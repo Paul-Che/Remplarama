@@ -1,1 +1,29 @@
 // Your footer style
+.main-footer {
+    background: #F9F9FA;
+    border-top: 1px solid #EAEAEB;
+    height: 150px;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    color : $gray;
+    font-size: 12px;
+}
+
+.social {
+    display: block;
+    background: #71deeb;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    line-height: 2.13em;
+    color: $gray-lighter;
+    padding-bottom: 6px
+}
+.primary_section{
+  margin-bottom: 60px;
+  margin-top: 30px;
+}
