@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :users do
-    resources :slots, only: [:new, :create, :edit, :update, :destroy]
-    resources :bookings, only: [:new, :create, :edit, :update, :destroy]
+    resources :slots, only: [:create, :update, :destroy]
+    resources :bookings, only: [:create, :update, :destroy]
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
 
