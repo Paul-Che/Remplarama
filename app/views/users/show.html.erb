@@ -1,1 +1,20 @@
-<p>test</p>
+<div class="container">
+  <div class="row">
+    <div id="profile">
+      <ul>
+        <li id="main-avatar">
+          <% if current_user.picture.nil? %>
+            <%= image_tag "http://placehold.it/80x80", class: "avatar-extralarge" %>
+          <% else %>
+            <%= image_tag current_user.picture, class: "avatar-extralarge " %>
+          <% end %>
+        </li>
+        <li><p><%= @user.first_name %> <%= @user.last_name %></p></li>
+        <hr>
+        <li><p><%= @user.email %></p></li>
+        <hr>
+        <li>
+      </ul>
+    </div>
+  </div>
+</div>
