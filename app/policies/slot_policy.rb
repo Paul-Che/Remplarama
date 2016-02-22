@@ -14,11 +14,11 @@ class SlotPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user  # Only slot creator can update it
+    record.user == user || user.admin? # Only slot creator or admin can update it
   end
 
   def destroy?
-    record.user == user  # Only slot creator can update it
+    record.user == user || user.admin? # Only slot creator or admin can update it
   end
 
 end
