@@ -3,7 +3,6 @@
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google
-//= require jquery-ui
 //= require_tree .
 
 $(document).ready(function() {

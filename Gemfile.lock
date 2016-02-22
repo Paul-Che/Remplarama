@@ -201,6 +201,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.8.3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
@@ -240,6 +241,7 @@ DEPENDENCIES
   simple_form
   spring
   uglifier
+  underscore-rails
 
 BUNDLED WITH
    1.11.2
