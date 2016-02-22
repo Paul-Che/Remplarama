@@ -1,6 +1,38 @@
 <div class="wrapper">
   <div class="page-content">
     <div class="container-fluid main">
+      <div id="search-filter">
+        <form action="/index">
+          <div class="row">
+            <div class="col-xs-6">
+              <input type="select" class="form-control" placeholder="Spécialité" name="speciality">
+              <input class="form-control" placeholder="Ville ou adresse..." name="location" id="user_input_autocomplete_address">
+              <input type="text" class="form-control datepick" placeholder="Date de début" name="start_date">
+              <input type="text" class="form-control datepick" placeholder="Date de fin" name="end_date">
+            </div>
+            <div class="col-xs-6">
+              <input type="checkbox" label="Hébergement" name="housing">
+              <input type="checkbox" label="Secrétariat" name="secretary">
+              <input type="checkbox" label="Visites à domicile" name="home_visits">
+              <input type="select" label="Secteur / Convention" name="sector">
+              <div id="the_slider">
+                <input type="hidden" id="min-com" name="min-com">
+                <input type="hidden" id="max-com" name="max-com">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <input type="submit" value="Filtrer" class="text-center btn btn-warning">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <i class="fa fa-arrow-circle-o-up text-center" id="hide-filter"></i>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xs-12 col-sm-8">
           <div class="cards">
@@ -14,29 +46,20 @@
                 <div class="col-xs-12">
                   <%= link_to user_path(user) do %>
                     <div class="card card-color">
-                      <div class="card-photo">
-                        <%# if !user.photos.first %>
-                          <%# photo_user = "http://placehold.it/300x200"%>
-                        <%# else %>
-                          <%# photo_user = user.photos.first.path %>
-                        <%# end %>
-                        <!-- <div class="card-photo-background" style='background-image: url(<%#= cloudinary_url photo_user %>);'> -->
-                        </div>
-                        <div class="card-price">
-                          <h5><span>XX% to XX%</span></h5>
-                        </div>
+                      <div class="card-avatar">
+                        <% if user.avatar.nil? %>
+                          <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+                        <% else %>
+                          <%= image_tag user.avatar, class: "avatar-large" %>
+                        <% end %>
                       </div>
-                      <div class="card-footer">
-                        <div class="card-footer-text">
-                          <h5><%= user.presentation %></h5>
-                        </div>
-                        <div class="card-footer-avatar">
-                          <%# if user.picture.nil? %>
-                            <%#= image_tag "placeholder_pic.png", class: "avatar-large" %>
-                          <%# else %>
-                            <%#= image_tag user.picture, class: "avatar-large" %>
-                          <%# end %>
-                        </div>
+                      <div class="card-content">
+                        <h4><%= user.speciality %></h4>
+                        <h4><%= user.reviews.average(:rating).round * "<i class='fa fa-star'></i>" %></h4>
+                        <h5><%= user.address %></h5>
+                      </div>
+                      <div class="card-tag">
+                        <h5>XX% to XX%</h5>
                       </div>
                     </div>
                   <% end %>
