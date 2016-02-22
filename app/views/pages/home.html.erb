@@ -1,2 +1,19 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="logo text-center">
+        <%= image_tag "logo_name", size: "205x160", class: "avatar-extralarge" %>
+    </div>
+    <div class="catchline text-center">
+      <h3>Le replacement entre médecins n'est plus un soucis</h3>
+    </div>
+    <form action="/users" class="form-inline text-center">
+      <label class="" for="formGroupInputSmall">Je recherche</label>
+      <input class="form-control" placeholder="un remplacant" name="location" id="user_input_autocomplete_address">
+      <label for="formGroupInputSmall">à</label>
+      <input type="text" class="form-control datepick" placeholder="Lyon" name="start_date">
+      <label for="formGroupInputSmall">en</label>
+      <input type="text" class="form-control datepick" placeholder="médecine générale" name="end_date">
+      <input type="submit" value="trouver" class="btn btn-primary">
+    </form>
+  </div>
+</div>

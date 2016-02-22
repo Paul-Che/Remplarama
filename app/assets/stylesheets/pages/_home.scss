@@ -2,3 +2,17 @@
  * CSS code specific to home page
  * (margin/padding adjustments)
  * ------------------------------------- */
+
+.logo {
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+.catchline {
+  margin-bottom: 70px;
+}
+.form-control {
+    min-width: 0;
+    width: 200px !important;
+    border-style : none;
+    color: $gray
+}

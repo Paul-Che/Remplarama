@@ -1,7 +1,7 @@
 <div class="navbar-wagon navbar-wagon-fixed">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "bike_logo.png" %>
+    <%= image_tag "logo-2.png" %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -41,10 +41,17 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
+<<<<<<< HEAD
           <% if current_user.avatar.nil? %>
             <%= image_tag 'placeholder_pic.png', class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <% else %>
             <%= image_tag current_user.avatar, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+=======
+          <% if current_user.picture.nil? %>
+            <%= image_tag 'http://placehold.it/30x30', class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% else %>
+            <%= image_tag current_user.picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+>>>>>>> master
           <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
@@ -73,6 +80,11 @@
 
     <% end %>
 
+<<<<<<< HEAD
+=======
+    <!-- Button (call-to-action) -->
+<!--     <%= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %> -->
+>>>>>>> master
   </div>
 
   <!-- Dropdown list appearing on mobile only -->
