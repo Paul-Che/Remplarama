@@ -10,10 +10,11 @@ gem 'devise'
 gem 'pundit'
 gem 'redis'
 gem 'cloudinary'
-gem "attachinary"
-gem "jquery-fileupload-rails"
-gem "coffee-rails"
+gem 'attachinary'
+gem 'jquery-fileupload-rails'
+gem 'coffee-rails'
 gem 'gmaps4rails'
+gem 'geocoder'
 
 gem 'sass-rails'
 gem 'jquery-rails'
