@@ -1,14 +1,31 @@
 <div class="wrapper">
-  <div class="page-content">
+  <div class="page-content padded">
     <div class="container-fluid main">
       <div id="search-filter">
         <form action="/index">
           <div class="row">
             <div class="col-xs-6">
-              <input type="select" class="form-control" placeholder="Spécialité" name="speciality">
+            <div class="form-group">
+              <label for="speciality">Spécialité :</label>
+              <input type="select" class="form-control" placeholder="Spécialité" name="speciality" />
+            </div>
               <input class="form-control" placeholder="Ville ou adresse..." name="location" id="user_input_autocomplete_address">
               <input type="text" class="form-control datepick" placeholder="Date de début" name="start_date">
               <input type="text" class="form-control datepick" placeholder="Date de fin" name="end_date">
+
+                <div class="row">
+                  <form class="col-lg-9 trip-form">
+                    <div class="row row-condensed">
+                      <div class="col-md-4 col-sm-6 row-space-1-sm">
+                        <input name="checkin" id="checkin" type="text" autocomplete="off" class="form-control datepick" placeholder="Date de début">
+                      </div>
+                      <div class="col-md-4 col-sm-6 row-space-1-sm">
+                        <input name="checkout" id="checkout" type="text" autocomplete="off" class="form-control datepick" placeholder="Date de fin">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
             </div>
             <div class="col-xs-6">
               <input type="checkbox" label="Hébergement" name="housing">
@@ -22,15 +39,20 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-12">
-              <input type="submit" value="Filtrer" class="text-center btn btn-warning">
+            <div class="col-xs-12 text-center" id="filter-button">
+              <input type="submit" value="Filtrer" class="btn btn-warning">
             </div>
           </div>
         </form>
       </div>
       <div class="row">
-        <div class="col-xs-12">
-          <i class="fa fa-arrow-circle-o-up text-center" id="hide-filter"></i>
+        <div class="col-xs-12 text-center hide-filter">
+          <span class="hide-arrow"><i class="fa fa-arrow-circle-o-up align-center"></i></span>
+          <span class="hide-arrow hidden"><i class="fa fa-arrow-circle-o-down align-center"></i></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 text-center hide-filter" style="box-shadow: none;">
         </div>
       </div>
       <div class="row">
@@ -55,7 +77,9 @@
                       </div>
                       <div class="card-content">
                         <h4><%= user.speciality %></h4>
-                        <h4><%= user.reviews.average(:rating).round * "<i class='fa fa-star'></i>" %></h4>
+                        <% if user.reviews.size > 0 %>
+                          <h4><%= "<i class='fa fa-star'></i>" * user.reviews.average(:rating).to_f.round %></h4>
+                        <% end %>
                         <h5><%= user.address %></h5>
                       </div>
                       <div class="card-tag">
