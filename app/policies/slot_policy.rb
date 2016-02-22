@@ -5,8 +5,21 @@ class SlotPolicy < ApplicationPolicy
     end
   end
 
+  # def show?
+  #   true  # Anyone can view a slot
+  # end
+
+  def create?
+    true  # Anyone can create a slot
+  end
+
   def update?
-    record.user == user  # Only user creator can update it
+    record.user == user  # Only slot creator can update it
+  end
+
+  def destroy?
+    record.user == user  # Only slot creator can update it
   end
 
 end
+
