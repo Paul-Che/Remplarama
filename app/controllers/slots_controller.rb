@@ -2,7 +2,7 @@ class SlotsController < ApplicationController
 
   def create
     @slot = current_user.slots.new(slot_params)
-
+    authorize @slot
     if @slot.save
       redirect_to user_path(@user)
     end
@@ -10,11 +10,14 @@ class SlotsController < ApplicationController
   end
 
   def update
-    authorize @slot
+    set_slot
   end
 
   def destroy
     authorize @slot
+    @slot.destroy
+
+    redirect_to user_path(@user), notice: 'Le créneaux a bien été détruit.'
   end
 
   private
