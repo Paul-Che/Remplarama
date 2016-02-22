@@ -3,6 +3,7 @@
   <head>
     <title>Remplarama</title>
     <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.gif'%>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,7 +13,7 @@
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>
-    <%= render 'shared/footer' %>
+<!--     <%= render 'shared/footer' %> -->
 
     <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false" %>
     <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" %>
