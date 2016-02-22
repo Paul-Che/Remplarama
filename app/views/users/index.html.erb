@@ -1,0 +1,67 @@
+<div class="wrapper">
+  <div class="page-content">
+    <div class="container-fluid main">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8">
+          <div class="cards">
+            <div class="container-fluid">
+              <div class="row">
+                <% if @users.first.nil? %>
+                  <h2 class="text-center"><i class="fa fa-frown-o"></i></h2>
+                  <h3 class="text-center">Sorry, there is no result in your area.</h3>
+                <% end %>
+                <% @users.each do |user| %>
+                <div class="col-xs-12">
+                  <%= link_to user_path(user) do %>
+                    <div class="card card-color">
+                      <div class="card-photo">
+                        <%# if !user.photos.first %>
+                          <%# photo_user = "http://placehold.it/300x200"%>
+                        <%# else %>
+                          <%# photo_user = user.photos.first.path %>
+                        <%# end %>
+                        <!-- <div class="card-photo-background" style='background-image: url(<%#= cloudinary_url photo_user %>);'> -->
+                        </div>
+                        <div class="card-price">
+                          <h5><span>XX% to XX%</span></h5>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="card-footer-text">
+                          <h5><%= user.presentation %></h5>
+                        </div>
+                        <div class="card-footer-avatar">
+                          <%# if user.picture.nil? %>
+                            <%#= image_tag "placeholder_pic.png", class: "avatar-large" %>
+                          <%# else %>
+                            <%#= image_tag user.picture, class: "avatar-large" %>
+                          <%# end %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden-xs col-sm-4 no-padding map">
+          <div id="map" style="position: fixed;"></div>
+          <% content_for(:after_js) do %>
+            <%= javascript_tag do %>
+              $(document).on('ready', function() {
+                handler = Gmaps.build('Google');
+                handler.buildMap({ internal: { id: 'map' } }, function(){
+                  markers = handler.addMarkers(<%= raw @markers.to_json %>);
+                  handler.bounds.extendWith(markers);
+                  handler.fitMapToBounds();
+                });
+              })
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
