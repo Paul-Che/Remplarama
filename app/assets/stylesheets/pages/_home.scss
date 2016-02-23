@@ -25,9 +25,16 @@
     background: #F9F9FA;
     border-top: 1px solid #EAEAEB;
     border-bottom: 1px solid #EAEAEB;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     bottom: 0;
     color : $gray;
     font-size: 12px;
+}
+#grey-img {
+  img {
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  }
 }
