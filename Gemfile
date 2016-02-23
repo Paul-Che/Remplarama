@@ -15,6 +15,7 @@ gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
 gem 'gmaps4rails'
 gem 'geocoder'
+gem 'owlcarousel-rails'
 
 gem 'sass-rails'
 gem 'jquery-rails'

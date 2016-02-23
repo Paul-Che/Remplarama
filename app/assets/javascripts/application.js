@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require moment
@@ -7,25 +8,44 @@
 //= require jquery.ui.touch-punch
 //= require underscore
 //= require gmaps/google
+//= require owl.carousel
 //= require_tree .
 
+
 $(document).ready(function() {
-  // var slider = $("#the_slider").slider({
-  //     range: true,
-  //     min: 0,
-  //     max: 100,
-  //     values: [70, 80],
-  //     slide: function(event, ui) {
-  //         $("#min-com").val(ui.values[0]);
-  //         $("#max-com").val(ui.values[1]);
-  //     }
-  // });
-  // $("#min-com").val(slider.slider("values")[0]);
-  // $("#max-com").val(slider.slider("values")[1]);
+  $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      values: [ 75, 95 ],
+      slide: function( event, ui ) {
+        $( "#commission" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] + "%" );
+      }
+    });
+    $( "#commission" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) + "%" );
+  });
+
+  $(function() {
+    $( "#slider-range2" ).slider({
+      range: true,
+      min: 0,
+      max: 5,
+      values: [ 0, 5 ],
+      slide: function( event, ui ) {
+        $( "#rating" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#rating" ).val( $( "#slider-range2" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range2" ).slider( "values", 1 ) );
+  });
 
   $(".hide-filter").click(function() {
-    $('#search-filter').toggleClass('hidden');
-    $('.hide-arrow').toggleClass('hidden');
+    $('#search-filter').slideToggle( "slow", function() {
+      // $('#search-filter').toggleClass('hidden');
+      $('.hide-arrow').toggleClass('hidden');
+    });
   });
 
 

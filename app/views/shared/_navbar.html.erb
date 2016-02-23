@@ -5,15 +5,17 @@
   <% end %>
 
   <!-- Right Navigation -->
-  <div class="navbar-wagon-right hidden-xs">
+  <div class="navbar-wagon-right">
 
     <!-- Search form -->
-    <form action="/users" class="navbar-wagon-search">
-      <input type="text" class="navbar-wagon-search-input" name="location" id="user_input_autocomplete_address_navbar" placeholder="Type a location">
-      <button type="submit" class="navbar-wagon-search-btn">
-        <i class="fa fa-search"></i>
-      </button>
-    </form>
+    <div id="search-div-navbar" class="hidden-xs">
+      <form action="/search" class="navbar-wagon-search">
+        <input type="text" class="navbar-wagon-search-input" name="location" id="user_input_autocomplete_address_navbar" placeholder="Ville ou adresse">
+        <button type="submit" class="navbar-wagon-search-btn">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
 
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
@@ -26,19 +28,54 @@
             <div class="badge badge-grey">0</div>
           <%# else %>
             <%# if current_user.bikes.first.bookings.where(status: "pending").count == 0 %>
-              <div class="badge badge-grey">
+<!--               <div class="badge badge-grey">
                 <%#= current_user.bikes.first.bookings.where(status: "pending").count %>
               </div>
             <%# else %>
               <div class="badge badge-orange">
                 <%#= current_user.bikes.first.bookings.where(status: "pending").count %>
-              </div>
+              </div> -->
             <%# end %>
-          <% end %>
+          <%# end %>
         </div>
       <% end %>
 
       <!-- Profile picture and dropdown -->
+      <div class="navbar-wagon-item hidden-xs">
+        <div class="dropdown">
+
+            <% if current_user.avatar.nil? %>
+              <%= image_tag 'placeholder_pic.png', class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <% else %>
+              <%= image_tag current_user.avatar, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <% end %>
+            <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <li>
+                <%= link_to user_path(current_user) do %>
+                  <i class="fa fa-user"></i> <%= t ".profile", default: "Profile" %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to root_path do %>
+                  <i class="fa fa-home"></i>  <%= t ".profile", default: "Home" %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Log out" %>
+                <% end %>
+              </li>
+            </ul>
+
+        </div>
+      </div>
+
+    <% else %>
+
+      <!-- Login text link -->
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+    <% end %>
 
   </div>
 
