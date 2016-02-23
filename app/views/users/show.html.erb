@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" id = "user_container">
 
   <div class="row">
     <div id="profile" class="col-xs-12 col-md-2 text-center">
-      <ul>
+      <ul class = "list-unstyled">
         <li id="main-avatar">
           <% if current_user.avatar.nil? %>
             <%= image_tag "http://placehold.it/80x80", class: "avatar-extralarge" %>
@@ -24,7 +24,7 @@
 
   <div class="row">
     <div id="user_content" class="col-xs-12 col-md-8 text-center">
-      <ul>
+      <ul class = "list-unstyled">
         <li><p><%= @user.presentation %></p></li>
         <hr>
         <li><%=@user.education %></li>
