@@ -2,7 +2,7 @@
   <div class="page-content padded">
     <div class="container-fluid main">
       <div id="search-filter">
-        <form action="/index">
+        <form action="/search">
           <div class="row">
             <div class="col-xs-12 col-sm-4">
               <div class="row-fluid">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="slider-margin"></div>
                     <div class="slider-addon checkbox hidden-xs">
-                      <label><input type="checkbox" name="unrated" value="unrated" checked> Inclure les profils non-notés</label>
+                      <label><input type="checkbox" name="unrated" value="on" checked> Inclure les profils non-notés</label>
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
                       <div class="form-group">
                         <label>Convention </label>
                         <select name="convention" class="search-input">
-                          <option value="">Tout</option>
+                          <option value="both">Tout</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
                         </select>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="label-option-small">
                       <div class="checkbox">
-                        <label><input type="checkbox" name="housing" class="search-input"> Secrétariat</label>
+                        <label><input type="checkbox" name="secretary" class="search-input"> Secrétariat</label>
                       </div>
                     </div>
                     <div class="label-option-large">
@@ -95,12 +95,8 @@
                   </div>
                 </div>
               </div>
-
-
-
             </div>
           </div>
-
           <div class="row">
             <div class="col-xs-12 text-center" id="filter-button">
               <input type="submit" value="Filtrer" class="btn btn-primary" id="filter-button" style="width: 33%;">
@@ -118,6 +114,8 @@
         <div class="col-xs-12 text-center hide-filter" style="box-shadow: none;">
         </div>
       </div>
+
+
       <div class="row">
         <div class="col-xs-12 col-sm-8">
           <div class="cards">
@@ -129,23 +127,27 @@
                 <% @users.each do |user| %>
                 <div class="col-xs-12">
                   <%= link_to user_path(user) do %>
-                    <div class="card card-color">
+                    <div class="card-user">
                       <div class="card-avatar">
                         <% if user.avatar.nil? %>
-                          <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+                          <%= image_tag "placeholder_pic.png", class: "avatar-xxl" %>
                         <% else %>
-                          <%= image_tag user.avatar, class: "avatar-large" %>
+                          <%= image_tag user.avatar, class: "avatar-xxl" %>
                         <% end %>
                       </div>
-                      <div class="card-content">
-                        <h4><%= user.speciality %></h4>
+                      <div class="card-content-left">
+                        <h4>Dr. <%= user.first_name %>  <%= user.last_name %></h4>
                         <% if user.reviews.size > 0 %>
-                          <h4><%= "<i class='fa fa-star'></i>" * user.reviews.average(:rating).to_f.round %></h4>
+                          <h4>
+                            <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews.average(:rating).to_f.round).html_safe %>
+                            <%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews.average(:rating).to_f.round)).html_safe %>
+                          </h4>
                         <% end %>
-                        <h5><%= user.address %></h5>
+                        <h5><%= user.speciality %></h5>
+                        <h6><%= user.address %></h6>
                       </div>
-                      <div class="card-tag">
-                        <h5>XX% to XX%</h5>
+                      <div class="card-content-right">
+
                       </div>
                     </div>
                   <% end %>
@@ -171,6 +173,8 @@
           <% end %>
         </div>
       </div>
+
+
     </div>
   </div>
 </div>

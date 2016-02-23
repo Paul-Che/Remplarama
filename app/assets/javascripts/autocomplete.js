@@ -7,7 +7,25 @@ $(document).ready(function() {
     }
   }
 
+  function onPlaceChanged() {
+    var place = this.getPlace();
+
+    // console.log(place);  // Uncomment this line to view the full object returned by Google API.
+
+    for (var i in place.address_components) {
+      var component = place.address_components[i];
+      for (var j in component.types) {  // Some types are ["country", "political"]
+        var type_element = document.getElementById(component.types[j]);
+        if (type_element) {
+          type_element.value = component.long_name;
+        }
+      }
+    }
+  }
+
   google.maps.event.addDomListener(window, 'load', function() {
     initializeAutocomplete('user_input_autocomplete_address');
+    initializeAutocomplete('user_input_autocomplete_address_navbar');
   });
 });
+

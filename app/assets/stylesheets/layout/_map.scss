@@ -1,0 +1,15 @@
+#map {
+  z-index: 1;
+  position: fixed;
+  float: right;
+  overflow-y: auto;
+  height: calc(100vh - 70px);
+  width: 100%;
+}
+#map > div > div > div {
+  position: fixed;
+}
+.map {
+  position: fixed;
+  right: 0;
+}
