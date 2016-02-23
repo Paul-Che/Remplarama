@@ -13,12 +13,12 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
-  def update?
-    record.user == user || user.admin? # Only user creator can update it
-  end
+  # def update?
+  #   record.user == user || user.admin? # Only user creator can update it
+  # end
 
-  def destroy?
-    record.user == user || user.admin? # Only user creator can destroy it
-  end
+  # def destroy?
+  #   record.user == user || user.admin? # Only user creator can destroy it
+  # end
 
 end
