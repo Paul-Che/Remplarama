@@ -1,5 +1,4 @@
-<div class="container-fluid" id = "home_container">
-
+<div class="container" id = "home_container">
   <div class="row">
     <div class="logo text-center">
         <%= image_tag "logo_name", size: "205x160", class: "" %>
@@ -19,31 +18,113 @@
       </form>
     </div>
   </div>
+</div>
 
-  <div class="row how">
-    <div class="text-center">
-      <div class="col-xs-6 col-md-2 col-md-offset-2">
-        <%= image_tag "calendar2", size: "100", class: "" %>
-        <h5>Déclarer vos disponibilités sur le calendrier intelligent</h5>
-      </div>
-      <div class="col-xs-6 col-md-2">
-        <%= image_tag "doctor2", size: "100", class: "" %>
-        <h5>Choisissez le cabinet ou le remplacant qui vous convient</h5>
-      </div>
-      <div class="col-xs-6 col-md-2">
-        <%= image_tag "switch2", size: "100", class: "" %>
-        <h5>Échangez aisément depuis la plateforme</h5>
-      </div>
-      <div class="col-xs-6 col-md-2">
-        <%= image_tag "stethoscope2", size: "100", class: "" %>
-        <h5>Donner votre feedback à la fin de la prestation</h5>
+<div class="how">
+  <div class="container">
+    <div class="row ">
+      <div class="text-center">
+        <h3>Comment ça marche ?</h3>
+        <br>
+        <div class="col-xs-6 col-md-3">
+          <div class="card">
+            <%= image_tag "calendar2", size: "100", class: "" %>
+            <h5><strong>1.</strong> Déclarer vos disponibilités sur le calendrier intelligent</h5>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <div class="card">
+            <%= image_tag "doctor2", size: "100", class: "" %>
+            <h5><strong>2.</strong> Choisissez le cabinet ou le remplacant qui vous convient</h5>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <div class="card">
+            <%= image_tag "switch2", size: "100", class: "" %>
+            <h5><strong>3.</strong> Échangez aisément depuis la plateforme</h5>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <div class="card">
+            <%= image_tag "stethoscope2", size: "100", class: "" %>
+            <h5><strong>4.</strong> Donner votre feedback à la fin de la prestation</h5>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <h3>ils parlent de nous</h3>
+      <br>
+      <div class="col-xs-6 col-md-4">
+        <%= image_tag "jdn.png", class: "img-responsive" %>
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <%= image_tag "paris-sud.png", class: "img-responsive"%>
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <%= image_tag "lemonde.png", class: "img-responsive"%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper-grey">
+  <div class="container">
+    <div class="owl-carousel">
+      <div class="carousel-card text-center">
+        <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
+        <h4>Dr Michel Dupont | Paris (15e)</h4>
+        <div class="description text-justify">
+          <p>Je suis très heureux de ce service. Je peux désormais rapidement prendre des congés et organiser des weekends de dernières minutes !</p>
+        </div>
+      </div>
+      <div class="carousel-card text-center">
+        <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
+        <h4>Dr Emmanuelle Devis | Paris (07e)</h4>
+        <div class="description text-justify">
+          <p>Encore interne à hopital, je recherche activement un cabinet dans lequel je pourrais m'installer. Grâce à Remplarama j'ai pu rencontrer des professionnels de santé dans mon secteur par le biais de remplacement efficaces et rapides !</p>
+        </div>
+      </div>
+      <div class="carousel-card text-center">
+        <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
+        <h4>Dr Pierre Petit | Paris (17e)</h4>
+        <div class="description text-justify">
+          <p>Super service rapide et efficace !</p>
+        </div>
+      </div>
+      <div class="carousel-card text-center">
+        <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
+        <h4>Dr Interne JB Delis | Paris (04e)</h4>
+        <div class="description text-justify">
+          <p>Encore interne dans à hopital, je recherche activement un cabinet dans lequel je pourrais m'installer. Grâce à Remplarama j'ai pu rencontrer des professionnels de santé dans mon secteur par le biais de remplacement efficaces et rapides !</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
 
 
-
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(function(){
+      $(".owl-carousel").owlCarousel({
+        items : 2,
+        itemsCustom : false,
+        itemsDesktop : [1199,4],
+        itemsDesktopSmall : [980,3],
+        itemsTablet: [768,2],
+        itemsTabletSmall: false,
+        itemsMobile : [479,1],
+        autoPlay : 3000,
+        stopOnHover : false
+      });
+    });
+  <% end %>
+<% end %>

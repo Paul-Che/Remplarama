@@ -4,7 +4,9 @@
 //= require bootstrap-datepicker
 //= require underscore
 //= require gmaps/google
+//= require owl.carousel
 //= require_tree .
+
 
 $(document).ready(function() {
   // var slider = $("#the_slider").slider({
