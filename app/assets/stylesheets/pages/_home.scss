@@ -2,7 +2,11 @@
  * CSS code specific to home page
  * (margin/padding adjustments)
  * ------------------------------------- */
-
+#home_container {
+  margin-top: 100px;
+  // background-image : url(/assets/white-bg.jpg);
+  // background-size: cover;
+}
 .logo {
   margin-top: 70px;
   margin-bottom: 50px;
@@ -12,7 +16,18 @@
 }
 .form-control {
     min-width: 0;
-    width: 200px !important;
     border-style : none;
-    color: $gray
+}
+.search{
+  padding-bottom: 130px;
+}
+.how {
+    background: #F9F9FA;
+    border-top: 1px solid #EAEAEB;
+    border-bottom: 1px solid #EAEAEB;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    bottom: 0;
+    color : $gray;
+    font-size: 12px;
 }

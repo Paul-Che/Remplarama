@@ -10,10 +10,11 @@ gem 'devise'
 gem 'pundit'
 gem 'redis'
 gem 'cloudinary'
-gem "attachinary"
-gem "jquery-fileupload-rails"
-gem "coffee-rails"
+gem 'attachinary'
+gem 'jquery-fileupload-rails'
+gem 'coffee-rails'
 gem 'gmaps4rails'
+gem 'geocoder'
 
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -23,9 +24,11 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
+gem 'underscore-rails'
 
 source 'https://rails-assets.org' do
-  gem "rails-assets-underscore"
+  gem 'rails-assets-underscore'
+  gem 'rails-assets-bootstrap-datepicker'
 end
 
 group :development, :test do
