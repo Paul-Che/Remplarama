@@ -14,6 +14,24 @@
   padding: 0 5px;
   background-color: white;
 }
-.form-group input {
-  float: right;
+#search-filter label {
+  font-family: Raleway;
+  font-size: 15px;
+  font-weight: lighter;
+}
+#left-filter {
+  padding: 0 10px 0 30px;
+}
+.search-input {
+  flex: 0 1 300px;
+  transition: all 0.15s ease;
+  line-height: 40px;
+  font-weight: lighter;
+  color: #666666;
+  border: 1px solid #E6E6E6;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin: 5px;
+  font-size: 14px;
+  outline: none;
 }

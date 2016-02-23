@@ -4,30 +4,26 @@
       <div id="search-filter">
         <form action="/index">
           <div class="row">
-            <div class="col-xs-6">
-            <div class="form-group">
-              <label for="speciality">Spécialité :</label>
-              <input type="select" class="form-control" placeholder="Spécialité" name="speciality" />
-            </div>
-              <input class="form-control" placeholder="Ville ou adresse..." name="location" id="user_input_autocomplete_address">
-              <input type="text" class="form-control datepick" placeholder="Date de début" name="start_date">
-              <input type="text" class="form-control datepick" placeholder="Date de fin" name="end_date">
-
+            <div class="col-xs-12 col-sm-6">
+              <div id="left-filter">
                 <div class="row">
-                  <form class="col-lg-9 trip-form">
-                    <div class="row row-condensed">
-                      <div class="col-md-4 col-sm-6 row-space-1-sm">
-                        <input name="checkin" id="checkin" type="text" autocomplete="off" class="form-control datepick" placeholder="Date de début">
+                      <div class="form-group form-inline">
+                        <!-- <label for="location">Lieu</label> -->
+                        <input class="search-input" placeholder="Ville ou adresse..." name="location" id="user_input_autocomplete_address" style="width: 45%;">
+                        <!-- <label for="speciality">Spécialité</label> -->
+                        <input type="select" class="search-input" placeholder="Spécialité" name="speciality" style="width: 45%;">
                       </div>
-                      <div class="col-md-4 col-sm-6 row-space-1-sm">
-                        <input name="checkout" id="checkout" type="text" autocomplete="off" class="form-control datepick" placeholder="Date de fin">
-                      </div>
-                    </div>
-                  </form>
                 </div>
-
+                <div class="row">
+                      <div class="form-group form-inline">
+                        <!-- <label for="location">Dates</label> -->
+                        <input type="text" class="search-input datepick" placeholder="Date de début" name="start_date" style="width: 45%;">
+                        <input type="text" class="search-input datepick" placeholder="Date de fin" name="end_date" style="width: 45%;">
+                      </div>
+                </div>
+              </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-12 col-sm-6">
               <input type="checkbox" label="Hébergement" name="housing">
               <input type="checkbox" label="Secrétariat" name="secretary">
               <input type="checkbox" label="Visites à domicile" name="home_visits">
@@ -40,7 +36,7 @@
           </div>
           <div class="row">
             <div class="col-xs-12 text-center" id="filter-button">
-              <input type="submit" value="Filtrer" class="btn btn-warning">
+              <input type="submit" value="Filtrer" class="btn btn-primary" style="width: 33%;">
             </div>
           </div>
         </form>
