@@ -114,6 +114,8 @@ GEM
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    momentjs-rails (2.11.0)
+      railties (>= 3.1)
     multi_json (1.11.2)
     netrc (0.11.0)
     nokogiri (1.6.7.2)
@@ -202,6 +204,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    touchpunch-rails (1.0.3)
+      railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -234,7 +238,11 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
+<<<<<<< HEAD
+  momentjs-rails
+=======
   owlcarousel-rails
+>>>>>>> master
   pg
   pry-byebug
   pry-rails
@@ -249,6 +257,7 @@ DEPENDENCIES
   sass-rails
   simple_form
   spring
+  touchpunch-rails
   uglifier
   underscore-rails
 
