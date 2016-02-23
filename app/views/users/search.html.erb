@@ -5,39 +5,64 @@
         <form action="/index">
           <div class="row">
             <div class="col-xs-12 col-sm-4">
-              <div id="left-filter">
-                <div class="row">
-
-                  <!-- <label for="location">Lieu</label> -->
-                  <input class="search-input" placeholder="Ville ou adresse..." name="location" id="user_input_autocomplete_address">
-
+              <div class="row-fluid">
+                <div class="col-xs-12">
+                  <input class="search-input full-input" placeholder="Ville ou adresse" name="location" id="user_input_autocomplete_address">
                 </div>
-                <div class="row">
-
-                  <!-- <label for="speciality">Spécialité</label> -->
-                  <input type="select" class="search-input" placeholder="Spécialité" name="speciality">
-
+              </div>
+              <div class="row-fluid">
+                <div class="col-xs-12">
+                  <input type="select" class="search-input full-input" placeholder="Spécialité" name="speciality">
                 </div>
-                <div class="row">
-
-                  <!-- <label for="location">Dates</label> -->
+              </div>
+              <div class="row-fluid">
+                <div class="col-xs-12 col-sm-6">
                   <input type="text" class="search-input datepick" placeholder="Date de début" name="start_date">
+                </div>
+                <div class="col-xs-12 col-sm-6">
                   <input type="text" class="search-input datepick" placeholder="Date de fin" name="end_date">
-
                 </div>
               </div>
             </div>
             <div class="col-xs-12 col-sm-8">
-              <div id="right-filter">
-                <div class="row">
-
+              <div class="row-fluid">
+                <div class="col-xs-12">
+                  <div class="option-flex filter-row">
+                    <div class="label-option">
+                      <label for="commission">Reversement au remplaçant</label>
+                    </div>
+                    <div class="slider-values">
+                      <input type="text" name="commission" class="text-center slider-values-text" id="commission" readonly>
+                    </div>
+                    <div class="slider-bar">
+                      <div id="slider-range"></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="row">
-
+              </div>
+              <div class="row-fluid">
+                <div class="col-xs-12">
+                  <div class="option-flex filter-row">
+                    <div class="label-option">
+                      <label for="rating">Note des profils</label>
+                    </div>
+                    <div class="slider-values">
+                      <input type="text" name="rating" class="text-center slider-values-text" id="rating" readonly>
+                    </div>
+                    <div class="slider-bar">
+                      <div id="slider-range2"></div>
+                    </div>
+                    <div class="slider-margin"></div>
+                    <div class="slider-addon checkbox hidden-xs">
+                      <label><input type="checkbox" name="unrated" value="unrated" checked> Inclure les profils non-notés</label>
+                    </div>
+                  </div>
                 </div>
-                <div class="row">
-                  <div class="col-xs-4 no-side-padding">
-                    <div id="convention" class="filter-option">
+              </div>
+              <div class="row-fluid">
+                <div class="col-xs-12">
+                  <div class="option-flex filter-row">
+                    <div class="label-option-small">
                       <div class="form-group">
                         <label>Convention </label>
                         <select name="convention" class="search-input">
@@ -47,30 +72,32 @@
                         </select>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-xs-4 no-side-padding">
-                    <div id="housing" class="filter-option">
+                    <div class="label-option-small">
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="housing" class="search-input"> Hébergement</label>
+                      </div>
+                    </div>
+                    <div class="label-option-small">
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="housing" class="search-input"> Secrétariat</label>
+                      </div>
+                    </div>
+                    <div class="label-option-large">
                       <div class="form-group">
-                        <label for="housing">Hébergement </label>
-                        <input type="checkbox" name="housing" class="search-input">
+                        <label>Visites à domicile </label>
+                        <select name="home-visits" class="search-input">
+                          <option value="none">Aucune</option>
+                          <option value="max2"><= 2 par jour</option>
+                          <option value="above2">> 2 par jour</option>
+                        </select>
                       </div>
                     </div>
                   </div>
-                  <div class="col-xs-4 no-side-padding">
-                    <div id="secretary" class="filter-option">
-                      <div class="form-group">
-                        <label for="housing">Secrétariat </label>
-                        <input type="checkbox" name="housing" class="search-input">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div id="the_slider">
-                  <input type="hidden" id="min-com" name="min-com">
-                  <input type="hidden" id="max-com" name="max-com">
                 </div>
               </div>
+
+
+
             </div>
           </div>
 
@@ -97,8 +124,7 @@
             <div class="container-fluid">
               <div class="row">
                 <% if @users.first.nil? %>
-                  <h2 class="text-center"><i class="fa fa-frown-o"></i></h2>
-                  <h3 class="text-center">Sorry, there is no result in your area.</h3>
+                  <h4 class="text-center">Sorry, there is no result in your area.</h4>
                 <% end %>
                 <% @users.each do |user| %>
                 <div class="col-xs-12">
