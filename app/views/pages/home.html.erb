@@ -8,13 +8,13 @@
       <h3>Et le replacement entre médecins n'est plus un soucis</h3>
     </div>
     <div class="search col-xs-12">
-      <form action="/users" class="form-inline text-center col-xs-12">
+      <form action="/search" class="form-inline text-center">
         <label class="" for="formGroupInputSmall">Je recherche</label>
-        <input class="form-control" placeholder="un remplacant" name="location" id="user_input_autocomplete_address">
+        <input type="select" class="form-control" placeholder="un remplacant" name="profile">
         <label for="formGroupInputSmall">à</label>
-        <input type="text" class="form-control datepick" placeholder="Lyon" name="start_date">
+        <input type="text" class="form-control" placeholder="Lyon" name="location" id="user_input_autocomplete_address">
         <label for="formGroupInputSmall">en</label>
-        <input type="text" class="form-control datepick" placeholder="médecine générale" name="end_date">
+        <input type="text" class="form-control" placeholder="médecine générale" name="end_date">
         <input type="submit" value="trouver" class="btn btn-primary">
       </form>
     </div>
