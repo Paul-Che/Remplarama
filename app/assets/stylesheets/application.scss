@@ -5,6 +5,8 @@
 // External libraries
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery-ui";
+// @import "jquery-ui/datepicker";
 @import "bootstrap-datepicker";
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -17,3 +19,7 @@
 @import "components/index";
 @import "pages/index";
 @import "vendor/index";
+
+
+@import "owl.carousel";
+@import "owl.theme";

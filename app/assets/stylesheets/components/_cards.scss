@@ -1,4 +1,6 @@
-.card {
+// Cards in search results
+.card-user {
+<<<<<<< HEAD
   height: 150px;
   display: flex;
   align-items: center;
@@ -17,4 +19,14 @@
 }
 .fa-gray {
   color: $gray-lighter;
+
+// Cards in home page
+.card {
+  border-radius: 7px;
+  width: 190px;
+  height: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  img {
+    margin-top: 10px;
+  }
 }

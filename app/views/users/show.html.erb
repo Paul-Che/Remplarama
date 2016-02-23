@@ -1,7 +1,7 @@
 <div class="container" id = "user_container">
 
   <div class="row">
-    <div id="profile" class="col-xs-12 col-md-2 text-center">
+    <div id="profile" class="col-xs-12 col-md-3 text-justify">
       <ul class = "list-unstyled">
         <li id="main-avatar">
           <% if current_user.avatar.nil? %>
@@ -10,26 +10,36 @@
             <%= image_tag current_user.avatar, class: "avatar-extralarge " %>
           <% end %>
         </li>
-        <li><p>Dr<%= @user.first_name %> <%= @user.last_name %></p></li>
+        <li><p><strong>Dr</strong><%= @user.first_name %> <%= @user.last_name %></p></li>
         <hr>
-        <li><p><%=@user.speciality %></p></li>
+        <li><strong>Spécialité:</strong><p><%=@user.speciality %></p></li>
         <hr>
         <li>
       </ul>
     </div>
-    <div id="calendar" class="col-xs-12 col-md-10 text-center">
-      <p>big calendar to be implemented</p>
+    <div id="calendar" class="col-xs-12 col-md-9 text-center">
+<!--       <div class="datepick date ">
+        <div class="input-group">
+          <div class = "dates">
+            <h1 class="btn btn-primary col-xs-6">Choisir mes dates <br><i class="fa fa-calendar"></i></h1>
+            <h4 class="col-xs-6">Dates recherchées :
+          <span><input type="textarea" class="form-control text-center col-xs-6"></h4></span>
+          </div>
+        </div>
+      </div> -->
+              <div id="demo"></div>
     </div>
   </div>
 
+
   <div class="row">
-    <div id="user_content" class="col-xs-12 col-md-8 text-center">
+    <div id="user_content" class="col-xs-12 col-md-8 text-justify">
       <ul class = "list-unstyled">
-        <li><p><%= @user.presentation %></p></li>
+        <li><strong>Présentation :</strong><p><%= @user.presentation %></p></li>
         <hr>
-        <li><%=@user.education %></li>
+        <li><strong>Éducation :</strong>  <%=@user.education %></li>
         <hr>
-        <li><%=@user.publications %></li>
+        <li><strong>Publications :</strong> <%=@user.publications %></li>
         <hr>
       </ul>
     </div>

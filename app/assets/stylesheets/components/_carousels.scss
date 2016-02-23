@@ -1,0 +1,17 @@
+.wrapper-grey {
+  background-color: $gray-lighter;
+  .owl-wrapper {
+    left: 73px;
+  }
+}
+.carousel-card {
+  width: 500px;
+  padding: 30px 50px;
+  img {
+    margin-top: 10px;
+  }
+}
+
+.owl-pagination {
+  margin-top: 20px !important;
+}
