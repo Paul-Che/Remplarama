@@ -41,7 +41,9 @@ $.fn.datepicker.dates['fr'] = {
     format: "dd/mm/yyyy",
     titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
     weekStart: 0
+    // clearBtn: "mise à zéro"
 };
+
 
 
   $(document).ready(function(){
@@ -52,6 +54,7 @@ $.fn.datepicker.dates['fr'] = {
        todayHighlight: true,
        calendarWeeks: true,
        selectMultiple: true,
+       clearBtn: true,
        multidateSeparator: "     -   ",
     });
   });
