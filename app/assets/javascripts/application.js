@@ -25,12 +25,34 @@ $(document).ready(function() {
     $('.hide-arrow').toggleClass('hidden');
   });
 
+// $('#event_period').datepicker({
+//     inputs: $('.actual_range')
+// });
+//
+//
+$.fn.datepicker.dates['fr'] = {
+    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+    months: ["January", "Février", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    today: "Today",
+    clear: "Clear",
+    format: "dd/mm/yyyy",
+    titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+    weekStart: 0
+};
+
+
   $(document).ready(function(){
     $('.datepick').datepicker({
-      format: "dd/mm/yyyy",
-      weekStart: 1,
-      autoclose: true,
-      todayHighlight: true
+      language: "fr",
+       daysOfWeekHighlighted: "0",
+       multidate: true,
+       todayHighlight: true,
+       calendarWeeks: true,
+       selectMultiple: true,
+       multidateSeparator: "     -   ",
     });
   });
 });
