@@ -238,11 +238,8 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
-<<<<<<< HEAD
   momentjs-rails
-=======
   owlcarousel-rails
->>>>>>> master
   pg
   pry-byebug
   pry-rails
