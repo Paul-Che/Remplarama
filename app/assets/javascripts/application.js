@@ -21,8 +21,10 @@ $(document).ready(function() {
   // $("#max-com").val(slider.slider("values")[1]);
 
   $(".hide-filter").click(function() {
-    $('#search-filter').toggleClass('hidden');
-    $('.hide-arrow').toggleClass('hidden');
+    $('#search-filter').slideToggle( "slow", function() {
+      // $('#search-filter').toggleClass('hidden');
+      $('.hide-arrow').toggleClass('hidden');
+    });
   });
 
   $(document).ready(function(){
