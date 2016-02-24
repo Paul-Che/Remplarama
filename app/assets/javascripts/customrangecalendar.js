@@ -51,7 +51,13 @@ var callbackRangeCalendar = $("#demo").rangeCalendar({
 
 function rangeChanged(target,range){
 
-console.log(range);
+$("#sendDates").click(function(){
+  $('#startDate').val(range.start);
+  $('#endDate').val(range.end);
+});
+
+console.log(range.start);
+console.log(range.end);
 }
 
 });

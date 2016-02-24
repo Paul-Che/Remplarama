@@ -2,14 +2,13 @@
   <div class="row">
 
     <div id="demo">
-      simple_form_for @user do |f|
-      f.input :title, :as => :hidden, :input_html => { :value => "some value" }
-      f.input :title, :as => :hidden, :input_html => { :value => "some value" }
-      end
     </div>
-    <div id="send" class="text-center">
-      <button type="button" class="btn btn-primary">Valider dates</button>
-    </div>
+
+      <%= form_tag('/posts') do -%>
+      <input id="startDate" type="hidden" value="" />
+      <input id="endDate" type="hidden" value="" />
+      <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary text-center" value='Valider dates pour cette plage de dates'/>
+      <% end -%>
 
     <div id="profile" class="col-xs-12 col-md-3 text-justify">
       <ul class = "list-unstyled">
@@ -28,15 +27,6 @@
       </ul>
     </div>
     <div id="calendar" class="col-xs-12 col-md-9 text-center">
-<!--       <div class="datepick date ">
-        <div class="input-group">
-          <div class = "dates">
-            <h1 class="btn btn-primary col-xs-6">Choisir mes dates <br><i class="fa fa-calendar"></i></h1>
-            <h4 class="col-xs-6">Dates recherchées :
-          <span><input type="textarea" class="form-control text-center col-xs-6"></h4></span>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 
