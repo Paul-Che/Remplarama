@@ -127,7 +127,7 @@
                 <% @users.each do |user| %>
                 <div class="col-xs-12">
                   <%= link_to user_path(user) do %>
-                    <div class="card-user user-<%= user.id %>">
+                    <div class="card-user" id="user-<%= user.id %>">
                       <div class="card-avatar">
                         <% if user.avatar.nil? %>
                           <%= image_tag "placeholder_pic.png", class: "avatar-xxl" %>
@@ -162,15 +162,11 @@
           <% content_for(:after_js) do %>
             <script> <%#= javascript_tag do %>
               $(document).on('ready', function() {
-
                 hoverPicture = {
                 url: "<%= asset_path 'marker_blue_small.png' %>",
-                width: 33,
-                height: 33
+                width: 60,
+                height: 90
                 };
-
-                console.log(hoverPicture);
-
                 handler = Gmaps.build('Google');
                 handler.buildMap({ internal: { id: 'map' } }, function(){
                   markers = handler.addMarkers(<%= raw @markers.to_json %>);
@@ -178,16 +174,28 @@
                   (<%=raw @markers.to_json %>).forEach(function(json, index){
                     json.marker = markers[index];
 
-                    $(".user-" + json.id).on('mouseenter', function() {
-                      console.log(json);
-                      // marker.setIcon(<%= image_path 'marker_blue' %>);
-                      handler.getMap().setZoom(14);
-                      // json.marker.setMap(handler.getMap()); //because clusterer removes map property from marker
-                      // json.marker.panTo();
-                      google.maps.event.trigger(json.marker.getServiceObject(), 'click');
+                    json.marker.serviceObject.addListener('click', function() {
+                      $('.card-user').removeClass('highlighted-card');
+                      $('#user-' + json.id).addClass('highlighted-card');
+                      document.getElementById('user-' + json.id).scrollIntoView();
+                      var scrolledY = window.scrollY
+                      if(scrolledY) {
+                        window.scroll(0, scrolledY - '75px');
+                      }
+                      console.log("click");
                     });
-                  });
 
+                    gr = {};
+                    gr.marker = void 0;
+                    $("#user-" + json.id).on('mouseover', function() {
+                      gr = { lat: json.lat, lng: json.lng, picture: hoverPicture };
+                      handler.removeMarker(json.marker);
+                      gr.marker = handler.addMarker(gr);
+                      }).on("mouseout", function() {
+                          handler.removeMarker(gr.marker);
+                          json.marker = handler.addMarker(json);
+                        });
+                  });
                   handler.bounds.extendWith(markers);
                   handler.fitMapToBounds();
                 });

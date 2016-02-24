@@ -5,11 +5,14 @@
   align-items: center;
 }
 .highlighted-card {
-  border: 3px solid $green;
-  color: red !important;
+  background-color: $gray-lighter;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px $blue;
+  border: 1px solid $blue;
 }
 .card-avatar {
   flex: 0 0 17%;
+  padding-left: 10px;
 }
 .card-content-left {
   flex: 1 1 auto;

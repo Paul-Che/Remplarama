@@ -8,11 +8,10 @@ class UsersController < ApplicationController
     @markers = Gmaps4rails.build_markers(@users) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
-      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90})
+      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [30, 90]})
       marker.infowindow "Dr. #{user.first_name} #{user.last_name}<br/>#{user.address}"
       marker.json({ :id => user.id })
     end
-
     authorize @user
   end
 
