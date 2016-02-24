@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="page-content padded">
     <div class="container-fluid main">
-<!--       <div id="search-filter">
+      <div id="search-filter">
         <form action="/search">
           <div class="row">
             <div class="col-xs-12 col-sm-4">
@@ -12,7 +12,11 @@
               </div>
               <div class="row-fluid">
                 <div class="col-xs-12">
-                  <input type="select" class="search-input full-input" placeholder="Spécialité" name="speciality">
+                  <select class="search-input select-height full-input" placeholder="Spécialité" name="speciality">
+                    <option class="search-input" value="generalist">Médecine générale</option>
+                    <option class="search-input" value="kine">Kinésithérapie</option>
+                    <option class="search-input" value="specialist">Autre spécialité</option>
+                  </select>
                 </div>
               </div>
               <div class="row-fluid">
@@ -114,7 +118,7 @@
       <div class="row">
         <div class="col-xs-12 text-center hide-filter" style="box-shadow: none;">
         </div>
-      </div> -->
+      </div>
 
       <div class="row">
         <div class="col-xs-12 col-sm-8">
@@ -175,6 +179,7 @@
                     json.marker = markers[index];
 
                     json.marker.serviceObject.addListener('click', function() {
+                      console.log("click");
                       $('.card-user').removeClass('highlighted-card');
                       $('#user-' + json.id).addClass('highlighted-card');
                       document.getElementById('user-' + json.id).scrollIntoView();
@@ -182,16 +187,15 @@
                       if(scrolledY) {
                         window.scroll(0, scrolledY - '75px');
                       }
-                      console.log("click");
                     });
 
                     gr = {};
                     gr.marker = void 0;
-                    $("#user-" + json.id).on('mouseover', function() {
+                    $("#user-" + json.id).on('mouseenter', function() {
                       gr = { lat: json.lat, lng: json.lng, picture: hoverPicture };
                       handler.removeMarker(json.marker);
                       gr.marker = handler.addMarker(gr);
-                      }).on("mouseout", function() {
+                      }).on("mouseleave", function() {
                           handler.removeMarker(gr.marker);
                           json.marker = handler.addMarker(json);
                         });

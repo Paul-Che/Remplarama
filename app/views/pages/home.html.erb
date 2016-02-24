@@ -13,7 +13,11 @@
         <label for="formGroupInputSmall">à</label>
         <input type="text" class="form-control" placeholder="Lyon" name="location" id="user_input_autocomplete_address">
         <label for="formGroupInputSmall">en</label>
-        <input type="text" class="form-control" placeholder="médecine générale" name="end_date">
+        <select class="form-control" placeholder="Médecine générale" name="end_date">
+          <option value="generalist">Médecine générale</option>
+          <option value="kine">Kinésithérapie</option>
+          <option value="specialist">Autre spécialité</option>
+        </select>
         <input type="submit" value="trouver" class="btn btn-primary">
       </form>
     </div>
