@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
 }
+.highlighted-card {
+  border: 3px solid $green;
+  color: red !important;
+}
 .card-avatar {
   flex: 0 0 17%;
 }
