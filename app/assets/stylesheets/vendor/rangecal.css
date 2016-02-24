@@ -62,25 +62,25 @@
 
 /* green-theme */
 
-.blue-theme-bg {background-color: #448FFF ; color: #fff ;border-color: rgba(255,255,255,0.3); }
-.blue-theme-color {color: #448FFF ;}
+.blue-theme-bg {background-color: #00AFC3 ; color: #fff ;border-color: rgba(255,255,255,0.3); }
+.blue-theme-color {color: #00AFC3 ;}
 .blue-theme .range-calendar {background-color: #fff;}
 .blue-theme .months {background-color: transparent ;}
 .blue-theme .months .cell {color: rgba(0, 0, 0, 0.6) ;}
-.blue-theme .months .cell .month-name {color: #448FFF ;}
-.blue-theme .months .cell.selected {background-color: #448FFF ;}
+.blue-theme .months .cell .month-name {color: #00AFC3 ;}
+.blue-theme .months .cell.selected {background-color: #00AFC3 ;}
 .blue-theme .months .cell.selected .month-name {color: #fff ;}
-.blue-theme .months .cell .bullet { background-color: #448FFF;}
+.blue-theme .months .cell .bullet { background-color: #00AFC3;}
 .blue-theme .months .cell.selected .bullet { background-color: #fff;}
 .blue-theme .calendar {background-color: transparent ;}
 .blue-theme .calendar .cell  {color: rgba(0, 0, 0, 0.4) ;}
-.blue-theme .calendar .cell .day-number {color: #448FFF ;}
+.blue-theme .calendar .cell .day-number {color: #00AFC3 ;}
 .blue-theme .calendar .cell:hover {background: transparent ;}
 .blue-theme .calendar .cell:hover .day-number{color:#888 ;}
 .blue-theme .calendar .cell.selected  {color: #fff ;}
 .blue-theme .calendar .cell.selected:hover {background: none ;}
 .blue-theme .calendar .cell.selected .day-number {color: #fff ;}
-.blue-theme .range-bar { background-color: #448FFF ;  }
+.blue-theme .range-bar { background-color: #00AFC3 ;  }
 
 
 /* SKY COLOR  #00CCFF */
@@ -199,8 +199,8 @@
 
 /* Context Colors*/
 
-.blue-theme .color, .blue-theme.color {background-color: #448FFF !important; color: #fff;fill:#fff;}
-.blue-theme .text-color, .blue-theme.text-color {color: #448FFF; }
+.blue-theme .color, .blue-theme.color {background-color: #00AFC3 !important; color: #fff;fill:#fff;}
+.blue-theme .text-color, .blue-theme.text-color {color: #00AFC3; }
 .cyano-theme .color,.cyano-theme.color {background-color: #00CCFF !important;color: #fff;fill:#fff;}
 .cyano-theme .text-color,.cyano-theme.text-color {color: #00CCFF;}
 .orange-light-theme .color,.orange-light-theme.text-color {background-color: #ff7400  !important;color: #fff;fill:#fff;}

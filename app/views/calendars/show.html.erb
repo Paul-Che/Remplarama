@@ -1,10 +1,24 @@
-    <div id="demo">
-    </div>
+<div id="demo"></div>
 
+<div class="container">
+  <div class="row">
+
+    <div class="call-to-action text-center">
       <%= form_tag(user_slots_path(@user), :method => :post ) do -%>
       <input id="startDate" name="start_date" type="hidden" value="" />
       <input id="endDate" name="end_date" type="hidden" value="" />
-      <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary text-center" value='Valider cette plage de dates'/>
+      <input id ="sendDates"name='commit' type='submit' class ="btn btn-success" value='Valider cette plage de dates'/>
       <% end -%>
+    </div>
 
-<%= @user.slots.each {|s| s.created_at} %>
+    <% @slot_ranges.each do |range| %>
+    <ul class="list-unstyled">
+      <li><%= range.flatten %></li>
+    </ul>
+    <% end %>
+
+  </div>
+</div>
+
+
+

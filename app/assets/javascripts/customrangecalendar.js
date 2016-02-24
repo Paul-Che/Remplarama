@@ -40,7 +40,7 @@ $(document).ready(function() {
 $(document).ready(function(){
 
   var callbackRangeCalendar = $("#demo").rangeCalendar({
-    theme:"cyano-theme",
+    theme:"blue-theme",
     changeRangeCallback: rangeChanged,
     start : "+1",
     startRangeWidth : 1,
