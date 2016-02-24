@@ -14,8 +14,13 @@
     <% @slot_ranges.each do |range| %>
     <ul class="list-unstyled">
       <li><%= range.flatten.join(', ').gsub("min,", "Début :").gsub("max,", "Fin :").gsub(",", " ") %></li>
+          <%= link_to @slote_delete do %>
+              <h4 class="pencil"><i class="fa fa-pencil "></i></h4>
+            <% end %>
     </ul>
     <% end %>
+
+
 
   </div>
 </div>

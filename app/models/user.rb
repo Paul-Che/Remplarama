@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
     )
   end
 
+  def slote_delete
+    slot_ranges.delete
+  end
+
   validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }
 
 end
