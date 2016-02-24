@@ -4,11 +4,13 @@
     <div id="demo">
     </div>
 
-      <%= form_tag('/posts') do -%>
-      <input id="startDate" type="hidden" value="" />
-      <input id="endDate" type="hidden" value="" />
+      <%= form_tag(user_slots_path(@user), :method => :post ) do -%>
+      <input id="startDate" name="start_date" type="hidden" value="" />
+      <input id="endDate" name="end_date" type="hidden" value="" />
       <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary text-center" value='Valider dates pour cette plage de dates'/>
       <% end -%>
+
+
 
     <div id="profile" class="col-xs-12 col-md-3 text-justify">
       <ul class = "list-unstyled">
