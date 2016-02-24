@@ -20,7 +20,7 @@ class SlotsController < ApplicationController
     @slot.save
 
     end
-    redirect_to current_user
+    redirect_to calendar_path(current_user)
     # flash[:notice] = "Vos dates sont ajoutées à votre calendrier"
     authorize @slot
   end
@@ -52,7 +52,7 @@ class SlotsController < ApplicationController
 
   def string_to_date(string)
     Time.parse(string).to_date
-  rescue ArgumentError
+  rescue ArgumentError, TypeError
     # we return nil
   end
 end
