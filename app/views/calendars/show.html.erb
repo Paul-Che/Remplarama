@@ -13,7 +13,7 @@
 
     <% @slot_ranges.each do |range| %>
     <ul class="list-unstyled">
-      <li><%= range.flatten %></li>
+      <li><%= range.flatten.join(', ').gsub("min,", "Début :").gsub("max,", "Fin :").gsub(",", " ") %></li>
     </ul>
     <% end %>
 
