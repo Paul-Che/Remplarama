@@ -88,14 +88,19 @@ $.fn.rangeCalendar = function(options) {
 		},
 		obj.range = function() {
 
+
 		    var startDateIndex = obj.calendarObj.find('.cell.selected:eq(0)').index();
-		    var endDateIndex = obj.calendarObj.find('.cell.selected').last().index();
+        var endDateIndex = obj.calendarObj.find('.cell.selected').last().index();
+
+        var allDatesIndex = obj.calendarObj.find('.cell.selected').index();
+
 		    var startDate = moment().add('days', startDateIndex+obj.start);
 		    var startDateFormatted = (startDateIndex>=0 ? moment().add('days', startDateIndex+obj.start).format() : null);
 		    var endDateFormatted = (endDateIndex>=0 ? moment().add('days', endDateIndex+obj.start).format() : null);
 		    var range = $.data( obj, "range", {
 						    	start: startDateFormatted,
 								end: endDateFormatted,
+                // all: allDatesIndex,
 								width: obj.rangeWidth(),
 								fromNow: startDate.fromNow()
 						  });
