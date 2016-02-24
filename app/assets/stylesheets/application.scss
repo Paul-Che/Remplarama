@@ -5,14 +5,13 @@
 // External libraries
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "jquery-ui";
-// @import "jquery-ui/datepicker";
 @import "bootstrap-datepicker";
 @import "font-awesome-sprockets";
 @import "font-awesome";
-@import 'jquery-ui/core.css';
-@import 'jquery-ui/datepicker.css';
-@import 'jquery-ui/theme.css';
+// @import "jquery-ui";
+// @import 'jquery-ui/core.css';
+// @import 'jquery-ui/datepicker.css';
+// @import 'jquery-ui/theme.css';
 
 // Your CSS
 @import "layout/index";
