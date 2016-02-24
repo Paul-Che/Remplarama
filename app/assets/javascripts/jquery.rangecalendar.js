@@ -88,6 +88,7 @@ $.fn.rangeCalendar = function(options) {
 		},
 		obj.range = function() {
 
+
 		    var startDateIndex = obj.calendarObj.find('.cell.selected:eq(0)').index();
 		    var endDateIndex = obj.calendarObj.find('.cell.selected').last().index();
 		    var startDate = moment().add('days', startDateIndex+obj.start);

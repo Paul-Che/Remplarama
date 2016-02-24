@@ -1,6 +1,16 @@
 <div class="container" id = "user_container">
-
   <div class="row">
+
+    <div id="demo">
+      simple_form_for @user do |f|
+      f.input :title, :as => :hidden, :input_html => { :value => "some value" }
+      f.input :title, :as => :hidden, :input_html => { :value => "some value" }
+      end
+    </div>
+    <div id="send" class="text-center">
+      <button type="button" class="btn btn-primary">Valider dates</button>
+    </div>
+
     <div id="profile" class="col-xs-12 col-md-3 text-justify">
       <ul class = "list-unstyled">
         <li id="main-avatar">
@@ -27,7 +37,6 @@
           </div>
         </div>
       </div> -->
-              <div id="demo"></div>
     </div>
   </div>
 
