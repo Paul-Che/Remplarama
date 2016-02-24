@@ -1,7 +1,10 @@
 class SlotsController < ApplicationController
+  skip_after_action :authenticate_user!, only: :create
+  skip_after_action :authenticate_user!, only: :update
+  skip_after_action :authenticate_user!, only: :destroy
 
   def create
-    # authorize @slot
+
     start_date = string_to_date(params[:start_date])
     end_date = string_to_date(params[:end_date])
 
@@ -10,19 +13,21 @@ class SlotsController < ApplicationController
     end
 
     (start_date..end_date).to_a.each do |date|
-      current_user.slots.new(date)
+    @slots = Slot.new
+    @slots.day = date
+    @slots.status = "pending"
+    @slots.save
+
     end
-    redirect_to current_user_path
-
-    # @slot = current_user.slots.new(slot_params)
-
-    # if @slot.save
-    #   redirect_to current_user_path
-    # end
+    redirect_to current_user
+    # flash[:notice] = "Vos dates sont ajoutées à votre calendrier"
+    authorize @slots
   end
 
   def update
-    set_slot
+    # @slots = Slot.find(params[:id)
+    # @slots.update(slots_params)
+    # @slots.save
   end
 
   def destroy
@@ -33,6 +38,10 @@ class SlotsController < ApplicationController
   end
 
   private
+
+  def slots_params
+    params.require(:slot).permit(:day, :status)
+  end
 
   def set_slot
     @slot = Slot.find(params[:id])
