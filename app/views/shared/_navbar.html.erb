@@ -17,6 +17,12 @@
       </form>
     </div>
 
+    <%= link_to calendar_path(current_user), class: "navbar-wagon-item navbar-wagon-link" do %>
+      <div id="user_calendar">
+        <i class="fa fa-calendar"></i>
+      </div>
+    <% end %>
+
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
 
