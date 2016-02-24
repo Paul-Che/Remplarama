@@ -2,15 +2,13 @@ class UsersController < ApplicationController
 
   def search
     @user = current_user
-    # if params[:profil] == "remplaçant"
-    #   @user.has_practice = true
-    # else
-    #   @user.has_practice = false
-    # end
-    @users = User.near(params[:location], 15)
+    @location = params[:location]
+    @users = User.near(@location, 15)
     @markers = Gmaps4rails.build_markers(@users) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
+      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [30, 90]})
+      marker.infowindow "Dr. #{user.first_name} #{user.last_name}<br/>#{user.address}"
       marker.json({ :id => user.id })
     end
     authorize @user
