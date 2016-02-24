@@ -2,6 +2,11 @@ class UsersController < ApplicationController
 
   def search
     @user = current_user
+    # if params[:profil] == "remplaçant"
+    #   @user.has_practice = true
+    # else
+    #   @user.has_practice = false
+    # end
     @users = User.near(params[:location], 15)
     @markers = Gmaps4rails.build_markers(@users) do |user, marker|
       marker.lat user.latitude
