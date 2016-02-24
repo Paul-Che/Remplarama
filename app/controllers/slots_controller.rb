@@ -5,25 +5,26 @@ class SlotsController < ApplicationController
 
   def create
 
-    start_date = string_to_date(params[:start_date])
-    end_date = string_to_date(params[:end_date])
+    @start_date = string_to_date(params[:start_date])
+    @end_date = string_to_date(params[:end_date])
 
-    if start_date.nil? || end_date.nil?
+    if @start_date.nil? || @end_date.nil?
       render :back
     end
 
-    (start_date..end_date).to_a.each do |date|
-    @slots = Slot.new
-    @slots.day = date
-    @slots.status = "pending"
-    @slots.user_id = current_user.id
-    @slots.save
+    (@start_date..@end_date).to_a.each do |date|
+    @slot = current_user.slots.new
+    @slot.day = date
+    @slot.status = "pending"
+    # @slot.user = current_user
+    @slot.save
 
     end
     redirect_to current_user
     # flash[:notice] = "Vos dates sont ajoutées à votre calendrier"
-    authorize @slots
+    authorize @slot
   end
+
 
   def update
     # @slots = Slot.find(params[:id)
