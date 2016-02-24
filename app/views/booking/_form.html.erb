@@ -1,0 +1,39 @@
+<div class="container padded">
+  <div class="form-inline">
+   <%= simple_form_for [@bike, @booking] do |f| %>
+     <%= f.error_notification %>
+     <%= f.input :date_in, label: 'date_in', input_html: { class: "form-control datepick" }, placeholder: "Select start date", name: "start_date" %>
+     <%= f.input :date_out, label: 'date_out', input_html: { class: "form-control datepick" }, placeholder: "Select end date", name: "date_end" %>
+     <%= f.input :status, as: :hidden, :input_html => { :value => "pending" } %>
+     </br>
+     <%= f.button :submit, label: 'Add booking', class: "btn btn-primary form-control" %>
+   <% end %>
+  </div>
+  <div class="text-center">
+    <%= link_to "Back", bike_path(@bike), class: "btn btn-success" %>
+  </div>
+</div>
+
+<% content_for(:after_js) do %>
+  <div class="container">
+    <div class="row">
+      <div class="form col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center">
+        <%= simple_form_for @booking, class: "text-left" do |form| %>
+          <%= form.error_notification %>
+          <%= form.input :kind, collection: %w(VTT Ville Tandem) %>
+          <%= form.input :description %>
+          <%= form.input :price %>
+          <%= form.input :date_in, as: :string, label: "Date à laquelle vous voulez rendre votre vélo disponible", input_html: { class: "form-control datepick" }, placeholder: "Date de début", name: "start_date" %>
+          <%= form.input :date_out, as: :string, label: 'Date de fin', input_html: { class: "form-control datepick" }, placeholder: "Date de fin", name: "date_end" %>
+          <%= form.input :address, input_html: { id: "user_input_autocomplete_address" } %>
+          <%= form.input :helmet %>
+          <%= form.input :baby_seat %>
+          <%= form.input :photos, as: :attachinary %>
+          <%= form.submit "Add my bike", :class => 'btn btn-danger', style: "width: 100%;" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
