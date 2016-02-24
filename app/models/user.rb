@@ -27,4 +27,7 @@ class User < ActiveRecord::Base
       HEREDOC
     )
   end
+
+  validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }
+
 end

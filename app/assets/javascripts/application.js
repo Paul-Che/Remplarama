@@ -4,7 +4,6 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require moment
-//= require jquery-ui
 //= require jquery.ui.touch-punch
 //= require underscore
 //= require gmaps/google
