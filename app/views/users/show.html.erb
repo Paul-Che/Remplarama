@@ -57,3 +57,6 @@
 
 </div>
 
+<div class="text-center">
+  <%= link_to "Prendre contact avec Dr #{@user.first_name} #{@user.last_name}", new_user_booking_path(current_user), class: "btn btn-small btn-warning" %>
+</div>

@@ -1,7 +1,10 @@
 fr:
   activerecord:
     models:
-      user: "Uutilisateur"
+      user: "Utilisateurs"
+      slot: "Créneaux"
+      review: "Commentaires"
+      booking: "Réservations"
     attributes:
       user:
         first_name: "Prénom"
