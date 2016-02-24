@@ -14,7 +14,7 @@ class SlotsController < ApplicationController
   end
 
   def destroy
-    authorize @slot
+    set_slot
     @slot.destroy
 
     redirect_to user_path(@user), notice: 'Le créneaux a bien été détruit.'
