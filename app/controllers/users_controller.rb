@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 
   def show
     set_user
+    @alert_message = "You are viewing #{@user.first_name}"
+    @user_coordinates = { latitude: @user.latitude, longitude: @user.longitude }
     @slots = current_user.slots
     @bookings = current_user.bookings
     authorize @user
