@@ -23,7 +23,8 @@ User.create!(email: "michel.michel@gmail.com",
             housing: true,
             secretary: true,
             convention: "Conventionné secteur 1",
-            house_visits: "Aucune")
+            house_visits: "Aucune",
+            commission: 90)
 User.create!(email: "jeanne.darc@gmail.com",
             password: "12345678",
             first_name: "Jeanne",
@@ -40,7 +41,8 @@ User.create!(email: "jeanne.darc@gmail.com",
             housing: true,
             secretary: true,
             convention: "Conventionné secteur 2",
-            house_visits: "<= 2 / jour")
+            house_visits: "<= 2 / jour",
+            commission: 80)
 User.create!(email: "martin.pecheur@gmail.com",
             password: "12345678",
             first_name: "Martin",
@@ -57,7 +59,8 @@ User.create!(email: "martin.pecheur@gmail.com",
             housing: false,
             secretary: false,
             convention: "Non conventionné",
-            house_visits: "> 2 / jour")
+            house_visits: "> 2 / jour",
+            commission: 70)
 User.create!(email: "edouard.lesoin@gmail.com",
             password: "12345678",
             first_name: "Edouard",
@@ -74,7 +77,8 @@ User.create!(email: "edouard.lesoin@gmail.com",
             housing: true,
             secretary: true,
             convention: "Conventionné secteur 1",
-            house_visits: "Aucune")
+            house_visits: "Aucune",
+            commission: 60)
 User.create!(email: "jacques.wagon@gmail.com",
             password: "12345678",
             first_name: "Jacques",
@@ -91,7 +95,8 @@ User.create!(email: "jacques.wagon@gmail.com",
             housing: false,
             secretary: true,
             convention: "Conventionné secteur 2",
-            house_visits: "<= 2 / jour")
+            house_visits: "<= 2 / jour",
+            commission: 50)
 
 
 User.all.each do |user|
