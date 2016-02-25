@@ -57,12 +57,10 @@
 
 </div>
 
-<div class="text-center">
-  <%= link_to "Prendre contact avec Dr #{@user.first_name} #{@user.last_name}", new_user_booking_path(current_user), class: "btn btn-small btn-warning" %>
-</div>
-
 <!-- button to trigger modal -->
-<button data-toggle="modal" data-target="#sign-up">Join</button>
+<div class="text-center">
+  <button data-toggle="modal" data-target="#sign-up" class="btn btn-small btn-warning">Prendre contact avec Dr <%= @user.first_name%> <%= @user.last_name%></button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade text-center" id="sign-up">
