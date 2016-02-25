@@ -3,6 +3,18 @@
   height: 150px;
   display: flex;
   align-items: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  p {
+    font-size: 14px;
+  }
+  ul {
+    line-height: 0.5em;
+    margin-bottom: 0px;
+  }
+}
+hr {
+  margin: 5px 0;
 }
 .highlighted-card {
   background-color: $gray-lighter;
@@ -21,6 +33,12 @@
   flex: 0 0 35%;
   color: #888;
   font-size: 14px;
+  .fa-fw {
+    width: 3em;
+  }
+  p {
+    line-height: 20px;
+  }
 }
 .fa-yellow {
   color: $yellow;
