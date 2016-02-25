@@ -13,25 +13,29 @@
     margin-bottom: 0px;
   }
 }
+.card-user:hover {
+  background-color: $gray-lighter;
+  border-radius: 3px;
+  border: 1px solid $blue;
+}
 hr {
   margin: 5px 0;
 }
 .highlighted-card {
   background-color: $gray-lighter;
-  border-radius: 4px;
-  box-shadow: 1px 1px 1px $blue;
+  border-radius: 3px;
   border: 1px solid $blue;
 }
 .card-avatar {
-  flex: 0 0 17%;
+  flex: 0 0 20%;
   padding-left: 10px;
 }
 .card-content-left {
   flex: 1 1 auto;
 }
 .card-content-right {
-  flex: 0 0 35%;
-  color: #888;
+  flex: 0 0 40%;
+  color: $gray-medium;
   font-size: 14px;
   .fa-fw {
     width: 3em;
@@ -44,7 +48,7 @@ hr {
   color: $yellow;
 }
 .fa-gray {
-  color: $gray-lighter;
+  color: $gray-light;
 }
 // Cards in home page
 .card {

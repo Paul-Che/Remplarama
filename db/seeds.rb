@@ -23,8 +23,9 @@ User.create!(email: "michel.michel@gmail.com",
             publications: "Mes publications sont ...",
             housing: true,
             secretary: true,
-            convention: "Conventionné secteur 1",
-            house_visits: "Aucune")
+            convention: "1",
+            house_visits: "none",
+            commission: 90)
 User.create!(email: "jeanne.darc@gmail.com",
             password: "12345678",
             first_name: "Jeanne",
@@ -40,8 +41,9 @@ User.create!(email: "jeanne.darc@gmail.com",
             publications: "Je n'ai pas de publication",
             housing: true,
             secretary: true,
-            convention: "Conventionné secteur 2",
-            house_visits: "<= 2 / jour")
+            convention: "2",
+            house_visits: "max2",
+            commission: 80)
 User.create!(email: "martin.pecheur@gmail.com",
             password: "12345678",
             first_name: "Martin",
@@ -57,8 +59,9 @@ User.create!(email: "martin.pecheur@gmail.com",
             publications: "Pas de publication",
             housing: false,
             secretary: false,
-            convention: "Non conventionné",
-            house_visits: "> 2 / jour")
+            convention: "no",
+            house_visits: "above2",
+            commission: 70)
 User.create!(email: "edouard.lesoin@gmail.com",
             password: "12345678",
             first_name: "Edouard",
@@ -74,8 +77,9 @@ User.create!(email: "edouard.lesoin@gmail.com",
             publications: "Pas de publication",
             housing: true,
             secretary: true,
-            convention: "Conventionné secteur 1",
-            house_visits: "Aucune")
+            convention: "1",
+            house_visits: "none",
+            commission: 60)
 User.create!(email: "jacques.wagon@gmail.com",
             password: "12345678",
             first_name: "Jacques",
@@ -91,13 +95,13 @@ User.create!(email: "jacques.wagon@gmail.com",
             publications: "Pas de publication",
             housing: false,
             secretary: true,
-            convention: "Conventionné secteur 2",
-            house_visits: "<= 2 / jour")
+            convention: "2",
+            house_visits: "max2",
+            commission: 50)
 
 
 User.all.each do |user|
-  user.reviews.new(content: "Super sympa !", rating: 4)
-  user.save
+  user.reviews.create!(content: "Super sympa !", rating: 4)
 end
 
 User.all.each do |user|
