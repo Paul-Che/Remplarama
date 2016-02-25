@@ -1,3 +1,56 @@
 #user_container {
   margin-top: 100px;
 }
+.card-profil {
+  height: 335px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  font-weight: lighter;
+  padding: 10px 10px;
+}
+.calendar-profil {
+  height: 335px;
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 7px;
+  font-weight: lighter;
+  padding: 10px 10px;
+}
+.description-profil {
+  height: 200px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  font-weight: lighter;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+.card-acces {
+  height: 200px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  font-weight: lighter;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+.card-map {
+  height: 200px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  font-weight: lighter;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+#icon-profil {
+  font-size: 20px;
+}
+.card-profil ul li:nth-child(-n+3){
+    text-align: center;
+}
+.card-profil ul li:nth-child(2){
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+.card-profil ul li:last-child{
+    text-align: center;
+    margin-top: 12px;
+}
