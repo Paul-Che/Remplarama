@@ -5,3 +5,41 @@
   padding-top: 20px;
   padding-bottom: 70px;
 }
+.demands{
+  width: 100%;
+  height: 70vh;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+  background: #F9F9FA;
+  border-top: 1px solid #EAEAEB;
+  border-bottom: 1px solid #EAEAEB;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  bottom: 0;
+  color : $gray;
+  font-size: 15px;
+    li {
+    padding: 10px;
+    }
+    ul {
+    padding: 10px;
+    }
+    h4{
+    margin-bottom: 50px;
+    }
+}
+.availabilities{
+  border-right: 1px solid #333333;
+}
+.fa-calendar-minus-o{
+   font-size: 40px;
+   padding-bottom: 30px;
+   padding-top: 30px;
+}
+.empty_availabilities > li {
+  padding: 10px;
+}
+.empty_availabilities > ul {
+  padding: 10px;
+}
