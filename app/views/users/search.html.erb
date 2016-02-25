@@ -71,8 +71,9 @@
                         <label>Convention </label>
                         <select name="convention" class="search-input">
                           <option value="both">Tout</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
+                          <option value="1">Secteur 1</option>
+                          <option value="2">Secteur 2</option>
+                          <option value="2">Non-conventionné</option>
                         </select>
                       </div>
                     </div>
@@ -150,10 +151,22 @@
                         <h5><%= user.speciality %></h5>
                         <h6><%= user.address %></h6>
                       </div>
-                      <div class="card-content-right">
-
+                      <div class="card-content-right hidden-xs">
+                        <ul class="list-unstyled">
+                          <li><i class="fa fa-fw fa-user-md"></i><%= user.convention %></li><br>
+                          <% if user.housing %>
+                            <li><i class="fa fa-fw fa-home"></i>Hébergement proposé</li><br>
+                          <% end %>
+                          <% if user.secretary %>
+                            <li><i class="fa fa-fw fa-phone"></i>Secrétariat</li><br>
+                          <% else %>
+                            <li><i class="fa fa-fw fa-phone"></i>Pas de secrétariat</li><br>
+                          <% end %>
+                          <li><i class="fa fa-fw fa-suitcase"></i>Visites à domicile : <%= user.house_visits.downcase %></li>
+                        </ul>
                       </div>
                     </div>
+                    <hr>
                   <% end %>
                 </div>
                 <% end %>

@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   def slot_ranges
     ActiveRecord::Base.connection.execute(
       <<~HEREDOC
-        select min(day), max(day)
+        select min(day) as start_date, max(day) as end_date
         from (
             select
                 day,
@@ -29,5 +29,7 @@ class User < ActiveRecord::Base
   end
 
   validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
+  validates :convention, inclusion: { in: ['Conventionné secteur 1', 'Conventionné secteur 2', 'Non conventionné']}, on: :update
+  validates :house_visits, inclusion: { in: ['Aucune', '<= 2 / jour', '> 2 / jour']}, on: :update
 
 end

@@ -12,10 +12,18 @@
     </div>
 
     <% @slot_ranges.each do |range| %>
-    <ul class="list-unstyled">
-      <li><%= range.flatten.join(', ').gsub("min,", "Début :").gsub("max,", "Fin :").gsub(",", " ") %></li>
-    </ul>
+      <ul class="list-unstyled">
+        <li><%= human_slot_range(range) %></li>
+        <li><%= link_to "Supprimer", slot_range_path(slot_range_id(range)), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
+      </ul>
     <% end %>
+
+
+<!-- @slot.range est un objet >> un tableau de hashs
+=> #<PG::Result:0x007fc9f842b480 status=PGRES_TUPLES_OK ntuples=2 nfields=2 cmd_tuples=2>
+[17] pry(main)> r.each { |rr| p rr }
+{"min"=>"2016-02-25", "max"=>"2016-03-09"}
+{"min"=>"2016-09-10", "max"=>"2016-09-11"} -->
 
   </div>
 </div>
