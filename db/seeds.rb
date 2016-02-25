@@ -59,7 +59,7 @@ User.create!(email: "martin.pecheur@gmail.com",
             publications: "Pas de publication",
             housing: false,
             secretary: false,
-            convention: "no",
+            convention: "3",
             house_visits: "above2",
             commission: 70)
 User.create!(email: "edouard.lesoin@gmail.com",

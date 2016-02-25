@@ -13,9 +13,9 @@ class UsersController < ApplicationController
     @unrated = to_b(params[:unrated]) || false
 
     if params[:convention] == 'all'
-      @convention = ['1', '2', 'no']
+      @convention = ['1', '2', '3']
     else
-      @convention = params[:convention] || ['1', '2', 'no']
+      @convention = params[:convention] || ['1', '2', '3']
     end
 
     @housing = to_b(params[:housing]) || [true, false]
@@ -27,9 +27,15 @@ class UsersController < ApplicationController
       @house_visits = params[:house_visits] || ['none', 'max2', 'above2']
     end
     @location = params[:location]
-    located_users = User.near(@location, 15)
+    if params[:location].nil? || params[:location] == ""
+      located_users = User.all
+    else
+      located_users = User.near(@location, 15)
+    end
 
-    @users = search_by_filters(located_users, @speciality, @has_practice, @commission, @rating, @unrated, @convention, @housing, @secretary, @house_visits)
+    prefiltered_users = search_by_filters(located_users, @speciality, @has_practice, @commission, @rating, @unrated, @convention, @housing, @secretary, @house_visits)
+
+    @users = search_by_date(prefiltered_users)
 
     @markers = Gmaps4rails.build_markers(@users) do |user, marker|
       marker.lat user.latitude
@@ -76,7 +82,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def search_by_date
+  def search_by_date(prefiltered_users)
+    users = []
+    prefiltered_users.each do |user|
+      user.slots.each do |slot|
+        if slot.day >= Date.parse(@start_date) && slot.day <= Date.parse(@end_date)
+          users << user if !users.include?(user)
+        end
+      end
+    end
+    return users
   end
 
   def search_by_filters(located_users, speciality, has_practice, commission, rating, unrated, convention, housing, secretary, house_visits)
