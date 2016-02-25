@@ -74,7 +74,7 @@
                           <option <%= "selected" if @convention == "all" %> value="all">Tout</option>
                           <option <%= "selected" if @convention == "1" %> value="1">Secteur 1</option>
                           <option <%= "selected" if @convention == "2" %> value="2">Secteur 2</option>
-                          <option <%= "selected" if @convention == "no" %> value="no">Non-conventionné</option>
+                          <option <%= "selected" if @convention == "3" %> value="3">Non-conventionné</option>
                         </select>
                       </div>
                     </div>
@@ -155,16 +155,26 @@
                       </div>
                       <div class="card-content-right hidden-xs">
                         <ul class="list-unstyled">
-                          <li><i class="fa fa-fw fa-user-md"></i><%= user.convention %></li><br>
+                          <li><i class="fa fa-fw fa-user-md"></i>Secteur <%= user.convention %></li><br>
                           <% if user.housing %>
                             <li><i class="fa fa-fw fa-home"></i>Hébergement proposé</li><br>
                           <% end %>
                           <% if user.secretary %>
                             <li><i class="fa fa-fw fa-phone"></i>Secrétariat</li><br>
                           <% else %>
-                            <li><i class="fa fa-fw fa-phone"></i>Pas de secrétariat</li><br>
+                            <strike><li><i class="fa fa-fw fa-phone"></i>Secrétariat</li></strike><br>
                           <% end %>
-                          <li><i class="fa fa-fw fa-suitcase"></i>Visites à domicile : <%= user.house_visits.downcase %></li>
+                          <li>
+                            <i class="fa fa-fw fa-suitcase"></i>
+                            Visites à domicile :
+                            <% if user.house_visits == "none" %>
+                              aucune
+                            <% elsif user.house_visits == "max2" %>
+                              <= 2 / jour
+                            <% else %>
+                              > 2 / jour
+                            <% end %>
+                          </li>
                         </ul>
                       </div>
                     </div>

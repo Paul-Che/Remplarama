@@ -13,9 +13,9 @@ class UsersController < ApplicationController
     @unrated = to_b(params[:unrated]) || false
 
     if params[:convention] == 'all'
-      @convention = ['1', '2', 'no']
+      @convention = ['1', '2', '3']
     else
-      @convention = params[:convention] || ['1', '2', 'no']
+      @convention = params[:convention] || ['1', '2', '3']
     end
 
     @housing = to_b(params[:housing]) || [true, false]
@@ -77,6 +77,7 @@ class UsersController < ApplicationController
   end
 
   def search_by_date
+
   end
 
   def search_by_filters(located_users, speciality, has_practice, commission, rating, unrated, convention, housing, secretary, house_visits)

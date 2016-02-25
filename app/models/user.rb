@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   end
 
   validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
-  validates :convention, inclusion: { in: ['1', '2', 'no']}, on: :update
+  validates :convention, inclusion: { in: ['1', '2', '3']}, on: :update
   validates :house_visits, inclusion: { in: ['none', 'max2', 'above2']}, on: :update
 
 end
