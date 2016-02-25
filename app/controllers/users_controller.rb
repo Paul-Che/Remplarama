@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update]
 
   def search
     @user = current_user
@@ -15,14 +16,35 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    set_user
     @slots = current_user.slots
     @bookings = current_user.bookings
     authorize @user
   end
 
+  def edit
+    set_user
+  end
+
+  def update
+    set_user
+    @user.update(user_params)
+
+    redirect_to user_path(@user)
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+
+  end
+
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :presentation, :photo)
+    # *Strong params*: You need to *whitelist* what can be updated by the user
+    # Never trust user data!
+    params.require(:user).permit(:first_name, :last_name, :address, :speciality, :numero_ordre,
+     :numero_ursaff, :has_practice, :avatar, :presentation, :education, :publications)
   end
 
 end
