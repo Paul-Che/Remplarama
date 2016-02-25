@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   def slot_ranges
     ActiveRecord::Base.connection.execute(
       <<~HEREDOC
-        select min(day), max(day)
+        select min(day) as start_date, max(day) as end_date
         from (
             select
                 day,
@@ -27,6 +27,27 @@ class User < ActiveRecord::Base
       HEREDOC
     )
   end
+
+  # def delete
+  #   slot_ranges.delete
+  # end
+
+  # def test
+  #   ActiveRecord::Base.connection.execute(
+  #     <<~HEREDOC
+  #       delete min(day), max(day)
+  #       from (
+  #           select
+  #               day,
+  #               day - (dense_rank() over(order by day))::int g
+  #           from slots
+  #           where user_id = #{id}
+  #       ) s
+  #       group by s.g
+  #       order by 1
+  #     HEREDOC
+  #   )
+  # end
 
   validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }
   validates :convention, inclusion: { in: ['Conventionné secteur 1', 'Conventionné secteur 2', 'Non conventionné']}
