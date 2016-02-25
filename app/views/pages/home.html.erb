@@ -9,14 +9,17 @@
     <div class="search col-xs-12">
       <form action="/search" class="form-inline text-center">
         <label class="" for="formGroupInputSmall">Je recherche</label>
-        <input type="select" class="form-control" placeholder="un remplacant" name="profile">
+        <select class="form-control" placeholder="..." name="has_practice">
+          <option value="true">un remplaçant</option>
+          <option value="false">un remplacement</option>
+        </select>
         <label for="formGroupInputSmall">à</label>
         <input type="text" class="form-control" placeholder="Lyon" name="location" id="user_input_autocomplete_address">
         <label for="formGroupInputSmall">en</label>
-        <select class="form-control" placeholder="Médecine générale" name="end_date">
-          <option value="generalist">Médecine générale</option>
-          <option value="kine">Kinésithérapie</option>
-          <option value="specialist">Autre spécialité</option>
+        <select class="form-control" placeholder="Médecine générale" name="speciality">
+          <option value="Médecine générale">Médecine générale</option>
+          <option value="Kinésithérapie">Kinésithérapie</option>
+          <option value="Autre spécialité">Autre spécialité</option>
         </select>
         <input type="submit" value="trouver" class="btn btn-primary">
       </form>
