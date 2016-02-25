@@ -20,18 +20,25 @@
       <div class="availabilities text-center col-sm-12 col-md-6">
       <h4>Mes recherches de remplacants</h4>
       <% if @slot_ranges.ntuples == 0 %>
-         <div class="empty_availabilities"><i class="fa fa-calendar-times-o"><br></i>Vous n'avez pas encore de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
+         <i class="fa fa-calendar-minus-o"></i>
+         <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
       <% else %>
           <% @slot_ranges.each do |range| %>
-            <ul class="list-unstyled list-inline">
+          <ul class="list-inline list-unstyled">
               <li><%= human_slot_range(range) %></li>
               <li><%= link_to "Supprimer", slot_range_path(slot_range_id(range)), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
-            </ul>
+              <hr>
+          </ul>
           <% end %>
       <% end %>
       </div>
       <div class="incoming_demands text-center col-sm-12 col-md-6">
           <h4>Mes demandes de remplacants en cours</h4>
+          <% if @user.bookings.nil? %>
+            <i class="fa fa-user-md"></i>
+              <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
+          <% end %>
+          <!-- MY PENDING BOOKINGS + MY PAST BOOKINGS TO DO  -->
       </div>
     </div>
   </div>
