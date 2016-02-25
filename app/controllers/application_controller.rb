@@ -21,4 +21,5 @@ class ApplicationController < ActionController::Base
   def devise_or_admin_controller?
     devise_controller? || params[:controller] =~ /admin\/.*/
   end
+
 end

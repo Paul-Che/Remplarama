@@ -11,6 +11,14 @@ fr:
         last_name:  "Nom"
         password:   "Mot de passe"
         password_confirmation: "Confirmation du mot de passe"
+        address: "Adresse"
+        speciality: "Spécialité"
+        numero_ordre: "Numéro d'ordre"
+        numero_ursaff: "Numéro d'URSSAF"
+        avatar: "Photo de profil"
+        presentation: "Présentation"
+        education: "Formation"
+        publications: "Publications"
   simple_form:
     labels:
       user:

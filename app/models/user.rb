@@ -28,6 +28,6 @@ class User < ActiveRecord::Base
     )
   end
 
-  validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }
+  validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
 
 end

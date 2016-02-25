@@ -60,3 +60,39 @@
 <div class="text-center">
   <%= link_to "Prendre contact avec Dr #{@user.first_name} #{@user.last_name}", new_user_booking_path(current_user), class: "btn btn-small btn-warning" %>
 </div>
+
+<!-- button to trigger modal -->
+<button data-toggle="modal" data-target="#sign-up">Join</button>
+
+<!-- Modal -->
+<div class="modal fade text-center" id="sign-up">
+<!-- Modal content with Sign up form -->
+  <h2>It's working !</h2>
+  <div class="container">
+    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="form-design background">
+        <div class="text-center" id="form_title">
+          <h2>Information</h2>
+          <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
+        </div>
+          <%= simple_form_for(@user) do |f| %>
+            <%= f.error_notification %>
+
+            <div id="form-inputs">
+              <%= f.input :address, required: true %>
+              <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
+              <%= f.input :numero_ordre, required: true %>
+              <%= f.input :numero_ursaff, required: true %>
+            </div>
+
+            <div class="form-actions text-center">
+              <%= f.button :submit, "Suivant", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
+            </div>
+
+          <% end %>
+
+          <%= link_to "Finir de compléter son profil", user_path(@user) %>
+      </div>
+    </div>
+  </div>
+</div>
