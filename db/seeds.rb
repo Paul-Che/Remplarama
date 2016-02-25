@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.destroy_all
 
 User.create!(email: "michel.michel@gmail.com",
             password: "12345678",
@@ -96,6 +97,12 @@ User.create!(email: "jacques.wagon@gmail.com",
 
 User.all.each do |user|
   user.reviews.new(content: "Super sympa !", rating: 4)
+  user.save
+end
+
+User.all.each do |user|
+  user.slots.new(day: ("Wed, 02 Mar 2016"), status: "pending")
+  user.slots.new(day: ("Thu, 03 Mar 2016"), status: "pending")
   user.save
 end
 
