@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
 
-  resource :calendar, only: [:show]
+  resource :calendar,     only: [:show]
+
+  resources :slot_ranges, only: [:destroy]
 
   mount Attachinary::Engine => "/attachinary"
 

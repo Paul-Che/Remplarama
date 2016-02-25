@@ -20,7 +20,7 @@ class SlotsController < ApplicationController
     @slot.save
 
     end
-    redirect_to calendar_path(current_user)
+    redirect_to calendar_path
     # flash[:notice] = "Vos dates sont ajoutées à votre calendrier"
     authorize @slot
   end
