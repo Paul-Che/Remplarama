@@ -83,6 +83,8 @@ class UsersController < ApplicationController
   end
 
   def search_by_date(prefiltered_users)
+    return prefiltered_users if @end_date == "" || @end_date.nil?
+    @start_date = Date.today.to_s if @start_date == "" || @start_date.nil?
     users = []
     prefiltered_users.each do |user|
       user.slots.each do |slot|
