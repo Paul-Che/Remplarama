@@ -11,11 +11,21 @@ class UsersController < ApplicationController
     @commission = params[:commission] || "0 - 100%"
     @rating = params[:rating] || "0 - 5"
     @unrated = to_b(params[:unrated]) || false
-    @convention = params[:convention] || ['Conventionné secteur 1', 'Conventionné secteur 2', 'Non conventionné']
-    @housing = to_b(params[:housing]) || false
-    @secretary = to_b(params[:secretary]) || false
-    @house_visits = params[:house_visits] || ['Aucune', '<= 2 / jour', '> 2 / jour']
 
+    if params[:convention] == 'all'
+      @convention = ['1', '2', 'no']
+    else
+      @convention = params[:convention] || ['1', '2', 'no']
+    end
+
+    @housing = to_b(params[:housing]) || [true, false]
+    @secretary = to_b(params[:secretary]) || [true, false]
+
+    if params[:house_visits] == 'all'
+      @house_visits = ['none', 'max2', 'above2']
+    else
+      @house_visits = params[:house_visits] || ['none', 'max2', 'above2']
+    end
     @location = params[:location]
     located_users = User.near(@location, 15)
 
@@ -53,8 +63,10 @@ class UsersController < ApplicationController
   private
 
   def to_b(string)
-    if string == "true" || string = true
+    if string == "true" || string == true
       true
+    elsif string == nil
+      nil
     else
       false
     end
@@ -72,17 +84,17 @@ class UsersController < ApplicationController
     max_commission = commission.scan(/\d+%/).join.gsub("%","").to_i
     min_rating = rating.first.to_i
     max_rating = rating.last.to_i
-    #binding.pry
-    users = located_users.where(speciality: speciality,
-                       has_practice: has_practice)
-                       # commission: min_commission..max_commission,
-                       # convention: convention,
-                       # housing: housing,
-                       # secretary: secretary,
-                       # house_visits: house_visits)
 
+    users = located_users.where(speciality: speciality,
+                       has_practice: has_practice,
+                       commission: min_commission..max_commission,
+                       convention: convention,
+                       housing: housing,
+                       secretary: secretary,
+                       house_visits: house_visits)
+    #binding.pry
     results = users.select do |user|
-      (user.reviews.average(:rating) <= max_rating && user.reviews.average(:rating) >= min_rating) || user.reviews.empty? if unrated == true
+      (user.reviews.average(:rating) <= max_rating && user.reviews.average(:rating) >= min_rating) || (user.reviews.empty? if unrated == true)
     end
     return results
   end
