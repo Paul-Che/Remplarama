@@ -6,6 +6,7 @@ class BookingsController < ApplicationController
   end
 
   def create
+    authorize @booking
     @user = User.find(params[:user_id])
     @start_date = params[:start_date]
     @end_date = params[:end_date]
@@ -24,6 +25,14 @@ class BookingsController < ApplicationController
 
   def update
     authorize @booking
+    @booking = Booking.find(params[:id])
+    if params[:commit] == "Confirm"
+      @booking.status = "confirmed"
+    elsif params[:commit] == "Reject"
+      @booking.status = "rejected"
+    end
+    @booking.save
+    redirect_to :back
   end
 
   def destroy
