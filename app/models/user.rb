@@ -28,29 +28,8 @@ class User < ActiveRecord::Base
     )
   end
 
-  # def delete
-  #   slot_ranges.delete
-  # end
-
-  # def test
-  #   ActiveRecord::Base.connection.execute(
-  #     <<~HEREDOC
-  #       delete min(day), max(day)
-  #       from (
-  #           select
-  #               day,
-  #               day - (dense_rank() over(order by day))::int g
-  #           from slots
-  #           where user_id = #{id}
-  #       ) s
-  #       group by s.g
-  #       order by 1
-  #     HEREDOC
-  #   )
-  # end
-
-  validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }
-  validates :convention, inclusion: { in: ['Conventionné secteur 1', 'Conventionné secteur 2', 'Non conventionné']}
-  validates :house_visits, inclusion: { in: ['Aucune', '<= 2 / jour', '> 2 / jour']}
+  validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
+  validates :convention, inclusion: { in: ['Conventionné secteur 1', 'Conventionné secteur 2', 'Non conventionné']}, on: :update
+  validates :house_visits, inclusion: { in: ['Aucune', '<= 2 / jour', '> 2 / jour']}, on: :update
 
 end

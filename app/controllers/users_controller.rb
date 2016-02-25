@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  after_action :verify_authorized, only: :update
 
   def search
     @user = current_user
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    authorize @user, :update?
     set_user
     @user.update(user_params)
 
@@ -43,8 +45,9 @@ class UsersController < ApplicationController
   def user_params
     # *Strong params*: You need to *whitelist* what can be updated by the user
     # Never trust user data!
-    params.require(:user).permit(:first_name, :last_name, :address, :speciality, :numero_ordre,
-     :numero_ursaff, :has_practice, :avatar, :presentation, :education, :publications)
+    params.require(:user).permit(:first_name, :last_name, :has_practice, :email, :password,
+      :password_confirmation, :address, :speciality, :numero_ordre, :numero_ursaff, :avatar,
+       :presentation, :education, :publications)
   end
 
 end
