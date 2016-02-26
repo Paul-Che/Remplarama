@@ -41,14 +41,17 @@
   margin: 10px 0px;
 }
 #icon-profil {
-  font-size: 20px;
+  font-size: 14px;
+  padding: 5px;
+  margin-top: 0px;
 }
-.card-profil ul li:nth-child(-n+3){
+.card-profil ul li:nth-child(-n+2){
     text-align: center;
 }
 .card-profil ul li:nth-child(2){
   margin-top: 10px;
   margin-bottom: 0px;
+  padding-top: 5px;
 }
 .card-profil ul li:last-child{
     text-align: center;

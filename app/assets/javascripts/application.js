@@ -5,6 +5,7 @@
 //= require bootstrap-datepicker
 //= require moment
 //= require jquery.ui.touch-punch
+//= require cloudinary
 //= require underscore
 //= require gmaps/google
 //= require owl.carousel
