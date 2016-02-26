@@ -12,6 +12,13 @@
           </li>
           <li><p><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></p></li>
           <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= @user.speciality %></i></li><hr>
+
+         <!-- test d'alignement !!!!!
+          <ul class="list-inline list-unstyled">
+            <li><i class="fa fa-home" id="icon-profil"> : </i></li>
+            <li><%= @user.address %></li>
+          </ul> -->
+
           <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
           <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li><hr>
           <li>
@@ -60,10 +67,12 @@
 <div class="wrapper-profil">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <div class="description-profil">
+      <div class="description-profil">
+        <div class="col-xs-6">
           <h4>Présentation :</h4>
           <h6><%= @user.presentation %></h6>
+        </div>
+        <div class="col-xs-6">
           <h4>Cursus et publications :</h4>
           <h6><%= @user.publications %></h6>
         </div>
@@ -76,13 +85,13 @@
   <div class="row">
     <div class="col-md-6">
       <div class="card-acces">
-        <h4>Informations d'accès</h4>
-        <h5><%= @user.address %></h5>
+        <h4>Informations d'accès :</h4>
+        <h5><strong><%= @user.address %></strong></h5>
         <div></div>
         <h6>Parking</h6>
         <h6>Informations supplémentaires</h6>
         <ul>
-          <li>3 eme étage avec ascenseur</li>
+          <li><h6>3 eme étage avec ascenseur</h6></li>
         </ul>
       </div>
     </div>
