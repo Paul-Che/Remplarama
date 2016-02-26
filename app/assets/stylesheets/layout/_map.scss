@@ -4,14 +4,10 @@
   top: -16px;
   float: right;
   overflow-y: auto;
-  height: 100vh;
+  height: calc(100vh - 70px);
   width: 100%;
-}
-#map > div > div > div {
-  position: fixed;
 }
 .map-fixed {
   position: fixed !important;
-  height: 100vh;
-  top: 70px;
+  top: 70px !important;
 }

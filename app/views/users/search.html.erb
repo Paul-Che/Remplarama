@@ -70,7 +70,7 @@
                   <div class="label-option-small">
                     <div class="form-group">
                       <select name="convention" class="search-input">
-                        <option value="" disabled selected="selected">Convention ?</option>
+                        <option value="" disabled selected="selected">Conventionnement</option>
                         <option <%= "selected" if @convention == "all" %> value="all">Tout</option>
                         <option <%= "selected" if @convention == "1" %> value="1">Secteur 1</option>
                         <option <%= "selected" if @convention == "2" %> value="2">Secteur 2</option>
@@ -90,8 +90,8 @@
                   </div>
                   <div class="label-option-large">
                     <div class="form-group">
-                      <label>Visites à domicile </label>
                       <select name="house_visits" class="search-input">
+                        <option value="" disabled selected>Nombre de visites à domicile</option>
                         <option <%= "selected" if @house_visits == "all" %> value="all">Tout</option>
                         <option <%= "selected" if @house_visits == "none" %> value="none">Aucune</option>
                         <option <%= "selected" if @house_visits == "max2" %> value="max2"><= 2 par jour</option>
@@ -154,7 +154,7 @@
                       <h5><%= user.speciality %></h5>
                       <h6><%= user.address %></h6>
                     </div>
-                    <div class="card-content-right hidden-xs">
+                    <div class="card-content-right hidden-xs hidden-sm">
                       <ul class="list-unstyled">
                         <li><i class="fa fa-fw fa-user-md"></i>Secteur <%= user.convention %></li><br>
                         <% if user.housing %>
