@@ -1,113 +1,112 @@
-<div class="wrapper">
-  <div class="page-content padded">
-    <div class="container-fluid main">
-      <div id="search-filter">
-        <form action="/search">
-          <input type="hidden" name="has_practice" value="<%= @has_practice %>">
-          <div class="row">
-            <div class="col-xs-12 col-sm-4">
-              <div class="row-fluid">
-                <div class="col-xs-12">
-                  <input class="search-input full-input" placeholder="Ville ou adresse" name="location" id="user_input_autocomplete_address" value="<%= @location %>">
-                </div>
+
+<div class="page-content padded">
+  <div class="container main">
+    <div id="search-filter">
+      <form action="/search">
+        <input type="hidden" name="has_practice" value="<%= @has_practice %>">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <div class="row-fluid">
+              <div class="col-xs-12">
+                <input class="search-input full-input" placeholder="Ville ou adresse" name="location" id="user_input_autocomplete_address" value="<%= @location %>">
               </div>
-              <div class="row-fluid">
-                <div class="col-xs-12">
-                  <select class="search-input select-height full-input" name="speciality">
-                    <option <%= "selected" if @speciality == "Médecine générale" %> class="search-input" value="Médecine générale">Médecine générale</option>
-                    <option <%= "selected" if @speciality == "Kinésithérapie" %> class="search-input" value="Kinésithérapie">Kinésithérapie</option>
-                    <option <%= "selected" if @speciality == "Autre spécialité" %> class="search-input" value="Autre spécialité">Autre spécialité</option>
-                  </select>
-                </div>
+            </div>
+            <div class="row-fluid">
+              <div class="col-xs-12">
+                <select class="search-input select-height full-input" name="speciality">
+                  <option <%= "selected" if @speciality == "Médecine générale" %> class="search-input" value="Médecine générale">Médecine générale</option>
+                  <option <%= "selected" if @speciality == "Kinésithérapie" %> class="search-input" value="Kinésithérapie">Kinésithérapie</option>
+                  <option <%= "selected" if @speciality == "Autre spécialité" %> class="search-input" value="Autre spécialité">Autre spécialité</option>
+                </select>
               </div>
-              <div class="row-fluid">
-                <div class="col-xs-12 col-sm-6">
-                  <input type="text" class="search-input datepick" placeholder="Date de début" name="start_date" value="<%= @start_date %>">
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                  <input type="text" class="search-input datepick" placeholder="Date de fin" name="end_date" value="<%= @end_date %>">
+            </div>
+            <div class="row-fluid">
+              <div class="col-xs-12 col-sm-6">
+                <input type="text" class="search-input datepick" placeholder="Date de début" name="start_date" value="<%= @start_date %>">
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <input type="text" class="search-input datepick" placeholder="Date de fin" name="end_date" value="<%= @end_date %>">
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-8">
+            <div class="row-fluid">
+              <div class="col-xs-12">
+                <div class="option-flex filter-row">
+                  <div class="label-option">
+                    <label for="commission">Reversement au remplaçant</label>
+                  </div>
+                  <div class="slider-values">
+                    <input type="text" name="commission" class="text-center slider-values-text" id="commission" readonly>
+                  </div>
+                  <div class="slider-bar">
+                    <div id="slider-range"></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-8">
-              <div class="row-fluid">
-                <div class="col-xs-12">
-                  <div class="option-flex filter-row">
-                    <div class="label-option">
-                      <label for="commission">Reversement au remplaçant</label>
-                    </div>
-                    <div class="slider-values">
-                      <input type="text" name="commission" class="text-center slider-values-text" id="commission" readonly>
-                    </div>
-                    <div class="slider-bar">
-                      <div id="slider-range"></div>
-                    </div>
+            <div class="row-fluid">
+              <div class="col-xs-12">
+                <div class="option-flex filter-row">
+                  <div class="label-option">
+                    <label for="rating">Note des profils</label>
+                  </div>
+                  <div class="slider-values">
+                    <input type="text" name="rating" class="text-center slider-values-text" id="rating" readonly>
+                  </div>
+                  <div class="slider-bar">
+                    <div id="slider-range2"></div>
+                  </div>
+                  <div class="slider-margin"></div>
+                  <div class="slider-addon checkbox hidden-xs">
+                    <label><input type="checkbox" name="unrated" value="true" checked> Inclure les profils non-notés</label>
                   </div>
                 </div>
               </div>
-              <div class="row-fluid">
-                <div class="col-xs-12">
-                  <div class="option-flex filter-row">
-                    <div class="label-option">
-                      <label for="rating">Note des profils</label>
-                    </div>
-                    <div class="slider-values">
-                      <input type="text" name="rating" class="text-center slider-values-text" id="rating" readonly>
-                    </div>
-                    <div class="slider-bar">
-                      <div id="slider-range2"></div>
-                    </div>
-                    <div class="slider-margin"></div>
-                    <div class="slider-addon checkbox hidden-xs">
-                      <label><input type="checkbox" name="unrated" value="true" checked> Inclure les profils non-notés</label>
+            </div>
+            <div class="row-fluid">
+              <div class="col-xs-12">
+                <div class="option-flex filter-row">
+                  <div class="label-option-small">
+                    <div class="form-group">
+                      <select name="convention" class="search-input">
+                        <option value="" disabled selected="selected">Convention ?</option>
+                        <option <%= "selected" if @convention == "all" %> value="all">Tout</option>
+                        <option <%= "selected" if @convention == "1" %> value="1">Secteur 1</option>
+                        <option <%= "selected" if @convention == "2" %> value="2">Secteur 2</option>
+                        <option <%= "selected" if @convention == "3" %> value="3">Non-conventionné</option>
+                      </select>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="row-fluid">
-                <div class="col-xs-12">
-                  <div class="option-flex filter-row">
-                    <div class="label-option-small">
-                      <div class="form-group">
-                        <label>Convention </label>
-                        <select name="convention" class="search-input">
-                          <option <%= "selected" if @convention == "all" %> value="all">Tout</option>
-                          <option <%= "selected" if @convention == "1" %> value="1">Secteur 1</option>
-                          <option <%= "selected" if @convention == "2" %> value="2">Secteur 2</option>
-                          <option <%= "selected" if @convention == "3" %> value="3">Non-conventionné</option>
-                        </select>
-                      </div>
+                  <div class="label-option-small">
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="true" <%= "checked" if @housing == true %> name="housing" class="search-input"> Hébergement</label>
                     </div>
-                    <div class="label-option-small">
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="true" <%= "checked" if @housing == true %> name="housing" class="search-input"> Hébergement</label>
-                      </div>
+                  </div>
+                  <div class="label-option-small">
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="true" <%= "checked" if @secretary == true %> name="secretary" class="search-input"> Secrétariat</label>
                     </div>
-                    <div class="label-option-small">
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="true" <%= "checked" if @secretary == true %> name="secretary" class="search-input"> Secrétariat</label>
-                      </div>
-                    </div>
-                    <div class="label-option-large">
-                      <div class="form-group">
-                        <label>Visites à domicile </label>
-                        <select name="house_visits" class="search-input">
-                          <option <%= "selected" if @house_visits == "all" %> value="all">Tout</option>
-                          <option <%= "selected" if @house_visits == "none" %> value="none">Aucune</option>
-                          <option <%= "selected" if @house_visits == "max2" %> value="max2"><= 2 par jour</option>
-                          <option <%= "selected" if @house_visits == "above2" %> value="above2">> 2 par jour</option>
-                        </select>
-                      </div>
+                  </div>
+                  <div class="label-option-large">
+                    <div class="form-group">
+                      <label>Visites à domicile </label>
+                      <select name="house_visits" class="search-input">
+                        <option <%= "selected" if @house_visits == "all" %> value="all">Tout</option>
+                        <option <%= "selected" if @house_visits == "none" %> value="none">Aucune</option>
+                        <option <%= "selected" if @house_visits == "max2" %> value="max2"><= 2 par jour</option>
+                        <option <%= "selected" if @house_visits == "above2" %> value="above2">> 2 par jour</option>
+                      </select>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xs-12 text-center" id="filter-button">
-              <input type="submit" value="Filtrer" class="btn btn-primary" id="filter-button" style="width: 33%;">
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-center" id="filter-button">
+            <input type="submit" value="Filtrer" class="btn btn-primary" id="filter-button" style="width: 33%;">
           </div>
         </form>
       </div>
@@ -117,78 +116,87 @@
           <span class="hide-arrow"><i class="fa fa-arrow-circle-o-up align-center"></i></span>
           <span class="hide-arrow hidden"><i class="fa fa-arrow-circle-o-down align-center"></i></span>
         </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center hide-filter">
+        <span class="hide-arrow"><i class="fa fa-arrow-circle-o-up align-center"></i></span>
+        <span class="hide-arrow hidden"><i class="fa fa-arrow-circle-o-down align-center"></i></span>
       </div>
-      <div class="row">
-        <div class="col-xs-12 text-center hide-filter" style="box-shadow: none;">
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center hide-filter" style="box-shadow: none;">
       </div>
+    </div>
+  </div>
 
-      <div class="row">
-        <div class="col-xs-12 col-sm-8">
-          <div class="cards">
-            <div class="container-fluid">
-              <div class="row">
-                <% if @users.first.nil? %>
-                  <h4 class="text-center">Sorry, there is no result in your area.</h4>
-                <% end %>
-                <% @users.each do |user| %>
-                <div class="col-xs-12">
-                  <%= link_to user_path(user) do %>
-                    <div class="card-user" id="user-<%= user.id %>">
-                      <div class="card-avatar">
-                        <% if user.avatar.nil? %>
-                          <%= image_tag "placeholder_pic.png", class: "avatar-xxl" %>
-                        <% else %>
-                          <%= image_tag user.avatar, class: "avatar-xxl" %>
-                        <% end %>
-                      </div>
-                      <div class="card-content-left">
-                        <h4>Dr. <%= user.first_name %>  <%= user.last_name %></h4>
-                        <% if user.reviews.size > 0 %>
-                          <h4>
-                            <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews.average(:rating).to_f.round).html_safe %>
-                            <%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews.average(:rating).to_f.round)).html_safe %>
-                          </h4>
-                        <% end %>
-                        <h5><%= user.speciality %></h5>
-                        <h6><%= user.address %></h6>
-                      </div>
-                      <div class="card-content-right hidden-xs">
-                        <ul class="list-unstyled">
-                          <li><i class="fa fa-fw fa-user-md"></i>Secteur <%= user.convention %></li><br>
-                          <% if user.housing %>
-                            <li><i class="fa fa-fw fa-home"></i>Hébergement proposé</li><br>
-                          <% end %>
-                          <% if user.secretary %>
-                            <li><i class="fa fa-fw fa-phone"></i>Secrétariat</li><br>
-                          <% else %>
-                            <strike><li><i class="fa fa-fw fa-phone"></i>Secrétariat</li></strike><br>
-                          <% end %>
-                          <li>
-                            <i class="fa fa-fw fa-suitcase"></i>
-                            Visites à domicile :
-                            <% if user.house_visits == "none" %>
-                              aucune
-                            <% elsif user.house_visits == "max2" %>
-                              <= 2 / jour
-                            <% else %>
-                              > 2 / jour
-                            <% end %>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="card-tag">
-                        <%= user.commission %>%
-                      </div>
+  <div class="container container-map">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+        <div class="cards">
+          <div class="container-fluid">
+            <div class="row">
+              <% if @users.first.nil? %>
+                <h4 class="text-center">Sorry, there is no result in your area.</h4>
+              <% end %>
+              <% @users.each do |user| %>
+              <div class="col-xs-12">
+                <%= link_to user_path(user) do %>
+                  <div class="card-user" id="user-<%= user.id %>">
+                    <div class="card-avatar">
+                      <% if user.avatar.nil? %>
+                        <%= image_tag "placeholder_pic.png", class: "avatar-xxl" %>
+                      <% else %>
+                        <%= image_tag user.avatar, class: "avatar-xxl" %>
+                      <% end %>
                     </div>
-                    <hr>
-                  <% end %>
-                </div>
+                    <div class="card-content-left">
+                      <h4>Dr. <%= user.first_name %>  <%= user.last_name %></h4>
+                      <% if user.reviews.size > 0 %>
+                        <h4>
+                          <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews.average(:rating).to_f.round).html_safe %>
+                          <%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews.average(:rating).to_f.round)).html_safe %>
+                        </h4>
+                      <% end %>
+                      <h5><%= user.speciality %></h5>
+                      <h6><%= user.address %></h6>
+                    </div>
+                    <div class="card-content-right hidden-xs">
+                      <ul class="list-unstyled">
+                        <li><i class="fa fa-fw fa-user-md"></i>Secteur <%= user.convention %></li><br>
+                        <% if user.housing %>
+                          <li><i class="fa fa-fw fa-home"></i>Hébergement proposé</li><br>
+                        <% end %>
+                        <% if user.secretary %>
+                          <li><i class="fa fa-fw fa-phone"></i>Secrétariat</li><br>
+                        <% else %>
+                          <strike><li><i class="fa fa-fw fa-phone"></i>Secrétariat</li></strike><br>
+                        <% end %>
+                        <li>
+                          <i class="fa fa-fw fa-suitcase"></i>
+                          Visites à domicile :
+                          <% if user.house_visits == "none" %>
+                            aucune
+                          <% elsif user.house_visits == "max2" %>
+                            <= 2 / jour
+                          <% else %>
+                            > 2 / jour
+                          <% end %>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="card-tag">
+                      <%= user.commission %>%
+                    </div>
+                  </div>
+                  <hr>
                 <% end %>
               </div>
+              <% end %>
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         <div class="hidden-xs col-sm-4 no-padding map">
           <div id="map" style="position: fixed;" class="small-height"></div>
           <% content_for(:after_js) do %>
@@ -205,39 +213,56 @@
 
                   (<%=raw @markers.to_json %>).forEach(function(json, index){
                     json.marker = markers[index];
-
-                    json.marker.serviceObject.addListener('click', function() {
-                      console.log("click");
-                      $('.card-user').removeClass('highlighted-card');
-                      $('#user-' + json.id).addClass('highlighted-card');
-                      document.getElementById('user-' + json.id).scrollIntoView();
-                      var scrolledY = window.scrollY
-                      if(scrolledY) {
-                        window.scroll(0, scrolledY - '75px');
-                      }
-                    });
-
-                    gr = {};
-                    gr.marker = void 0;
-                    $("#user-" + json.id).on('mouseenter', function() {
-                      gr = { lat: json.lat, lng: json.lng, picture: hoverPicture };
-                      handler.removeMarker(json.marker);
-                      gr.marker = handler.addMarker(gr);
-                      }).on("mouseleave", function() {
-                          handler.removeMarker(gr.marker);
-                          json.marker = handler.addMarker(json);
-                        });
-                  });
-                  handler.bounds.extendWith(markers);
-                  handler.fitMapToBounds();
-                });
-              });
-            </script> <%# end %>
-          <% end %>
-        </div>
+=======
       </div>
+      <div class="hidden-xs col-sm-4 no-padding">
+        <div id="map" style="position: fixed;"></div>
+        <% content_for(:after_js) do %>
+          <script> <%#= javascript_tag do %>
+            $(document).on('ready', function() {
+              hoverPicture = {
+              url: "<%= asset_path 'marker_blue_small.png' %>",
+              width: 60,
+              height: 90
+              };
+              handler = Gmaps.build('Google');
+              handler.buildMap({ internal: { id: 'map' } }, function(){
+                markers = handler.addMarkers(<%= raw @markers.to_json %>);
+>>>>>>> master
 
+                (<%=raw @markers.to_json %>).forEach(function(json, index){
+                  json.marker = markers[index];
 
+                  json.marker.serviceObject.addListener('click', function() {
+                    console.log("click");
+                    $('.card-user').removeClass('highlighted-card');
+                    $('#user-' + json.id).addClass('highlighted-card');
+                    document.getElementById('user-' + json.id).scrollIntoView();
+                    var scrolledY = window.scrollY
+                    if(scrolledY) {
+                      window.scroll(0, scrolledY - '75px');
+                    }
+                  });
+
+                  gr = {};
+                  gr.marker = void 0;
+                  $("#user-" + json.id).on('mouseenter', function() {
+                    gr = { lat: json.lat, lng: json.lng, picture: hoverPicture };
+                    handler.removeMarker(json.marker);
+                    gr.marker = handler.addMarker(gr);
+                    }).on("mouseleave", function() {
+                        handler.removeMarker(gr.marker);
+                        json.marker = handler.addMarker(json);
+                      });
+                });
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+              });
+            });
+          </script> <%# end %>
+        <% end %>
+      </div>
     </div>
   </div>
+
 </div>

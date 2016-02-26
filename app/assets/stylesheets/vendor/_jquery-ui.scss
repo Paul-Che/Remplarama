@@ -663,6 +663,11 @@ button.ui-button::-moz-focus-inner {
   -ms-touch-action: none;
   touch-action: none;
 }
+.ui-slider .ui-slider-handle:focus {
+  outline: 0;
+}
+
+
 .ui-slider .ui-slider-range {
   position: absolute;
   // z-index: 1;
