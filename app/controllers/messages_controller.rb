@@ -1,10 +1,8 @@
 class MessagesController < ApplicationController
-
-  def show
-    @message = Message.find(booking_id)
-  end
+  skip_after_action :verify_authorized, only: :new
 
   def new
+    # authorize @message
     @message = Message.new
   end
 
