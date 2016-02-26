@@ -97,7 +97,8 @@
                 handler.buildMap({ internal: { id: 'map' } }, function(){
                   markers = handler.addMarkers(<%= raw @markers.to_json %>);
                   handler.bounds.extendWith(markers);
-                  handler.getMap().setZoom(12);
+                  handler.fitMapToBounds();
+                  handler.getMap().setZoom(14);
                 });
               });
             <% end %>
