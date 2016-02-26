@@ -112,7 +112,7 @@
         </form>
       </div>
       <div class="row">
-        <div class="col-xs-12 text-center hide-filter">
+        <div class="col-xs-12 text-center hide-filter" id="separation">
 
           <span class="hide-arrow"><i class="fa fa-arrow-circle-o-up align-center"></i></span>
           <span class="hide-arrow hidden"><i class="fa fa-arrow-circle-o-down align-center"></i></span>
@@ -190,7 +190,7 @@
           </div>
         </div>
         <div class="hidden-xs col-sm-4 no-padding map">
-          <div id="map" style="position: fixed;"></div>
+          <div id="map" style="position: fixed;" class="small-height"></div>
           <% content_for(:after_js) do %>
             <script> <%#= javascript_tag do %>
               $(document).on('ready', function() {
