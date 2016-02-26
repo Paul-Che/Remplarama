@@ -8,6 +8,8 @@
 
 User.destroy_all
 
+# Créations des users "Practice"
+
 User.create!(email: "michel.michel@gmail.com",
             password: "12345678",
             first_name: "Michel",
@@ -109,4 +111,78 @@ User.all.each do |user|
   user.slots.new(day: ("Thu, 03 Mar 2016"), status: "pending")
   user.save
 end
+
+# Créations des users "Remplaçant"
+
+User.create!(email: "antoine.loron@gmail.com",
+            password: "12345678",
+            first_name: "Antoine",
+            last_name: "Loron",
+            has_practice: false,
+            numero_ordre: "A1B2C3D4E5",
+            address: "36 rue Beaurepaire, 75010, Paris",
+            speciality: "Médecine générale",
+            avatar: nil,
+            numero_ursaff: nil,
+            presentation: "Bonjour, je suis le Dr Antoine Loron, médecin généraliste remplaçant, fraîchement diplomé.",
+            education: "Université de Lyon III",
+            publications: "Pas de publication",
+            housing: nil,
+            secretary: nil,
+            convention: nil,
+            house_visits: "max2",
+            commission: 80)
+User.create!(email: "paul.chenon@gmail.com",
+            password: "12345678",
+            first_name: "Paul",
+            last_name: "Chenon",
+            has_practice: false,
+            numero_ordre: "A1B2C3D4E5",
+            address: "Rue de Lévy, 75017 Paris",
+            speciality: "Médecine générale",
+            avatar: nil,
+            numero_ursaff: nil,
+            presentation: "Bonjour, je suis le Dr Paul Chénon, médecin généraliste remplaçant, fraîchement diplomé.",
+            education: "Université de Saint Malo",
+            publications: "Pas de publication",
+            housing: nil,
+            secretary: nil,
+            convention: nil,
+            house_visits: "none",
+            commission: 70)
+User.create!(email: "jerome.burgaud@gmail.com",
+            password: "12345678",
+            first_name: "Jerome",
+            last_name: "Burgaud",
+            has_practice: false,
+            numero_ordre: "A1B2C3D4E5",
+            address: "Rue du commerce, 75015, Paris",
+            speciality: "Médecine générale",
+            avatar: nil,
+            numero_ursaff: nil,
+            presentation: "Bonjour, je suis le Dr Jérôme Burgaud, médecin généraliste remplaçant, fraîchement diplomé.",
+            education: "Université de Rennes",
+            publications: "Pas de publication",
+            housing: nil,
+            secretary: nil,
+            convention: nil,
+            house_visits: "above2",
+            commission: 90)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
