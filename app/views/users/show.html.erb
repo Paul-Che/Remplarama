@@ -88,13 +88,13 @@
     </div>
     <div class="col-md-6">
       <div class="card-map">
-        <div id="map" style="width: 101%; height: 180px;"></div>
+        <div id="map-user" style="width: 101%; height: 180px;"></div>
         <script type="text/javascript">
           <% content_for(:after_js) do %>
             <%= javascript_tag do %>
               $(document).ready(function() {
                 handler = Gmaps.build('Google');
-                handler.buildMap({ internal: { id: 'map' } }, function(){
+                handler.buildMap({ internal: { id: 'map-user' } }, function(){
                   markers = handler.addMarkers(<%= raw @markers.to_json %>);
                   handler.bounds.extendWith(markers);
                   handler.fitMapToBounds();
