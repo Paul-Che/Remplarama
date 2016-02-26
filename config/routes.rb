@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   get 'search', to: 'users#search'
 
   resources :users, except: [:index] do
-    resources :slots, only: [:create, :update, :destroy]
-    resources :bookings, only: [:new, :create, :update, :destroy]
+    resources :slots, only: [:create, :update, :destroy] do
+      resources :messages, only: [:new, :create]
+    end
+    resources :bookings, only: [:new, :create, :update, :destroy] do
+      resources :messages, only: [:new, :create]
+    end
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
 
