@@ -83,6 +83,9 @@
   top: -2px;
   z-index: 1;
 }
+.navbar-wagon-search-btn:focus {
+  outline: 0;
+}
 .navbar-wagon-search-input {
   flex: 0 1 300px;
   transition: all 0.15s ease;
@@ -135,4 +138,11 @@
   padding-left: 20px;
   padding-right: 10px;
   color : $blue;
+}
+#logo-text {
+  font-family: 'Quicksand', sans-serif;
+  color: #6D6E71;
+}
+#logo-text:hover {
+  color: #6D6E71;
 }

@@ -39,6 +39,9 @@
   outline: none;
   background-color: white;
 }
+.search-input:focus {
+  border: 1px solid #CCCCCC;
+}
 .select-height {
   height: 40px;
 }
