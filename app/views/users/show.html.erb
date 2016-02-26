@@ -1,71 +1,36 @@
-<div class="container" id = "user_container">
+<div class="container" id="user_container">
   <div class="row">
-
-<!--     <div id="demo">
+    <div class="col-md-3">
+      <div class="card-profil">
+        <ul class = "list-unstyled">
+          <li>
+            <% if current_user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+            <% else %>
+              <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
+            <% end %>
+          </li>
+          <li><p><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></p></li>
+          <br>
+          <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= @user.speciality %></i></li><hr>
+          <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
+          <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li><hr>
+          <li>
+            <button data-toggle="modal" data-target="#contacter" class="btn btn-primary">Contacter</button>
+          </li>
+        </ul>
+      </div>
     </div>
-
-      <%= form_tag(user_slots_path(@user), :method => :post ) do -%>
-      <input id="startDate" name="start_date" type="hidden" value="" />
-      <input id="endDate" name="end_date" type="hidden" value="" />
-      <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary text-center" value='Valider cette plage de dates'/>
-      <% end -%> -->
-
-
-
-    <div id="profile" class="col-xs-12 col-md-3 text-justify">
-      <ul class = "list-unstyled">
-        <li id="main-avatar">
-          <% if current_user.avatar.nil? %>
-            <%= image_tag "http://placehold.it/80x80", class: "avatar-extralarge" %>
-          <% else %>
-            <%= image_tag current_user.avatar, class: "avatar-extralarge " %>
-          <% end %>
-        </li>
-        <li><p><strong>Dr</strong><%= @user.first_name %> <%= @user.last_name %></p></li>
-        <hr>
-        <li><strong>Spécialité:</strong><p><%=@user.speciality %></p></li>
-        <hr>
-        <li>
-      </ul>
-    </div>
-    <div id="calendar" class="col-xs-12 col-md-9 text-center">
+    <div class="col-md-8 col-md-offset-1">
+      <div class="calendar-profil">
+        <h4><strong>Prenez votre créneau de remplacement directement en ligne</strong></h4>
+      </div>
     </div>
   </div>
-
-
-  <div class="row">
-    <div id="user_content" class="col-xs-12 col-md-8 text-justify">
-      <ul class = "list-unstyled">
-        <li><strong>Présentation :</strong><p><%= @user.presentation %></p></li>
-        <hr>
-        <li><strong>Éducation :</strong>  <%=@user.education %></li>
-        <hr>
-        <li><strong>Publications :</strong> <%=@user.publications %></li>
-        <hr>
-      </ul>
-    </div>
-    <div class="map" class="hidden-xs col-md-4 text-center">
-      <p>here is the corresponding map</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div id="user_history" class="col-xs-12 col-md-8 text-center">
-      <p>user history to be implemented</p>
-    </div>
-  </div>
-
 </div>
-
-<div class="text-center">
-  <%= link_to "Prendre contact avec Dr #{@user.first_name} #{@user.last_name}", new_user_booking_path(current_user), class: "btn btn-small btn-warning" %>
-</div>
-
-<!-- button to trigger modal -->
-<button data-toggle="modal" data-target="#sign-up">Join</button>
 
 <!-- Modal -->
-<div class="modal fade text-center" id="sign-up">
+<div class="modal fade text-center" id="contacter">
 <!-- Modal content with Sign up form -->
   <h2>It's working !</h2>
   <div class="container">
@@ -77,21 +42,81 @@
         </div>
           <%= simple_form_for(@user) do |f| %>
             <%= f.error_notification %>
-
             <div id="form-inputs">
               <%= f.input :address, required: true %>
               <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
               <%= f.input :numero_ordre, required: true %>
               <%= f.input :numero_ursaff, required: true %>
             </div>
-
             <div class="form-actions text-center">
               <%= f.button :submit, "Suivant", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
             </div>
-
           <% end %>
-
           <%= link_to "Finir de compléter son profil", user_path(@user) %>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="wrapper-profil">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="description-profil">
+          <h4>Présentation :</h4>
+          <h6><%= @user.presentation %></h6>
+          <h4>Cursus et publications :</h4>
+          <h6><%= @user.publications %></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card-acces">
+        <h4>Informations d'accès</h4>
+        <h5><%= @user.address %></h5>
+        <div></div>
+        <h6>Parking</h6>
+        <h6>Informations supplémentaires</h6>
+        <ul>
+          <li>3 eme étage avec ascenseur</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-map">
+        <h2>Map</h2>
+          <div id="map" style="width: 100%; height: 600px;"></div>
+          <script type="text/javascript">
+            <% content_for(:after_js) do %>
+              <%= javascript_tag do %>
+                $(document).ready(function() {
+                  handler = Gmaps.build('Google');
+                  handler.buildMap({ internal: { id: 'map' } }, function(){
+                    markers = handler.addMarkers(<%= raw @markers.to_json %>);
+                    handler.bounds.extendWith(markers);
+                    handler.fitMapToBounds();
+                });
+              <% end %>
+            <% end %>
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper-profil">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="description-profil">
+          <h4>Recommandation :</h4>
+        </div>
       </div>
     </div>
   </div>

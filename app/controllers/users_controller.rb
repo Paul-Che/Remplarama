@@ -49,6 +49,12 @@ class UsersController < ApplicationController
 
   def show
     set_user
+    @markers = Gmaps4rails.build_markers(@users) do |user, marker|
+         marker.lat user.latitude
+         marker.lng user.longitude
+         marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [30, 90]})
+       end
+
     @slots = current_user.slots
     @bookings = current_user.bookings
     authorize @user
