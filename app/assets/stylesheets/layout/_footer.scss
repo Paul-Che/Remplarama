@@ -2,15 +2,14 @@
 .main-footer {
     background: #F9F9FA;
     border-top: 1px solid #EAEAEB;
-    height: 150px;
+    height: 26vh;
     padding-top: 50px;
     padding-bottom: 60px;
-    position: absolute;
+    // position: absolute;
     width: 100%;
     bottom: 0;
     color : $gray;
     font-size: 12px;
-    position:fixed;
     left:0px;
     bottom:0px;
 }

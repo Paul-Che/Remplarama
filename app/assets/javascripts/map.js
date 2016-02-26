@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   $(window).on("scroll", function(){
     if ($("#search-filter").hasClass("masked")) {
@@ -16,19 +17,3 @@ $(document).ready(function() {
   });
 });
 
-
-// $(function(){
-//   // var map_width = $('#map').width();
-//   $(window).on("scroll", function(){
-//     if ($(window).scrollTop() > 220) {
-//       $("#map").addClass("map-fixed");
-
-//       // $("#map").width(map_width);
-//       // console.log(map_width);
-//     }
-//     else {
-//       $("#map").removeClass("map-fixed");
-
-//     };
-//   });
-// });
