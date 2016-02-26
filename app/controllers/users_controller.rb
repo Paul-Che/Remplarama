@@ -115,7 +115,6 @@ class UsersController < ApplicationController
                        housing: housing,
                        secretary: secretary,
                        house_visits: house_visits)
-    #binding.pry
     results = users.select do |user|
       (user.reviews.average(:rating) <= max_rating && user.reviews.average(:rating) >= min_rating) || (user.reviews.empty? if unrated == true)
     end
