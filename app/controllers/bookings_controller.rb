@@ -23,9 +23,10 @@ class BookingsController < ApplicationController
     end
   end
 
+
   def update
     authorize @booking
-    @booking = Booking.find(params[:id])
+    set_booking
     if params[:commit] == "Confirm"
       @booking.status = "confirmed"
     elsif params[:commit] == "Reject"
@@ -51,6 +52,10 @@ class BookingsController < ApplicationController
       return false if !pending_slots_days.include?(day)
     end
     return true
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
 
   def booking_params
