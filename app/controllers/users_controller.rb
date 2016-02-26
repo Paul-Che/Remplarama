@@ -54,6 +54,7 @@ class UsersController < ApplicationController
       marker.lat user.latitude
       marker.lng user.longitude
    end
+    p @markers
 
     @slots = current_user.slots
     @bookings = current_user.bookings
