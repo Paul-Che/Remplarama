@@ -108,6 +108,13 @@
           <div class="col-xs-12 text-center" id="filter-button">
             <input type="submit" value="Filtrer" class="btn btn-primary" id="filter-button" style="width: 33%;">
           </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 text-center hide-filter" id="separation">
+
+          <span class="hide-arrow"><i class="fa fa-arrow-circle-o-up align-center"></i></span>
+          <span class="hide-arrow hidden"><i class="fa fa-arrow-circle-o-down align-center"></i></span>
         </div>
       </form>
     </div>
@@ -189,6 +196,7 @@
             </div>
           </div>
         </div>
+
       </div>
       <div class="hidden-xs col-sm-4 no-padding">
         <div id="map" style="position: fixed;"></div>
@@ -203,6 +211,7 @@
               handler = Gmaps.build('Google');
               handler.buildMap({ internal: { id: 'map' } }, function(){
                 markers = handler.addMarkers(<%= raw @markers.to_json %>);
+
 
                 (<%=raw @markers.to_json %>).forEach(function(json, index){
                   json.marker = markers[index];
