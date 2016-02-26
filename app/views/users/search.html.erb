@@ -196,24 +196,7 @@
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-        <div class="hidden-xs col-sm-4 no-padding map">
-          <div id="map" style="position: fixed;" class="small-height"></div>
-          <% content_for(:after_js) do %>
-            <script> <%#= javascript_tag do %>
-              $(document).on('ready', function() {
-                hoverPicture = {
-                url: "<%= asset_path 'marker_blue_small.png' %>",
-                width: 60,
-                height: 90
-                };
-                handler = Gmaps.build('Google');
-                handler.buildMap({ internal: { id: 'map' } }, function(){
-                  markers = handler.addMarkers(<%= raw @markers.to_json %>);
 
-                  (<%=raw @markers.to_json %>).forEach(function(json, index){
-                    json.marker = markers[index];
-=======
       </div>
       <div class="hidden-xs col-sm-4 no-padding">
         <div id="map" style="position: fixed;"></div>
@@ -228,7 +211,7 @@
               handler = Gmaps.build('Google');
               handler.buildMap({ internal: { id: 'map' } }, function(){
                 markers = handler.addMarkers(<%= raw @markers.to_json %>);
->>>>>>> master
+
 
                 (<%=raw @markers.to_json %>).forEach(function(json, index){
                   json.marker = markers[index];
