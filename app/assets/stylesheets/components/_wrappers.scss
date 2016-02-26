@@ -1,3 +1,20 @@
 .wrapper-profil {
   background-color: $gray-lighter;
 }
+.wrapper-footer {
+  background-color: #F9F9FA;
+  height: 150px;
+  width: 100%;
+  color : $gray;
+}
+.icon-link {
+  font-size: 30px;
+  padding: 20px;
+}
+.made-with {
+  text-align: center;
+}
+.footer-hover:hover {
+  font-size: 15px;
+  transform: scale(1.2);
+}
