@@ -10,25 +10,10 @@
   top: -16px;
   float: right;
   overflow-y: auto;
-  height: 100vh;
-  width: 100%;
-}
-.small-height{
-  height: calc(100vh - 70px - 202px);
-}
-.augmented_height{
   height: calc(100vh - 70px);
-}
-#map.stick{
-  position: fixed;
-  top: 0;
-  z-index: 10000;
-}
-#map > div > div > div {
-  position: fixed;
+  width: 100%;
 }
 .map-fixed {
   position: fixed !important;
-  height: 100vh;
-  top: 70px;
+  top: 70px !important;
 }
