@@ -3,6 +3,7 @@
     <div class="container-fluid main">
       <div id="search-filter">
         <form action="/search">
+          <input type="hidden" name="has_practice" value="<%= @has_practice %>">
           <div class="row">
             <div class="col-xs-12 col-sm-4">
               <div class="row-fluid">
@@ -12,19 +13,19 @@
               </div>
               <div class="row-fluid">
                 <div class="col-xs-12">
-                  <select class="search-input select-height full-input" placeholder="Spécialité" name="speciality">
-                    <option class="search-input" value="generalist">Médecine générale</option>
-                    <option class="search-input" value="kine">Kinésithérapie</option>
-                    <option class="search-input" value="specialist">Autre spécialité</option>
+                  <select class="search-input select-height full-input" name="speciality">
+                    <option <%= "selected" if @speciality == "Médecine générale" %> class="search-input" value="Médecine générale">Médecine générale</option>
+                    <option <%= "selected" if @speciality == "Kinésithérapie" %> class="search-input" value="Kinésithérapie">Kinésithérapie</option>
+                    <option <%= "selected" if @speciality == "Autre spécialité" %> class="search-input" value="Autre spécialité">Autre spécialité</option>
                   </select>
                 </div>
               </div>
               <div class="row-fluid">
                 <div class="col-xs-12 col-sm-6">
-                  <input type="text" class="search-input datepick" placeholder="Date de début" name="start_date">
+                  <input type="text" class="search-input datepick" placeholder="Date de début" name="start_date" value="<%= @start_date %>">
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                  <input type="text" class="search-input datepick" placeholder="Date de fin" name="end_date">
+                  <input type="text" class="search-input datepick" placeholder="Date de fin" name="end_date" value="<%= @end_date %>">
                 </div>
               </div>
             </div>
@@ -58,7 +59,7 @@
                     </div>
                     <div class="slider-margin"></div>
                     <div class="slider-addon checkbox hidden-xs">
-                      <label><input type="checkbox" name="unrated" value="on" checked> Inclure les profils non-notés</label>
+                      <label><input type="checkbox" name="unrated" value="true" checked> Inclure les profils non-notés</label>
                     </div>
                   </div>
                 </div>
@@ -70,30 +71,31 @@
                       <div class="form-group">
                         <label>Convention </label>
                         <select name="convention" class="search-input">
-                          <option value="both">Tout</option>
-                          <option value="1">Secteur 1</option>
-                          <option value="2">Secteur 2</option>
-                          <option value="2">Non-conventionné</option>
+                          <option <%= "selected" if @convention == "all" %> value="all">Tout</option>
+                          <option <%= "selected" if @convention == "1" %> value="1">Secteur 1</option>
+                          <option <%= "selected" if @convention == "2" %> value="2">Secteur 2</option>
+                          <option <%= "selected" if @convention == "3" %> value="3">Non-conventionné</option>
                         </select>
                       </div>
                     </div>
                     <div class="label-option-small">
                       <div class="checkbox">
-                        <label><input type="checkbox" name="housing" class="search-input"> Hébergement</label>
+                        <label><input type="checkbox" value="true" <%= "checked" if @housing == true %> name="housing" class="search-input"> Hébergement</label>
                       </div>
                     </div>
                     <div class="label-option-small">
                       <div class="checkbox">
-                        <label><input type="checkbox" name="secretary" class="search-input"> Secrétariat</label>
+                        <label><input type="checkbox" value="true" <%= "checked" if @secretary == true %> name="secretary" class="search-input"> Secrétariat</label>
                       </div>
                     </div>
                     <div class="label-option-large">
                       <div class="form-group">
                         <label>Visites à domicile </label>
-                        <select name="home-visits" class="search-input">
-                          <option value="none">Aucune</option>
-                          <option value="max2"><= 2 par jour</option>
-                          <option value="above2">> 2 par jour</option>
+                        <select name="house_visits" class="search-input">
+                          <option <%= "selected" if @house_visits == "all" %> value="all">Tout</option>
+                          <option <%= "selected" if @house_visits == "none" %> value="none">Aucune</option>
+                          <option <%= "selected" if @house_visits == "max2" %> value="max2"><= 2 par jour</option>
+                          <option <%= "selected" if @house_visits == "above2" %> value="above2">> 2 par jour</option>
                         </select>
                       </div>
                     </div>
@@ -153,16 +155,26 @@
                       </div>
                       <div class="card-content-right hidden-xs">
                         <ul class="list-unstyled">
-                          <li><i class="fa fa-fw fa-user-md"></i><%= user.convention %></li><br>
+                          <li><i class="fa fa-fw fa-user-md"></i>Secteur <%= user.convention %></li><br>
                           <% if user.housing %>
                             <li><i class="fa fa-fw fa-home"></i>Hébergement proposé</li><br>
                           <% end %>
                           <% if user.secretary %>
                             <li><i class="fa fa-fw fa-phone"></i>Secrétariat</li><br>
                           <% else %>
-                            <li><i class="fa fa-fw fa-phone"></i>Pas de secrétariat</li><br>
+                            <strike><li><i class="fa fa-fw fa-phone"></i>Secrétariat</li></strike><br>
                           <% end %>
-                          <li><i class="fa fa-fw fa-suitcase"></i>Visites à domicile : <%= user.house_visits.downcase %></li>
+                          <li>
+                            <i class="fa fa-fw fa-suitcase"></i>
+                            Visites à domicile :
+                            <% if user.house_visits == "none" %>
+                              aucune
+                            <% elsif user.house_visits == "max2" %>
+                              <= 2 / jour
+                            <% else %>
+                              > 2 / jour
+                            <% end %>
+                          </li>
                         </ul>
                       </div>
                     </div>

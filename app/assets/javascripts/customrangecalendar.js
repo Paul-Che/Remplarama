@@ -5,7 +5,7 @@ $(document).ready(function() {
       range: true,
       min: 0,
       max: 100,
-      values: [ 75, 95 ],
+      values: [ 0, 100 ],
       slide: function( event, ui ) {
         $( "#commission" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] + "%" );
       }
