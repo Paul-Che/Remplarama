@@ -73,8 +73,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-datepicker-rails (1.5.0)
-      railties (>= 3.0)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -195,6 +193,9 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.5.1)
       sprockets-rails
+    rails-assets-bootstrap-datepicker (1.6.0)
+      rails-assets-jquery (>= 1.7.1)
+    rails-assets-jquery (2.2.0)
     rails-assets-underscore (1.8.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -276,7 +277,6 @@ DEPENDENCIES
   autoprefixer-rails
   better_errors
   binding_of_caller
-  bootstrap-datepicker-rails
   bootstrap-sass
   cloudinary
   coffee-rails
@@ -299,6 +299,7 @@ DEPENDENCIES
   pundit
   quiet_assets
   rails (= 4.2.5.1)
+  rails-assets-bootstrap-datepicker!
   rails-assets-underscore!
   rails-i18n
   rails_12factor
