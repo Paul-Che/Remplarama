@@ -9,7 +9,7 @@ $(document).ready(function(){
       // prevText: "Précédent",
       // nextText: "Suivant",
       // currentText: "Aujourd'hui",
-      months: [ "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre" ],
+      monthNames: [ "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre" ],
       monthsShort: [ "janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc." ],
       days: [ "dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi" ],
       daysShort: [ "dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam." ],

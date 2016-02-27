@@ -27,6 +27,7 @@ gem 'momentjs-rails'
 gem 'touchpunch-rails'
 gem 'uglifier'
 gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
@@ -34,7 +35,6 @@ gem 'underscore-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
-  gem 'rails-assets-bootstrap-datepicker'
 end
 
 group :development, :test do
