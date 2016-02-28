@@ -70,7 +70,7 @@
                   <div class="label-option-small">
                     <div class="form-group">
                       <select name="convention" class="search-input">
-                        <option value="" disabled selected="selected">Convention ?</option>
+                        <option value="" disabled selected="selected">Conventionnement</option>
                         <option <%= "selected" if @convention == "all" %> value="all">Tout</option>
                         <option <%= "selected" if @convention == "1" %> value="1">Secteur 1</option>
                         <option <%= "selected" if @convention == "2" %> value="2">Secteur 2</option>
@@ -90,8 +90,8 @@
                   </div>
                   <div class="label-option-large">
                     <div class="form-group">
-                      <label>Visites à domicile </label>
                       <select name="house_visits" class="search-input">
+                        <option value="" disabled selected>Nombre de visites à domicile</option>
                         <option <%= "selected" if @house_visits == "all" %> value="all">Tout</option>
                         <option <%= "selected" if @house_visits == "none" %> value="none">Aucune</option>
                         <option <%= "selected" if @house_visits == "max2" %> value="max2"><= 2 par jour</option>
@@ -101,33 +101,32 @@
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12 text-center" id="filter-button">
             <input type="submit" value="Filtrer" class="btn btn-primary" id="filter-button" style="width: 33%;">
           </div>
-        </form>
+        </div>
+      </form>
       </div>
-      <div class="row">
-        <div class="col-xs-12 text-center hide-filter" id="separation">
+    </div>
 
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="hide-filter text-center">
           <span class="hide-arrow"><i class="fa fa-arrow-circle-o-up align-center"></i></span>
           <span class="hide-arrow hidden"><i class="fa fa-arrow-circle-o-down align-center"></i></span>
         </div>
-      </form>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 text-center hide-filter">
-        <span class="hide-arrow"><i class="fa fa-arrow-circle-o-up align-center"></i></span>
-        <span class="hide-arrow hidden"><i class="fa fa-arrow-circle-o-down align-center"></i></span>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 text-center hide-filter" style="box-shadow: none;">
+      <div class="col-xs-12">
+        <div class="hide-filter text-center" text-center hide-filter" style="border: none;">
+        </div>
       </div>
     </div>
+
   </div>
 
   <div class="container container-map">
@@ -161,7 +160,7 @@
                       <h5><%= user.speciality %></h5>
                       <h6><%= user.address %></h6>
                     </div>
-                    <div class="card-content-right hidden-xs">
+                    <div class="card-content-right hidden-xs hidden-sm">
                       <ul class="list-unstyled">
                         <li><i class="fa fa-fw fa-user-md"></i>Secteur <%= user.convention %></li><br>
                         <% if user.housing %>
@@ -196,7 +195,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="hidden-xs col-sm-4 no-padding">
         <div id="map" style="position: fixed;"></div>
@@ -247,5 +245,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -1,16 +1,19 @@
-// <<<<<<< HEAD
-// $('.hide-arrow').click(function() {
-//     $('#map').toggleClass('small-height');
-//     $('#map').toggleClass('augmented_height');
-// =======
-$(function(){
+
+$(document).ready(function() {
   $(window).on("scroll", function(){
-    if ($(window).scrollTop() > 220) {
-      $("#map").addClass("map-fixed");
-    }
-    else {
-      $("#map").removeClass("map-fixed");
-    }
-  })
-// >>>>>>> master
+    if ($("#search-filter").hasClass("masked")) {
+      if ($(window).scrollTop() > 20) {
+        $("#map").addClass("map-fixed");
+      } else {
+        $("#map").removeClass("map-fixed");
+      }
+    } else {
+      if ($(window).scrollTop() > 225) {
+        $("#map").addClass("map-fixed");
+      } else {
+        $("#map").removeClass("map-fixed");
+      };
+    };
+  });
 });
+

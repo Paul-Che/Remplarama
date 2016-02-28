@@ -18,17 +18,20 @@
 }
 .description-profil {
   height: 200px;
-  border: 1px solid grey;
-  border-radius: 7px;
-  font-weight: lighter;
+  h4 {
+    color: $blue;
+  }
+  // border: 1px solid grey;
+  // border-radius: 7px;
+  // font-weight: lighter;
   padding: 10px 10px;
   margin: 10px 0px;
 }
 .card-acces {
+  h4 {
+    color: $blue;
+  }
   height: 200px;
-  border: 1px solid grey;
-  border-radius: 7px;
-  font-weight: lighter;
   padding: 10px 10px;
   margin: 10px 0px;
 }
