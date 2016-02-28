@@ -32,12 +32,13 @@
         <h4><strong>Prenez votre créneau de remplacement directement en ligne</strong></h4>
         <div class="user_availabilities">
 
-        <%= @start_date %>
-        <%= @end_date %>
+         <%= @start_date %>
+         <%= @end_date %>
 
           <% @slot_ranges.each do |range| %>
           <ul class="list-inline list-unstyled">
               <li><%= human_slot_range(range) %></li>
+              <li><%= link_to "prendre contact pour ce créneau", user_bookings_path(current_user), method: :post, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
           <% end %>
 
         </div>
