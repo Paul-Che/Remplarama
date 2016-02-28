@@ -114,7 +114,7 @@ end
 
 # Créations des users "Remplaçant"
 
-User.create!(email: "antoine.loron@gmail.com",
+User.create!(email: "loron.antoine@gmail.com",
             password: "12345678",
             first_name: "Antoine",
             last_name: "Loron",

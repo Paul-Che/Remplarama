@@ -1,8 +1,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require bootstrap-sprockets
 //= require bootstrap-datepicker
+//= require bootstrap-sprockets
 //= require moment
 //= require jquery.ui.touch-punch
 //= require cloudinary

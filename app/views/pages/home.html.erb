@@ -7,22 +7,34 @@
       <h3>Et le replacement entre médecins n'est plus un souci</h3>
     </div>
     <div class="search col-xs-12">
-      <form action="/search" class="form-inline text-center">
-        <label class="" for="formGroupInputSmall">Je recherche</label>
-        <select class="search-input select-height" placeholder="..." name="has_practice">
-          <option value="false">un remplaçant</option>
-          <option value="true">un remplacement</option>
-        </select>
-        <label for="formGroupInputSmall">à</label>
-        <input type="text" class="search-input" placeholder="Lyon" name="location" id="user_input_autocomplete_address">
-        <label for="formGroupInputSmall">en</label>
-        <select class="search-input select-height" placeholder="Médecine générale" name="speciality">
-          <option value="Médecine générale">Médecine générale</option>
-          <option value="Kinésithérapie">Kinésithérapie</option>
-          <option value="Autre spécialité">Autre spécialité</option>
-        </select>
-        <button type="submit" class="btn btn-primary btn-search-home"><i class="fa fa-search"></i></button>
-      </form>
+      <% if !user_signed_in? %>
+        <form action="/search_locums" class="form-inline text-center" id="home-form">
+      <% elsif current_user.has_practice %>
+        <form action="/search_locums" class="form-inline text-center" id="home-form">
+      <% else %>
+        <form action="/search_practices" class="form-inline text-center" id="home-form">
+      <% end %>
+          <label class="" for="formGroupInputSmall">Je recherche</label>
+          <% if !user_signed_in? %>
+          <select id="practice_select" class="search-input select-height" placeholder="...">
+            <option value="false">un remplaçant</option>
+            <option value="true">un remplacement</option>
+          </select>
+          <% elsif current_user.has_practice %>
+            <strong>un remplaçant</strong>
+          <% else %>
+            <strong>un remplaçement</strong>
+          <% end %>
+          <label for="formGroupInputSmall">à</label>
+          <input type="text" class="search-input" placeholder="Lyon" name="location" id="user_input_autocomplete_address">
+          <label for="formGroupInputSmall">en</label>
+          <select class="search-input select-height" placeholder="Médecine générale" name="speciality">
+            <option value="Médecine générale">Médecine générale</option>
+            <option value="Kinésithérapie">Kinésithérapie</option>
+            <option value="Autre spécialité">Autre spécialité</option>
+          </select>
+          <button type="submit" class="btn btn-primary btn-search-home"><i class="fa fa-search"></i></button>
+        </form>
     </div>
   </div>
 </div>

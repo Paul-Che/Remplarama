@@ -1,6 +1,8 @@
 .page-content {
-  margin-top: 75px;
   min-height: 1200px;
+}
+.margin-navbar {
+  margin-top: 75px;
 }
 .hide-filter {
   width: 100%;
@@ -86,10 +88,18 @@
   flex: 0 0 25%;
 }
 .label-option-small {
-  flex: 0 0 20%;
+  flex: 0 0 17.5%;
+  background-color: $gray-lighter;
+  border: 1px solid #E6E6E6;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin: 5px;
+  font-size: 14px;
+  outline: none;
+  height: 40px;
 }
 .label-option-large {
-  flex: 0 0 40%;
+  flex: 0 0 auto;
 }
 .slider-values {
   flex: 0 0 15%;

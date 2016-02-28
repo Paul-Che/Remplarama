@@ -1,14 +1,59 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   after_action :verify_authorized, only: :update
-  before_filter :disable_footer, only: [:search]
+  before_filter :disable_footer, only: [:search_practices, :search_locums]
 
-  def search
+  def search_practices
     @user = current_user
     @speciality = params[:speciality] || ['Médecine générale', 'Kinésithérapie', 'Autre spécialité']
     @start_date = params[:start_date]
     @end_date = params[:end_date]
-    @has_practice = to_b(params[:has_practice])
+    @has_practice = true
+    @commission = params[:commission] || "0 - 100%"
+    @rating = params[:rating] || "0 - 5"
+    @unrated = to_b(params[:unrated]) || false
+
+    if params[:convention] == 'all'
+      @convention = ['1', '2', '3']
+    else
+      @convention = params[:convention] || ['1', '2', '3']
+    end
+
+    @housing = to_b(params[:housing]) || [true, false]
+    @secretary = to_b(params[:secretary]) || [true, false]
+
+    if params[:house_visits] == 'all'
+      @house_visits = ['none', 'max2', 'above2']
+    else
+      @house_visits = params[:house_visits] || ['none', 'max2', 'above2']
+    end
+    @location = params[:location]
+    if params[:location].nil? || params[:location] == ""
+      located_users = User.all
+    else
+      located_users = User.near(@location, 15)
+    end
+
+    prefiltered_users = search_by_filters(located_users, @speciality, @has_practice, @commission, @rating, @unrated, @convention, @housing, @secretary, @house_visits)
+
+    @users = search_by_date(prefiltered_users)
+
+    @markers = Gmaps4rails.build_markers(@users) do |user, marker|
+      marker.lat user.latitude
+      marker.lng user.longitude
+      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [30, 90]})
+      marker.infowindow "Dr. #{user.first_name} #{user.last_name}<br/>#{user.address}"
+      marker.json({ :id => user.id })
+    end
+    authorize @user
+  end
+
+  def search_locums
+    @user = current_user
+    @speciality = params[:speciality] || ['Médecine générale', 'Kinésithérapie', 'Autre spécialité']
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    @has_practice = false
     @commission = params[:commission] || "0 - 100%"
     @rating = params[:rating] || "0 - 5"
     @unrated = to_b(params[:unrated]) || false
