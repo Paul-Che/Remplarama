@@ -60,6 +60,8 @@ class UsersController < ApplicationController
     @slots = current_user.slots
     @bookings = current_user.bookings
     authorize @user
+
+    @slot_ranges = @user.slot_ranges
   end
 
   def edit
