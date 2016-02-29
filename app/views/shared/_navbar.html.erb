@@ -25,8 +25,9 @@
     <% end %>
 
     <%= link_to calendar_path, class: "navbar-wagon-item navbar-wagon-link" do %>
-      <div id="user_calendar">
+      <div class="badge-container">
         <i class="fa fa-calendar"></i>
+        <div class="badge badge-grey">0</div>
       </div>
     <% end %>
 
@@ -52,6 +53,12 @@
           <%# end %>
         </div>
       <% end %>
+
+        <div class="navbar-name hidden-xs">
+          <%= link_to user_path(current_user) do %>
+            <p><%= current_user.first_name %> <strong><%= current_user.last_name %></strong></p>
+          <% end %>
+        </div>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item hidden-xs">

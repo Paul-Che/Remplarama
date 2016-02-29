@@ -40,7 +40,7 @@
                     <input type="text" name="commission-single" class="text-center slider-values-text" id="commission-single" readonly>
                   </div>
                   <div class="slider-bar">
-                    <div id="slider-single"></div>
+                    <div id="slider-single" data-value="<%= @min_commission %>"></div>
                   </div>
                 </div>
                 <% else %>
@@ -72,7 +72,7 @@
                   </div>
                   <div class="slider-margin"></div>
                   <div class="slider-addon checkbox hidden-xs">
-                    <label><input type="checkbox" name="unrated" value="true" checked> Inclure les profils non-notés</label>
+                    <label><input type="checkbox" name="unrated" value="true" <%= "checked" if @unrated == true %>> Inclure les profils non-notés</label>
                   </div>
                 </div>
               </div>

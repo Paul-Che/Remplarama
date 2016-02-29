@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @min_rating = @rating.first.to_i || 0
     @max_rating = @rating.last.to_i || 5
 
-    @unrated = to_b(params[:unrated]) || true
+    @unrated = to_b(params[:unrated])
 
     if params[:convention] == 'all'
       @convention = ['1', '2', '3']
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     @min_rating = @rating.first.to_i || 0
     @max_rating = @rating.last.to_i || 5
 
-    @unrated = to_b(params[:unrated]) || true
+    @unrated = to_b(params[:unrated])
 
     @house_visits_tolerance = params[:house_visits_tolerance]
     @nosecretary_tolerance = params[:nosecretary_tolerance]
@@ -157,7 +157,7 @@ class UsersController < ApplicationController
 
   def search_by_date(prefiltered_users)
     return prefiltered_users if @end_date == "" || @end_date.nil?
-    @start_date = Date.today.to_s if @start_date == "" || @start_date.nil?
+    @start_date = Date.today.strftime("%d/%m/%Y") if @start_date == "" || @start_date.nil?
     users = []
     prefiltered_users.each do |user|
       user.slots.each do |slot|
