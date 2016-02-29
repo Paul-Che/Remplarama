@@ -102,13 +102,13 @@ class UsersController < ApplicationController
    end
     p @markers
 
-    @slots = current_user.slots
-    @bookings = current_user.bookings
-    authorize @user
-
     @slot_ranges = @user.slot_ranges
     @start_date = params[:start_date]
     @end_date = params[:end_date]
+    @booking = current_user.bookings
+    @slots = current_user.slots
+
+    authorize @user
   end
 
   def edit
