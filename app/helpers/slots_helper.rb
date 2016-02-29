@@ -6,4 +6,12 @@ module SlotsHelper
   def slot_range_id(range)
     "#{range['start_date']}--#{range['end_date']}"
   end
+
+  def slot_start(range)
+    range['start_date']
+  end
+
+  def slot_end(range)
+    range['end_date']
+  end
 end
