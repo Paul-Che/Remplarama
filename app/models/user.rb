@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
   validates :convention, inclusion: { in: ['1', '2', '3']}, on: :update
   validates :house_visits, inclusion: { in: ['none', 'max2', 'above2']}, on: :update
+  validates :house_visits_tolerance, inclusion: { in: ['none', 'max2', 'above2']}, on: :update
   #validates :numero_ursaff, format: { with: /\d{18}/, message: "Votre numéro URSSAF n'est pas le bon" }, on: :update
 
 end
