@@ -2,8 +2,8 @@
   margin-top: 100px;
 }
 .card-profil {
-  // border: 1px solid grey;
-  // border-radius: 7px;
+  border: 1px solid grey;
+  border-radius: 7px;
   font-weight: lighter;
   padding: 10px 10px;
 }
@@ -21,7 +21,7 @@
   }
   // border: 1px solid grey;
   // border-radius: 7px;
-  // font-weight: lighter;
+  font-weight: lighter;
   padding: 10px 10px;
   margin: 10px 0px;
 }
@@ -70,5 +70,13 @@
 }
 .doc_resume {
   font-size: 32px;
+}
+#main_user_row {
+  padding-top: 40px;
+}
+.user_calendar{
+  border-radius: 7px;
+  background: #F9F9FA;
+  border-top: 1px solid #EAEAEB;
 }
 

@@ -16,7 +16,7 @@ class SlotsController < ApplicationController
       @slot = current_user.slots.new
       @slot.day = date
       @slot.status = "pending"
-      @slot.booking_id = ... unless nil
+
       # @slot.user = current_user
       @slot.save
 

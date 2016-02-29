@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   after_action :verify_authorized, only: :update
-  before_filter :disable_footer, only: [:search_practices, :search_locums]
+  before_filter :disable_footer, only: [:search_practices, :search_locums, :show]
 
   def search_practices
     @user = current_user
