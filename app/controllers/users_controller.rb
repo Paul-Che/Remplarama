@@ -116,11 +116,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize @user, :update?
     set_user
     @user.update(user_params)
 
     redirect_to user_path(@user)
+
+    authorize @user, :update?
   end
 
   private

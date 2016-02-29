@@ -65,12 +65,12 @@
 }
 .single_dispo{
   padding: 20px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
   -webkit-transition: width 1s, height 1s, background-color 1s, -webkit-transform 1s;
     transition: width 1s, height 1s, background-color 1s, transform 1s;
 }
 .single_dispo:hover{
-  padding: 20px;
   background-color: $gray-lighter;
 }
 

@@ -29,22 +29,27 @@
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="calendar-profil">
-        <h4><strong>Choisissez parmi ces créneaux : </strong></h4>
+        <h4><strong>Choisissez un créneau de remplacement : </strong></h4>
         <div class="user_availabilities">
 
           <% @slot_ranges.each do |range| %>
           <ul class="list-inline list-unstyled">
 <!--               <li><%= human_slot_range(range) %></li> -->
             <div class="hvr-bounce-to-right">
-                <li><% slot_start(range) %></li>
-                <li><% slot_end(range) %></li>
+                <% slot_start(range) %>
+                <% slot_end(range) %>
 
-                  <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
+                <% if current_user.numero_ordre.nil? %>
+                  <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", "#", data: {toggle: "modal", target: "#contacter"}%>
                   </li>
+                <% else %>
+                <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
+                </li>
+                <hr>
+                <% end %>
 
-            <% end %>
+              <% end %>
             </div>
-
 
         </div>
       </div>
@@ -57,22 +62,21 @@
 <!-- Modal content with Sign up form -->
   <h2>It's working !</h2>
   <div class="container">
-    <div class="row col-xs-12 col-sm-6 col-sm-offset-">
+    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
       <div class="form-design background">
         <div class="text-center" id="form_title">
           <h2>Information</h2>
           <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
         </div>
-          <%= simple_form_for(@user) do |f| %>
+          <%= simple_form_for(current_user) do |f| %>
             <%= f.error_notification %>
             <div id="form-inputs">
               <%= f.input :address, required: true %>
               <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
               <%= f.input :numero_ordre, required: true %>
-              <%= f.input :numero_ursaff, required: true %>
             </div>
             <div class="form-actions text-center">
-              <%= f.button :submit, "Suivant", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
+              <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
             </div>
           <% end %>
           <%= link_to "Finir de compléter son profil", user_path(@user) %>
