@@ -98,6 +98,17 @@
   outline: none;
   height: 40px;
 }
+.label-option-medium {
+  flex: 0 0 33.3%;
+  background-color: $gray-lighter;
+  border: 1px solid #E6E6E6;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin: 5px;
+  font-size: 14px;
+  outline: none;
+  height: 40px;
+}
 .label-option-large {
   flex: 0 0 auto;
 }
