@@ -11,13 +11,16 @@
     <!-- Search form -->
     <% if current_user %>
       <div id="search-div-navbar" class="hidden-xs">
-        <form action="/search" class="navbar-wagon-search">
-          <input type="text" class="navbar-wagon-search-input" name="location" id="user_input_autocomplete_address_navbar" placeholder="Ville ou adresse">
-          <input type="hidden" name="has_practice" value="<%= current_user.has_practice %>">
-          <button type="submit" class="navbar-wagon-search-btn">
-            <i class="fa fa-search"></i>
-          </button>
-        </form>
+        <% if current_user.has_practice %>
+          <form action="/search_locums" class="navbar-wagon-search">
+        <% else %>
+          <form action="/search_practices" class="navbar-wagon-search">
+        <% end %>
+            <input type="text" class="navbar-wagon-search-input" name="location" id="user_input_autocomplete_address_navbar" placeholder="Ville ou adresse">
+            <button type="submit" class="navbar-wagon-search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
       </div>
     <% end %>
 

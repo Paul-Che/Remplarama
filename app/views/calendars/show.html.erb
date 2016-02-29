@@ -2,19 +2,19 @@
   <h3>Mon calendrier de recherches de remplacants</h3>
 </div>
 
-<div id="demo"></div>
 
 <div class="container">
   <div class="row">
-
-    <div class="call-to-action text-center">
-      <%= form_tag(user_slots_path(@user), :method => :post ) do -%>
-      <input id="startDate" name="start_date" type="hidden" value="" />
-      <input id="endDate" name="end_date" type="hidden" value="" />
-      <input id ="sendDates"name='commit' type='submit' class ="btn btn-success" value='Valider cette plage de dates'/>
-      <% end -%>
+    <div class="col-xs-12">
+      <div id="demo"></div>
+      <div class="call-to-action text-center">
+        <%= form_tag(user_slots_path(@user), :method => :post ) do -%>
+        <input id="startDate" name="start_date" type="hidden" value="" />
+        <input id="endDate" name="end_date" type="hidden" value="" />
+        <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Ajouter la plage sélectionnée'/>
+        <% end -%>
+      </div>
     </div>
-
   </div>
 </div>
 
