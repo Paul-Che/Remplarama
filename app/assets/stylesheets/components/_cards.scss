@@ -74,7 +74,6 @@ hr {
 // Messages
 
 .title-message {
-  margin-top: 80px;
   padding: 0px 25px;
 }
 
@@ -127,6 +126,25 @@ hr {
   border-radius: 6px;
   height: 100px;
   margin: 5px 0px;
+  display: flex;
+  &-content {
+    flex: 0 0 80%;
+    &-support {
+        color: #FFFFFF;
+      border: 1px solid #999999;
+      font-weight: lighter;
+      border-radius: 6px;
+      height: 80px;
+      margin: 7px;
+    }
+  }
+  &-button-section {
+    text-align: center;
+    flex: 0 0 20%;
+  }
+  &-button {
+    margin-top: 35px;
+  }
 }
 .btn-medium {
   color: #999999;
@@ -140,3 +158,4 @@ hr {
   opacity: 1;
   text-decoration: none;
   color: #999999;
+}

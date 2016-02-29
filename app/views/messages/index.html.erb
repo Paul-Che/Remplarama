@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="title-message">
-      <h2>Mes messsages</h2>
+      <h2>Mes messages</h2>
     </div>
   </div>
   <div class="row">
@@ -11,6 +11,19 @@
           <li>
             <div class="card-message text-center">
               <div class="card-message-item">
+              <% @bookings.each do |booking| %>
+                <%= booking.slots.first.user.first_name %>
+              <% end %>
+
+
+                <%# if @user_receiver.avatar.nil? %>
+                  <%# image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+                <%# else %>
+                  <%# image_tag current_user.avatar, class: "avatar-superextralarge " %>
+                <%# end %>
+
+
+
                 <%= image_tag "placeholder_pic.png", class: "avatar" %>
               </div>
               <div class="card-message-item">
@@ -48,10 +61,20 @@
           <li>
             <div class="enter-message">
               <div class="enter-message-content">
+                <div class="enter-message-content-support">
+                  <%# simple_form_for(@message) do |f| %>
+                    <%#= f.error_notification %>
 
+                    <%#= f.input :content, placeholder: "Ajouter un message ..." %>
+
+                    <%#= f.button :submit %>
+                  <%# end %>
+                </div>
               </div>
-              <div class="enter-message-button">
-                <a href="#" class="btn-medium">Répondre</a>
+              <div class="enter-message-button-section">
+                <div class="enter-message-button">
+                  <a href="#" class="btn-medium">Envoyer</a>
+                </div>
               </div>
             </div>
           </li>
