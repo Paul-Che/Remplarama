@@ -4,7 +4,7 @@ $(document).ready(function() {
       range: true,
       min: 0,
       max: 100,
-      values: [ 0, 100 ],
+      values: [ $("#slider-range").data("value1"), $("#slider-range").data("value2") ],
       slide: function( event, ui ) {
         $( "#commission" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] + "%" );
       }
@@ -18,7 +18,7 @@ $(document).ready(function() {
       range: true,
       min: 0,
       max: 5,
-      values: [ 0, 5 ],
+      values: [ $("#slider-range2").data("value1"), $("#slider-range2").data("value2") ],
       slide: function( event, ui ) {
         $( "#rating" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
@@ -31,12 +31,12 @@ $(document).ready(function() {
     $( "#slider-single" ).slider({
       min: 0,
       max: 100,
-      value: 75,
+      value: $("#slider-single").data("value"),
       slide: function( event, ui ) {
-        $( "#commission-single" ).val( ui.value + "%" );
+        $( "#min_commission" ).val( ui.value + "%" );
       }
     });
-    $( "#commission-single" ).val( $( "#slider-single" ).slider( "value" ) + "%" );
+    $( "#min_commission" ).val( $( "#slider-single" ).slider( "value" ) + "%" );
   });
 
 });

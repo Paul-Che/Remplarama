@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <div class="card-profil">
-        <ul class = "list-unstyled">
+        <ul class = "list-unstyled doc_resume text-center">
           <li>
             <% if current_user.avatar.nil? %>
               <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
@@ -12,18 +12,8 @@
           </li>
           <li><p><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></p></li>
           <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= @user.speciality %></i></li><hr>
-
-         <!-- test d'alignement !!!!!
-          <ul class="list-inline list-unstyled">
-            <li><i class="fa fa-home" id="icon-profil"> : </i></li>
-            <li><%= @user.address %></li>
-          </ul> -->
-
           <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
-          <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li><hr>
-<!--           <li>
-            <button data-toggle="modal" data-target="#contacter" class="btn btn-primary">Contacter</button>
-          </li> -->
+          <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li>
         </ul>
       </div>
     </div>
@@ -35,7 +25,7 @@
           <% @slot_ranges.each do |range| %>
           <ul class="list-inline list-unstyled">
 <!--               <li><%= human_slot_range(range) %></li> -->
-            <div class="hvr-bounce-to-right">
+            <div class="">
                 <% slot_start(range) %>
                 <% slot_end(range) %>
 
@@ -144,7 +134,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="description-profil">
-          <h4>Recommandation :</h4>
+          <h4>Recommandations :</h4>
         </div>
       </div>
     </div>
