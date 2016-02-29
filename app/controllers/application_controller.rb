@@ -23,7 +23,8 @@ class ApplicationController < ActionController::Base
   end
 
   def disable_footer
-    @disable_footer = true
+
+  @disable_footer = true
   end
 
 end

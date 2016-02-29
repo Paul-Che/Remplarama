@@ -30,6 +30,17 @@
     <div class="col-md-8 col-md-offset-1">
       <div class="calendar-profil">
         <h4><strong>Prenez votre créneau de remplacement directement en ligne</strong></h4>
+        <div class="user_availabilities">
+
+          <% @slot_ranges.each do |range| %>
+          <ul class="list-inline list-unstyled">
+              <li><%= human_slot_range(range) %></li>
+              <li><%= slot_start(range) %></li>
+              <li><%= slot_end(range) %></li>
+              <li><%= link_to "prendre contact pour ce créneau", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "btn" %></li>
+          <% end %>
+
+        </div>
       </div>
     </div>
   </div>

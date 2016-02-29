@@ -1,6 +1,6 @@
 class Slot < ActiveRecord::Base
   belongs_to :user
-  belongs_to :booking
+  belongs_to :booking # ??????????? Un créneau peut ne pas être réservé ...
 
   validates :day, presence: true
   validates :status, presence: true
