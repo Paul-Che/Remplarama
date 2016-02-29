@@ -69,3 +69,74 @@ hr {
     margin-top: 10px;
   }
 }
+
+
+// Messages
+
+.title-message {
+  margin-top: 80px;
+  padding: 0px 25px;
+}
+
+.cards-messages {
+  border: 1px solid #999999;
+  font-weight: lighter;
+  height: 400px;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.card-message {
+  border: 1px solid #999999;
+  font-weight: lighter;
+  opacity: 0.6;
+  &:hover {
+    opacity: 1;
+  }
+  height: 50px;
+  border-radius: 6px;
+  margin: 5px 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  &-item {
+    flex: 1;
+  }
+}
+
+.messages-displays {
+  border: 1px solid #999999;
+  font-weight: lighter;
+  border-radius: 6px;
+  height: 400px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.message-display {
+  border: 1px solid #999999;
+  font-weight: lighter;
+  border-radius: 6px;
+  height: 275px;
+  margin: 5px 0px;
+}
+.enter-message {
+  border: 1px solid #999999;
+  font-weight: lighter;
+  border-radius: 6px;
+  height: 100px;
+  margin: 5px 0px;
+}
+.btn-medium {
+  color: #999999;
+  border: 1px solid #999999;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-weight: lighter;
+  opacity: 0.6;
+}
+.btn-medium:hover {
+  opacity: 1;
+  text-decoration: none;
+  color: #999999;

@@ -1,5 +1,10 @@
 class MessagesController < ApplicationController
   skip_after_action :verify_authorized, only: :new
+  skip_after_action :verify_policy_scoped, only: :index
+
+  def index
+    @messages = Message.all
+  end
 
   def new
     # authorize @message
