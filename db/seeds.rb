@@ -107,9 +107,8 @@ User.all.each do |user|
 end
 
 User.all.each do |user|
-  user.slots.new(day: ("Wed, 02 Mar 2016"), status: "pending")
-  user.slots.new(day: ("Thu, 03 Mar 2016"), status: "pending")
-  user.save
+  user.slots.create!(day: ("Wed, 02 Mar 2016"), status: "pending")
+  user.slots.create!(day: ("Thu, 03 Mar 2016"), status: "pending")
 end
 
 # Créations des users "Remplaçant"

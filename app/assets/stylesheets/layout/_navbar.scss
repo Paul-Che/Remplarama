@@ -30,12 +30,21 @@
   align-items: center;
   justify-content: space-between;
 }
+.navbar-name {
+  p {
+    font-size: 12px;
+    font-family: Raleway;
+    line-height: 0.2em;
+    margin: 0;
+    color: #888;
+  }
+}
 
 /* Navbar item */
 .navbar-wagon-item {
   flex: 0 1 auto;
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 
 /* Navbar standard link */
@@ -134,10 +143,11 @@
   border-top: 1px solid #E6E6E6;
 }
 #user_calendar{
-  font-size: 27px;
+  font-size: 25px;
   padding-left: 20px;
-  padding-right: 10px;
-  color : $blue;
+  padding-right: 0px;
+  padding-bottom: 3px;
+  color : #888;
 }
 #logo-text {
   font-family: 'Quicksand', sans-serif;
