@@ -153,7 +153,7 @@
               <% end %>
               <% @users.each do |user| %>
               <div class="col-xs-12">
-                <%= link_to user_path(user) do %>
+                <%= link_to user_path(user, end_date: @end_date, start_date: @start_date) do %>
                   <div class="card-user" id="user-<%= user.id %>">
                     <div class="card-avatar">
                       <% if user.avatar.nil? %>
