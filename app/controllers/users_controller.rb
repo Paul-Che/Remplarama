@@ -114,6 +114,10 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+  def profile
+    @user = current_user
+  end
+
   def edit
     set_user
   end
