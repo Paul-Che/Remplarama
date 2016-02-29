@@ -48,15 +48,29 @@
   padding: 5px;
   margin-top: 0px;
 }
-.card-profil ul li:nth-child(-n+2){
-    text-align: center;
-}
+// .card-profil ul li:nth-child(-n+2){
+//     text-align: center;
+// }
 .card-profil ul li:nth-child(2){
   margin-top: 10px;
   margin-bottom: 0px;
   padding-top: 5px;
 }
-.card-profil ul li:last-child{
-    text-align: center;
-    margin-top: 12px;
+
+.user_availabilities{
+  padding-top: 20px;
 }
+.single_dispo{
+  padding: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  -webkit-transition: width 1s, height 1s, background-color 1s, -webkit-transform 1s;
+    transition: width 1s, height 1s, background-color 1s, transform 1s;
+}
+.single_dispo:hover{
+  background-color: $gray-lighter;
+}
+.doc_resume {
+  font-size: 32px;
+}
+

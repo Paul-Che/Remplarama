@@ -1,8 +1,8 @@
 <div class="container" id="user_container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-xs-12 col-md-6">
       <div class="card-profil">
-        <ul class = "list-unstyled">
+        <ul class = "list-unstyled doc_resume text-center">
           <li>
             <% if current_user.avatar.nil? %>
               <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
@@ -12,33 +12,34 @@
           </li>
           <li><p><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></p></li>
           <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= @user.speciality %></i></li><hr>
-
-         <!-- test d'alignement !!!!!
-          <ul class="list-inline list-unstyled">
-            <li><i class="fa fa-home" id="icon-profil"> : </i></li>
-            <li><%= @user.address %></li>
-          </ul> -->
-
           <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
-          <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li><hr>
-          <li>
-            <button data-toggle="modal" data-target="#contacter" class="btn btn-primary">Contacter</button>
-          </li>
+          <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li>
         </ul>
       </div>
     </div>
-    <div class="col-md-8 col-md-offset-1">
+    <div class="col-xs-12 col-md-6">
       <div class="calendar-profil">
-        <h4><strong>Prenez votre créneau de remplacement directement en ligne</strong></h4>
+        <h4><strong>Choisissez un créneau de remplacement : </strong></h4>
         <div class="user_availabilities">
 
           <% @slot_ranges.each do |range| %>
           <ul class="list-inline list-unstyled">
-              <li><%= human_slot_range(range) %></li>
-              <li><%= slot_start(range) %></li>
-              <li><%= slot_end(range) %></li>
-              <li><%= link_to "prendre contact pour ce créneau", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "btn" %></li>
-          <% end %>
+<!--               <li><%= human_slot_range(range) %></li> -->
+            <div class="">
+                <% slot_start(range) %>
+                <% slot_end(range) %>
+
+                <% if current_user.numero_ordre.nil? %>
+                  <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), data: {toggle: "modal", target: "#contacter"}%>
+                  </li>
+                <% else %>
+                <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
+                </li>
+                <hr>
+                <% end %>
+
+              <% end %>
+            </div>
 
         </div>
       </div>
@@ -57,16 +58,15 @@
           <h2>Information</h2>
           <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
         </div>
-          <%= simple_form_for(@user) do |f| %>
+          <%= simple_form_for(current_user) do |f| %>
             <%= f.error_notification %>
             <div id="form-inputs">
               <%= f.input :address, required: true %>
               <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
               <%= f.input :numero_ordre, required: true %>
-              <%= f.input :numero_ursaff, required: true %>
             </div>
             <div class="form-actions text-center">
-              <%= f.button :submit, "Suivant", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
+              <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
             </div>
           <% end %>
           <%= link_to "Finir de compléter son profil", user_path(@user) %>
@@ -134,7 +134,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="description-profil">
-          <h4>Recommandation :</h4>
+          <h4>Recommandations :</h4>
         </div>
       </div>
     </div>
