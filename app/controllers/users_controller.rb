@@ -107,6 +107,8 @@ class UsersController < ApplicationController
     authorize @user
 
     @slot_ranges = @user.slot_ranges
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
   end
 
   def edit
