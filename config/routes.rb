@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
   root to: 'pages#home'
 
-  get 'search', to: 'users#search'
+  get 'search_practices', to: 'users#search_practices'
+  get 'search_locums', to: 'users#search_locums'
 
   resources :users, except: [:index] do
     resources :slots, only: [:create, :update, :destroy]

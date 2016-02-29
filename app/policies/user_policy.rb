@@ -5,7 +5,11 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  def search?
+  def search_practices?
+    true
+  end
+
+  def search_locums?
     true
   end
 

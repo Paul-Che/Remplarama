@@ -26,4 +26,17 @@ $(document).ready(function() {
     $( "#rating" ).val( $( "#slider-range2" ).slider( "values", 0 ) +
       " - " + $( "#slider-range2" ).slider( "values", 1 ) );
   });
+
+  $(function() {
+    $( "#slider-single" ).slider({
+      min: 0,
+      max: 100,
+      value: 75,
+      slide: function( event, ui ) {
+        $( "#commission-single" ).val( ui.value + "%" );
+      }
+    });
+    $( "#commission-single" ).val( $( "#slider-single" ).slider( "value" ) + "%" );
+  });
+
 });
