@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :slots, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :messages, through: [:bookings, :slots], dependent: :restrict_with_exception
 
   def slot_ranges
     ActiveRecord::Base.connection.execute(

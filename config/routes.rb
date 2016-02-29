@@ -12,6 +12,14 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  resources :bookings, only: [:new, :create, :update, :destroy] do
+    resources :messages, only: [:new, :create]
+  end
+
+  resources :users, except: [:index] do
+    resources :messages, only: [:index]
+  end
+
   resource :calendar,     only: [:show]
 
   resources :slot_ranges, only: [:destroy]
