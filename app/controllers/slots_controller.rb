@@ -16,6 +16,7 @@ class SlotsController < ApplicationController
       @slot = current_user.slots.new
       @slot.day = date
       @slot.status = "pending"
+      @slot.booking_id = ... unless nil
       # @slot.user = current_user
       @slot.save
 
@@ -42,7 +43,7 @@ class SlotsController < ApplicationController
   private
 
   def slots_params
-    params.require(:slot).permit(:day, :status, :user_id)
+    params.require(:slot).permit(:day, :status, :user_id, :booking_id)
   end
 
   def set_slot
