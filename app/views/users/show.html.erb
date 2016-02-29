@@ -60,9 +60,9 @@
       </div>
 
       <div id="small_calendar" class="text-center">
-        <div class="col-xs-12 col-md-4 user_calendar">
-          <h4><strong>Choisissez un créneau de remplacement : </strong></h4>
-          <div class="user_availabilities calendar-profil">
+        <div class="col-xs-12 col-md-4">
+          <div class="user_availabilities user_calendar">
+          <h4>Choisissez un créneau de remplacement : </h4>
             <% @slot_ranges.each do |range| %>
               <ul class="list-inline list-unstyled">
                 <div class="">
@@ -84,8 +84,11 @@
               </ul>
             </div>
         </div>
-        <div class="description-profil">
+        <div class="description-profil user_calendar">
           <h4>Recommandations :</h4>
+
+              <i class="fa fa-comment"></i>
+
         </div>
       </div>
     </div>
