@@ -60,3 +60,17 @@
     text-align: center;
     margin-top: 12px;
 }
+.user_availabilities{
+  padding-top: 20px;
+}
+.single_dispo{
+  padding: 20px;
+  font-size: 20px;
+  -webkit-transition: width 1s, height 1s, background-color 1s, -webkit-transform 1s;
+    transition: width 1s, height 1s, background-color 1s, transform 1s;
+}
+.single_dispo:hover{
+  padding: 20px;
+  background-color: $gray-lighter;
+}
+

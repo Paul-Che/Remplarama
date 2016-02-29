@@ -1,6 +1,6 @@
 <div class="container" id="user_container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-xs-12 col-md-6">
       <div class="card-profil">
         <ul class = "list-unstyled">
           <li>
@@ -21,24 +21,30 @@
 
           <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
           <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li><hr>
-          <li>
+<!--           <li>
             <button data-toggle="modal" data-target="#contacter" class="btn btn-primary">Contacter</button>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
-    <div class="col-md-8 col-md-offset-1">
+    <div class="col-xs-12 col-md-6">
       <div class="calendar-profil">
-        <h4><strong>Prenez votre créneau de remplacement directement en ligne</strong></h4>
+        <h4><strong>Choisissez parmi ces créneaux : </strong></h4>
         <div class="user_availabilities">
 
           <% @slot_ranges.each do |range| %>
           <ul class="list-inline list-unstyled">
-              <li><%= human_slot_range(range) %></li>
-              <li><%= slot_start(range) %></li>
-              <li><%= slot_end(range) %></li>
-              <li><%= link_to "prendre contact pour ce créneau", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "btn" %></li>
-          <% end %>
+<!--               <li><%= human_slot_range(range) %></li> -->
+            <div class="hvr-bounce-to-right">
+                <li><% slot_start(range) %></li>
+                <li><% slot_end(range) %></li>
+
+                  <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
+                  </li>
+
+            <% end %>
+            </div>
+
 
         </div>
       </div>
@@ -51,7 +57,7 @@
 <!-- Modal content with Sign up form -->
   <h2>It's working !</h2>
   <div class="container">
-    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="row col-xs-12 col-sm-6 col-sm-offset-">
       <div class="form-design background">
         <div class="text-center" id="form_title">
           <h2>Information</h2>
