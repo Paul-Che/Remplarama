@@ -35,7 +35,6 @@
                 <% else %>
                 <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
                 </li>
-                <hr>
                 <% end %>
 
               <% end %>
@@ -47,33 +46,6 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade text-center" id="contacter">
-<!-- Modal content with Sign up form -->
-  <h2>It's working !</h2>
-  <div class="container">
-    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
-      <div class="form-design background">
-        <div class="text-center" id="form_title">
-          <h2>Information</h2>
-          <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
-        </div>
-          <%= simple_form_for(current_user) do |f| %>
-            <%= f.error_notification %>
-            <div id="form-inputs">
-              <%= f.input :address, required: true %>
-              <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
-              <%= f.input :numero_ordre, required: true %>
-            </div>
-            <div class="form-actions text-center">
-              <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
-            </div>
-          <% end %>
-          <%= link_to "Finir de compléter son profil", user_path(@user) %>
-      </div>
-    </div>
-  </div>
-</div>
 <br>
 <div class="wrapper-profil">
   <div class="container">
@@ -141,6 +113,33 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade text-center" id="contacter">
+<!-- Modal content with Sign up form -->
+  <h2>It's working !</h2>
+  <div class="container">
+    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="form-design background">
+        <div class="text-center" id="form_title">
+          <h2>Information</h2>
+          <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
+        </div>
+          <%= simple_form_for(current_user) do |f| %>
+            <%= f.error_notification %>
+            <div id="form-inputs">
+              <%= f.input :address, required: true %>
+              <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
+              <%= f.input :numero_ordre, required: true %>
+            </div>
+            <div class="form-actions text-center">
+              <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
+            </div>
+          <% end %>
+          <%= link_to "Finir de compléter son profil", user_path(@user) %>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
