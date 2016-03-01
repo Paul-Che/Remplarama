@@ -1,5 +1,8 @@
-#user_container {
+.user_container {
   margin-top: 100px;
+}
+.user_container p{
+  font-size: 15px;
 }
 .card-profil {
   border: 1px solid grey;
@@ -14,25 +17,7 @@
   font-weight: lighter;
   padding: 10px 10px;
 }
-// .description-profil {
-//   height: 200px;
-//   h4 {
-//     color: $blue;
-//   }
-//   // border: 1px solid grey;
-//   // border-radius: 7px;
-//   font-weight: lighter;
-//   padding: 10px 10px;
-//   margin: 10px 0px;
-// }
-.card-acces {
-  h4 {
-    color: $blue;
-  }
-  height: 200px;
-  padding: 10px 10px;
-  margin: 10px 0px;
-}
+
 .card-map {
   height: 200px;
   border: 1px solid grey;
@@ -46,9 +31,6 @@
   padding: 5px;
   margin-top: 0px;
 }
-// .card-profil ul li:nth-child(-n+2){
-//     text-align: center;
-// }
 .card-profil ul li:nth-child(2){
   margin-top: 10px;
   margin-bottom: 0px;
@@ -65,18 +47,21 @@
   -webkit-transition: width 1s, height 1s, background-color 1s, -webkit-transform 1s;
     transition: width 1s, height 1s, background-color 1s, transform 1s;
 }
-.single_dispo:hover{
-  background-color: $gray-lighter;
-}
 .doc_resume {
   font-size: 32px;
 }
 #main_user_row {
   padding-top: 40px;
 }
-.user_calendar{
+.grey_card{
   border-radius: 7px;
   background: #F9F9FA;
   border-top: 1px solid #EAEAEB;
 }
-
+.description-profil p{
+  font-weight: 20px;
+}
+.empty-comment{
+  padding-top: 10px;
+  padding-bottom: 20px;
+}

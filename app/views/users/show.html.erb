@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container user_container">
   <div class="row" id="main_user_row">
     <div class="profile">
 
@@ -12,19 +12,23 @@
                 <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
               <% end %>
             </li>
-            <li><p><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></p></li>
+            <li><H4><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></H4></li>
             <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= @user.speciality %></i></li><hr>
             <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
             <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li>
           </ul>
           <div class="description-profil">
-            <div class="col-xs-6">
+            <div class="col-xs-12">
               <h4>Présentation :</h4>
               <h6><%= @user.presentation %></h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique ipsam vitae laborum eveniet illum iusto, praesentium earum ullam ratione illo. Dicta nihil illum laborum quia itaque delectus facilis molestias aut.</p>
+              <hr>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-12">
               <h4>Cursus et publications :</h4>
               <h6><%= @user.publications %></h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem adipisci ipsa fugit vero, recusandae officiis sunt neque quia eaque esse, necessitatibus consequuntur dignissimos placeat deserunt inventore error qui provident debitis.</p>
+              <hr>
             </div>
           </div>
           <div class="location">
@@ -38,7 +42,7 @@
                 <li><h6>3 eme étage avec ascenseur</h6></li>
               </ul>
             </div>
-            <div id="map-user" style="; height: 200px;" class="hidden-xs col-md-5">
+            <div id="map-user" style="; height: 200px;" class="hidden-xs col-md-6">
               <script type="text/javascript">
                 <% content_for(:after_js) do %>
                   <%= javascript_tag do %>
@@ -61,7 +65,7 @@
 
       <div id="small_calendar" class="text-center">
         <div class="col-xs-12 col-md-4">
-          <div class="user_availabilities user_calendar">
+          <div class="user_availabilities grey_card">
           <h4>Choisissez un créneau de remplacement : </h4>
             <% @slot_ranges.each do |range| %>
               <ul class="list-inline list-unstyled">
@@ -84,11 +88,12 @@
               </ul>
             </div>
         </div>
-        <div class="description-profil user_calendar">
+        <div class="description-profil grey_card">
           <h4>Recommandations :</h4>
-
+            <div class="empty-comment">
               <i class="fa fa-comment"></i>
-
+              <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+            </div>
         </div>
       </div>
     </div>
