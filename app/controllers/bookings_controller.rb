@@ -62,20 +62,11 @@ class BookingsController < ApplicationController
       slot.status = "rejected"
       slot.save
     end
-    render "calendars/show.html.erb"
+    redirect_to :back
   end
 
   def update
-    raise
-    set_booking
-    authorize @booking
-    if params[:commit] == "Confirm"
-      @booking.status = "confirmed"
-    elsif params[:commit] == "Reject"
-      @booking.status = "rejected"
-    end
-    @booking.save
-    redirect_to :back
+
   end
 
   def destroy

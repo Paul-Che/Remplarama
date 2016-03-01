@@ -82,15 +82,17 @@
               <%= booking.user.first_name %> veut vous remplacer du :
               <%= booking.start_date %> au
               <%= booking.end_date %>
-              <%# raise %>
-              <%#= form_for booking do |f| %>
-                <%#= f.submit "Confirm", class: "btn btn-primary", method: :patch %>
-              <%# end %>
-              <%#= form_for booking do |f| %>
-                <%#= f.submit "Reject", class: "btn btn-danger", method: :patch %>
-              <%# end %>
-              <%= link_to "Valider", confirm_booking_path(booking), method: :patch, class: "btn btn-primary" %>
-              <%= link_to "Refuser", reject_booking_path(booking), method: :patch, class: "btn btn-danger" %>
+              <% booking.slots.each do |slot| %>
+                <% if slot.status == "pending" %>
+                  <%= link_to "Valider", confirm_booking_path(booking), method: :patch, class: "btn btn-primary" %>
+                  <%= link_to "Refuser", reject_booking_path(booking), method: :patch, class: "btn btn-danger" %>
+                <% else %>
+                  <div class="display-status">
+                    <%= slot.status %>
+                    <% break %>
+                  </div>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
