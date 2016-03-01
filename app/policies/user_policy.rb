@@ -17,6 +17,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def profile
+    @record == @user || @user.admin? # Only current user can see his/her profile
+  end
+
   def update?
     @record == @user || @user.admin? # Only user creator can update it
   end
