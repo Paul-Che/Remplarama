@@ -1,6 +1,4 @@
 class ReviewsController < ApplicationController
-    # skip_before_action :verify_authorized, only: :create, :new
-    # skip_before_action :verify_policy_scoped, only: :create, :new
 
   def new
     @review = Review.new
@@ -18,9 +16,8 @@ class ReviewsController < ApplicationController
     authorize @review
     @review.user = current_user
     @review.save
-    flash[:notice] = "Votre avis a été envoyé, merci."
-    redirect_to user_path(@review.user)
-
+    flash[:notice] = "Votre avis a été créé. Merci."
+    redirect_to user_path(@user)
   end
 
   def edit
