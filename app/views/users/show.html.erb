@@ -69,7 +69,6 @@
           <h4>Choisissez un créneau de remplacement : </h4>
             <% @slot_ranges.each do |range| %>
               <ul class="list-inline list-unstyled">
-                <div class="">
                     <% slot_start(range) %>
                     <% slot_end(range) %>
                     <% if current_user.numero_ordre.nil? %>
@@ -84,15 +83,14 @@
                     </ul>
                     <% end %>
                   <% end %>
-                </div>
               </ul>
             </div>
-        </div>
-        <div class="description-profil grey_card">
-          <h4>Recommandations :</h4>
-            <div class="empty-comment">
-              <i class="fa fa-comment"></i>
-              <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+            <div class="description-profil grey_card">
+              <h4>Recommandations :</h4>
+                <div class="empty-comment">
+                  <i class="fa fa-comment"></i>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                </div>
             </div>
         </div>
       </div>
