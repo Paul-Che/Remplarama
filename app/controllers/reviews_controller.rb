@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+
     @rating = params[:rating]
     @content = params[:content]
 
@@ -32,7 +33,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :content, :user_id)
+    params.require(:review).permit(:rating, :content, :reviewer_id, :reviewed_id)
   end
 
 end
