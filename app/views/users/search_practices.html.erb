@@ -1,7 +1,7 @@
 <% content_for :meta_title, "RemplaMatch - Profils de professionnels installés, cherchant des remplaçants" %>
 
 <div class="page-content padded">
-  <div class="container main">
+  <div class="container-fluid main">
     <div id="search-filter">
       <form action="/search_practices">
         <div class="row">
@@ -143,7 +143,7 @@
 
   </div>
 
-  <div class="container container-map">
+  <div class="container-fluid container-map">
     <div class="row">
       <div class="col-xs-12 col-sm-8">
         <div class="cards">
@@ -218,7 +218,8 @@
               hoverPicture = {
               url: "<%= asset_path 'marker_blue_small.png' %>",
               width: 60,
-              height: 90
+              height: 90,
+              'anchor': [15, 45]
               };
               handler = Gmaps.build('Google');
               handler.buildMap({ internal: { id: 'map' } }, function(){
