@@ -1,47 +1,73 @@
 <% content_for :meta_title, "RemplaMatch - Mon profil - #{current_user.first_name} #{current_user.last_name}" %>
 
 <div class="container user_container">
-  <div class="row" id="main_user_row">
+  <div class="row" class="main_user_row">
     <div class="profile">
-
       <div class="card-profile">
         <div class="col-xs-12 col-md-8">
-          <ul class = "list-unstyled doc_resume text-center">
-            <li>
-              <% if current_user.avatar.nil? %>
-                <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
-              <% else %>
-                <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
-              <% end %>
-            </li>
-            <li><H4><strong>Dr </strong><%= current_user.first_name %> <%= current_user.last_name %></H4></li>
-            <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= current_user.speciality %></i></li><hr>
-            <li><i class="fa fa-home" id="icon-profil"> : <%= current_user.address %></i></li><hr>
-            <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= current_user.education %></i></li>
-          </ul>
-          <div class="description-profil">
-            <div class="col-xs-12">
-              <h4>Présentation :</h4>
-              <% if current_user.presentation.nil? %>
-              <i><p> En attente d'informations de la part du médecin</p></i>
-              <% else %>
-              <h6><%= current_user.presentation %></h6>
-              <%end%>
+          <div class="col-xs-6">
+              <div class="avatar-header text-center">
+                <% if current_user.avatar.nil? %>
+                  <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+                <% else %>
+                  <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
+                <% end %>
+                <h4><strong><%= "Dr. " if current_user.speciality != "Kinésithérapie" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
+                <h5>
+                  <i class="fa fa-fw fa-search"></i>
+                  <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
+                </h5>
+              </div>
               <hr>
-            </div>
-            <div class="col-xs-12">
-              <h4>Cursus et publications :</h4>
-              <% if current_user.publications.nil? %>
-              <i><p> En attente d'informations de la part du médecin</p></i>
-              <% else %>
-              <h6><%= current_user.publications %></h6>
+            <ul class = "list-unstyled doc-user-profile">
+              <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><%= current_user.speciality %></li>
+              <li><i class="fa fa-fw fa-graduation-cap icon-profile"></i><%= current_user.education %></li>
+              <li><i class="fa fa-fw fa-hashtag icon-profile"></i>Numéro de l'Ordre : <%= current_user.numero_ordre %></li>
+              <% if !current_user.has_practice %>
+                <li><i class="fa fa-fw fa-file-text-o icon-profile"></i>Numéro URSSAF : <%= current_user.numero_ursaff %></li>
               <% end %>
-              <hr>
+              <li><i class="fa fa-fw fa-home icon-profile"></i><%= current_user.address %></li>
+            </ul>
+            <br><br>
+          </div>
+          <div class="col-xs-6">
+
+            <br><br>
+          </div>
+          <div class="description-myprofile">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12">
+                  <h4>Ma présentation :</h4>
+                  <% if current_user.presentation.nil? %>
+                  <i><p> Editez votre profil pour rédiger votre présentation et obtenir jusqu'à 80% de résultats en plus.</p></i>
+                  <% else %>
+                  <h6><%= current_user.presentation %></h6>
+                  <%end%>
+                  <hr>
+                </div>
+                <div class="col-xs-12">
+                  <h4>Mon cursus et mes publications :</h4>
+                  <% if current_user.publications.nil? %>
+                  <i><p> Editez votre profil pour renseigner vos publications.</p></i>
+                  <% else %>
+                  <h6><%= current_user.publications %></h6>
+                  <% end %>
+                  <hr>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
           <div class="location">
             <div class="card-acces col-xs-12 col-md-12">
-              <h4>Informations d'accès :</h4>
+              <h4><%= current_user.has_practice ? "Localisation de mon cabinet" : "Ma localisation" %></h4>
               <p><%= current_user.address %></p>
             </div>
             <div id="map-user" style="; height: 200px;" class="hidden-xs col-md-12">
@@ -67,11 +93,19 @@
 
       <div id="small_calendar" class="text-center">
         <div class="col-xs-12 col-md-4">
-            <div class="description-profil grey_card">
-              <h4>Recommandations :</h4>
+            <div class="reviews-card grey_card">
+              <h4>Mes recommandations reçues</h4>
                 <div class="empty-comment">
                   <i class="fa fa-comment"></i>
                   <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+
                 </div>
             </div>
         </div>
