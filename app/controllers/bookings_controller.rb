@@ -20,8 +20,7 @@ class BookingsController < ApplicationController
     @booking.save
 
     @user.slots.each do |slot|
-      if slot.day >= Date.parse(@start_date) || slot.day <= Date.parse(@end_date)
-        # binding.pry
+      if slot.day >= Date.parse(@start_date) && slot.day <= Date.parse(@end_date)
         if slot.booking_id.nil?
           slot.booking_id = @booking.id
           slot.save
