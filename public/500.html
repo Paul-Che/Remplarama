@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <meta charset="UTF-8">
+  <title>Désolé, une erreur s'est produite (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
@@ -27,7 +28,7 @@
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
     background-color: white;
-    padding: 7px 12% 0;
+    padding: 20px;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
 
@@ -35,6 +36,17 @@
     font-size: 100%;
     color: #00AFC3;
     line-height: 1.5em;
+  }
+
+  a {
+    text-decoration: none;
+    font-family: arial, sans-serif;
+    color: #666666;
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-size: 14px;
+    outline: none;
   }
 
   div.dialog > p {
@@ -51,16 +63,19 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
   </style>
 </head>
 
 <body>
   <!-- This file lives in public/500.html -->
   <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
+  <div>
+    <h1>Désolé, une erreur s'est produite.</h1>
+    <img src="/assets/large_logo_remplamatch.png" alt="Logo RemplaMatch" width="50%">
+    <br><br>
+    <a href="javascript:history.back()">Page précédente</a>
+    <a href="http://www.remplamatch.com">Page d'accueil</a>
   </div>
 </body>
 </html>
