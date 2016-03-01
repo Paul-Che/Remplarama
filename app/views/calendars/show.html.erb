@@ -1,11 +1,10 @@
 <div id="title" class="text-center">
-  <% if @user.has_practice? %>
-  <h3>Mon calendrier de recherches de remplacants</h3>
-    <% else %>
-  <h3>Mon calendrier de recherches de remplacements</h3>
-  <%end%>
+  <% if current_user.has_practice == false %>
+    <h3>Mon calendrier de recherches de remplacements</h3>
+  <% else %>
+    <h3>Mon calendrier de recherches de remplaçants</h3>
+  <% end %>
 </div>
-
 
 <div class="container">
   <div class="row">
@@ -26,30 +25,36 @@
   <div class="container">
     <div class="row-fluid">
       <div class="availabilities text-center col-sm-12 col-md-6">
-      <% if @user.has_practice? %>
-        <h4>Les dates où je recherche des remplacants</h4>
+        <% if current_user.has_practice == false %>
+          <h4>Les dates où je recherche des remplacements</h4>
+          <% else %>
+          <h4>Les dates où je recherche des remplaçants</h4>
+        <%end%>
+        <% if @slot_ranges.ntuples == 0 %>
+           <i class="fa fa-calendar-minus-o"></i>
+           <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
         <% else %>
-        <h4>Les dates où je recherche des remplacements</h4>
-      <%end%>
-      <% if @slot_ranges.ntuples == 0 %>
-         <i class="fa fa-calendar-minus-o"></i>
-         <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
-      <% else %>
           <% @slot_ranges.each do |range| %>
-          <ul class="list-inline list-unstyled">
+            <ul class="list-inline list-unstyled">
               <li><%= human_slot_range(range) %></li>
               <li><%= link_to "Supprimer", slot_range_path(slot_range_id(range)), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
               <hr>
-          </ul>
+            </ul>
           <% end %>
-      <% end %>
+        <% end %>
       </div>
       <div class="incoming_demands text-center col-sm-12 col-md-6">
-            <h4>Les demandes entrantes de remplacement</h4>
-          <% if @user.bookings.nil? %>
-            <i class="fa fa-user-md"></i>
-              <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
-          <% end %>
+        <h4>Les demandes entrantes de remplacement</h4>
+        <% if current_user.slotes.each { |slot| slot.booking_id.nil? } %>
+          <i class="fa fa-user-md"></i>
+          <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
+        <% else %>
+          <%= @booking.user.first_name %>
+          <ul class="list-inline list-unstyled">
+            <li><%= human_slot_range(range) %></li>
+            <hr>
+          </ul>
+        <% end %>
           <!-- MY PENDING BOOKINGS + MY PAST BOOKINGS TO DO  -->
       </div>
     </div>
