@@ -1,14 +1,15 @@
 <div class="container">
   <div class="row">
-    <%= simple_form_for(@user) do |f| %>
+    <%= simple_form_for [current_user, @review] do |f| %>
       <%= f.error_notification %>
 
       <div class="form-inputs">
-        <%= f.input :rating, collection: 1..5, prompt: "Nombre d'étoiles", selected: 3, required: true %>
+        <%= f.input :content %>
+        <%= f.input :rating, collection: 1..5, prompt: "Nombre d'étoiles", selected: 4, required: true %>
       </div>
 
       <div class="form-actions text-center">
-        <%= f.button :submit, "Envoyer ", method: :post, :class => 'btn btn-primary', style: "width: 100%;" %>
+        <%= f.button :submit, "Valider avis ", method: :post, :class => 'btn btn-primary', style: "width: 100%;" %>
       </div>
 
     <% end %>
