@@ -1,146 +1,126 @@
-<div class="container" id="user_container">
-  <div class="row">
-    <div class="col-xs-12 col-md-6">
-      <div class="card-profil">
-        <ul class = "list-unstyled doc_resume text-center">
-          <li>
-            <% if current_user.avatar.nil? %>
-              <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
-            <% else %>
-              <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
-            <% end %>
-          </li>
-          <li><p><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></p></li>
-          <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= @user.speciality %></i></li><hr>
-          <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
-          <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-6">
-      <div class="calendar-profil">
-        <h4><strong>Choisissez un créneau de remplacement : </strong></h4>
-        <div class="user_availabilities">
+<div class="container user_container">
+  <div class="row" id="main_user_row">
+    <div class="profile">
 
-          <% @slot_ranges.each do |range| %>
-          <ul class="list-inline list-unstyled">
-<!--               <li><%= human_slot_range(range) %></li> -->
-            <div class="">
-                <% slot_start(range) %>
-                <% slot_end(range) %>
-
-                <% if current_user.numero_ordre.nil? %>
-                  <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), data: {toggle: "modal", target: "#contacter"}%>
-                  </li>
-                <% else %>
-                <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
-                </li>
-                <hr>
-                <% end %>
-
+      <div class="card-profile">
+        <div class="col-xs-12 col-md-8">
+          <ul class = "list-unstyled doc_resume text-center">
+            <li>
+              <% if current_user.avatar.nil? %>
+                <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+              <% else %>
+                <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
               <% end %>
+            </li>
+            <li><H4><strong>Dr </strong><%= @user.first_name %> <%= @user.last_name %></H4></li>
+            <li><i class="fa fa-stethoscope" id="icon-profil"> : <%= @user.speciality %></i></li><hr>
+            <li><i class="fa fa-home" id="icon-profil"> : <%= @user.address %></i></li><hr>
+            <li><i class="fa fa-graduation-cap" id="icon-profil"> : <%= @user.education %></i></li>
+          </ul>
+          <div class="description-profil">
+            <div class="col-xs-12">
+              <h4>Présentation :</h4>
+              <% if @user.presentation.nil? %>
+              <i><p> En attente d'informations de la part du médecin</p></i>
+              <% else %>
+              <h6><%= @user.presentation %></h6>
+              <%end%>
+              <hr>
             </div>
+            <div class="col-xs-12">
+              <h4>Cursus et publications :</h4>
+              <% if @user.publications.nil? %>
+              <i><p> En attente d'informations de la part du médecin</p></i>
+              <% else %>
+              <h6><%= @user.publications %></h6>
+              <% end %>
+              <hr>
+            </div>
+          </div>
+          <div class="location">
+            <div class="card-acces col-xs-12 col-md-12">
+              <h4>Informations d'accès :</h4>
+              <p><%= @user.address %></p>
+            </div>
+            <div id="map-user" style="; height: 200px;" class="hidden-xs col-md-12">
+              <script type="text/javascript">
+                <% content_for(:after_js) do %>
+                  <%= javascript_tag do %>
+                    $(document).ready(function() {
+                      handler = Gmaps.build('Google');
+                      handler.buildMap({ internal: { id: 'map-user' } }, function(){
+                        markers = handler.addMarkers(<%= raw @markers.to_json %>);
+                        handler.bounds.extendWith(markers);
+                        handler.fitMapToBounds();
+                        handler.getMap().setZoom(14);
+                      });
+                    });
+                  <% end %>
+                <% end %>
+            </script>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div id="small_calendar" class="text-center">
+        <div class="col-xs-12 col-md-4">
+          <div class="user_availabilities grey_card">
+          <h4>Choisissez un créneau de remplacement : </h4>
+            <% @slot_ranges.each do |range| %>
+              <ul class="list-inline list-unstyled">
+                    <% slot_start(range) %>
+                    <% slot_end(range) %>
+                    <% if current_user.numero_ordre.nil? %>
+                    <ul class="list-unstyled">
+                      <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), data: {toggle: "modal", target: "#contacter"}%>
+                      </li>
+                    </ul>
+                    <% else %>
+                    <ul class="list-unstyled">
+                      <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
+                      </li>
+                    </ul>
+                    <% end %>
+                  <% end %>
+              </ul>
+            </div>
+            <div class="description-profil grey_card">
+              <h4>Recommandations :</h4>
+                <div class="empty-comment">
+                  <i class="fa fa-comment"></i>
+                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
+                </div>
+            </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade text-center" id="contacter">
-<!-- Modal content with Sign up form -->
-  <h2>It's working !</h2>
-  <div class="container">
-    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
-      <div class="form-design background">
-        <div class="text-center" id="form_title">
-          <h2>Information</h2>
-          <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
-        </div>
-          <%= simple_form_for(current_user) do |f| %>
-            <%= f.error_notification %>
-            <div id="form-inputs">
-              <%= f.input :address, required: true %>
-              <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
-              <%= f.input :numero_ordre, required: true %>
-            </div>
-            <div class="form-actions text-center">
-              <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
-            </div>
-          <% end %>
-          <%= link_to "Finir de compléter son profil", user_path(@user) %>
-      </div>
-    </div>
-  </div>
-</div>
-<br>
-<div class="wrapper-profil">
-  <div class="container">
-    <div class="row">
-      <div class="description-profil">
-        <div class="col-xs-6">
-          <h4>Présentation :</h4>
-          <h6><%= @user.presentation %></h6>
-        </div>
-        <div class="col-xs-6">
-          <h4>Cursus et publications :</h4>
-          <h6><%= @user.publications %></h6>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card-acces">
-        <h4>Informations d'accès :</h4>
-        <h5><strong><%= @user.address %></strong></h5>
-        <div></div>
-        <h6>Parking</h6>
-        <h6>Informations supplémentaires</h6>
-        <ul>
-          <li><h6>3 eme étage avec ascenseur</h6></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card-map">
-        <div id="map-user" style="width: 101%; height: 180px;"></div>
-        <script type="text/javascript">
-          <% content_for(:after_js) do %>
-            <%= javascript_tag do %>
-              $(document).ready(function() {
-                handler = Gmaps.build('Google');
-                handler.buildMap({ internal: { id: 'map-user' } }, function(){
-                  markers = handler.addMarkers(<%= raw @markers.to_json %>);
-                  handler.bounds.extendWith(markers);
-                  handler.fitMapToBounds();
-                  handler.getMap().setZoom(14);
-                });
-              });
+  <!-- Modal -->
+  <div class="modal fade text-center" id="contacter">
+  <!-- Modal content with Sign up form -->
+    <h2>It's working !</h2>
+    <div class="container">
+      <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
+        <div class="form-design background">
+          <div class="text-center" id="form_title">
+            <h2>Information</h2>
+            <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
+          </div>
+            <%= simple_form_for(current_user) do |f| %>
+              <%= f.error_notification %>
+              <div id="form-inputs">
+                <%= f.input :address, required: true %>
+                <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
+                <%= f.input :numero_ordre, required: true %>
+              </div>
+              <div class="form-actions text-center">
+                <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
+              </div>
             <% end %>
-          <% end %>
-        </script>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper-profil">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="description-profil">
-          <h4>Recommandations :</h4>
+            <%= link_to "Finir de compléter son profil", user_path(@user) %>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
