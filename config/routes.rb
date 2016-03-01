@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:new, :create, :update, :destroy] do
     resources :messages, only: [:new, :create]
+    member do
+      patch 'confirm'
+      patch 'reject'
+    end
   end
 
   resources :users, except: [:index] do

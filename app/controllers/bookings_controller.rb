@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-
+  # skip_after_action :verify_policy_scoped, only: :index
 
   def new
     @booking = Booking.new
@@ -45,10 +45,30 @@ class BookingsController < ApplicationController
     # end
   end
 
+  def confirm
+    set_booking
+    authorize @booking
+    @booking.slots.each do |slot|
+      slot.status = "confirmed"
+      slot.save
+    end
+    redirect_to :back
+  end
+
+  def reject
+    set_booking
+    authorize @booking
+    @booking.slots.each do |slot|
+      slot.status = "rejected"
+      slot.save
+    end
+    render "calendars/show.html.erb"
+  end
 
   def update
-    authorize @booking
+    raise
     set_booking
+    authorize @booking
     if params[:commit] == "Confirm"
       @booking.status = "confirmed"
     elsif params[:commit] == "Reject"

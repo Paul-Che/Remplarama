@@ -1,5 +1,5 @@
 <div id="title" class="text-center">
-  <% if @user.has_practice? %>
+  <% if current_user.has_practice? %>
   <h3>Mon calendrier de recherches de remplacants</h3>
     <% else %>
   <h3>Mon calendrier de recherches de remplacements</h3>
@@ -12,7 +12,7 @@
     <div class="col-xs-12">
       <div id="demo"></div>
       <div class="call-to-action text-center">
-        <%= form_tag(user_slots_path(@user), :method => :post ) do -%>
+        <%= form_tag(user_slots_path(current_user), :method => :post ) do -%>
         <input id="startDate" name="start_date" type="hidden" value="" />
         <input id="endDate" name="end_date" type="hidden" value="" />
         <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Ajouter la plage sélectionnée'/>
@@ -26,7 +26,7 @@
   <div class="container">
     <div class="row-fluid">
       <div class="availabilities text-center col-sm-12 col-md-6">
-      <% if @user.has_practice? %>
+      <% if current_user.has_practice? %>
         <h4>Les dates où je recherche des remplacants</h4>
         <% else %>
         <h4>Les dates où je recherche des remplacements</h4>
@@ -46,7 +46,7 @@
       </div>
       <div class="incoming_demands text-center col-sm-12 col-md-6">
         <h4>Les demandes entrantes de remplacement</h4>
-        <% if @user.bookings.nil? %>
+        <% if current_user.bookings.nil? %>
           <i class="fa fa-user-md"></i>
             <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
         <% end %>
@@ -70,7 +70,29 @@
             <% end %>
           <% end %>
         <% else %>
-
+          <% if current_user.slots.first.booking_id.nil? %>
+            <p> On ne vous a pas encore fait de demande !</p>
+          <% else %>
+            <% @slotted_bookings.each do |booking| %>
+              <% if booking.user.avatar.nil? %>
+                <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+              <% else %>
+                <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
+              <% end %>
+              <%= booking.user.first_name %> veut vous remplacer du :
+              <%= booking.start_date %> au
+              <%= booking.end_date %>
+              <%# raise %>
+              <%#= form_for booking do |f| %>
+                <%#= f.submit "Confirm", class: "btn btn-primary", method: :patch %>
+              <%# end %>
+              <%#= form_for booking do |f| %>
+                <%#= f.submit "Reject", class: "btn btn-danger", method: :patch %>
+              <%# end %>
+              <%= link_to "Valider", confirm_booking_path(booking), method: :patch, class: "btn btn-primary" %>
+              <%= link_to "Refuser", reject_booking_path(booking), method: :patch, class: "btn btn-danger" %>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
     </div>
