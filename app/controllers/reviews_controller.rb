@@ -8,17 +8,19 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @review = Review.new(params[review_params])
+    @review.reviewed_id = params[:user_id].to_i
 
     @rating = params[:rating]
     @content = params[:content]
+        raise
+    @review.reviewer_id = current_user.id
 
     @review = Review.new(review_params)
     authorize @review
-    @review.user = current_user
     @review.save
     flash[:notice] = "Votre avis a été créé. Merci."
-    redirect_to user_path(@user)
+    redirect_to calendar_path(@user)
   end
 
   def edit
