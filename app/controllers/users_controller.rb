@@ -49,8 +49,8 @@ class UsersController < ApplicationController
     @markers = Gmaps4rails.build_markers(@users) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
-      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [30, 90]})
-      marker.infowindow "Dr. #{user.first_name} #{user.last_name}<br/>#{user.address}"
+      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [15, 45]})
+      marker.infowindow "<strong>Dr. #{user.first_name} #{user.last_name}</strong><br/>#{user.address}"
       marker.json({ :id => user.id })
     end
     authorize @user
@@ -89,8 +89,8 @@ class UsersController < ApplicationController
     @markers = Gmaps4rails.build_markers(@users) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
-      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [30, 90]})
-      marker.infowindow "Dr. #{user.first_name} #{user.last_name}<br/>#{user.address}"
+      marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [15, 45]})
+      marker.infowindow "<strong>Dr. #{user.first_name} #{user.last_name}</strong><br/>#{user.address}"
       marker.json({ :id => user.id })
     end
     authorize @user
@@ -115,7 +115,19 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @user = current_user
+    @markers = Gmaps4rails.build_markers(current_user) do |user, marker|
+       marker.lat user.latitude
+       marker.lng user.longitude
+       marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [15, 45]})
+    end
+
+    @slot_ranges = current_user.slot_ranges
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    @booking = current_user.bookings
+    @slots = current_user.slots
+
+    authorize current_user
   end
 
   def edit
