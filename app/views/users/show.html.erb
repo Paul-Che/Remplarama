@@ -20,29 +20,29 @@
           <div class="description-profil">
             <div class="col-xs-12">
               <h4>Présentation :</h4>
+              <% if @user.presentation.nil? %>
+              <i><p> En attente d'informations de la part du médecin</p></i>
+              <% else %>
               <h6><%= @user.presentation %></h6>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique ipsam vitae laborum eveniet illum iusto, praesentium earum ullam ratione illo. Dicta nihil illum laborum quia itaque delectus facilis molestias aut.</p>
+              <%end%>
               <hr>
             </div>
             <div class="col-xs-12">
               <h4>Cursus et publications :</h4>
+              <% if @user.publications.nil? %>
+              <i><p> En attente d'informations de la part du médecin</p></i>
+              <% else %>
               <h6><%= @user.publications %></h6>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem adipisci ipsa fugit vero, recusandae officiis sunt neque quia eaque esse, necessitatibus consequuntur dignissimos placeat deserunt inventore error qui provident debitis.</p>
+              <% end %>
               <hr>
             </div>
           </div>
           <div class="location">
-            <div class="card-acces col-xs-12 col-md-6">
+            <div class="card-acces col-xs-12 col-md-12">
               <h4>Informations d'accès :</h4>
-              <h5><strong><%= @user.address %></strong></h5>
-              <div></div>
-              <h6>Parking</h6>
-              <h6>Informations supplémentaires</h6>
-              <ul>
-                <li><h6>3 eme étage avec ascenseur</h6></li>
-              </ul>
+              <p><%= @user.address %></p>
             </div>
-            <div id="map-user" style="; height: 200px;" class="hidden-xs col-md-6">
+            <div id="map-user" style="; height: 200px;" class="hidden-xs col-md-12">
               <script type="text/javascript">
                 <% content_for(:after_js) do %>
                   <%= javascript_tag do %>
