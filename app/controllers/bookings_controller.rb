@@ -32,6 +32,10 @@ class BookingsController < ApplicationController
     set_booking
     if params[:commit] == "Confirm"
       @booking.status = "confirmed"
+      raise
+      @booking.slots.each do |slot|
+        slot.booking_id = @booking.id
+      end
     elsif params[:commit] == "Reject"
       @booking.status = "rejected"
     end
