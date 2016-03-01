@@ -1,23 +1,38 @@
 class ReviewsController < ApplicationController
 
   def new
-    authorize @slot
+    @review = Review.new
+    @user = User.find(params[:user_id])
+
+    authorize @review
   end
 
   def create
-    authorize @slot
+    @user = User.find(params[:user_id])
+    @rating = params[:rating]
+    @content = params[:content]
+
+    @review = Review.new(review_params)
+    authorize @review
+
+    @review.user = current_user
+    @review.save
+
   end
 
   def edit
-    authorize @slot
   end
 
   def update
-    authorize @slot
   end
 
   def destroy
-    authorize @slot
+  end
+
+  private
+
+  def review_params
+    params.permit(:rating, :content)
   end
 
 end
