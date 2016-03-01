@@ -40,7 +40,7 @@
                     <input type="text" name="commission-single" class="text-center slider-values-text" id="commission-single" readonly>
                   </div>
                   <div class="slider-bar">
-                    <div id="slider-single"></div>
+                    <div id="slider-single" data-value="<%= @min_commission %>"></div>
                   </div>
                 </div>
                 <% else %>
@@ -52,7 +52,7 @@
                     <input type="text" name="commission" class="text-center slider-values-text" id="commission" readonly>
                   </div>
                   <div class="slider-bar">
-                    <div id="slider-range"></div>
+                    <div id="slider-range" data-value1="<%= @min_commission %>" data-value2="<%= @max_commission %>"></div>
                   </div>
                 </div>
                 <% end %>
@@ -68,11 +68,11 @@
                     <input type="text" name="rating" class="text-center slider-values-text" id="rating" readonly>
                   </div>
                   <div class="slider-bar">
-                    <div id="slider-range2"></div>
+                    <div id="slider-range2" data-value1="<%= @min_rating %>" data-value2="<%= @max_rating %>"></div>
                   </div>
                   <div class="slider-margin"></div>
                   <div class="slider-addon checkbox hidden-xs">
-                    <label><input type="checkbox" name="unrated" value="true" checked> Inclure les profils non-notés</label>
+                    <label><input type="checkbox" name="unrated" value="true" <%= "checked" if @unrated == true %>> Inclure les profils non-notés</label>
                   </div>
                 </div>
               </div>
@@ -227,16 +227,16 @@
                 (<%=raw @markers.to_json %>).forEach(function(json, index){
                   json.marker = markers[index];
 
-                  json.marker.serviceObject.addListener('click', function() {
-                    console.log("click");
-                    $('.card-user').removeClass('highlighted-card');
-                    $('#user-' + json.id).addClass('highlighted-card');
-                    document.getElementById('user-' + json.id).scrollIntoView();
-                    var scrolledY = window.scrollY
-                    if(scrolledY) {
-                      window.scroll(0, scrolledY - '75px');
-                    }
-                  });
+                  // json.marker.serviceObject.addListener('click', function() {
+                  //   console.log("click");
+                  //   $('.card-user').removeClass('highlighted-card');
+                  //   $('#user-' + json.id).addClass('highlighted-card');
+                  //   document.getElementById('user-' + json.id).scrollIntoView();
+                  //   var scrolledY = window.scrollY
+                  //   if(scrolledY) {
+                  //     window.scroll(0, scrolledY - '75px');
+                  //   }
+                  // });
 
                   gr = {};
                   gr.marker = void 0;

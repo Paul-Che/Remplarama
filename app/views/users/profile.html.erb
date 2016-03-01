@@ -20,28 +20,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="calendar-profil">
         <h4><strong>Choisissez un créneau de remplacement : </strong></h4>
-        <div class="user_availabilities">
 
-          <% @slot_ranges.each do |range| %>
-          <ul class="list-inline list-unstyled">
-<!--               <li><%= human_slot_range(range) %></li> -->
-            <div class="">
-                <% slot_start(range) %>
-                <% slot_end(range) %>
-
-                <% if current_user.numero_ordre.nil? %>
-                  <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), data: {toggle: "modal", target: "#contacter"}%>
-                  </li>
-                <% else %>
-                <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
-                </li>
-                <hr>
-                <% end %>
-
-              <% end %>
-            </div>
-
-        </div>
       </div>
     </div>
   </div>
