@@ -30,9 +30,11 @@
                 <% slot_end(range) %>
 
                 <% if current_user.numero_ordre.nil? %>
+
                   <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), data: {toggle: "modal", target: "#contacter"}%>
                   </li>
                 <% else %>
+                <%# raise %>
                 <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
                 </li>
                 <hr>

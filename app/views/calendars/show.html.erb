@@ -45,12 +45,33 @@
       <% end %>
       </div>
       <div class="incoming_demands text-center col-sm-12 col-md-6">
-            <h4>Les demandes entrantes de remplacement</h4>
-          <% if @user.bookings.nil? %>
-            <i class="fa fa-user-md"></i>
-              <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
+        <h4>Les demandes entrantes de remplacement</h4>
+        <% if @user.bookings.nil? %>
+          <i class="fa fa-user-md"></i>
+            <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
+        <% end %>
+        <!-- MY PENDING BOOKINGS + MY PAST BOOKINGS TO DO  -->
+        <% if current_user.has_practice == false %>
+          <% if current_user.bookings.nil? %>
+            <p> Vous n'avez pas encore fait de demande !</p>
+          <% else %>
+            <% current_user.bookings.each do |booking| %>
+              <%= booking.start_date %>
+              <%= booking.end_date %>
+              <% if booking.slots.first.nil? %>
+                <p> "Demande en attente" </p>
+                <br>
+              <% else %>
+                <% booking.slots.each do |slot| %>
+                  <%= slot.status %>
+                  <%= slot.user.first_name %>
+                <% end %>
+              <% end %>
+            <% end %>
           <% end %>
-          <!-- MY PENDING BOOKINGS + MY PAST BOOKINGS TO DO  -->
+        <% else %>
+
+        <% end %>
       </div>
     </div>
   </div>
