@@ -74,7 +74,6 @@
 
       <div class = "outcoming_demands text-center col-sm-12 col-md-4">
         <h4>Les demandes envoyées de remplacements</h4>
-        <% if current_user.has_practice == false %> <!-- Je suis un remplaçant ! -->
           <% if current_user.bookings.nil? %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
@@ -94,7 +93,8 @@
           </div>
             <% end %>
           <% end %>
-        <% end %><!-- Je suis un cabinet ! -->
+
+
       </div>
 
     </div>
