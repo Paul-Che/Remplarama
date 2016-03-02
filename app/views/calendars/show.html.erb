@@ -32,14 +32,14 @@
         <% else %>
           <h4>Les dates où je recherche des remplacements</h4>
         <%end%>
-        <% if current_user.slots.first.nil? %>
+        <% if current_user.slots.nil? %>
           <i class="fa fa-calendar-minus-o"></i>
           <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
         <% else %>
           <% current_user.slots.each do |slot| %>
             <ul class="list-inline list-unstyled">
               <li>Du <%= slot.start_date %> au <%= slot.end_date %></li>
-              <li><%#= link_to "Supprimer", user_slot_path(slot), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
+              <li><%= link_to "Supprimer", user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
               <hr>
             </ul>
           <% end %>
@@ -50,8 +50,13 @@
         <% if current_user.bookings.nil? %>
           <i class="fa fa-user-md"></i>
             <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
-        <% end %>
         <!-- MY PENDING BOOKINGS + MY PAST BOOKINGS TO DO  -->
+        <% else %>
+          <% current_user.bookings.each do |booking| %>
+            <%= booking.start_date %>
+            <%= booking.slot.user.first_name %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
