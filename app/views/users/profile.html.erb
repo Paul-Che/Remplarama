@@ -133,7 +133,7 @@
           <hr>
           <% current_user.reviews.each do |review| %>
             <div class="review">
-              <p>"<em><%= review.content %></p></em>" by xxx</p>
+              <p>"<em><%= review.content %></p></em>" by <%= review.reviewer.first_name %> <%= review.reviewer.first_name %></p>
             </div>
           <% end %>
         <% else %>
