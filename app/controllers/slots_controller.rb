@@ -5,22 +5,26 @@ class SlotsController < ApplicationController
 
   def create
 
+    @slot = Slot.new(slots_params)
     @start_date = string_to_date(params[:start_date])
     @end_date = string_to_date(params[:end_date])
 
+    @slot.status = "pending"
     if @start_date.nil? || @end_date.nil?
       render :back
     end
 
-    (@start_date..@end_date).to_a.each do |date|
-      @slot = current_user.slots.new
-      @slot.day = date
-      @slot.status = "pending"
+    # (@start_date..@end_date).to_a.each do |date|
+    #   @slot = current_user.slots.new
+    #   @slot.day = date
+    #   @slot.status = "pending"
+    #   # @slot.user = current_user
+    #   @slot.save
+    # end
 
-      # @slot.user = current_user
-      @slot.save
 
-    end
+    @slot.save
+
     redirect_to calendar_path
     # flash[:notice] = "Vos dates sont ajoutées à votre calendrier"
     authorize @slot
@@ -37,13 +41,13 @@ class SlotsController < ApplicationController
     set_slot
     @slot.destroy
 
-    redirect_to user_path(@user), notice: 'Le créneaux a bien été détruit.'
+    redirect_to :back, notice: 'Le créneaux a bien été détruit.'
   end
 
   private
 
   def slots_params
-    params.require(:slot).permit(:day, :status, :user_id, :booking_id)
+    params.permit(:start_date, :end_date, :status, :user_id,)
   end
 
   def set_slot

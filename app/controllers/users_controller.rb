@@ -105,7 +105,7 @@ class UsersController < ApplicationController
    end
     p @markers
 
-    @slot_ranges = @user.slot_ranges
+
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @bookings = current_user.bookings
