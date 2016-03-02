@@ -7,32 +7,19 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @start_date = params[:start_date]
-    @end_date = params[:end_date]
-
     @booking = Booking.new(booking_params)
-    authorize @booking
-
-    @booking.user = current_user
+    @user = params[:user_id]
+    @start_date = params[:start_date].to_i
+    @end_date = params[:end_date].to_i
+    @slot_id = params[:slot_id].to_i
 
     # Permet de marquer les slots correspondants aux booking avec l'id booking en question :
     @booking.save
 
-    @user.slots.each do |slot|
-      if slot.day >= Date.parse(@start_date) && slot.day <= Date.parse(@end_date)
-        if slot.booking_id.nil?
-          slot.booking_id = @booking.id
-          slot.save
-          flash[:notice] = "Votre demande a été envoyée"
-          redirect_to calendar_path
-        else
-          flash[:alert] = "Une demande a déjà été envoyé par un autre utilisateur. Merci de revenir ultérieurement."
-          redirect_to user_path(@user, start_date: @start_date, end_date: @end_date)
-          break
-        end
-      end
-    end
+
+    authorize @booking
+
+    redirect_to calendar_path(current_user)
 
 
     # if date_check_included?
@@ -90,7 +77,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.permit(:start_date, :end_date)
+    params.permit(:start_date, :end_date, :slot_id, :user_id)
   end
 
   def string_to_date(string)

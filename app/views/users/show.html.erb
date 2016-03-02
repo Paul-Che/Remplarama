@@ -68,30 +68,27 @@
         <div class="col-xs-12 col-md-4">
           <div class="user_availabilities grey_card">
           <h4>Choisissez un créneau de remplacement : </h4>
-            <% @slot_ranges.each do |range| %>
-                <% slot_start(range) %>
-                <% slot_end(range) %>
+            <% @user.slots.each do |slot| %>
               <ul class="list-inline list-unstyled">
-                    <% if current_user.numero_ordre.nil? %>
-                    <ul class="list-unstyled">
-                      <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), data: {toggle: "modal", target: "#contacter"}%>
-                      </li>
-                    </ul>
-                    <% else %>
-                    <ul class="list-unstyled">
-                      <li class= "single_dispo"><%= link_to "#{human_slot_range(range)}", user_bookings_path(@user, start_date: slot_start(range), end_date: slot_end(range)), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
-                      </li>
-                    </ul>
-                    <% end %>
-                  <% end %>
+                <% if current_user.numero_ordre.nil? %>
+                  <ul class="list-unstyled">
+                    <li class= "single_dispo"><%= link_to "#{slot.start_date} au #{slot.end_date}", user_bookings_path(@user, user_id: current_user.id,slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date), data: {toggle: "modal", target: "#contacter"}%>
+                    </li>
+                  </ul>
+                <% else %>
+                  <ul class="list-unstyled">
+                    <li class= "single_dispo"><%= link_to "#{slot.start_date} au #{slot.end_date}", user_bookings_path(@user, user_id: current_user.id, slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
+                    </li>
+                  </ul>
+                <% end %>
               </ul>
+            <% end %>
             </div>
             <div class="description-profil grey_card">
               <h4>Recommandations :</h4>
                 <div class="empty-comment">
                   <i class="fa fa-comment"></i>
                   <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-
                 </div>
             </div>
         </div>

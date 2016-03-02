@@ -3,8 +3,8 @@ class Booking < ActiveRecord::Base
 
   # Associations
   belongs_to :user
+  belongs_to :slot
 
-  has_many :slots
   has_many :messages, dependent: :destroy
 
   # Validations

@@ -14,22 +14,6 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   # has_many :messages, through: [:bookings, :slots], dependent: :restrict_with_exception
 
-  def slot_ranges
-    ActiveRecord::Base.connection.execute(
-      <<~HEREDOC
-        select min(day) as start_date, max(day) as end_date
-        from (
-            select
-                day,
-                day - (dense_rank() over(order by day))::int g
-            from slots
-            where user_id = #{id}
-        ) s
-        group by s.g
-        order by 1
-      HEREDOC
-    )
-  end
 
   validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
 
