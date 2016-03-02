@@ -20,6 +20,8 @@ gem 'geocoder'
 gem 'owlcarousel-rails'
 gem 'activeadmin', github: 'activeadmin'
 gem 'mailboxer'
+gem 'bootstrap-will_paginate'
+gem 'will_paginate'
 
 gem 'sass-rails'
 gem 'jquery-rails'

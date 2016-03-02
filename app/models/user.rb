@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  acts_as_messageable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -22,5 +24,9 @@ class User < ActiveRecord::Base
   validates :house_visits_tolerance, inclusion: { in: [nil,'none', 'max2', 'above2']}, on: :update
 
   #validates :numero_ursaff, format: { with: /\d{18}/, message: "Votre numéro URSSAF n'est pas le bon" }, on: :update
+
+  def mailboxer_email(object)
+    email
+  end
 
 end
