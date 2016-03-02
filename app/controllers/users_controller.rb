@@ -121,7 +121,7 @@ class UsersController < ApplicationController
        marker.picture({'url' => view_context.image_path('marker_yellow_small.png'), 'width' => 60, 'height' => 90, 'anchor' => [15, 45]})
     end
 
-    @slot_ranges = current_user.slot_ranges
+    # @slot_ranges = current_user.slot_ranges
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @booking = current_user.bookings
