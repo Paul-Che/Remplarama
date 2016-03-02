@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
 
   #validates :numero_ursaff, format: { with: /\d{18}/, message: "Votre numéro URSSAF n'est pas le bon" }, on: :update
 
+  def mailboxer_email(object)
+    email
+  end
+
 end

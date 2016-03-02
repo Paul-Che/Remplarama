@@ -30,4 +30,14 @@ class ApplicationController < ActionController::Base
     { host: ENV['HOST'] || 'localhost:3000' }
   end
 
+  # Mailboxer :
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:warning] = 'Resource not found.'
+    redirect_back_or root_path
+  end
+  # Mailboxer :
+  def redirect_back_or(path)
+    redirect_to request.referer || path
+  end
+
 end
