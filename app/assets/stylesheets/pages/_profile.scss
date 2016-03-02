@@ -7,7 +7,7 @@
 .myprofile-container {
   padding-top: 10px;
   p {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 .main_user_row {
@@ -64,7 +64,7 @@
     font-size: 18px;
   }
   p {
-    font-size: 14px;
+    font-size: 13px;
   }
   background-color: #F9F9FA;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
@@ -84,8 +84,16 @@
   margin-bottom: 60px;
 }
 .number-of-reviews {
-  font-size: 14px;
+  font-size: 13px;
   font-family: Open Sans;
-  font-weight: lighter;
   color: #888;
+}
+.review {
+  padding: 5px 0;
+  p {
+    margin-bottom: 0;
+  }
+}
+.reviewer-name {
+  font-size: 12px;
 }

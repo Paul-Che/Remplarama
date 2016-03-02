@@ -1,18 +1,20 @@
 <div class="container">
   <div class="row">
-    <%= simple_form_for [@user, @review] do |f| %>
-      <%= f.error_notification %>
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+      <%= simple_form_for [@user, @review] do |f| %>
+        <%= f.error_notification %>
 
-      <div class="form-inputs">
-        <%= f.input :content %>
-        <%= f.input :rating, collection: 1..5, prompt: "Nombre d'étoiles", selected: 4, required: true %>
-      </div>
+        <div class="form-inputs">
+          <%= f.input :content %>
+          <%= f.input :rating, collection: 1..5, prompt: "Nombre d'étoiles", selected: 4, required: true %>
+        </div>
 
-      <div class="form-actions text-center">
-        <%= f.button :submit, "Valider avis ", method: :post, :class => 'btn btn-primary', style: "width: 100%;" %>
-      </div>
+        <div class="form-actions text-center">
+          <%= f.button :submit, "Valider avis ", method: :post, :class => 'btn btn-primary', style: "width: 100%;" %>
+        </div>
 
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 

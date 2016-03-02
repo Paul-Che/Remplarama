@@ -19,6 +19,7 @@ gem 'gmaps4rails'
 gem 'geocoder'
 gem 'owlcarousel-rails'
 gem 'activeadmin', github: 'activeadmin'
+gem 'mailboxer'
 
 gem 'sass-rails'
 gem 'jquery-rails'

@@ -194,8 +194,8 @@ class UsersController < ApplicationController
                        secretary: secretary,
                        house_visits: house_visits)
     results = users.select do |user|
-      if user.reviews.size > 0
-        (user.reviews.average(:rating) <= max_rating && user.reviews.average(:rating) >= min_rating)
+      if user.reviews_i_received.size > 0
+        (user.reviews_i_received.average(:rating) <= max_rating && user.reviews_i_received.average(:rating) >= min_rating)
       else
         user if unrated == true
       end
@@ -215,8 +215,8 @@ class UsersController < ApplicationController
                        house_visits_tolerance: house_visits_tolerance).where("min_commission >= ?", min_commission - 5)
 
     results = users.select do |user|
-      if user.reviews.size > 0
-        (user.reviews.average(:rating) <= max_rating && user.reviews.average(:rating) >= min_rating)
+      if user.reviews_i_received.size > 0
+        (user.reviews_i_received.average(:rating) <= max_rating && user.reviews_i_received.average(:rating) >= min_rating)
       else
         user if unrated == true
       end

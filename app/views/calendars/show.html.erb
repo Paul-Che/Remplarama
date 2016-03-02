@@ -47,7 +47,7 @@
       </div>
       <div class="incoming_demands text-center col-sm-12 col-md-6">
         <h4>Les demandes entrantes de remplacement</h4>
-        <% if current_user.slots.each { |slot| slot.booking_id.nil? } %>
+        <% if current_user.slots.first.nil? %>
           <i class="fa fa-user-md"></i>
           <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
         <% else %>
