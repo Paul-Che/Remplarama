@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229131253) do
+ActiveRecord::Schema.define(version: 20160302102208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(version: 20160229131253) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "slot_id"
   end
 
+  add_index "bookings", ["slot_id"], name: "index_bookings_on_slot_id", using: :btree
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
@@ -77,15 +79,14 @@ ActiveRecord::Schema.define(version: 20160229131253) do
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "slots", force: :cascade do |t|
-    t.date     "day"
     t.string   "status"
     t.integer  "user_id"
-    t.integer  "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
-  add_index "slots", ["booking_id"], name: "index_slots_on_booking_id", using: :btree
   add_index "slots", ["user_id"], name: "index_slots_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -132,6 +133,5 @@ ActiveRecord::Schema.define(version: 20160229131253) do
   add_foreign_key "bookings", "users"
   add_foreign_key "messages", "bookings"
   add_foreign_key "reviews", "users"
-  add_foreign_key "slots", "bookings"
   add_foreign_key "slots", "users"
 end
