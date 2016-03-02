@@ -9,11 +9,25 @@ class BookingPolicy < ApplicationPolicy
     true
   end
 
+  def confirm?
+    user.id == record.slots.first.user_id
+  end
+
+  def reject?
+    user.id == record.slots.first.user_id
+  end
+
   def update?
-    record.user == user || user.admin?
+    user_is_owner_or_admin
   end
 
   def destroy?
+    user_is_owner_or_admin
+  end
+
+  private
+
+  def user_is_owner_or_admin
     record.user == user || user.admin?
   end
 end

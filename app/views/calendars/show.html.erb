@@ -1,11 +1,11 @@
 <% content_for :meta_title, "RemplaMatch - Mon calendrier - #{current_user.first_name} #{current_user.last_name}" %>
 
 <div id="title" class="text-center">
-  <% if current_user.has_practice == false %>
-    <h3>Mon calendrier de recherches de remplacements</h3>
-  <% else %>
-    <h3>Mon calendrier de recherches de remplaçants</h3>
-  <% end %>
+  <% if current_user.has_practice? %>
+  <h3>Mon calendrier de recherches de remplacants</h3>
+    <% else %>
+  <h3>Mon calendrier de recherches de remplacements</h3>
+  <%end%>
 </div>
 
 <div class="container">
@@ -13,7 +13,7 @@
     <div class="col-xs-12">
       <div id="demo"></div>
       <div class="call-to-action text-center">
-        <%= form_tag(user_slots_path(@user), :method => :post ) do -%>
+        <%= form_tag(user_slots_path(current_user), :method => :post ) do -%>
         <input id="startDate" name="start_date" type="hidden" value="" />
         <input id="endDate" name="end_date" type="hidden" value="" />
         <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Ajouter la plage sélectionnée'/>
@@ -27,14 +27,14 @@
   <div class="container">
     <div class="row-fluid">
       <div class="availabilities text-center col-sm-12 col-md-6">
-        <% if current_user.has_practice == false %>
-          <h4>Les dates où je recherche des remplacements</h4>
-          <% else %>
+        <% if current_user.has_practice? %>
           <h4>Les dates où je recherche des remplaçants</h4>
+        <% else %>
+          <h4>Les dates où je recherche des remplacements</h4>
         <%end%>
         <% if @slot_ranges.ntuples == 0 %>
-           <i class="fa fa-calendar-minus-o"></i>
-           <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
+          <i class="fa fa-calendar-minus-o"></i>
+          <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
         <% else %>
           <% @slot_ranges.each do |range| %>
             <ul class="list-inline list-unstyled">
@@ -47,17 +47,56 @@
       </div>
       <div class="incoming_demands text-center col-sm-12 col-md-6">
         <h4>Les demandes entrantes de remplacement</h4>
-        <% if current_user.slotes.each { |slot| slot.booking_id.nil? } %>
+        <% if current_user.bookings.nil? %>
           <i class="fa fa-user-md"></i>
-          <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
-        <% else %>
-          <%= @booking.user.first_name %>
-          <ul class="list-inline list-unstyled">
-            <li><%= human_slot_range(range) %></li>
-            <hr>
-          </ul>
+            <div class="empty_availabilities">Vous n'avez pas encore reçu de demandes <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</div>
         <% end %>
-          <!-- MY PENDING BOOKINGS + MY PAST BOOKINGS TO DO  -->
+        <!-- MY PENDING BOOKINGS + MY PAST BOOKINGS TO DO  -->
+        <% if current_user.has_practice == false %>
+          <% if current_user.bookings.nil? %>
+            <p> Vous n'avez pas encore fait de demande !</p>
+          <% else %>
+            <% current_user.bookings.each do |booking| %>
+              <%= booking.start_date %>
+              <%= booking.end_date %>
+              <% if booking.slots.first.nil? %>
+                <p> "Demande en attente" </p>
+                <br>
+              <% else %>
+                <% booking.slots.each do |slot| %>
+                  <%= slot.status %>
+                  <%= slot.user.first_name %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% if current_user.slots.first.booking_id.nil? %>
+            <p> On ne vous a pas encore fait de demande !</p>
+          <% else %>
+            <% @slotted_bookings.each do |booking| %>
+              <% if booking.user.avatar.nil? %>
+                <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+              <% else %>
+                <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
+              <% end %>
+              <%= booking.user.first_name %> veut vous remplacer du :
+              <%= booking.start_date %> au
+              <%= booking.end_date %>
+              <% booking.slots.each do |slot| %>
+                <% if slot.status == "pending" %>
+                  <%= link_to "Valider", confirm_booking_path(booking), method: :patch, class: "btn btn-primary" %>
+                  <%= link_to "Refuser", reject_booking_path(booking), method: :patch, class: "btn btn-danger" %>
+                <% else %>
+                  <div class="display-status">
+                    <%= slot.status %>
+                    <% break %>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

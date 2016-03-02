@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-
+  # skip_after_action :verify_policy_scoped, only: :index
 
   def new
     @booking = Booking.new
@@ -16,31 +16,56 @@ class BookingsController < ApplicationController
 
     @booking.user = current_user
 
-    if date_check_included?
-      @booking.save
-      flash[:notice] = "Votre demande a été envoyée"
-      redirect_to calendar_path
-    else
-      flash[:alert] = "Les dates ne correspondent pas ! Veuillez tenter à nouveau"
-      redirect_to user_path(@user, start_date: @start_date, end_date: @end_date)
+    # Permet de marquer les slots correspondants aux booking avec l'id booking en question :
+    @booking.save
+
+    @user.slots.each do |slot|
+      if slot.day >= Date.parse(@start_date) && slot.day <= Date.parse(@end_date)
+        if slot.booking_id.nil?
+          slot.booking_id = @booking.id
+          slot.save
+          flash[:notice] = "Votre demande a été envoyée"
+          redirect_to calendar_path
+        else
+          flash[:alert] = "Une demande a déjà été envoyé par un autre utilisateur. Merci de revenir ultérieurement."
+          redirect_to user_path(@user, start_date: @start_date, end_date: @end_date)
+          break
+        end
+      end
     end
+
+
+    # if date_check_included?
+    #   flash[:notice] = "Votre demande a été envoyée"
+    #   redirect_to calendar_path
+    # else
+    #   flash[:alert] = "Les dates ne correspondent pas ! Veuillez tenter à nouveau"
+    #   redirect_to user_path(@user, start_date: @start_date, end_date: @end_date)
+    # end
   end
 
+  def confirm
+    set_booking
+    authorize @booking
+    @booking.slots.each do |slot|
+      slot.status = "confirmed"
+      slot.save
+    end
+    redirect_to :back
+  end
+
+  def reject
+    set_booking
+    authorize @booking
+    @booking.slots.each do |slot|
+      slot.status = "rejected"
+      slot.save
+    end
+    redirect_to :back
+  end
 
   def update
-    authorize @booking
-    set_booking
-    if params[:commit] == "Confirm"
-      @booking.status = "confirmed"
-      raise
-      @booking.slots.each do |slot|
-        slot.booking_id = @booking.id
-      end
-    elsif params[:commit] == "Reject"
-      @booking.status = "rejected"
-    end
-    @booking.save
-    redirect_to :back
+
   end
 
   def destroy
