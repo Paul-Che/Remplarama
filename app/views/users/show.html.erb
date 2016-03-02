@@ -70,7 +70,6 @@
           <h4>Choisissez un créneau de remplacement : </h4>
             <% @user.slots.each do |slot| %>
               <ul class="list-inline list-unstyled">
-
                 <% if current_user.numero_ordre.nil? %>
                   <ul class="list-unstyled">
                     <li class= "single_dispo"><%= link_to "#{slot.start_date} au #{slot.end_date}", user_bookings_path(@user, user_id: current_user.id,slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date), data: {toggle: "modal", target: "#contacter"}%>

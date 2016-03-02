@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
+  has_many :reviews_i_received, class_name: 'Review', foreign_key: :reviewed_id
+  has_many :reviews_i_made, class_name: 'Review', foreign_key: :reviewer_id
   has_many :slots, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :reviews, dependent: :destroy

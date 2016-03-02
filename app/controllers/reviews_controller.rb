@@ -1,23 +1,40 @@
 class ReviewsController < ApplicationController
 
   def new
-    authorize @slot
+    @review = Review.new
+    @user = User.find(params[:user_id])
+    authorize @review
   end
 
   def create
-    authorize @slot
+    @review = Review.new(review_params)
+    @review.reviewed_id = params[:user_id].to_i
+
+    @rating = params[:rating]
+    @content = params[:content]
+    @review.reviewer_id = current_user.id
+
+    # @review = Review.new(review_params)
+    authorize @review
+    @review.save
+        raise
+    flash[:notice] = "Votre avis a été créé. Merci."
+    redirect_to calendar_path(@user)
   end
 
   def edit
-    authorize @slot
   end
 
   def update
-    authorize @slot
   end
 
   def destroy
-    authorize @slot
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:rating, :content, :reviewer_id, :reviewed_id)
   end
 
 end

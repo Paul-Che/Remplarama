@@ -1,7 +1,7 @@
 <% content_for :meta_title, "RemplaMatch - Profils de remplaçants" %>
 
 <div class="page-content padded">
-  <div class="container main">
+  <div class="container-fluid main">
     <div id="search-filter">
       <form action="/search_locums">
         <div class="row">
@@ -125,7 +125,7 @@
     </div>
   </div>
 
-  <div class="container container-map">
+  <div class="container-fluid container-map">
     <div class="row">
       <div class="col-xs-12 col-sm-8">
         <div class="cards">
@@ -149,8 +149,7 @@
                       <h4>Dr. <%= user.first_name %>  <%= user.last_name %></h4>
                       <% if user.reviews.size > 0 %>
                         <h4>
-                          <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews.average(:rating).to_f.round).html_safe %>
-                          <%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews.average(:rating).to_f.round)).html_safe %>
+                          <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews.average(:rating).to_f.round).html_safe %><%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews.average(:rating).to_f.round)).html_safe %>
                         </h4>
                       <% end %>
                       <h5><%= user.speciality %></h5>
@@ -196,25 +195,28 @@
               hoverPicture = {
               url: "<%= asset_path 'marker_blue_small.png' %>",
               width: 60,
-              height: 90
+              height: 90,
+              'anchor': [15, 45]
               };
               handler = Gmaps.build('Google');
               handler.buildMap({ internal: { id: 'map' } }, function(){
                 markers = handler.addMarkers(<%= raw @markers.to_json %>);
 
-
                 (<%=raw @markers.to_json %>).forEach(function(json, index){
                   json.marker = markers[index];
 
                   // json.marker.serviceObject.addListener('click', function() {
-                  //   console.log("click");
-                  //   $('.card-user').removeClass('highlighted-card');
-                  //   $('#user-' + json.id).addClass('highlighted-card');
-                  //   document.getElementById('user-' + json.id).scrollIntoView();
-                  //   var scrolledY = window.scrollY
-                  //   if(scrolledY) {
-                  //     window.scroll(0, scrolledY - '75px');
-                  //   }
+                  //   setTimeout(function() {
+                  //     console.log("click");
+                  //     $('.card-user').removeClass('highlighted-card');
+                  //     $('#user-' + json.id).addClass('highlighted-card');
+                  //     var element = document.getElementById('user-' + json.id);
+                  //     element.scrollIntoView();
+                  //     var scrolledY = window.scrollY;
+                  //     if(scrolledY) {
+                  //       window.scroll(0, scrolledY - '75px');
+                  //     };
+                  //   }, 100)
                   // });
 
                   gr = {};
@@ -231,6 +233,14 @@
                 handler.bounds.extendWith(markers);
                 handler.fitMapToBounds();
               });
+
+              function gmaps4rails_callback() {
+                function say_yo(arg) { return function(){alert('yo '+ arg + '!' );};};
+                  for (var i = 0; i <  Gmaps4Rails.markers.length; ++i) {
+                    google.maps.event.addListener(Gmaps4Rails.markers[i].google_object, 'click', say_yo(i));
+                  }
+              }
+
             });
           </script> <%# end %>
         <% end %>

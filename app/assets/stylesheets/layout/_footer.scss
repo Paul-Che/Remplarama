@@ -1,31 +1,34 @@
 // Your footer style
 .main-footer {
-    background: #F9F9FA;
-    border-top: 1px solid #EAEAEB;
-    height: 26vh;
-    padding-top: 50px;
-    padding-bottom: 60px;
-    // position: absolute;
-    width: 100%;
-    bottom: 0;
-    color : $gray;
-    font-size: 12px;
-    left:0px;
-    bottom:0px;
+  min-height: 150px;
+  background: #F9F9FA;
+  border-top: 1px solid #EAEAEB;
+  height: 26vh;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  // position: absolute;
+  width: 100%;
+  bottom: 0;
+  color : $gray;
+  font-size: 12px;
+  left:0px;
+  margin-bottom: 0;
+  ul {
+    margin-bottom: 0;
+  }
 }
 
 .social {
-    display: block;
-    background: #71deeb;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 20px;
-    line-height: 2.13em;
-    color: $gray-lighter;
-    padding-bottom: 6px
+  display: block;
+  background: #71deeb;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 20px;
+  line-height: 2.13em;
+  color: $gray-lighter;
+  padding-bottom: 6px
 }
 .primary_section{
-  margin-bottom: 60px;
-  margin-top: 30px;
+  padding: 30px;
 }
