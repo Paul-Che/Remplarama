@@ -38,7 +38,7 @@
         <% else %>
           <% current_user.slots.each do |slot| %>
             <ul class="list-inline list-unstyled">
-              <li>Du <%= slot.start_date %> au <%= slot.end_date %></li>
+              <li>Du <%= l(slot.start_date, format: "%e %B %Y") %> au <%= l(slot.end_date, format: "%e %B %Y") %></li>
               <li><%= link_to "Supprimer", user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
               <hr>
             </ul>
@@ -61,18 +61,26 @@
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
             <% current_user.bookings.each do |booking| %>
-              <%= booking.start_date %>
-              <%= booking.slot.user.first_name %>
-              <%# if booking.slot %>
-                <p> "Demande en attente" </p>
+          <div class="sent-requests">
+            <% if booking.slot.user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+            <% else %>
+              <%= image_tag booking.slot.user.avatar, class: "avatar-superextralarge " %>
+            <% end %>
+            Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %>
+            <br> Pour un remplacement <br>
+              du <%= l(booking.start_date, format: "%e %B %Y") %>
+              au <%= l(booking.end_date, format: "%e %B %Y") %> <br>
+                <div class="status"><strong>...Status...</strong></div>
                 <br>
+          </div>
               <%# else %>
                 <%# booking.slots.each do |slot| %>
                   <%#= slot.status %>
                   <%#= slot.user.first_name %>
                 <%# end %>
+              <% end %>
             <% end %>
-          <% end %>
         <% else %>
         <!-- Je suis un cabinet ! -->
           <% if current_user.slots.first.nil? %>
@@ -85,9 +93,9 @@
                 <% else %>
                   <%= image_tag booking.user.avatar, class: "avatar-superextralarge " %>
                 <% end %>
-                <%= booking.user.first_name %> veut vous remplacer du :
-                <%= booking.start_date %> au
-                <%= booking.end_date %>
+                <%= booking.user.first_name %> souhiaterait vous remplacer du :
+                <%= l(booking.start_date, format: "%e %B %Y")  %> au
+                <%= l(booking.end_date, format: "%e %B %Y")  %>
                 <%# booking.slots.each do |slot| %>
                   <%# if slot.status == "pending" %>
                     <%#= link_to "Valider", confirm_booking_path(booking), method: :patch, class: "btn btn-primary" %>
