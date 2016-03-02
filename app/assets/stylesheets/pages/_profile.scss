@@ -1,30 +1,91 @@
+.myprofile-header {
+  margin-top: 70px;
+  background-color: #F9F9FA;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  text-align: center;
+}
+.myprofile-container {
+  padding-top: 10px;
+  p {
+    font-size: 14px;
+  }
+}
 .main_user_row {
   padding-top: 20px;
 }
 .avatar-header {
+  margin-top: -5px;
+  padding: 15px;
   h5 {
     font-size: 14px;
-    color: $blue;
     font-weight: lighter;
   }
 }
+.myprofile-card {
+  padding: 10px;
+  h4 {
+    font-size: 18px;
+  }
+}
 .doc-user-profile li {
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
   padding: 5px 0;
 }
+
+.doc-user-profile li i {
+  flex: 0 0 12%;
+}
+.doc-user-profile li p {
+  flex: 0 0 88%;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+#p-comm {
+  flex: 0 0 68%;
+}
+.small-comm-tag {
+ flex: 0 0 15%;
+ text-align: center;
+ margin-left: 10px;
+ border-radius: 2px;
+ background-color: $yellow;
+ color: white;
+ padding: 0 5px;
+}
+
+
 .card-profile h4 {
   font-size: 16px;
 }
-.reviews-card {
+.myprofile-reviews {
   h4 {
-    font-size: 16px;
+    font-size: 18px;
   }
-  padding: 10px;
+  p {
+    font-size: 14px;
+  }
+  background-color: #F9F9FA;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  padding: 1px 12px 10px 12px;
+  margin-top: 9px;
+  border-radius: 3px;
+  min-height: 250px;
 }
 .description-myprofile {
   background-color: rgb(240,240,240);
 }
 .icon-profile {
-  padding-left: 5px;
-  padding-right: 30px;
+  padding-right: 15px;
+}
+#myprofile-map {
+  margin-top: 15px;
+  margin-bottom: 60px;
+}
+.number-of-reviews {
+  font-size: 14px;
+  font-family: Open Sans;
+  font-weight: lighter;
+  color: #888;
 }
