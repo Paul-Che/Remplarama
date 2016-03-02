@@ -2,6 +2,7 @@ class CalendarsController < ApplicationController
 
   def show
     @user = current_user
+    @review = Review.new
     authorize @user
 
     @slotted_bookings = Booking.joins(:slots).where(slots: { user_id: current_user.id } ).distinct
