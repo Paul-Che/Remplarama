@@ -41,7 +41,7 @@ class SlotsController < ApplicationController
     set_slot
     @slot.destroy
 
-    redirect_to :back, notice: 'Le créneaux a bien été détruit.'
+    redirect_to :back, notice: 'Le créneau a bien été détruit.'
   end
 
   private
