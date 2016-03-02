@@ -1,115 +1,152 @@
 <% content_for :meta_title, "RemplaMatch - Mon profil - #{current_user.first_name} #{current_user.last_name}" %>
 
-<div class="container user_container">
-  <div class="row" class="main_user_row">
-    <div class="profile">
-      <div class="card-profile">
-        <div class="col-xs-12 col-md-8">
-          <div class="col-xs-6">
-              <div class="avatar-header text-center">
-                <% if current_user.avatar.nil? %>
-                  <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
-                <% else %>
-                  <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
-                <% end %>
-                <h4><strong><%= "Dr. " if current_user.speciality != "Kinésithérapie" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
-                <h5>
-                  <i class="fa fa-fw fa-search"></i>
-                  <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
-                </h5>
-              </div>
-              <hr>
-            <ul class = "list-unstyled doc-user-profile">
-              <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><%= current_user.speciality %></li>
-              <li><i class="fa fa-fw fa-graduation-cap icon-profile"></i><%= current_user.education %></li>
-              <li><i class="fa fa-fw fa-hashtag icon-profile"></i>Numéro de l'Ordre : <%= current_user.numero_ordre %></li>
-              <% if !current_user.has_practice %>
-                <li><i class="fa fa-fw fa-file-text-o icon-profile"></i>Numéro URSSAF : <%= current_user.numero_ursaff %></li>
+<div class="myprofile-header">
+  <div class="avatar-header text-center">
+    <% if current_user.avatar.nil? %>
+      <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+    <% else %>
+      <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
+    <% end %>
+    <h4><strong><%= "Dr. " if current_user.speciality != "Kinésithérapie" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
+    <h5>
+      <i class="fa fa-fw fa-search"></i>
+      <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
+    </h5>
+  </div>
+  <hr>
+</div>
+
+<div class="container myprofile-container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div class="col-xs-6">
+        <div class="myprofile-card">
+          <h4>Mes informations clés</h4>
+          <hr>
+          <ul class="list-unstyled doc-user-profile">
+            <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><p><%= current_user.speciality %></p></li>
+            <li><i class="fa fa-fw fa-graduation-cap icon-profile"></i><p><%= current_user.education %></p></li>
+            <li><i class="fa fa-fw fa-hashtag icon-profile"></i><p>Numéro de l'Ordre : <%= current_user.numero_ordre %></p></li>
+            <% if !current_user.has_practice %>
+              <li><i class="fa fa-fw fa-file-text-o icon-profile"></i><p>Numéro URSSAF : <%= current_user.numero_ursaff %></p></li>
+            <% end %>
+          </ul>
+          <br><br>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="myprofile-card">
+          <h4>
+          <% if current_user.has_practice %>
+            Mon activité & mon cabinet
+          <% else %>
+            Mes filtres de recherche
+          <% end %>
+          </h4>
+          <hr>
+          <ul class = "list-unstyled doc-user-profile">
+            <% if current_user.has_practice %>
+              <li><i class="fa fa-fw fa-user-md icon-profile"></i><p>Conventionnement secteur <%= current_user.convention %></p></li>
+              <li><i class="fa fa-fw fa-suitcase icon-profile"></i><p><%= human_house_visits(current_user.house_visits) %></p></li>
+              <li><i class="fa fa-fw fa-phone icon-profile"></i><p><%= human_secretary(current_user.secretary) %></p></li>
+              <li><i class="fa fa-fw fa-home icon-profile"></i><p><%= human_housing(current_user.housing) %></p></li>
+              <li>
+                <i class="fa fa-fw fa-money icon-profile"></i>
+                <p id="p-comm">Rétrocommission moyenne :</p>
+                <div class="small-comm-tag"><%= current_user.commission %>%</div>
+              </li>
+            <% else %>
+              <li>
+                <i class="fa fa-fw fa-suitcase icon-profile"></i>
+                <p><%= human_house_visits_tolerance(current_user.house_visits_tolerance)%></p>
+              </li>
+              <li>
+                <i class="fa fa-fw fa-phone icon-profile"></i>
+                <p><%= human_nosecretary_tolerance(current_user.nosecretary_tolerance)%></p>
+              </li>
+              <li>
+                <i class="fa fa-fw fa-home icon-profile"></i>
+                <p><%= human_nohousing_tolerance(current_user.nohousing_tolerance)%></p>
+              </li>
+              <li>
+                <i class="fa fa-fw fa-money icon-profile"></i>
+                <p id="p-comm">Rétrocommission minimale souhaitée :</p>
+                <div class="small-comm-tag"><%= current_user.min_commission %>%</div>
+              </li>
+            <% end %>
+          </ul>
+          <br><br>
+        </div>
+      </div>
+
+      <div class="col-xs-12">
+        <h4>Ma présentation :</h4>
+        <% if current_user.presentation.nil? %>
+        <p> Editez votre profil pour rédiger votre présentation et obtenir jusqu'à 80% de résultats en plus.</p>
+        <% else %>
+        <p><%= current_user.presentation %></p>
+        <%end%>
+        <hr>
+
+        <h4>Mon cursus et mes publications :</h4>
+        <% if current_user.publications.nil? %>
+        <p> Editez votre profil pour renseigner vos publications.</p>
+        <% else %>
+        <p><%= current_user.publications %></p>
+        <% end %>
+        <hr>
+      </div>
+
+      <div class="col-xs-12">
+        <h4><%= current_user.has_practice ? "Localisation de mon cabinet" : "Ma localisation" %></h4>
+        <p><%= current_user.address %></p>
+        <div id="myprofile-map" style="; height: 200px;" class="hidden-xs col-md-12">
+          <script type="text/javascript">
+            <% content_for(:after_js) do %>
+              <%= javascript_tag do %>
+                $(document).ready(function() {
+                  handler = Gmaps.build('Google');
+                  handler.buildMap({ internal: { id: 'myprofile-map' } }, function(){
+                    markers = handler.addMarkers(<%= raw @markers.to_json %>);
+                    handler.bounds.extendWith(markers);
+                    handler.fitMapToBounds();
+                    handler.getMap().setZoom(15);
+                  });
+                });
               <% end %>
-              <li><i class="fa fa-fw fa-home icon-profile"></i><%= current_user.address %></li>
-            </ul>
-            <br><br>
-          </div>
-          <div class="col-xs-6">
-
-            <br><br>
-          </div>
-          <div class="description-myprofile">
-            <div class="container">
-              <div class="row">
-                <div class="col-xs-12">
-                  <h4>Ma présentation :</h4>
-                  <% if current_user.presentation.nil? %>
-                  <i><p> Editez votre profil pour rédiger votre présentation et obtenir jusqu'à 80% de résultats en plus.</p></i>
-                  <% else %>
-                  <h6><%= current_user.presentation %></h6>
-                  <%end%>
-                  <hr>
-                </div>
-                <div class="col-xs-12">
-                  <h4>Mon cursus et mes publications :</h4>
-                  <% if current_user.publications.nil? %>
-                  <i><p> Editez votre profil pour renseigner vos publications.</p></i>
-                  <% else %>
-                  <h6><%= current_user.publications %></h6>
-                  <% end %>
-                  <hr>
-                </div>
-              </div>
-            </div>
-          </div>
+            <% end %>
+          </script>
         </div>
+      </div>
+
+    </div>
+    <div class="hidden-sm col-md-4">
+      <div class="myprofile-reviews">
+        <h4>Mes avis reçus</h4>
+        <hr>
+        <% if current_user.reviews.size > 0 %>
+          <h4>
+            <%= ("<i class='fa fa-star fa-yellow'></i>" * current_user.reviews.average(:rating).to_f.round).html_safe %><%= ("<i class='fa fa-star fa-gray'></i>" * (5 - current_user.reviews.average(:rating).to_f.round)).html_safe %>
+            <span class="number-of-reviews"> (<%= current_user.reviews.size%> avis reçus)</span>
+          </h4>
+        <% else %>
+        <div class="empty-comment">
+          <p>Vous n'avez pas encore reçu d'avis.</p>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>
-</div>
 
 
-          <div class="location">
-            <div class="card-acces col-xs-12 col-md-12">
-              <h4><%= current_user.has_practice ? "Localisation de mon cabinet" : "Ma localisation" %></h4>
-              <p><%= current_user.address %></p>
-            </div>
-            <div id="map-user" style="; height: 200px;" class="hidden-xs col-md-12">
-              <script type="text/javascript">
-                <% content_for(:after_js) do %>
-                  <%= javascript_tag do %>
-                    $(document).ready(function() {
-                      handler = Gmaps.build('Google');
-                      handler.buildMap({ internal: { id: 'map-user' } }, function(){
-                        markers = handler.addMarkers(<%= raw @markers.to_json %>);
-                        handler.bounds.extendWith(markers);
-                        handler.fitMapToBounds();
-                        handler.getMap().setZoom(15);
-                      });
-                    });
-                  <% end %>
-                <% end %>
-            </script>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div id="small_calendar" class="text-center">
-        <div class="col-xs-12 col-md-4">
-            <div class="reviews-card grey_card">
-              <h4>Mes recommandations reçues</h4>
-                <div class="empty-comment">
-                  <i class="fa fa-comment"></i>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
-                  <p>Il n'y a pas encore de recommandation pour cet utilisateur</p>
 
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
+
+
+
+  <div class="row">
+
   </div>
+
 </div>
+
