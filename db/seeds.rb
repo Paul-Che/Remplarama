@@ -103,7 +103,7 @@ User.create!(email: "jacques.wagon@gmail.com",
 
 
 User.all.each do |user|
-  user.reviews.create!(content: "Super sympa !", rating: 4)
+  user.reviews_i_received.create!(content: "Super sympa !", rating: 4, reviewer_id: 102)
 end
 
 User.all.each do |user|

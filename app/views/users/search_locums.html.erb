@@ -147,9 +147,9 @@
                     </div>
                     <div class="card-content-left">
                       <h4>Dr. <%= user.first_name %>  <%= user.last_name %></h4>
-                      <% if user.reviews.size > 0 %>
+                      <% if user.reviews_i_received.size > 0 %>
                         <h4>
-                          <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews.average(:rating).to_f.round).html_safe %><%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews.average(:rating).to_f.round)).html_safe %>
+                          <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews_i_received.average(:rating).to_f.round).html_safe %><%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews_i_received.average(:rating).to_f.round)).html_safe %>
                         </h4>
                       <% end %>
                       <h5><%= user.speciality %></h5>
