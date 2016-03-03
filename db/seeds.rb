@@ -210,6 +210,9 @@ User.all.each do |user|
   user.slots.create!(start_date: ("Mon, 14 Mar 2016"), end_date: ("Fri, 18 Mar 2016"), status: "pending")
 end
 
+User.find(37).slots.create!(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), status: "confirmed")
+User.find(44).create(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), user_id: 37, slot_id: User.find(37).slots.last.id, accepted: true)
+
 
 
 
