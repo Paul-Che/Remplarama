@@ -149,20 +149,22 @@
           <%else%>
               <% @user.slots.each do |slot| %>
                 <ul class="list-inline list-unstyled text-center">
-                  <% if current_user.numero_ordre.nil? %>
-                    <ul class="list-unstyled">
+                  <% if slot.status == "pending" && slot.end_date < Date.today %>
+                    <% if current_user.numero_ordre.nil? %>
+                      <ul class="list-unstyled">
 
-                      <li class= "single_dispo"><i class="fa fa-fw fa-calendar-plus-o"></i><%= link_to " #{l(slot.start_date, format: "%e %B %Y")} au #{l(slot.end_date, format: "%e %B %Y")}", user_bookings_path(@user, booking: { user_id: current_user.id,slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date }), data: {toggle: "modal", target: "#contacter"}%>
+                        <li class= "single_dispo"><i class="fa fa-fw fa-calendar-plus-o"></i><%= link_to " #{l(slot.start_date, format: "%e %B %Y")} au #{l(slot.end_date, format: "%e %B %Y")}", user_bookings_path(@user, booking: { user_id: current_user.id,slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date }), data: {toggle: "modal", target: "#contacter"}%>
 
-                      </li>
-                    </ul>
-                  <% else %>
-                    <ul class="list-unstyled">
+                        </li>
+                      </ul>
+                    <% else %>
+                      <ul class="list-unstyled">
 
-                      <li class= "single_dispo"><i class="fa fa-fw fa-calendar-plus-o"></i><%= link_to " #{l(slot.start_date, format: "%e %B %Y")} au #{l(slot.end_date, format: "%e %B %Y")}", user_bookings_path(@user, booking: { user_id: current_user.id, slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date }), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
+                        <li class= "single_dispo"><i class="fa fa-fw fa-calendar-plus-o"></i><%= link_to " #{l(slot.start_date, format: "%e %B %Y")} au #{l(slot.end_date, format: "%e %B %Y")}", user_bookings_path(@user, booking: { user_id: current_user.id, slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date }), method: :post, data: { confirm: "Etes-vous sûr(e) ?" }, class: "" %>
 
-                      </li>
-                    </ul>
+                        </li>
+                      </ul>
+                    <% end %>
                   <% end %>
                 </ul>
               <% end %>
