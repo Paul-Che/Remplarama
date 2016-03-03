@@ -49,7 +49,11 @@
       </div>
 
       <div class="incoming_demands text-center col-sm-12 col-md-4">
-        <h4>Les demandes reçues de remplacements</h4>
+        <% if current_user.has_practice %>
+          <h4>Ils souhaitent vous remplacer :</h4>
+        <% else %>
+          <h4>Ils souhaitent que vous les remplaciez :</h4>
+        <% end %>
         <!-- Je suis un cabinet ! -->
         <% if current_user.slots.first.nil? %>
           <h5> Vous n'avez pas encore reçu de demande <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</h5>
@@ -64,7 +68,6 @@
                 <%= image_tag booking.user.avatar, class: "avatar-superextralarge " %>
               <% end %>
               Dr <%= booking.user.first_name %> <%= booking.user.last_name %> <br>
-              souhaiterait vous remplacer <br>
               Du<%= l(booking.start_date, format: "%e %B %Y")  %>
               Au <%= l(booking.end_date, format: "%e %B %Y")  %> <br>
             </div>
@@ -74,7 +77,11 @@
       </div>
 
       <div class = "outcoming_demands text-center col-sm-12 col-md-4">
-        <h4>Les demandes envoyées de remplacements</h4>
+        <% if current_user.has_practice %>
+          <h4>Vous souhaitez qu'ils vous remplacent :</h4>
+        <% else %>
+          <h4>Vous souhaitez les remplacer :</h4>
+        <% end %>
           <% if current_user.bookings.nil? %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
@@ -85,8 +92,7 @@
             <% else %>
               <%= image_tag booking.slot.user.avatar, class: "avatar-superextralarge " %>
             <% end %>
-            Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %>
-            <br> Pour un remplacement <br>
+            Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %><br>
               du <%= l(booking.start_date, format: "%e %B %Y") %>
               au <%= l(booking.end_date, format: "%e %B %Y") %> <br>
               <%= booking.slot.status %>
