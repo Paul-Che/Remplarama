@@ -136,15 +136,17 @@
 
     </div>
     <div class="col-xs-12 col-sm-4">
-      <div class="user_availabilities grey_card">
-      <h4>Choisissez un créneau de remplacement : </h4>
-      <% if @user.slots.nil? %>
-        ppp
+      <div class="user_availabilities myprofile-reviews">
+      <h4>Choisissez un créneau de remplacement</h4>
+      <hr>
+      <% if @user.slots.first.nil? %>
+        <div class="empty-comment">
+          <p>Ce docteur n'a pas encore défini de créneau.</p>
+        </div>
       <%else%>
-
           <% @user.slots.each do |slot| %>
             <ul class="list-inline list-unstyled">
-              <% if @user.numero_ordre.nil? %>
+              <% if current_user.numero_ordre.nil? %>
                 <ul class="list-unstyled">
                   <li class= "single_dispo"><%= link_to "#{l(slot.start_date, format: "%e %B %Y")} au #{l(slot.end_date, format: "%e %B %Y")}", user_bookings_path(@user, user_id: @user.id,slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date), data: {toggle: "modal", target: "#contacter"}%>
                   </li>
@@ -162,7 +164,7 @@
     </div>
     <div class="hidden-xs col-sm-4">
       <div class="myprofile-reviews">
-        <h4>Mes avis reçus</h4>
+        <h4>Avis reçus</h4>
         <hr>
         <% if @user.reviews_i_received.size > 0 %>
           <% @user.reviews_i_received.order(created_at: :desc).each do |review| %>
@@ -181,7 +183,7 @@
           <% end %>
         <% else %>
         <div class="empty-comment">
-          <p>Vous n'avez pas encore reçu d'avis.</p>
+          <p>Ce docteur n'a pas encore reçu d'avis.</p>
         </div>
         <% end %>
       </div>
@@ -226,7 +228,7 @@
                 <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
               </div>
             <% end %>
-            <%= link_to "Finir de compléter son profil", user_path(@user) %>
+            <%= link_to "Finir de compléter son profil", calendar_path(current_user) %>
         </div>
       </div>
     </div>
