@@ -68,8 +68,27 @@
                 <%= image_tag booking.user.avatar, class: "avatar-superextralarge " %>
               <% end %>
               Dr <%= booking.user.first_name %> <%= booking.user.last_name %> <br>
-              Du<%= l(booking.start_date, format: "%e %B %Y")  %>
-              Au <%= l(booking.end_date, format: "%e %B %Y")  %> <br>
+              <%= l(booking.start_date, format: "%e %B %Y")  %>
+              au <%= l(booking.end_date, format: "%e %B %Y")  %>
+              <br>
+              <%= link_to "Contacter", user_path(booking.user) %>
+              <br><br>
+              <% if booking.accepted.nil? %>
+                <%= simple_form_for(booking) do |f| %>
+                  <%= f.input :accepted, as: :hidden, input_html: { value: 'true' } %>
+                  <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary' %>
+                <% end %>
+                <%= simple_form_for(booking) do |f| %>
+                  <%= f.input :accepted, as: :hidden, input_html: { value: 'false' } %>
+                  <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger' %>
+                <% end %>
+              <% elsif booking.accepted == false %>
+                <strong>Remplacement refusé</strong>
+              <% else %>
+                <strong>Remplacement accepté !</strong>
+              <% end %>
+
+
             </div>
             <% end %>
           <% end %>
@@ -93,10 +112,17 @@
               <%= image_tag booking.slot.user.avatar, class: "avatar-superextralarge " %>
             <% end %>
             Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %><br>
-              du <%= l(booking.start_date, format: "%e %B %Y") %>
-              au <%= l(booking.end_date, format: "%e %B %Y") %> <br>
-              <%= booking.slot.status %>
-                <div class="status"><strong>...Status...</strong></div>
+              <%= l(booking.start_date, format: "%e %B %Y") %>
+              au <%= l(booking.end_date, format: "%e %B %Y") %> <br><br>
+              <div class="status">
+                <% if booking.accepted.nil? %>
+                  <em>Demande en attente</em>
+                <% elsif booking.accepted == false %>
+                  <strong>Remplacement refusé</strong>
+                <% else %>
+                  <strong>Remplacement accepté !</strong>
+                <% end %>
+              </div>
                 <br>
           </div>
             <% end %>

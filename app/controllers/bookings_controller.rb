@@ -31,28 +31,30 @@ class BookingsController < ApplicationController
     # end
   end
 
-  def confirm
-    set_booking
-    authorize @booking
-    @booking.slots.each do |slot|
-      slot.status = "confirmed"
-      slot.save
-    end
-    redirect_to :back
-  end
+  # def confirm
+  #   set_booking
+  #   authorize @booking
+  #   @booking.slots.each do |slot|
+  #     slot.status = "confirmed"
+  #     slot.save
+  #   end
+  #   redirect_to :back
+  # end
 
   def reject
     set_booking
     authorize @booking
-    @booking.slots.each do |slot|
-      slot.status = "rejected"
-      slot.save
-    end
-    redirect_to :back
+    @booking.accepted = false
+    @booking.save
+    redirect_to calendar_path
   end
 
   def update
-
+    set_booking
+    authorize @booking
+    @booking.update(booking_params)
+    @booking.slot.update(status: "confirmed")
+    redirect_to calendar_path
   end
 
   def destroy
@@ -77,7 +79,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.permit(:start_date, :end_date, :slot_id, :user_id)
+    params.require(:booking).permit(:start_date, :end_date, :slot_id, :user_id, :accepted)
   end
 
   def string_to_date(string)
@@ -85,4 +87,17 @@ class BookingsController < ApplicationController
   rescue ArgumentError, TypeError
     # we return nil
   end
+
+  def to_b(string)
+    if string == "true" || string == true
+      true
+    elsif string == "false" || string == false
+      false
+    elsif string == nil
+      nil
+    else
+      string
+    end
+  end
+
 end
