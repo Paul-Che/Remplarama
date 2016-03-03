@@ -1,81 +1,43 @@
 <div class="container">
   <div class="row">
-    <div class="title-message">
-      <h2>Mes messages</h2>
+    <div class="title-new-message">
+      <h2>Mon message</h2>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
-      <div class="cards-messages">
-        <ul class="list-unstyled">
-          <%# @bookings.each do |booking| %>
-            <%# if !booking.slot.nil? %>
-              <li>
-                <div class="card-message text-center">
-                  <div class="card-message-item">
-                    <%# if booking.slot.user.avatar.nil? %>
-                      <%= image_tag "placeholder_pic.png", class: "avatar" %>
-                    <%# else %>
-                      <%#= image_tag booking.slot.user.avatar, class: "avatar" %>
-                    <%# end %>
-                  </div>
-                  <div class="card-message-item">
-                    <h5><%#= booking.slot.user.first_name %></h5>
-                  </div>
-                  <div class="card-message-item">
-                    <h5><%#= booking.slot.user.last_name %></h5>
-                  </div>
-                </div>
-              </li>
-            <%# end %>
-          <%# end %>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-8 col-md-offset-1">
-      <div class="messages-displays">
-        <ul class="list-unstyled">
-          <li>
-            <div class="message-display">
-            <!--  Mettre les messages reçus ici dude -->
-            </div>
-          </li>
-          <li>
-            <div class="enter-message">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="enter-message">
+        <div class="enter-message-content">
+          <div class="enter-message-content-support">
+            <% page_header "Start Conversation" %>
 
-              <div class="enter-message-content">
-                <div class="enter-message-content-support">
-                  <% page_header "Start Conversation" %>
+            <%= form_tag messages_path, method: :post do %>
 
-                  <%= form_tag messages_path, method: :post do %>
-
-                    <div class="form-group">
-                      <%= label_tag 'message[subject]', 'Subject' %>
-                      <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
-                    </div>
-
-                    <div class="form-group">
-                      <%#= label_tag 'message[body]', 'Message' %>
-                      <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', placeholder: "Ecrivez votre message à ...", required: true %>
-                    </div>
-
-                    <div class="form-group">
-                      <%= label_tag 'recipients', 'Choose recipients' %>
-                      <%= select_tag 'recipients', recipients_options, multiple: true, class: 'form-control' %>
-                    </div>
-                </div>
+              <div class="form-group">
+                <%= label_tag '', 'Je souhaite envoyer un message à :', id: 'label-new-message' %>
+                <%= select_tag 'recipients', recipients_options, multiple: true, class: 'form-control' %>
               </div>
 
-              <div class="enter-message-button-section">
-                <div class="enter-message-button">
-                    <%= submit_tag 'Send', class: 'btn btn-primary' %>
-                  <% end %>
-                </div>
+              <div class="form-group">
+                <%#= label_tag 'message[subject]', 'Subject' %>
+                <%#= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
               </div>
 
-            </div>
-          </li>
-        </ul>
+              <div class="form-group">
+                <%#= label_tag 'message[body]', 'Message :' %>
+                <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', placeholder: "Ecrivez votre message ", required: true %>
+              </div>
+
+          </div>
+        </div>
+
+        <div class="enter-message-button-section">
+          <div class="enter-message-button">
+              <%= submit_tag 'Send', class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

@@ -17,9 +17,14 @@ class MessagesController < ApplicationController
 
   def create
     recipients = User.where(id: params['recipients'])
-    conversation = current_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
-    flash[:success] = "Message has been sent!"
-    redirect_to conversation_path(conversation)
+    conversation = current_user.send_message(recipients, params[:message][:body], SecureRandom.hex).conversation
+    if conversation
+      flash[:notice] = "Message has been sent!"
+    else
+      raise ""
+      flash[:alert] = "Could not send your message"
+    end
+    redirect_to :back
   end
 
   private
