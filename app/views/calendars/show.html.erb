@@ -76,19 +76,47 @@
               <% if booking.accepted.nil? %>
                 <%= simple_form_for(booking) do |f| %>
                   <%= f.input :accepted, as: :hidden, input_html: { value: 'true' } %>
-                  <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary' %>
-                <% end %>
-                <%= simple_form_for(booking) do |f| %>
+                  <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm' %>
+                <% end %><%= simple_form_for(booking) do |f| %>
                   <%= f.input :accepted, as: :hidden, input_html: { value: 'false' } %>
-                  <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger' %>
+                  <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm' %>
                 <% end %>
               <% elsif booking.accepted == false %>
                 <strong>Remplacement refusé</strong>
               <% else %>
                 <strong>Remplacement accepté !</strong>
               <% end %>
+              <% if booking.accepted && booking.end_date >= Date.today %>
+                <br><br>
+                <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
+                  Donnez votre avis
+                </button>
 
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
+                      </div>
+                      <div class="modal-body">
+                        <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
+                          <%= f.error_notification %>
 
+                          <%= f.input :rating %>
+                          <%= f.input :content %>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
             </div>
             <% end %>
           <% end %>
@@ -124,7 +152,36 @@
                 <% end %>
               </div>
               <br>
-              <%= render 'shared/new_reviews_modal' %>
+              <% if booking.accepted && booking.end_date >= Date.today %>
+                <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
+                  Donnez votre avis
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
+                      </div>
+                      <div class="modal-body">
+                        <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
+                          <%= f.error_notification %>
+
+                          <%= f.input :rating %>
+                          <%= f.input :content %>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
           </div>
             <% end %>
           <% end %>
