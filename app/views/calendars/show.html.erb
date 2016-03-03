@@ -88,6 +88,7 @@
             <br> Pour un remplacement <br>
               du <%= l(booking.start_date, format: "%e %B %Y") %>
               au <%= l(booking.end_date, format: "%e %B %Y") %> <br>
+              <%= booking.slot.status %>
                 <div class="status"><strong>...Status...</strong></div>
                 <br>
           </div>
