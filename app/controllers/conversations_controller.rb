@@ -8,19 +8,31 @@ class ConversationsController < ApplicationController
 
    def show
     @box = params[:box]
+
     if @box == "sentbox"
       @conversations = @mailbox.sentbox.paginate(page: params[:page], per_page: 10)
     else
       @conversations = @mailbox.inbox.paginate(page: params[:page], per_page: 10)
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
    end
 
   def index
-    box = params[:box]
-    if box == "sentbox"
+    @box = params[:box]
+
+    if @box == "sentbox"
       @conversations = @mailbox.sentbox.paginate(page: params[:page], per_page: 10)
     else
       @conversations = @mailbox.inbox.paginate(page: params[:page], per_page: 10)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
