@@ -39,7 +39,7 @@
 .range-bar {width: 210px; height: 100%; top: 0px; left: 0; position: absolute;  z-index: 1; padding: 0; margin: 0; background-image: none; z-index: 1 ; background-color: #888; }
 .range-bar.resizable {height: 100%;position: absolute;}
 .range-bar.range-bar-content {width: 100%; height: 100%; display: block;float: left;}
-.range-bar .ui-resizable-handle.ui-resizable-e{width: 6px;height: 100%;background-position: 25px 53%;background-repeat: no-repeat;right: 0px;padding: 20px;opacity: 0.5;}
+.range-bar .ui-resizable-handle.ui-resizable-e{width: 6px;height: 100%;background-position: 25px 13%;background-repeat: no-repeat;right: 0px;padding: 20px;opacity: 0.9;}
 .range-calendar .ui-draggable {cursor: move;cursor: -moz-grab;cursor: -webkit-grab; }
 .range-calendar .ui-draggable-dragging {cursor: -moz-grabbing;cursor: -webkit-grabbing;}
 
