@@ -71,7 +71,7 @@ hr {
 // Messages
 
 .title-message {
-  padding: 0px 25px;
+  padding: 0px 0px;
 }
 
 .cards-messages {
@@ -81,6 +81,7 @@ hr {
   padding: 5px;
   margin: 10px;
   border-radius: 6px;
+  overflow-y: scroll;
 }
 
 .card-message {
@@ -105,32 +106,31 @@ hr {
   border: 1px solid #999999;
   font-weight: lighter;
   border-radius: 6px;
-  height: 800px;
+  min-height: 400px;
   padding: 5px;
   margin: 10px;
 }
 
 .message-display {
-  border: 1px solid #999999;
   font-weight: lighter;
-  border-radius: 6px;
-  height: 300px;
+  min-height: 200px;
   margin: 5px 0px;
+  padding: 5px;
 }
 .enter-message {
   border: 1px solid #999999;
   font-weight: lighter;
   border-radius: 6px;
-  height: 400px;
+  min-height: 200px;
   margin: 5px 0px;
   display: flex;
   &-content {
     flex: 0 0 80%;
     &-support {
         color: #FFFFFF;
-      border: 1px solid #999999;
-      font-weight: lighter;
-      border-radius: 6px;
+      // border: 1px solid #999999;
+      // font-weight: lighter;
+      // border-radius: 6px;
       // height: 80px;
       margin: 7px;
     }
@@ -140,7 +140,7 @@ hr {
     flex: 0 0 20%;
   }
   &-button {
-    margin-top: 35px;
+    margin-top: 200px;
   }
 }
 .btn-medium {

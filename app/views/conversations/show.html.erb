@@ -1,28 +1,87 @@
+<%# page_header "Your Conversations" %>
 <% page_header "Conversation" %>
 
-<p>Chatting with
-  <%= render 'conversations/participants', conversation: @conversation %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="title-message">
+        <h2>Mes messages</h2>
+      </div>
+      <p><%= link_to 'Reçus', conversations_path(box: "inbox") %></p>
+      <p><%= link_to 'Envoyés', conversations_path(box: "sentbox") %></p>
+    </div>
+    <div class="col-md-3 col-md-offset-3">
+      <div id="new-conversation-button">
+        <p><%= link_to 'Commencer une conversation', new_message_path, class: 'btn btn-lg btn-primary' %></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="cards-messages">
+        <ul class="list-unstyled">
+          <!-- Conversations index -->
+          <li>
+            <%= render partial: 'conversations/conversation', collection: @conversations %>
+            <%= will_paginate %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-8 col-md-offset-1">
+      <div class="messages-displays">
+        <ul class="list-unstyled">
+          <li>
+            <div class="message-display">
 
-<div class="panel panel-default">
-  <div class="panel-heading"><%= @conversation.subject %></div>
 
-  <div class="panel-body">
-    <div class="messages">
-      <% @conversation.receipts_for(current_user).each do |receipt| %>
-        <div class="media">
-          <% message = receipt.message %>
-          <div class="media-left">
-            <%#= gravatar_for message.sender, 45, message.sender.name %>
-          </div>
+              <p>Message envoyé à :
+                <%= render 'conversations/participants', conversation: @conversation %>
+              </p>
 
-          <div class="media-body">
-            <h6 class="media-heading"><%= message.sender.first_name %>
-              says at <%= message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></h6>
-            <%= message.body %>
-          </div>
-        </div>
-      <% end %>
+              <div class="panel panel-default">
+                <!-- <div class="panel-heading"><%= @conversation.subject %></div> -->
+                  <div class="panel-body">
+                    <div class="messages">
+                      <% @conversation.receipts_for(current_user).each do |receipt| %>
+                      <div class="media">
+                        <% message = receipt.message %>
+                        <!-- <div class="media-left">
+                          <%#= gravatar_for message.sender, 45, message.sender.name %>
+                        </div> -->
+                        <div class="media-body">
+                          <h6 class="media-heading">Le <%= message.created_at.strftime("%-d %B %Y, (%H:%M:%S)") %> :</h6>
+                          <%= message.body %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
