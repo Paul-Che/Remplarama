@@ -95,29 +95,30 @@
 
 <div class="wrapper-grey">
   <div class="container">
+  <div class="row">
     <div class="owl-carousel">
-      <div class="carousel-card text-center">
+      <div class="carousel-card text-center col-xs-6">
         <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
         <h4>Dr Michel Dupont | Paris (15e)</h4>
         <div class="description text-justify">
           <p>Je suis très heureux de ce service. Je peux désormais rapidement prendre des congés et organiser des weekends de dernière minute !</p>
         </div>
       </div>
-      <div class="carousel-card text-center">
+      <div class="carousel-card text-center col-xs-6">
         <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
         <h4>Dr Emmanuelle Devis | Paris (07e)</h4>
         <div class="description text-justify">
           <p>Encore interne à hopital, je recherche activement un cabinet dans lequel je pourrais m'installer. Grâce à RemplaMatch j'ai pu rencontrer des professionnels de santé dans mon secteur par le biais de remplacements efficaces et rapides !</p>
         </div>
       </div>
-      <div class="carousel-card text-center">
+      <div class="carousel-card text-center col-xs-6">
         <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
         <h4>Dr Pierre Petit | Paris (17e)</h4>
         <div class="description text-justify">
           <p>Super service, rapide et efficace !</p>
         </div>
       </div>
-      <div class="carousel-card text-center">
+      <div class="carousel-card text-center col-xs-6">
         <%= image_tag 'placeholder_pic.png', class: "avatar-larger" %>
         <h4>Dr Interne JB Delis | Paris (04e)</h4>
         <div class="description text-justify">
@@ -125,6 +126,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -136,8 +138,8 @@
           items : 2,
           itemsCustom : false,
           itemsDesktop : [1199,4],
-          itemsDesktopSmall : [980,3],
-          itemsTablet: [768,2],
+          itemsDesktopSmall : [980,1],
+          itemsTablet: [768,1],
           itemsTabletSmall: false,
           itemsMobile : [479,1],
           autoPlay : 3000,
