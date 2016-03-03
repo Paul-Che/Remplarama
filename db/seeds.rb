@@ -36,7 +36,7 @@ User.create!(email: "jeanne.darc@gmail.com",
             first_name: "Jeanne",
             last_name: "D'Arc",
             has_practice: true,
-            numero_ordre: "A1B2C3D4E5",
+            numero_ordre: nil,
             address: "Place de l'Odéon, Paris",
             speciality: "Médecine générale",
             avatar: nil,
@@ -104,14 +104,6 @@ User.create!(email: "jacques.wagon@gmail.com",
             house_visits: "max2",
             commission: 50)
 
-
-User.all.each do |user|
-  user.reviews_i_received.create!(content: "Super sympa !", rating: 4, reviewer_id: User.last.id)
-end
-
-User.all.each do |user|
-  user.slots.create!(start_date: ("Wed, 02 Mar 2016"), end_date: ("Wed, 03 Mar 2016"), status: "pending")
-end
 
 # Créations des users "Remplaçant"
 
@@ -206,6 +198,17 @@ User.create!(email: "ludovic.dupont@gmail.com",
             house_visits_tolerance: nil,
             min_commission: 80)
 
+# Créations des reviews pour toutes les utilisateurs
+
+User.all.each do |user|
+  user.reviews_i_received.create!(content: "Super sympa !", rating: 4, reviewer_id: User.last.id)
+end
+
+# Créations des slots pour les utilisateurs
+
+User.all.each do |user|
+  user.slots.create!(start_date: ("Wed, 02 Mar 2016"), end_date: ("Wed, 03 Mar 2016"), status: "pending")
+end
 
 
 
