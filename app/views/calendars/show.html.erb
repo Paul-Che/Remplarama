@@ -17,14 +17,89 @@
         <input id="startDate" name="start_date" type="hidden" value="" />
         <input id="endDate" name="end_date" type="hidden" value="" />
         <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Ajouter la plage sélectionnée'/>
-        <% end -%>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
 
 
+<div class="demands">
+  <div class="container">
+    <div class="row-fluid">
 
+      <div class="availabilities text-center col-sm-12 col-md-4">
+        <% if current_user.has_practice? %>
+          <h4>Les dates où je recherche des remplaçants</h4>
+        <% else %>
+          <h4>Les dates où je recherche des remplacements</h4>
+        <% end %>
+        <% if current_user.slots.nil? %>
+          <i class="fa fa-calendar-minus-o"></i>
+          <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
+        <% else %>
+          <% current_user.slots.each do |slot| %>
+            <ul class="list-inline list-unstyled">
+              <li>Du <%= l(slot.start_date, format: "%e %B %Y") %> au <%= l(slot.end_date, format: "%e %B %Y") %></li>
+              <li><%= link_to "Supprimer", user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
+              <hr>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="incoming_demands text-center col-sm-12 col-md-4">
+        <h4>Les demandes reçues de remplacements</h4>
+        <!-- Je suis un cabinet ! -->
+        <% if current_user.slots.first.nil? %>
+          <h5> Vous n'avez pas encore reçu de demande <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</h5>
+        <% else %>
+          <% current_user.slots.each do |slot| %>
+            <% slot.bookings.each do |booking| %>
+            <div class="requests">
+
+              <% if booking.user.avatar.nil? %>
+                <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+              <% else %>
+                <%= image_tag booking.user.avatar, class: "avatar-superextralarge " %>
+              <% end %>
+              Dr <%= booking.user.first_name %> <%= booking.user.last_name %> <br>
+              souhaiterait vous remplacer <br>
+              Du<%= l(booking.start_date, format: "%e %B %Y")  %>
+              Au <%= l(booking.end_date, format: "%e %B %Y")  %> <br>
+            </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class = "outcoming_demands text-center col-sm-12 col-md-4">
+        <h4>Les demandes envoyées de remplacements</h4>
+          <% if current_user.bookings.nil? %>
+            <p> Vous n'avez pas encore fait de demande !</p>
+          <% else %>
+            <% current_user.bookings.each do |booking| %>
+          <div class="requests">
+            <% if booking.slot.user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+            <% else %>
+              <%= image_tag booking.slot.user.avatar, class: "avatar-superextralarge " %>
+            <% end %>
+            Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %>
+            <br> Pour un remplacement <br>
+              du <%= l(booking.start_date, format: "%e %B %Y") %>
+              au <%= l(booking.end_date, format: "%e %B %Y") %> <br>
+              <%= booking.slot.status %>
+                <div class="status"><strong>...Status...</strong></div>
+                <br>
+          </div>
+            <% end %>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= render 'shared/new_reviews_modal' %>
 
