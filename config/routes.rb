@@ -25,9 +25,12 @@ Rails.application.routes.draw do
     resources :messages, only: [:index]
   end
 
+  resources :conversations, only: [:index, :show, :destroy]
+  resources :messages, only: [:new, :create]
+
   resource :calendar,     only: [:show]
 
-  resources :slot_ranges, only: [:destroy]
+  # resources :slot_ranges, only: [:destroy] A detruire
 
   mount Attachinary::Engine => "/attachinary"
 

@@ -76,6 +76,8 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
     bourbon (4.2.6)
       sass (~> 3.4)
       thor (~> 0.19)
@@ -278,6 +280,7 @@ GEM
     unf_ext (0.0.7.2)
     warden (1.2.6)
       rack (>= 1.0)
+    will_paginate (3.1.0)
 
 PLATFORMS
   ruby
@@ -289,6 +292,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  bootstrap-will_paginate
   cloudinary
   coffee-rails
   devise
@@ -322,6 +326,7 @@ DEPENDENCIES
   touchpunch-rails
   uglifier
   underscore-rails
+  will_paginate
 
 BUNDLED WITH
    1.11.2
