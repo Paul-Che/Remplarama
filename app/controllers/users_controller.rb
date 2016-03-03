@@ -137,10 +137,8 @@ class UsersController < ApplicationController
   def update
     set_user
     @user.update(user_params)
-
-    redirect_to user_path(@user)
-
-    authorize @user, :update?
+    authorize @user
+    redirect_to :back
   end
 
   private

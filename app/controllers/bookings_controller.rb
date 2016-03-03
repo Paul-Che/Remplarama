@@ -15,38 +15,9 @@ class BookingsController < ApplicationController
 
     # Permet de marquer les slots correspondants aux booking avec l'id booking en question :
     @booking.save
-
-
     authorize @booking
 
     redirect_to calendar_path(current_user)
-
-
-    # if date_check_included?
-    #   flash[:notice] = "Votre demande a été envoyée"
-    #   redirect_to calendar_path
-    # else
-    #   flash[:alert] = "Les dates ne correspondent pas ! Veuillez tenter à nouveau"
-    #   redirect_to user_path(@user, start_date: @start_date, end_date: @end_date)
-    # end
-  end
-
-  # def confirm
-  #   set_booking
-  #   authorize @booking
-  #   @booking.slots.each do |slot|
-  #     slot.status = "confirmed"
-  #     slot.save
-  #   end
-  #   redirect_to :back
-  # end
-
-  def reject
-    set_booking
-    authorize @booking
-    @booking.accepted = false
-    @booking.save
-    redirect_to calendar_path
   end
 
   def update
