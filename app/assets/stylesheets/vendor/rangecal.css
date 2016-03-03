@@ -9,7 +9,7 @@
 .range-calendar.triggerable {display: none ;}
 .calendar-wrapper {position: relative; left: 0;top: 0;z-index: 2; list-style: none; display: block;clear: both; overflow: hidden; padding: 10px 0;  }
 .range-calendar .calendar { z-index: 1; list-style: none;float: left;margin: 0; padding:  0 ; position: relative; width: 99999px;}
-.range-calendar .calendar .cell {float: left;width: 70px; padding:25px 20px; margin: 0px; border-right: 1px solid rgba(0,0,0,0.03); text-align: center; position: relative;color: #888 ;}
+.range-calendar .calendar .cell {float: left;width: 59px; padding:25px 18px; margin: 0px; border-right: 1px solid rgba(0,0,0,0.03); text-align: center; position: relative;color: #888 ;}
 .range-calendar .calendar .cell .day-number {display: block;clear: both; font-weight: bold;font-size: 20px;  z-index: 1; position: relative; }
 .range-calendar .calendar .cell .day {display: block;clear: both; text-transform: uppercase; width: 100%; font-weight: 100; font-size: 12px; margin-top: 0px; z-index: 1; position: relative;}
 .range-calendar .calendar .cell .month { width: 100%;  font-size: 12px;z-index: 1; text-transform: uppercase; position: absolute;opacity: 1;left: 0;top: 10px;font-weight: bold;}
