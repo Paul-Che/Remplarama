@@ -101,7 +101,7 @@
                         <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
                       </div>
                       <div class="modal-body">
-                        <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
+                        <%= simple_form_for([ booking.user, @review ]) do |f| %>
                           <%= f.error_notification %>
 
                           <%= f.input :rating %>
