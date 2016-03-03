@@ -14,12 +14,10 @@ class ReviewsController < ApplicationController
     @content = params[:content]
     @review.reviewer_id = current_user.id
 
-    # @review = Review.new(review_params)
     authorize @review
     @review.save
-        raise
-    flash[:notice] = "Votre avis a été créé. Merci."
-    redirect_to calendar_path(@user)
+    flash[:notice] = "Votre avis a bien été enregistré"
+    redirect_to calendar_path(current_user)
   end
 
   def edit
