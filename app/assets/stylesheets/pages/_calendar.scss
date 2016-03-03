@@ -59,5 +59,23 @@
   border-radius: 5px;
   padding: 10px;
   margin: 20px;
-  height: 140px;
+  min-height: 130px;
 }
+.btn-calendar {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.btn-confirm {
+  width: 80px;
+  margin: 3px;
+}
+#myModal {
+  text-align: left;
+  h4 {
+    margin-bottom: -20px;
+  }
+}
+
+
+
+
