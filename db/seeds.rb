@@ -207,7 +207,7 @@ end
 # Créations des slots pour les utilisateurs
 
 User.all.each do |user|
-  user.slots.create!(start_date: ("Wed, 02 Mar 2016"), end_date: ("Wed, 03 Mar 2016"), status: "pending")
+  user.slots.create!(start_date: ("Mon, 14 Mar 2016"), end_date: ("Fri, 18 Mar 2016"), status: "pending")
 end
 
 
