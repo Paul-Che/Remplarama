@@ -1,0 +1,6 @@
+<% conversation.participants.each do |participant| %>
+  <% unless participant == current_user %>
+    <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+    <%= participant.first_name %>
+  <% end %>
+<% end %>

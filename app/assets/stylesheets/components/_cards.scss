@@ -105,7 +105,7 @@ hr {
   border: 1px solid #999999;
   font-weight: lighter;
   border-radius: 6px;
-  height: 400px;
+  height: 800px;
   padding: 5px;
   margin: 10px;
 }
@@ -114,14 +114,14 @@ hr {
   border: 1px solid #999999;
   font-weight: lighter;
   border-radius: 6px;
-  height: 275px;
+  height: 300px;
   margin: 5px 0px;
 }
 .enter-message {
   border: 1px solid #999999;
   font-weight: lighter;
   border-radius: 6px;
-  height: 100px;
+  height: 400px;
   margin: 5px 0px;
   display: flex;
   &-content {
@@ -131,7 +131,7 @@ hr {
       border: 1px solid #999999;
       font-weight: lighter;
       border-radius: 6px;
-      height: 80px;
+      // height: 80px;
       margin: 7px;
     }
   }

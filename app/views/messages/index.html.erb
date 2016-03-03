@@ -8,22 +8,34 @@
     <div class="col-md-3">
       <div class="cards-messages">
         <ul class="list-unstyled">
-          <li>
+
+          <% @bookings.each do |booking| %>
+            <% if !booking.slot.nil? %>
+              <li>
+                <div class="card-message text-center">
+                  <div class="card-message-item">
+                    <% if booking.slot.user.avatar.nil? %>
+                      <%= image_tag "placeholder_pic.png", class: "avatar" %>
+                    <% else %>
+                      <%= image_tag booking.slot.user.avatar, class: "avatar" %>
+                    <% end %>
+                  </div>
+                  <div class="card-message-item">
+                    <h5><%= booking.slot.user.first_name %></h5>
+                  </div>
+                  <div class="card-message-item">
+                    <h5><%= booking.slot.user.last_name %></h5>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          <% end %>
+
+
+
+          <!-- <li>
             <div class="card-message text-center">
               <div class="card-message-item">
-              <% @bookings.each do |booking| %>
-                <%= booking.slots.first.user.first_name %>
-              <% end %>
-
-
-                <%# if @user_receiver.avatar.nil? %>
-                  <%# image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
-                <%# else %>
-                  <%# image_tag current_user.avatar, class: "avatar-superextralarge " %>
-                <%# end %>
-
-
-
                 <%= image_tag "placeholder_pic.png", class: "avatar" %>
               </div>
               <div class="card-message-item">
@@ -33,20 +45,11 @@
                 <h5>Date</h5>
               </div>
             </div>
-          </li>
-          <li>
-            <div class="card-message text-center">
-              <div class="card-message-item">
-                <%= image_tag "placeholder_pic.png", class: "avatar" %>
-              </div>
-              <div class="card-message-item">
-                <h5>Name</h5>
-              </div>
-              <div class="card-message-item">
-                <h5>Date</h5>
-              </div>
-            </div>
-          </li>
+          </li> -->
+
+
+
+
         </ul>
       </div>
     </div>
@@ -62,12 +65,12 @@
             <div class="enter-message">
               <div class="enter-message-content">
                 <div class="enter-message-content-support">
-                  <%# simple_form_for(@message) do |f| %>
+                  <%# simple_form_for(reply_conversation_path(conversation)) do |f| %>
                     <%#= f.error_notification %>
+                    <%#= f.input :subject %>
+                    <%#= f.input :body %>
 
-                    <%#= f.input :content, placeholder: "Ajouter un message ..." %>
-
-                    <%#= f.button :submit %>
+                    <%#= f.button :submit, class: "btn-primary" %>
                   <%# end %>
                 </div>
               </div>
@@ -83,3 +86,22 @@
     </div>
   </div>
 </div>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to 'Synergy', root_path, class: 'navbar-brand' %>
+      </div>
+      <ul class="nav navbar-nav">
+        <% if user_signed_in? %>
+          <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+          <li><%= link_to 'Your Conversations', conversations_path %></li>
+          <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Log In', new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</body>
