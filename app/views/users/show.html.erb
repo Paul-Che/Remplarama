@@ -149,7 +149,7 @@
           <%else%>
               <% @user.slots.each do |slot| %>
                 <ul class="list-inline list-unstyled text-center">
-                  <% if slot.status == "pending" && slot.end_date < Date.today %>
+                  <% if slot.status == "pending" && slot.end_date > Date.today %>
                     <% if current_user.numero_ordre.nil? %>
                       <ul class="list-unstyled">
 
