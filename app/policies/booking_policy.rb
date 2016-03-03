@@ -14,11 +14,11 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def reject?
-    user.id == record.slots.first.user_id
+    true # A mettre à jour
   end
 
   def update?
-    user_is_owner_or_admin
+    true # A mettre à jour
   end
 
   def destroy?
