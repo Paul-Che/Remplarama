@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Booking.destroy_all
+Slot.destroy_all
+Review.destroy_all
 User.destroy_all
 
 # Créations des users "Practice"
@@ -103,12 +106,11 @@ User.create!(email: "jacques.wagon@gmail.com",
 
 
 User.all.each do |user|
-  user.reviews_i_received.create!(content: "Super sympa !", rating: 4, reviewer_id: 102)
+  user.reviews_i_received.create!(content: "Super sympa !", rating: 4, reviewer_id: User.last.id)
 end
 
 User.all.each do |user|
-  user.slots.create!(day: ("Wed, 02 Mar 2016"), status: "pending")
-  user.slots.create!(day: ("Thu, 03 Mar 2016"), status: "pending")
+  user.slots.create!(start_date: ("Wed, 02 Mar 2016"), end_date: ("Wed, 03 Mar 2016"), status: "pending")
 end
 
 # Créations des users "Remplaçant"
