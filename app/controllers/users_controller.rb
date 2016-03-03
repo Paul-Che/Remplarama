@@ -210,7 +210,7 @@ class UsersController < ApplicationController
                        has_practice: has_practice,
                        nohousing_tolerance: to_b(nohousing_tolerance),
                        nosecretary_tolerance: to_b(nosecretary_tolerance),
-                       house_visits_tolerance: house_visits_tolerance).where("min_commission >= ?", min_commission - 5)
+                       house_visits_tolerance: house_visits_tolerance).where("min_commission <= ?", min_commission + 5)
 
     results = users.select do |user|
       if user.reviews_i_received.size > 0
