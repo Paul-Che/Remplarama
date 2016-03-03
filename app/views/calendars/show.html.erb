@@ -65,7 +65,7 @@
               <% if booking.user.avatar.nil? %>
                 <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
               <% else %>
-                <%= image_tag booking.user.avatar, class: "avatar-superextralarge " %>
+                <%= image_tag booking.user.avatar, class: "avatar-large " %>
               <% end %>
               Dr <%= booking.user.first_name %> <%= booking.user.last_name %> <br>
               <%= l(booking.start_date, format: "%e %B %Y")  %>
@@ -86,7 +86,7 @@
               <% else %>
                 <strong>Remplacement accepté !</strong>
               <% end %>
-              <% if booking.accepted && booking.end_date >= Date.today %>
+              <% if booking.accepted && booking.end_date <= Date.today %>
                 <br><br>
                 <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
                   Donnez votre avis
@@ -137,7 +137,7 @@
             <% if booking.slot.user.avatar.nil? %>
               <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
             <% else %>
-              <%= image_tag booking.slot.user.avatar, class: "avatar-superextralarge " %>
+              <%= image_tag booking.slot.user.avatar, class: "avatar-large " %>
             <% end %>
             Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %><br>
               <%= l(booking.start_date, format: "%e %B %Y") %>
@@ -152,7 +152,7 @@
                 <% end %>
               </div>
               <br>
-              <% if booking.accepted && booking.end_date >= Date.today %>
+              <% if booking.accepted && booking.end_date <= Date.today %>
                 <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
                   Donnez votre avis
                 </button>
