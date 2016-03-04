@@ -14,15 +14,6 @@ class SlotsController < ApplicationController
       render :back
     end
 
-    # (@start_date..@end_date).to_a.each do |date|
-    #   @slot = current_user.slots.new
-    #   @slot.day = date
-    #   @slot.status = "pending"
-    #   # @slot.user = current_user
-    #   @slot.save
-    # end
-
-
     @slot.save
 
     redirect_to calendar_path

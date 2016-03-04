@@ -9,6 +9,5 @@
 //= require underscore
 //= require gmaps/google
 //= require owl.carousel
+//= require moment_locale_config
 //= require_tree .
-
-

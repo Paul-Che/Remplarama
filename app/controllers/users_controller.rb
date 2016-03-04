@@ -137,10 +137,8 @@ class UsersController < ApplicationController
   def update
     set_user
     @user.update(user_params)
-
-    redirect_to user_path(@user)
-
-    authorize @user, :update?
+    authorize @user
+    redirect_to :back
   end
 
   private
@@ -177,7 +175,7 @@ class UsersController < ApplicationController
     users = []
     prefiltered_users.each do |user|
       user.slots.each do |slot|
-        if slot.day >= Date.parse(@start_date) && slot.day <= Date.parse(@end_date)
+        if slot.start_date <= Date.parse(@start_date) && slot.end_date >= Date.parse(@end_date)
           users << user if !users.include?(user)
         end
       end
@@ -212,7 +210,7 @@ class UsersController < ApplicationController
                        has_practice: has_practice,
                        nohousing_tolerance: to_b(nohousing_tolerance),
                        nosecretary_tolerance: to_b(nosecretary_tolerance),
-                       house_visits_tolerance: house_visits_tolerance).where("min_commission >= ?", min_commission - 5)
+                       house_visits_tolerance: house_visits_tolerance).where("min_commission <= ?", min_commission + 5)
 
     results = users.select do |user|
       if user.reviews_i_received.size > 0

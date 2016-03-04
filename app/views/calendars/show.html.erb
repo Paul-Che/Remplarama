@@ -17,11 +17,12 @@
         <input id="startDate" name="start_date" type="hidden" value="" />
         <input id="endDate" name="end_date" type="hidden" value="" />
         <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Ajouter la plage sélectionnée'/>
-        <% end -%>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="demands">
   <div class="container">
@@ -48,7 +49,11 @@
       </div>
 
       <div class="incoming_demands text-center col-sm-12 col-md-4">
-        <h4>Les demandes reçues de remplacements</h4>
+        <% if current_user.has_practice %>
+          <h4>Ils souhaitent vous remplacer :</h4>
+        <% else %>
+          <h4>Ils souhaitent que vous les remplaciez :</h4>
+        <% end %>
         <!-- Je suis un cabinet ! -->
         <% if current_user.slots.first.nil? %>
           <h5> Vous n'avez pas encore reçu de demande <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</h5>
@@ -60,12 +65,58 @@
               <% if booking.user.avatar.nil? %>
                 <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
               <% else %>
-                <%= image_tag booking.user.avatar, class: "avatar-superextralarge " %>
+                <%= image_tag booking.user.avatar, class: "avatar-large " %>
               <% end %>
               Dr <%= booking.user.first_name %> <%= booking.user.last_name %> <br>
-              souhaiterait vous remplacer <br>
-              Du<%= l(booking.start_date, format: "%e %B %Y")  %>
-              Au <%= l(booking.end_date, format: "%e %B %Y")  %> <br>
+              <%= l(booking.start_date, format: "%e %B %Y")  %>
+              au <%= l(booking.end_date, format: "%e %B %Y")  %>
+              <br>
+              <%= link_to "Contacter", user_path(booking.user) %>
+              <br><br>
+              <% if booking.accepted.nil? %>
+                <%= simple_form_for(booking) do |f| %>
+                  <%= f.input :accepted, as: :hidden, input_html: { value: 'true' } %>
+                  <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm' %>
+                <% end %><%= simple_form_for(booking) do |f| %>
+                  <%= f.input :accepted, as: :hidden, input_html: { value: 'false' } %>
+                  <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm' %>
+                <% end %>
+              <% elsif booking.accepted == false %>
+                <strong>Remplacement refusé</strong>
+              <% else %>
+                <strong>Remplacement accepté !</strong>
+              <% end %>
+              <% if booking.accepted && booking.end_date <= Date.today %>
+                <br><br>
+                <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
+                  Donnez votre avis
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
+                      </div>
+                      <div class="modal-body">
+                        <%= simple_form_for([ booking.user, @review ]) do |f| %>
+                          <%= f.error_notification %>
+
+                          <%= f.input :rating %>
+                          <%= f.input :content %>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
             </div>
             <% end %>
           <% end %>
@@ -73,7 +124,11 @@
       </div>
 
       <div class = "outcoming_demands text-center col-sm-12 col-md-4">
-        <h4>Les demandes envoyées de remplacements</h4>
+        <% if current_user.has_practice %>
+          <h4>Vous souhaitez qu'ils vous remplacent :</h4>
+        <% else %>
+          <h4>Vous souhaitez les remplacer :</h4>
+        <% end %>
           <% if current_user.bookings.nil? %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
@@ -82,55 +137,60 @@
             <% if booking.slot.user.avatar.nil? %>
               <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
             <% else %>
-              <%= image_tag booking.slot.user.avatar, class: "avatar-superextralarge " %>
+              <%= image_tag booking.slot.user.avatar, class: "avatar-large " %>
             <% end %>
-            Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %>
-            <br> Pour un remplacement <br>
-              du <%= l(booking.start_date, format: "%e %B %Y") %>
-              au <%= l(booking.end_date, format: "%e %B %Y") %> <br>
-                <div class="status"><strong>...Status...</strong></div>
-                <br>
+            Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %><br>
+              <%= l(booking.start_date, format: "%e %B %Y") %>
+              au <%= l(booking.end_date, format: "%e %B %Y") %> <br><br>
+              <div class="status">
+                <% if booking.accepted.nil? %>
+                  <em>Demande en attente</em>
+                <% elsif booking.accepted == false %>
+                  <strong>Remplacement refusé</strong>
+                <% else %>
+                  <strong>Remplacement accepté !</strong>
+                <% end %>
+              </div>
+              <br>
+              <% if booking.accepted && booking.end_date <= Date.today %>
+                <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
+                  Donnez votre avis
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
+                      </div>
+                      <div class="modal-body">
+                        <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
+                          <%= f.error_notification %>
+
+                          <%= f.input :rating %>
+                          <%= f.input :content %>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
           </div>
             <% end %>
           <% end %>
 
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for([ @user, @review ]) do |f| %>
-          <%= f.error_notification %>
-
-          <%= f.input :rating %>
-          <%= f.input :content %>
-
-          <%= f.button :submit, "Valider" %>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary">Valider</button>
       </div>
     </div>
   </div>
 </div>
+
 
 
 
