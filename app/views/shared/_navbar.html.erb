@@ -28,7 +28,17 @@
     <%= link_to calendar_path, class: "navbar-wagon-item navbar-wagon-link" do %>
       <div class="badge-container">
         <i class="fa fa-calendar"></i>
-        <div class="badge badge-grey">0</div>
+        <% if current_user %>
+          <% if pending_requests_count > 0 %>
+            <div class="badge badge-blue">
+              <%= pending_requests_count %>
+            </div>
+          <% else %>
+            <div class="badge badge-grey">
+              <%= pending_requests_count %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
 
@@ -40,7 +50,6 @@
         <div class="badge-container">
           <i class="fa fa-envelope-o"></i>
           <%# if current_user.bikes.first.nil? %>
-          <% raise %>
             <div class="badge badge-grey">0</div>
           <%# else %>
             <%# if current_user.bikes.first.bookings.where(status: "pending").count == 0 %>
