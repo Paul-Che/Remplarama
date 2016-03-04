@@ -36,14 +36,16 @@
         <% end %>
         <% if current_user.slots.nil? %>
           <i class="fa fa-calendar-minus-o"></i>
-          <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
+          <div class="empty_availabilities">Vous n'avez pas encore défini de nouvelle plage de recherche <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
         <% else %>
-          <% current_user.slots.each do |slot| %>
-            <ul class="list-inline list-unstyled">
-              <li>Du <%= l(slot.start_date, format: "%e %B %Y") %> au <%= l(slot.end_date, format: "%e %B %Y") %></li>
-              <li><%= link_to "Supprimer", user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
-              <hr>
-            </ul>
+          <% current_user.slots.order(created_at: :desc).each do |slot| %>
+            <% if slot.end_date > Date.today %>
+              <ul class="list-inline list-unstyled">
+                <li>Du <%= l(slot.start_date, format: "%e %B %Y") %> au <%= l(slot.end_date, format: "%e %B %Y") %></li>
+                <li><%= link_to "Supprimer", user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
+                <hr>
+              </ul>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -59,7 +61,7 @@
           <h5> Vous n'avez pas encore reçu de demande <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</h5>
         <% else %>
           <% current_user.slots.each do |slot| %>
-            <% slot.bookings.each do |booking| %>
+            <% slot.bookings.order(created_at: :desc).each do |booking| %>
             <div class="requests">
               <div class="request-head">
                 <% if booking.user.avatar.nil? %>
@@ -143,7 +145,7 @@
           <% if current_user.bookings.nil? %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
-            <% current_user.bookings.each do |booking| %>
+            <% current_user.bookings.order(created_at: :desc).each do |booking| %>
               <div class="requests">
                 <div class="request-head">
                   <% if booking.slot.user.avatar.nil? %>
