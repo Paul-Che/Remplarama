@@ -60,44 +60,44 @@
         <% else %>
           <% current_user.slots.each do |slot| %>
             <% slot.bookings.each do |booking| %>
-              <div class="requests">
+            <div class="requests">
+              <div class="request-head">
                 <% if booking.user.avatar.nil? %>
                   <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                 <% else %>
                   <%= image_tag booking.user.avatar, class: "avatar-large " %>
                 <% end %>
-                Dr <%= booking.user.first_name %> <%= booking.user.last_name %>
-                <br>
-                <%= l(booking.start_date, format: "%e %B %Y")  %> au <%= l(booking.end_date, format: "%e %B %Y")  %>
-                <br>
+                <div class="request-header-info">
+                  <%= link_to user_path(booking.user) do %>
+                    <p class="request-dr-name">Dr <%= booking.user.first_name %> <%= booking.user.last_name %></p>
+                  <% end %>
+                  <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
+                  <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="request-contact">
                 <%= link_to "Contacter", user_path(booking.user) %>
-                <br><br>
+              </div>
+              <hr>
+              <div class="request-buttons">
                 <% if booking.accepted.nil? %>
                   <%= simple_form_for(booking) do |f| %>
                     <%= f.input :accepted, as: :hidden, input_html: { value: 'true' } %>
-                    <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm' %>
+                    <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm', style: "width: 100%;" %>
                   <% end %><%= simple_form_for(booking) do |f| %>
                     <%= f.input :accepted, as: :hidden, input_html: { value: 'false' } %>
-                    <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm' %>
+                    <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm', style: "width: 100%;" %>
                   <% end %>
                 <% elsif booking.accepted == false %>
                   <strong>Remplacement refusé</strong>
-                <% else %>
-                  <strong>
-                    <% if booking.end_date > Date.today %><% raise %>
-                      Remplacement accepté !
-                    <% else %>
-                      Remplacement terminé
-                    <% end %>
-                  </strong>
-                <% end %>
-                <% if booking.accepted && booking.end_date <= Date.today && Review.where(booking_id: booking.id).size == 0 %>
-
-                  <br><br>
+                <% elsif booking.accepted && booking.end_date >= Date.today %>
+                  <strong>Remplacement accepté</strong>
+                <% elsif booking.accepted && booking.end_date < Date.today && Review.where(booking_id: booking.id).size == 0 %>
+                  <strong>Remplacement terminé</strong>
                   <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
                     Donnez votre avis
                   </button>
-
                   <!-- Modal -->
                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -110,8 +110,9 @@
                           <%= simple_form_for([ booking.user, @review ]) do |f| %>
                             <%= f.error_notification %>
 
-                            <%= f.input :rating %>
-                            <%= f.input :content %>
+
+                            <%= f.input :rating, label: "Nombre d'étoiles", collection: [1,2,3,4,5] %>
+                            <%= f.input :content, label: "Commentaire" %>
                             <%= f.input :booking_id, as: :hidden, input_html: { value: booking.id } %>
 
                         </div>
@@ -123,8 +124,11 @@
                       </div>
                     </div>
                   </div>
+                <% else %>
+                  <strong>Remplacement terminé</strong>
                 <% end %>
               </div>
+            </div>
             <% end %>
           <% end %>
         <% end %>
@@ -140,65 +144,70 @@
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
             <% current_user.bookings.each do |booking| %>
-          <div class="requests">
-            <% if booking.slot.user.avatar.nil? %>
-              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
-            <% else %>
-              <%= image_tag booking.slot.user.avatar, class: "avatar-large " %>
-            <% end %>
-            Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %><br>
-              <%= l(booking.start_date, format: "%e %B %Y") %>
-              au <%= l(booking.end_date, format: "%e %B %Y") %> <br><br>
-              <div class="status">
-                <% if booking.accepted.nil? %>
-                  <em>Demande en attente</em>
-                <% elsif booking.accepted == false %>
-                  <strong>Remplacement refusé</strong>
-                <% else %>
-                  <strong>
-                    <% if booking.end_date > Date.today %>
-                      Remplacement accepté !
-                    <% else %>
-                      Remplacement terminé
+              <div class="requests">
+                <div class="request-head">
+                  <% if booking.slot.user.avatar.nil? %>
+                    <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+                  <% else %>
+                    <%= image_tag booking.slot.user.avatar, class: "avatar-large " %>
+                  <% end %>
+                  <div class="request-header-info">
+                    <%= link_to user_path(booking.slot.user) do %>
+                      <p class="request-dr-name">Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></p>
                     <% end %>
-                  </strong>
-                <% end %>
-              </div>
-              <br>
-              <% if booking.accepted && booking.end_date <= Date.today %>
-                <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
-                  Donnez votre avis
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
-                      </div>
-                      <div class="modal-body">
-                        <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
-                          <%= f.error_notification %>
-
-                          <%= f.input :rating %>
-                          <%= f.input :content %>
-
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                        <%= f.button :submit, "Valider", class: "btn btn-primary" %>
-                        <% end %>
-                      </div>
-                    </div>
+                    <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
+                    <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
                   </div>
                 </div>
-              <% end %>
-          </div>
+                <hr>
+                <div class="request-contact">
+                  <%= link_to "Contacter", user_path(booking.slot.user) %>
+                </div>
+                <hr>
+                <div class="request-buttons">
+                  <% if booking.accepted.nil? %>
+                    <em>Demande en attente</em>
+                  <% elsif booking.accepted == false %>
+                    <strong>Remplacement refusé</strong>
+                  <% elsif booking.accepted && booking.end_date >= Date.today %>
+                    <strong>Remplacement accepté</strong>
+                  <% elsif booking.accepted && booking.end_date < Date.today && Review.where(booking_id: booking.id).size == 0 %>
+                    <strong>Remplacement terminé</strong>
+                    <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
+                      Donnez votre avis
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
+                          </div>
+                          <div class="modal-body">
+                            <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
+                              <%= f.error_notification %>
+
+                              <%= f.input :rating, label: "Nombre d'étoiles", collection: [1,2,3,4,5] %>
+                              <%= f.input :content, label: "Commentaire" %>
+                              <%= f.input :booking_id, as: :hidden, input_html: { value: booking.id } %>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                            <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% else %>
+                    <strong>Remplacement terminé</strong>
+                  <% end %>
+                </div>
+              </div>
             <% end %>
           <% end %>
-
       </div>
     </div>
   </div>
