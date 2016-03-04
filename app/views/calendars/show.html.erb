@@ -91,9 +91,9 @@
                   <% end %>
                 <% elsif booking.accepted == false %>
                   <strong>Remplacement refusé</strong>
-                <% elsif booking.accepted && booking.end_date > Date.today %>
+                <% elsif booking.accepted && booking.end_date >= Date.today %>
                   <strong>Remplacement accepté</strong>
-                <% else %>
+                <% elsif booking.accepted && booking.end_date < Date.today && Review.where(booking_id: booking.id).size == 0 %>
                   <strong>Remplacement terminé</strong>
                   <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
                     Donnez votre avis
@@ -110,8 +110,10 @@
                           <%= simple_form_for([ booking.user, @review ]) do |f| %>
                             <%= f.error_notification %>
 
+
                             <%= f.input :rating, label: "Nombre d'étoiles", collection: [1,2,3,4,5] %>
                             <%= f.input :content, label: "Commentaire" %>
+                            <%= f.input :booking_id, as: :hidden, input_html: { value: booking.id } %>
 
                         </div>
                         <div class="modal-footer">
@@ -122,6 +124,8 @@
                       </div>
                     </div>
                   </div>
+                <% else %>
+                  <strong>Remplacement terminé</strong>
                 <% end %>
               </div>
             </div>
@@ -157,7 +161,7 @@
                 </div>
                 <hr>
                 <div class="request-contact">
-                  <%= link_to "Contacter", user_path(booking.user) %>
+                  <%= link_to "Contacter", user_path(booking.slot.user) %>
                 </div>
                 <hr>
                 <div class="request-buttons">
@@ -165,9 +169,9 @@
                     <em>Demande en attente</em>
                   <% elsif booking.accepted == false %>
                     <strong>Remplacement refusé</strong>
-                  <% elsif booking.accepted && booking.end_date > Date.today %>
+                  <% elsif booking.accepted && booking.end_date >= Date.today %>
                     <strong>Remplacement accepté</strong>
-                  <% else %>
+                  <% elsif booking.accepted && booking.end_date < Date.today && Review.where(booking_id: booking.id).size == 0 %>
                     <strong>Remplacement terminé</strong>
                     <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
                       Donnez votre avis
@@ -181,11 +185,12 @@
                             <h4 class="modal-title" id="myModalLabel">Donnez votre avis</h4>
                           </div>
                           <div class="modal-body">
-                            <%= simple_form_for([ booking.user, @review ]) do |f| %>
+                            <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
                               <%= f.error_notification %>
 
                               <%= f.input :rating, label: "Nombre d'étoiles", collection: [1,2,3,4,5] %>
                               <%= f.input :content, label: "Commentaire" %>
+                              <%= f.input :booking_id, as: :hidden, input_html: { value: booking.id } %>
 
                           </div>
                           <div class="modal-footer">
@@ -196,6 +201,8 @@
                         </div>
                       </div>
                     </div>
+                  <% else %>
+                    <strong>Remplacement terminé</strong>
                   <% end %>
                 </div>
               </div>
