@@ -9,7 +9,7 @@
 .range-calendar.triggerable {display: none ;}
 .calendar-wrapper {position: relative; left: 0;top: 0;z-index: 2; list-style: none; display: block;clear: both; overflow: hidden; padding: 10px 0;  }
 .range-calendar .calendar { z-index: 1; list-style: none;float: left;margin: 0; padding:  0 ; position: relative; width: 99999px;}
-.range-calendar .calendar .cell {float: left;width: 70px; padding:25px 20px; margin: 0px; border-right: 1px solid rgba(0,0,0,0.03); text-align: center; position: relative;color: #888 ;}
+.range-calendar .calendar .cell {float: left;width: 59px; padding:25px 18px; margin: 0px; border-right: 1px solid rgba(0,0,0,0.03); text-align: center; position: relative;color: #888 ;}
 .range-calendar .calendar .cell .day-number {display: block;clear: both; font-weight: bold;font-size: 20px;  z-index: 1; position: relative; }
 .range-calendar .calendar .cell .day {display: block;clear: both; text-transform: uppercase; width: 100%; font-weight: 100; font-size: 12px; margin-top: 0px; z-index: 1; position: relative;}
 .range-calendar .calendar .cell .month { width: 100%;  font-size: 12px;z-index: 1; text-transform: uppercase; position: absolute;opacity: 1;left: 0;top: 10px;font-weight: bold;}
@@ -39,7 +39,7 @@
 .range-bar {width: 210px; height: 100%; top: 0px; left: 0; position: absolute;  z-index: 1; padding: 0; margin: 0; background-image: none; z-index: 1 ; background-color: #888; }
 .range-bar.resizable {height: 100%;position: absolute;}
 .range-bar.range-bar-content {width: 100%; height: 100%; display: block;float: left;}
-.range-bar .ui-resizable-handle.ui-resizable-e{width: 6px;height: 100%;background-position: 25px 53%;background-repeat: no-repeat;right: 0px;padding: 20px;opacity: 0.5;}
+.range-bar .ui-resizable-handle.ui-resizable-e{width: 6px;height: 100%;background-position: 25px 13%;background-repeat: no-repeat;right: 0px;padding: 20px;opacity: 0.9;}
 .range-calendar .ui-draggable {cursor: move;cursor: -moz-grab;cursor: -webkit-grab; }
 .range-calendar .ui-draggable-dragging {cursor: -moz-grabbing;cursor: -webkit-grabbing;}
 
