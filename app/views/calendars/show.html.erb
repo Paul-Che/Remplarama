@@ -62,7 +62,7 @@
         <% else %>
           <% current_user.slots.each do |slot| %>
 
-            <% slot.bookings.order(created_at: :desc).each do |booking| %>
+            <% slot.bookings.order(created_at: :asc).each do |booking| %>
             <div class="requests">
               <div class="request-head">
                 <% if booking.user.avatar.nil? %>
