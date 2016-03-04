@@ -61,6 +61,7 @@
           <h5> Vous n'avez pas encore reçu de demande <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</h5>
         <% else %>
           <% current_user.slots.each do |slot| %>
+
             <% slot.bookings.order(created_at: :desc).each do |booking| %>
             <div class="requests">
               <div class="request-head">
