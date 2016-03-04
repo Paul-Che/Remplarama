@@ -104,7 +104,7 @@
                         <%= simple_form_for([ booking.user, @review ]) do |f| %>
                           <%= f.error_notification %>
 
-                          <%= f.input :rating, label: "Nombre d'étoiles" %>
+                          <%= f.input :rating, label: "Nombre d'étoiles", collection: [1,2,3,4,5] %>
                           <%= f.input :content, label: "Commentaire" %>
 
                       </div>
@@ -169,8 +169,8 @@
                         <%= simple_form_for([ booking.slot.user, @review ]) do |f| %>
                           <%= f.error_notification %>
 
-                          <%= f.input :rating %>
-                          <%= f.input :content %>
+                          <%= f.input :rating, label: "Nombre d'étoiles", collection: [1,2,3,4,5] %>
+                          <%= f.input :content, label: "Commentaire" %>
 
                       </div>
                       <div class="modal-footer">
