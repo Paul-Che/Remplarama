@@ -91,7 +91,7 @@
                   <% end %>
                 <% elsif booking.accepted == false %>
                   <strong>Remplacement refusé</strong>
-                <% elsif booking.accepted && booking.end_date <= Date.today %>
+                <% elsif booking.accepted && booking.end_date > Date.today %>
                   <strong>Remplacement accepté</strong>
                 <% else %>
                   <strong>Remplacement terminé</strong>
@@ -165,7 +165,7 @@
                     <em>Demande en attente</em>
                   <% elsif booking.accepted == false %>
                     <strong>Remplacement refusé</strong>
-                  <% elsif booking.accepted && booking.end_date <= Date.today %>
+                  <% elsif booking.accepted && booking.end_date > Date.today %>
                     <strong>Remplacement accepté</strong>
                   <% else %>
                     <strong>Remplacement terminé</strong>
