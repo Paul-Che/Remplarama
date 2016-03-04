@@ -40,6 +40,7 @@
         <div class="badge-container">
           <i class="fa fa-envelope-o"></i>
           <%# if current_user.bikes.first.nil? %>
+          <% raise %>
             <div class="badge badge-grey">0</div>
           <%# else %>
             <%# if current_user.bikes.first.bookings.where(status: "pending").count == 0 %>
