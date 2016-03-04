@@ -23,9 +23,9 @@ User.create!(email: "chenon@gmail.com",
             speciality: "Médecine générale",
             avatar: "http://www.rhsante.fr/wp-content/uploads/sites/2/2015/04/medecin-f-298.jpg",
             numero_ursaff: "111011101110111011",
-            presentation: "Bonjour, je suis le Dr Angéline Chenon, médecin généraliste. J'exerce ce métier avec passion depuis plus de 30 ans. J'attache beaucoup d'importance à ma patientèle et à l'aspect humain de la relation professionnel. Je prend le temps qu'il faut pour les urgences et les cas qui me semblent importants, sinon en moyenne, je prend 30min par consultation. Je suis rigoureux sur les horaires. Le futur remplaçant qui serait intéressé se verra donc encadré par un secrétariat compétent et un minimum de 15 consultations par jour pour les mois d'étés, 20 à 25 consultations par jour en moyenne pour le reste de l'année.",
+            presentation: "Bonjour, je suis le Dr Angéline Chenon, médecin généraliste. J'exerce ce métier avec passion depuis plus de 30 ans. J'attache beaucoup d'importance à ma patientèle et à l'aspect humain de la relation professionnelle. Je prend le temps qu'il faut pour les urgences et les cas qui me semblent importants, sinon en moyenne, je prend 30min par consultation. Je suis rigoureux sur les horaires. Le futur remplaçant qui serait intéressé sera encadré par un secrétariat compétent et un minimum de 15 consultations par jour pour les mois d'étés, 20 à 25 consultations par jour en moyenne pour le reste de l'année.",
             education: "Université Angers",
-            publications: "Après avoir obtenu mon Doctorat de Médecine Générale - Angers (1984), je me suis installé dans le cabinet médical au 1 Avenue des fontenelles à Saint-Malo en 2009 après avoir exercé à Cancale pendant une dizaine d'année.",
+            publications: "Après avoir obtenu mon Doctorat de Médecine Générale - Angers (1984), je me suis installé dans le cabinet médical au 1 Avenue des fontenelles à Saint-Malo en 2009 après avoir exercé à Cancale pendant une dizaine d'années.",
             housing: true,
             secretary: true,
             convention: "1",
@@ -201,7 +201,7 @@ User.create!(email: "ludovic.dupont@gmail.com",
 # Créations des reviews pour toutes les utilisateurs
 
 User.all.each do |user|
-  user.reviews_i_received.create!(content: "Super sympa !", rating: 4, reviewer_id: User.last.id)
+  user.reviews_i_received.create!(content: "Cabinet très agréable. Je recommande le remplacement à Saint-Malo.", rating: 4, reviewer_id: User.last.id)
 end
 
 # Créations des slots pour les utilisateurs
