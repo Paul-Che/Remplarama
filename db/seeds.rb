@@ -23,10 +23,10 @@ User.create!(email: "chenon@gmail.com",
             speciality: "Médecine générale",
             avatar: "http://www.rhsante.fr/wp-content/uploads/sites/2/2015/04/medecin-f-298.jpg",
             numero_ursaff: "111011101110111011",
-            presentation: "Bonjour, je suis le Dr Angéline Chenon, médecin généraliste. J'exerce ce métier avec passion depuis plus de 30 ans. J'attache beaucoup d'importance à ma patientèle et à l'aspect humain de la relation professionnelle. Je prend le temps qu'il faut pour les urgences et les cas qui me semblent importants, sinon en moyenne, je prend 30min par consultation. Je suis rigoureux sur les horaires. Le futur remplaçant qui serait intéressé sera encadré par un secrétariat compétent et un minimum de 15 consultations par jour pour les mois d'étés, 20 à 25 consultations par jour en moyenne pour le reste de l'année.",
-            education: "Université Angers",
-            publications: "Après avoir obtenu mon Doctorat de Médecine Générale - Angers (1984), je me suis installé dans le cabinet médical au 1 Avenue des fontenelles à Saint-Malo en 2009 après avoir exercé à Cancale pendant une dizaine d'années.",
-            housing: true,
+            presentation: "Bonjour, je suis le Dr Angéline Chenon, médecin généraliste. J'exerce ce métier avec passion depuis plus de 20 ans. Le futur remplaçant qui serait intéressé sera encadré dans une équipe de 4 médecins et un secrétariat compétent. Un minimum de 10 consultations par jour pour les mois d'étés.",
+            education: "Université Rennes",
+            publications: "Après avoir obtenu mon Doctorat de Médecine Générale - Rennes (1998), je me suis installé dans le cabinet médical au 1 Avenue des fontenelles à Saint-Malo en 2012 après avoir exercé à Cancale pendant 15 ans.",
+             housing: true,
             secretary: true,
             convention: "1",
             house_visits: "above2",
@@ -113,7 +113,7 @@ User.create!(email: "antoine@gmail.com",
             last_name: "Loron",
             has_practice: false,
             numero_ordre: "A1B2C3D4E5",
-            address: "36 rue Saint-louis, 35000, Rennes",
+            address: "rue de Saint-Maur, 75011, Paris",
             speciality: "Médecine générale",
             avatar: "http://media.cirrusmedia.com.au/AD_Media_Library/AD_WEB_IMAGES/Medical/Young_doctor.jpg?width=300&height=300&mode=max",
             numero_ursaff: nil,
@@ -213,7 +213,9 @@ User.all.each do |user|
 end
 
 User.where("first_name LIKE '%Angéline%'").first.slots.create!(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), status: "confirmed")
+
 User.where("first_name LIKE '%Jerome%'").first.bookings.create(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), user_id: 37, slot_id: User.where("first_name LIKE '%Angéline%'").first.slots.last.id, accepted: true)
+
 
 User.where("first_name LIKE '%Antoine%'").first.slots.destroy_all
 
