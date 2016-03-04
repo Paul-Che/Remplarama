@@ -201,12 +201,10 @@ User.create!(email: "ludovic.dupont@gmail.com",
 # Créations des reviews pour toutes les utilisateurs
 
 User.all.each do |user|
-  user.reviews_i_received.create!(content: "Cabinet très agréable. Je recommande le remplacement à Saint-Malo.", rating: 4, reviewer_id: User.last.id)
+  if user.last_name != 'Loron'
+    user.reviews_i_received.create!(content: "Cabinet très agréable. Je recommande le remplacement à Saint-Malo.", rating: 4, reviewer_id: User.last.id)
+  end
 end
-
-#  Pas de revus pour le Dr Antoine Loron
-
-User.find_by_last_name('Loron').reviews_i_received.destroy_all!
 
 # Créations des slots pour les utilisateurs
 
