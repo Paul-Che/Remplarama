@@ -14,7 +14,7 @@ $.fn.rangeCalendar = function(options) {
 
     var defaults = {
 
-			lang: "en",
+			lang: "fr",
 			theme: "default-theme",
 			themeContext: this,
 			startDate: moment(),
