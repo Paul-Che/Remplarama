@@ -38,7 +38,7 @@
           <i class="fa fa-calendar-minus-o"></i>
           <div class="empty_availabilities">Vous n'avez pas encore défini de nouvelle plage de recherche <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
         <% else %>
-          <% current_user.slots.order(created_at: :desc).each do |slot| %>
+          <% current_user.slots.order(created_at: :asc).each do |slot| %>
             <% if slot.end_date > Date.today %>
               <ul class="list-inline list-unstyled">
                 <li>Du <%= l(slot.start_date, format: "%e %B %Y") %> au <%= l(slot.end_date, format: "%e %B %Y") %></li>
