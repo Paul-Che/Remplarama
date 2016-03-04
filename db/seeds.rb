@@ -117,7 +117,7 @@ User.create!(email: "antoine@gmail.com",
             speciality: "Médecine générale",
             avatar: "http://media.cirrusmedia.com.au/AD_Media_Library/AD_WEB_IMAGES/Medical/Young_doctor.jpg?width=300&height=300&mode=max",
             numero_ursaff: nil,
-            presentation: "Bonjour, je suis le Dr Antoine Loron, médecin généraliste remplaçant, fraîchement diplomé. Actuellement interne à l'hopital européen Georges-Pompidou dans le 15 ème arrondissement.",
+            presentation: "Bonjour, je suis le Dr Antoine Loron, médecin généraliste remplaçant, fraîchement diplomé. Actuellement interne à l'hopital européen Georges-Pompidou à Rennes.",
             education: "Université de Lyon III",
             publications: "Participation au projet Urgence-Afrique en tant que médecin sans frontière. Responsable des approvisionnements et gestion des risques sanitaires (été 2009 et 2010).",
             nohousing_tolerance: nil,
@@ -203,6 +203,10 @@ User.create!(email: "ludovic.dupont@gmail.com",
 User.all.each do |user|
   user.reviews_i_received.create!(content: "Cabinet très agréable. Je recommande le remplacement à Saint-Malo.", rating: 4, reviewer_id: User.last.id)
 end
+
+#  Pas de revus pour le Dr Antoine Loron
+
+User.find_by_last_name('Loron').reviews_i_received.destroy_all!
 
 # Créations des slots pour les utilisateurs
 
