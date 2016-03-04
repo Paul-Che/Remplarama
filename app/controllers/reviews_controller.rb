@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
     authorize @review
     @review.save
     flash[:notice] = "Votre avis a bien été enregistré"
+
     redirect_to calendar_path(current_user)
   end
 
@@ -32,7 +33,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :content, :reviewer_id, :reviewed_id)
+    params.require(:review).permit(:rating, :content, :reviewer_id, :reviewed_id, :booking_id)
   end
 
 end

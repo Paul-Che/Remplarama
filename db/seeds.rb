@@ -13,35 +13,35 @@ User.destroy_all
 
 # Créations des users "Practice"
 
-User.create!(email: "paul@gmail.com",
+User.create!(email: "chenon@gmail.com",
             password: "12345678",
-            first_name: "Paul",
+            first_name: "Angéline",
             last_name: "Chenon",
             has_practice: true,
             numero_ordre: "A1B2C3D4E5",
-            address: "10 Rue Marceau, 93100 Montreuil",
+            address: "1 Avenue des fontenelles, 35400, Saint-Malo",
             speciality: "Médecine générale",
-            avatar: "http://medicure.cmsmasters.net/wp-content/uploads/2014/01/old-doctor-300x300.jpg",
+            avatar: "http://www.rhsante.fr/wp-content/uploads/sites/2/2015/04/medecin-f-298.jpg",
             numero_ursaff: "111011101110111011",
-            presentation: "Bonjour, je suis le Dr Paul Chenon, médecin généraliste.",
-            education: "Université Paris Diderot",
-            publications: "Mes publications sont ...",
+            presentation: "Bonjour, je suis le Dr Angéline Chenon, médecin généraliste. J'exerce ce métier avec passion depuis plus de 30 ans. J'attache beaucoup d'importance à ma patientèle et à l'aspect humain de la relation professionnelle. Je prend le temps qu'il faut pour les urgences et les cas qui me semblent importants, sinon en moyenne, je prend 30min par consultation. Je suis rigoureux sur les horaires. Le futur remplaçant qui serait intéressé sera encadré par un secrétariat compétent et un minimum de 15 consultations par jour pour les mois d'étés, 20 à 25 consultations par jour en moyenne pour le reste de l'année.",
+            education: "Université Angers",
+            publications: "Après avoir obtenu mon Doctorat de Médecine Générale - Angers (1984), je me suis installé dans le cabinet médical au 1 Avenue des fontenelles à Saint-Malo en 2009 après avoir exercé à Cancale pendant une dizaine d'années.",
             housing: true,
             secretary: true,
             convention: "1",
-            house_visits: "none",
+            house_visits: "above2",
             commission: 90)
 User.create!(email: "jeanne.darc@gmail.com",
             password: "12345678",
             first_name: "Jeanne",
-            last_name: "D'Arc",
+            last_name: "Dupont",
             has_practice: true,
             numero_ordre: nil,
-            address: "Place de l'Odéon, Paris",
+            address: "Avenue de moka, 35400, Saint-Malo",
             speciality: "Médecine générale",
             avatar: "http://d236bkdxj385sg.cloudfront.net/wp-content/uploads/2011/11/dartmouth-old-lady-black-doctor-e1286646111253.jpg",
             numero_ursaff: nil,
-            presentation: "Bonjour, je suis le Dr Jeanne D'Arc, ophtalmologiste.",
+            presentation: "Bonjour, je suis le Dr Jeanne Dupont, ophtalmologiste.",
             education: "Université Lyon 3",
             publications: "Je n'ai pas de publication",
             housing: true,
@@ -55,7 +55,7 @@ User.create!(email: "martin.pecheur@gmail.com",
             last_name: "Pêcheur",
             has_practice: true,
             numero_ordre: "A1B2C3D4E5",
-            address: "Gare de Lyon, Paris",
+            address: "1 Avenue des fontenelles, 35400, Saint-Malo",
             speciality: "Médecine générale",
             avatar: "http://infinarium.com/wp-content/uploads/2013/04/Doctor-Says-No-Such-thing-as-Health-Myths-Google-Images.jpg",
             numero_ursaff: nil,
@@ -73,7 +73,7 @@ User.create!(email: "edouard.lesoin@gmail.com",
             last_name: "Le soin",
             has_practice: true,
             numero_ordre: "A1B2C3D4E5",
-            address: "1 place de la République, Paris",
+            address: "1 Avenue des fontenelles, 35400, Saint-Malo",
             speciality: "Médecine générale",
             avatar: nil,
             numero_ursaff: nil,
@@ -91,7 +91,7 @@ User.create!(email: "jacques.wagon@gmail.com",
             last_name: "Wagon",
             has_practice: true,
             numero_ordre: "A1B2C3D4E5",
-            address: "10 rue du commerce, 75010, Paris",
+            address: "Quai saint-louis, 35400, Saint-Malo",
             speciality: "Médecine générale",
             avatar: "https://s-media-cache-ak0.pinimg.com/236x/1b/91/0d/1b910ddb6f05806835337637d695b395.jpg",
             numero_ursaff: nil,
@@ -113,13 +113,13 @@ User.create!(email: "antoine@gmail.com",
             last_name: "Loron",
             has_practice: false,
             numero_ordre: "A1B2C3D4E5",
-            address: "36 rue Beaurepaire, 75010, Paris",
+            address: "36 rue Saint-louis, 35000, Rennes",
             speciality: "Médecine générale",
             avatar: "http://media.cirrusmedia.com.au/AD_Media_Library/AD_WEB_IMAGES/Medical/Young_doctor.jpg?width=300&height=300&mode=max",
             numero_ursaff: nil,
-            presentation: "Bonjour, je suis le Dr Antoine Loron, médecin généraliste remplaçant, fraîchement diplomé.",
+            presentation: "Bonjour, je suis le Dr Antoine Loron, médecin généraliste remplaçant, fraîchement diplomé. Actuellement interne à l'hopital européen Georges-Pompidou à Rennes.",
             education: "Université de Lyon III",
-            publications: "Pas de publication",
+            publications: "Participation au projet Urgence-Afrique en tant que médecin sans frontière. Responsable des approvisionnements et gestion des risques sanitaires (été 2009 et 2010).",
             nohousing_tolerance: nil,
             nosecretary_tolerance: nil,
             convention: nil,
@@ -201,7 +201,9 @@ User.create!(email: "ludovic.dupont@gmail.com",
 # Créations des reviews pour toutes les utilisateurs
 
 User.all.each do |user|
-  user.reviews_i_received.create!(content: "Super sympa !", rating: 4, reviewer_id: User.last.id)
+  if user.last_name != 'Loron'
+    user.reviews_i_received.create!(content: "Cabinet très agréable. Je recommande le remplacement à Saint-Malo.", rating: 4, reviewer_id: User.last.id)
+  end
 end
 
 # Créations des slots pour les utilisateurs
@@ -210,8 +212,8 @@ User.all.each do |user|
   user.slots.create!(start_date: ("Mon, 14 Mar 2016"), end_date: ("Fri, 18 Mar 2016"), status: "pending")
 end
 
-User.where("first_name LIKE '%Paul%'").first.slots.create!(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), status: "confirmed")
-User.where("first_name LIKE '%Jerome%'").first.bookings.create(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), user_id: 37, slot_id: User.where("first_name LIKE '%Paul%'").first.slots.last.id, accepted: true)
+User.where("first_name LIKE '%Angéline%'").first.slots.create!(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), status: "confirmed")
+User.where("first_name LIKE '%Antoine%'").first.bookings.create(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), user_id: 37, slot_id: User.where("first_name LIKE '%Angéline%'").first.slots.last.id, accepted: true)
 
 
 
