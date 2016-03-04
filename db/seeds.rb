@@ -118,13 +118,13 @@ User.create!(email: "antoine@gmail.com",
             avatar: "http://media.cirrusmedia.com.au/AD_Media_Library/AD_WEB_IMAGES/Medical/Young_doctor.jpg?width=300&height=300&mode=max",
             numero_ursaff: nil,
             presentation: "Bonjour, je suis le Dr Antoine Loron, médecin généraliste remplaçant, fraîchement diplomé. Actuellement interne à l'hopital européen Georges-Pompidou à Rennes.",
-            education: "Université de Lyon III",
+            education: "Université de Rennes",
             publications: "Participation au projet Urgence-Afrique en tant que médecin sans frontière. Responsable des approvisionnements et gestion des risques sanitaires (été 2009 et 2010).",
             nohousing_tolerance: nil,
             nosecretary_tolerance: nil,
             convention: nil,
-            house_visits_tolerance: "max2",
-            min_commission: 60)
+            house_visits_tolerance: "above2",
+            min_commission: 80)
 User.create!(email: "Didier.chenon@gmail.com",
             password: "12345678",
             first_name: "Dider",
@@ -213,9 +213,9 @@ User.all.each do |user|
 end
 
 User.where("first_name LIKE '%Angéline%'").first.slots.create!(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), status: "confirmed")
-User.where("first_name LIKE '%Antoine%'").first.bookings.create(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), user_id: 37, slot_id: User.where("first_name LIKE '%Angéline%'").first.slots.last.id, accepted: true)
+User.where("first_name LIKE '%Jerome%'").first.bookings.create(start_date: ("Mon, 29 Feb 2016"), end_date: ("Tue, 01 Mar 2016"), user_id: 37, slot_id: User.where("first_name LIKE '%Angéline%'").first.slots.last.id, accepted: true)
 
-
+User.where("first_name LIKE '%Antoine%'").first.slots.destroy_all
 
 
 
