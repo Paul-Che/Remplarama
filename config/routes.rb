@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :slots, only: [:create, :update, :destroy]
     resources :bookings, only: [:new, :create, :update, :destroy]
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
+    resources :messages, only: [:index]
   end
 
   resources :bookings, only: [:new, :create, :update, :destroy] do
@@ -19,10 +20,6 @@ Rails.application.routes.draw do
       patch 'confirm'
       patch 'reject'
     end
-  end
-
-  resources :users, except: [:index] do
-    resources :messages, only: [:index]
   end
 
   resources :conversations, only: [:index, :show, :destroy]
