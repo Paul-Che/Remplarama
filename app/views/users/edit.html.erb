@@ -4,11 +4,11 @@
   <%= simple_form_for @user, :url => @user do |f|%>
     <% f.error_notification %>
     <!-- left-edition : picture, firstname, lastname, A la recherche de -->
-      <div class="container"></div>
-        <div class="row"></div>
+      <div class="container">
+        <div class="row">
           <div class="col-xs-12 col-sm-4">
             <div class="left-editing">
-              <div class="avatar-header">
+              <div class="avatar-header text-center">
                 <% if @user.avatar.nil? %>
                   <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
                 <% else %>
@@ -27,64 +27,104 @@
               <div style = "margin-top: 20px;">
                 <%= f.input :has_practice, collection: [['Je recherche un remplaçant', true], ['Je recherche un poste', false]], label: false %>
               </div>
+              <div style = "margin-top: 20px;">
+                  <%= f.input :address, placeholder: "#{@user.address}", label: "Localisation de votre cabinet" %>
+              </div>
             </div>
           </div>
             <!-- right-edition -->
             <div class="col-xs-12 col-sm-offset-1 col-sm-7">
               <div class="right-editing">
                 <div id="accordion">
-                  <h3>Section 1</h3>
-                  <div>
-                    <p>
-                      Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-                      ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-                      amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                      odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-                    </p>
-                  </div>
-                  <h3>Section 2</h3>
-                  <div>
-                    <p>
-                      Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                      purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                      velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                      suscipit faucibus urna.
-                    </p>
-                  </div>
-                  <h3>Section 3</h3>
-                  <div>
-                    <p>
-                      Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-                      Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-                      ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                      lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                    </p>
+                  <h3>Informations clés</h3>
                     <ul>
-                      <li>List item one</li>
-                      <li>List item two</li>
-                      <li>List item three</li>
+                      <li>
+                        <i class="fa fa-fw fa-stethoscope icon-profile"></i>
+                        <%= f.input :speciality, placeholder: "#{@user.speciality }", label: "Spécialité" %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-graduation-cap icon-profile"></i>
+                        <%= f.input :education, placeholder: "#{@user.education }", label: "Education" %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-hashtag icon-profile"></i>
+                        <%= f.input :numero_ordre, placeholder: "#{@user.numero_ordre }", label: "Numéro d'Ordre" %>
+                      </li>
+                      <% if !@user.has_practice %>
+                        <li>
+                          <i class="fa fa-fw fa-file-text-o icon-profile"></i>
+                          <%= f.input :numero_ursaff, placeholder: "#{@user.numero_ursaff }", label: "Numéro URSAFF" %>
+                        </li>
+                      <% end %>
                     </ul>
-                  </div>
-                  <h3>Section 4</h3>
-                  <div>
-                    <p>
-                      Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-                      et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-                      faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-                      mauris vel est.
-                    </p>
-                    <p>
-                      Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-                      Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                      inceptos himenaeos.
-                    </p>
-                  </div>
+                  <h3>
+                    <% if @user.has_practice %>
+                      Activité & cabinet
+                    <% else %>
+                      Filtres de recherche
+                    <% end %>
+                  </h3>
+                  <ul>
+                    <% if @user.has_practice %>
+                      <li>
+                        <i class="fa fa-fw fa-user-md icon-profile"></i>
+                        <%= f.input :convention, placeholder: "#{@user.convention }", label: "Conventionnement secteur" %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-suitcase icon-profile"></i>
+                        <%= f.input :house_visits, placeholder: "#{@user.house_visits}", collection: [['Aucune visite à domicile', 'none'], ["Jusqu'à 2 visites à domicile / jour en moyenne", "max2"], ["Plus de 2 visites à domicile / jour en moyenne", "above2"]], label: false %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-phone icon-profile"></i>
+                        <%= f.input :secretary, placeholder: "#{@user.secretary}", collection: [['Secrétariat disponible', true], ["Pas de secrétariat", false]], label: false %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-home icon-profile"></i>
+                        <%= f.input :housing, placeholder: "#{@user.housing}", collection: [['Hébergement possible', true], ["Pas d'hébergement possible", false]], label: false %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-money icon-profile"></i>
+                        <%= f.input :commission, placeholder: "#{@user.commission }", label: "Versement souhaitée (%)" %>
+                      </li>
+                    <% else %>
+                      <li>
+                        <i class="fa fa-fw fa-suitcase icon-profile"></i>
+                        <%= f.input :house_visits_tolerance, placeholder: "#{@user.house_visits_tolerance}", collection: [['Aucune visite à domicile acceptée', 'none'], ["Maximum 2 visites à domicile / jour acceptées", "max2"], ["Visites à domicile acceptées", "above2"]], label: false %>
+                      </li>
+
+                      <li>
+                        <i class="fa fa-fw fa-phone icon-profile"></i>
+                        <%= f.input :nosecretary_tolerance, placeholder: "#{@user.nosecretary_tolerance}", collection: [['Absence de secrétariat acceptée', true], ["Secrétariat requis", false]], label: false %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-home icon-profile"></i>
+                        <%= f.input :nohousing_tolerance, placeholder: "#{@user.nohousing_tolerance}", collection: [['Hébergement non-nécessaire', true], ["Hébergement nécessaire", false]], label: false %>
+                      </li>
+                      <li>
+                        <i class="fa fa-fw fa-money icon-profile"></i>
+                        <%= f.input :commission, placeholder: "#{@user.min_commission }", label: "Versement minimal souhaité (%)" %>
+                      </li>
+                    <% end %>
+                  </ul>
+                  <h3>Présentation</h3>
+                    <ul>
+                      <li style = "margin-top: 20px;">
+                        <%= f.input :presentation, placeholder: "#{@user.presentation}", label: "Rédigez votre présentation et obtenez jusqu'à 80% de résultats en plus" %>
+                      </li>
+                      <li style = "margin-top: 20px;">
+                        <%= f.input :publications, placeholder: "#{@user.publications}", label: "Renseignez vos publications" %>
+                      </li>
+                    </ul>
                 </div>
               </div>
             </div>
-    <div class="text-center">
-      <%= f.button :submit,"Terminé", :class => "btn btn-primary btn-search-home user-edit-button",  :style => "margin: 50px" %>
-    </div>
+          </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-offset-4 col-sm-4">
+            <%= f.button :submit,"Terminé", :class => "btn btn-primary btn-search-home user-edit-button",  :style => "margin: 50px" %>
+          </div>
+        </div>
+      </div>
   <% end %>
 </div>
 

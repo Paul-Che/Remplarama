@@ -66,7 +66,7 @@
               <li><i class="fa fa-fw fa-home icon-profile"></i><p><%= human_housing(current_user.housing) %></p></li>
               <li>
                 <i class="fa fa-fw fa-money icon-profile"></i>
-                <p id="p-comm">Rétrocommission souhaitée :</p>
+                <p id="p-comm">Versement souhaitée :</p>
                 <div class="small-comm-tag"><%= current_user.commission %>%</div>
               </li>
             <% else %>
@@ -84,7 +84,7 @@
               </li>
               <li>
                 <i class="fa fa-fw fa-money icon-profile"></i>
-                <p id="p-comm">Rétrocommission minimale souhaitée :</p>
+                <p id="p-comm">Versement minimale souhaitée :</p>
                 <div class="small-comm-tag"><%= current_user.min_commission %>%</div>
               </li>
             <% end %>
