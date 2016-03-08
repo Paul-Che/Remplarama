@@ -144,6 +144,9 @@
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
             <% current_user.bookings.each do |booking| %>
+            <% if booking.slot.nil?%>
+            <p>créneau n'existe plus</p>
+            <% else %>
               <div class="requests">
                 <div class="request-head">
                   <% if booking.slot.user.avatar.nil? %>
@@ -206,6 +209,7 @@
                   <% end %>
                 </div>
               </div>
+            <% end %>
             <% end %>
           <% end %>
       </div>
