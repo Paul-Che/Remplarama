@@ -1,18 +1,36 @@
 <% content_for :meta_title, "RemplaMatch - Modifier mon profil - #{current_user.first_name} #{current_user.last_name}" %>
 
-<div class="my-profile-header">
-  <%= simple_form_for (@user) do |f|%>
+<div class="my-profile-header" style = "padding: 70px;">
+  <%= simple_form_for @user, :url => @user do |f|%>
     <% f.error_notification %>
     <!-- left-edition : picture, firstname, lastname, A la recherche de -->
       <div class="container"></div>
         <div class="row"></div>
           <div class="col-xs-12 col-sm-4">
             <div class="left-editing">
-              <% f.input :avatar, as: :file, :label => "Changez votre avatar" %>
+              <div class="avatar-header">
+                <% if @user.avatar.nil? %>
+                  <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+                <% else %>
+                  <%= image_tag @user.avatar, class: "avatar-superextralarge " %>
+                <% end %>
+              </div>
+              <div>
+                  <%= f.input :avatar, as: :file, :label => "Changez votre avatar" %>
+              </div>
+              <div style = "margin-top: 20px;">
+                  <%= f.input :first_name, placeholder: "#{@user.first_name}", label: false %>
+              </div>
+              <div style = "margin-top: 20px;">
+                  <%= f.input :last_name, placeholder: "#{@user.last_name}", label: false %>
+              </div>
+              <div style = "margin-top: 20px;">
+                <%= f.input :has_practice, collection: [['Je recherche un remplaçant', true], ['Je recherche un poste', false]], label: false %>
+              </div>
             </div>
           </div>
             <!-- right-edition -->
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-offset-1 col-sm-7">
               <div class="right-editing">
                 <div id="accordion">
                   <h3>Section 1</h3>
@@ -64,7 +82,9 @@
                 </div>
               </div>
             </div>
-    <%= f.button :submit %>
+    <div class="text-center">
+      <%= f.button :submit,"Terminé", :class => "btn btn-primary btn-search-home user-edit-button",  :style => "margin: 50px" %>
+    </div>
   <% end %>
 </div>
 

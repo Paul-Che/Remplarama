@@ -63,5 +63,4 @@ module UsersHelper
       raw("<em>Hébergement : non-renseigné</em>")
     end
   end
-
 end

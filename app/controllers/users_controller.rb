@@ -134,7 +134,7 @@ class UsersController < ApplicationController
   def update
     @user.update(user_params)
     authorize @user
-    redirect_to :back
+    redirect_to :user
   end
 
   private
