@@ -14,9 +14,9 @@
             <!-- <div class="row-fluid"> -->
               <div class="col-xs-12">
                 <select class="search-input select-height full-input" name="speciality">
-                  <option <%= "selected" if @speciality == "Médecine générale" %> class="search-input" value="Médecine générale">Médecine générale</option>
-                  <option <%= "selected" if @speciality == "Kinésithérapie" %> class="search-input" value="Kinésithérapie">Kinésithérapie</option>
-                  <option <%= "selected" if @speciality == "Autre spécialité" %> class="search-input" value="Autre spécialité">Autre spécialité</option>
+                  <option <%= "selected" if @speciality == "medg" %> class="search-input" value="medg">Médecine générale</option>
+                  <option <%= "selected" if @speciality == "kine" %> class="search-input" value="kine">Kinésithérapie</option>
+                  <option <%= "selected" if @speciality == "otherspe" %> class="search-input" value="otherspe">Autre spécialité</option>
                 </select>
               </div>
 <!--             </div>
@@ -152,7 +152,7 @@
                           <%= ("<i class='fa fa-star fa-yellow'></i>" * user.reviews_i_received.average(:rating).to_f.round).html_safe %><%= ("<i class='fa fa-star fa-gray'></i>" * (5 - user.reviews_i_received.average(:rating).to_f.round)).html_safe %>
                         </h4>
                       <% end %>
-                      <h5><%= user.speciality %></h5>
+                      <h5><%= human_speciality(user.speciality) %></h5>
                       <h6><%= user.address %></h6>
                     </div>
                     <div class="card-content-right hidden-xs hidden-sm">

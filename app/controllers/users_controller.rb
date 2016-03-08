@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def search_practices
     @user = current_user
-    @speciality = params[:speciality] || ['Médecine générale', 'Kinésithérapie', 'Autre spécialité']
+    @speciality = params[:speciality] || ['medg', 'kine', 'otherspe']
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @has_practice = true
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
   def search_locums
     @user = current_user
-    @speciality = params[:speciality] || ['Médecine générale', 'Kinésithérapie', 'Autre spécialité']
+    @speciality = params[:speciality] || ['medg', 'kine', 'otherspe']
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @has_practice = false

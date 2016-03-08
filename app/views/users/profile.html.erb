@@ -7,7 +7,7 @@
     <% else %>
       <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
     <% end %>
-    <h4><strong><%= "Dr. " if current_user.speciality != "Kinésithérapie" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
+    <h4><strong><%= "Dr. " if current_user.speciality != "kine" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
     <h5>
       <i class="fa fa-fw fa-search"></i>
       <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
@@ -27,7 +27,7 @@
           <h4>Mes informations clés</h4>
           <hr>
           <ul class="list-unstyled doc-user-profile">
-            <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><p><%= current_user.speciality %></p></li>
+            <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><p><%= human_speciality(current_user.speciality) %></p></li>
             <li><i class="fa fa-fw fa-graduation-cap icon-profile"></i><p><%= current_user.education %></p></li>
             <li><i class="fa fa-fw fa-hashtag icon-profile"></i><p>Numéro de l'Ordre : <%= current_user.numero_ordre %></p></li>
             <% if !current_user.has_practice %>

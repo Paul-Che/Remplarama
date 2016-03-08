@@ -12,7 +12,7 @@
         <% else %>
           <%= image_tag @user.avatar, class: "avatar-superextralarge " %>
         <% end %>
-      <h4><strong><%= "Dr. " if @user.speciality != "Kinésithérapie" %></strong><%= @user.first_name %> <%= @user.last_name %></h4>
+      <h4><strong><%= "Dr. " if @user.speciality != "kine" %></strong><%= @user.first_name %> <%= @user.last_name %></h4>
       <h5>
         <i class="fa fa-fw fa-search"></i>
         <%= @user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
@@ -28,7 +28,7 @@
             <h4>Informations clés</h4>
             <hr>
             <ul class="list-unstyled doc-user-profile">
-              <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><p><%= @user.speciality %></p></li>
+              <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><p><%= human_speciality(@user.speciality) %></p></li>
               <li><i class="fa fa-fw fa-graduation-cap icon-profile"></i><p><%= @user.education %></p></li>
               <li><i class="fa fa-fw fa-hashtag icon-profile"></i><p>Numéro de l'Ordre : <%= @user.numero_ordre %></p></li>
               <% if !@user.has_practice %>
@@ -214,7 +214,7 @@
                 <%= f.error_notification %>
                 <div id="form-inputs">
                   <%= f.input :address, required: true %>
-                  <%= f.input :speciality, required: true, collection: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] %>
+                  <%= f.input :speciality, required: true, collection: [['Médecine générale', 'medg'], ['Kinésithérapie', 'kine'], ['Autre spécialité', 'otherspe']] %>
                   <%= f.input :numero_ordre, required: true %>
                 </div>
                 <div class="form-actions text-center">
