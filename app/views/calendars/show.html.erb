@@ -34,9 +34,9 @@
             <% if slot.end_date > Date.today %>
               <div class="myslots">
                 <p><strong><%= l(slot.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(slot.end_date, format: "%e %B %Y") %></strong></p>
-                <div class="delete-gray">
-                  <%= link_to "X", user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %>
-                </div>
+                <%= link_to user_slot_path(id: slot.id, user_id: current_user.id), method: :delete do %>
+                  <div class="delete-gray"><strong>X</strong></div>
+                <% end %>
               </div>
             <% end %>
           <% end %>
