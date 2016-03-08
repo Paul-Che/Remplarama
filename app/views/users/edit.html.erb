@@ -1,1 +1,99 @@
-<h1>Hello World</h1>
+<% content_for :meta_title, "RemplaMatch - Modifier mon profil - #{current_user.first_name} #{current_user.last_name}" %>
+
+<div class="my-profile-header" style = "padding: 70px;">
+  <%= simple_form_for @user, :url => @user do |f|%>
+    <% f.error_notification %>
+    <!-- left-edition : picture, firstname, lastname, A la recherche de -->
+      <div class="container"></div>
+        <div class="row"></div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="left-editing">
+              <div class="avatar-header">
+                <% if @user.avatar.nil? %>
+                  <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+                <% else %>
+                  <%= image_tag @user.avatar, class: "avatar-superextralarge " %>
+                <% end %>
+              </div>
+              <div>
+                  <%= f.input :avatar, as: :file, :label => "Changez votre avatar" %>
+              </div>
+              <div style = "margin-top: 20px;">
+                  <%= f.input :first_name, placeholder: "#{@user.first_name}", label: false %>
+              </div>
+              <div style = "margin-top: 20px;">
+                  <%= f.input :last_name, placeholder: "#{@user.last_name}", label: false %>
+              </div>
+              <div style = "margin-top: 20px;">
+                <%= f.input :has_practice, collection: [['Je recherche un remplaçant', true], ['Je recherche un poste', false]], label: false %>
+              </div>
+            </div>
+          </div>
+            <!-- right-edition -->
+            <div class="col-xs-12 col-sm-offset-1 col-sm-7">
+              <div class="right-editing">
+                <div id="accordion">
+                  <h3>Section 1</h3>
+                  <div>
+                    <p>
+                      Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                      ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                      amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                      odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                    </p>
+                  </div>
+                  <h3>Section 2</h3>
+                  <div>
+                    <p>
+                      Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                      purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                      velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                      suscipit faucibus urna.
+                    </p>
+                  </div>
+                  <h3>Section 3</h3>
+                  <div>
+                    <p>
+                      Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                      Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                      ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                      lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                    </p>
+                    <ul>
+                      <li>List item one</li>
+                      <li>List item two</li>
+                      <li>List item three</li>
+                    </ul>
+                  </div>
+                  <h3>Section 4</h3>
+                  <div>
+                    <p>
+                      Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                      et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                      faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                      mauris vel est.
+                    </p>
+                    <p>
+                      Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                      Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                      inceptos himenaeos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+    <div class="text-center">
+      <%= f.button :submit,"Terminé", :class => "btn btn-primary btn-search-home user-edit-button",  :style => "margin: 50px" %>
+    </div>
+  <% end %>
+</div>
+
+<% content_for :after_js do %>
+
+  <script>
+  $(document).ready(function() {
+    $( "#accordion" ).accordion();
+  });
+  </script>
+
+<% end %>

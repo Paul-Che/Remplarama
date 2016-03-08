@@ -12,6 +12,9 @@
       <i class="fa fa-fw fa-search"></i>
       <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
     </h5>
+    <div class="text-center">
+      <%= link_to "Modifier mon profil", edit_user_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button " %>
+    </div>
   </div>
   <hr>
 </div>
@@ -157,15 +160,6 @@
         <% end %>
       </div>
     </div>
-  </div>
-
-
-
-
-
-
-  <div class="row">
-    <%= link_to "Modifier mon profil", edit_user_path(current_user)%>
   </div>
 
 </div>
