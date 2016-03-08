@@ -97,8 +97,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    set_user
-
     @markers = Gmaps4rails.build_markers(@user) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
@@ -131,11 +129,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    set_user
   end
 
   def update
-    set_user
     @user.update(user_params)
     authorize @user
     redirect_to :back
