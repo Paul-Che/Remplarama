@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def pending_requests_count
-    @pending_requests ||= Slot.joins(:bookings).where(bookings: {accepted: nil}).where(user: current_user).size
+    @pending_requests_in ||= Slot.joins(:bookings).where(bookings: {accepted: nil}, user: current_user).size
   end
 
 end
