@@ -51,6 +51,7 @@
 }
 .panel-body {
   position: relative;
+  padding: 0px;
 }
 .panel-body > .flexbox-columns {
   width: 100%;
@@ -114,18 +115,18 @@
   }
 }
 .end-of-messages {
-  font-size: 13px;
   text-align: center;
   color: #d9d9d9;
   border-bottom: 1px solid rgb(240, 240, 240);
   width: 100%;
   p {
     margin-top: 10px;
+    font-size: 13px;
   }
 }
 .fixed-height {
   height: 75vh;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .scroll {
 }
@@ -144,12 +145,15 @@
 }
 .message-container {
   width: 100%;
-  padding: 10px 20px;
+  padding: 5px 10px;
   .message-content {
     margin-left: 10px;
     h6 {
       margin-top: 0;
       margin-bottom: 7px;
+    }
+    p {
+      font-size: 13px;
     }
   }
   .message-header {
@@ -219,7 +223,7 @@
 #wrapper {
   min-height: 75vh;
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   padding-bottom: 61px;
   &.focused {
     padding-bottom: 159px;
