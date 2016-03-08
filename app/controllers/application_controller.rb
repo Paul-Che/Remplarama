@@ -18,9 +18,41 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
-
   def devise_or_admin_controller?
     devise_controller? || params[:controller] =~ /admin\/.*/
+  end
+
+  def after_sign_in_path_for(resource)
+    url = stored_location_for(resource)
+    if url.include?("practices") && resource.has_practice
+      root_path
+    elsif url.include?("locums") && !resource.has_practice
+      root_path
+    else
+      sign_in_url = search_practices_path
+      if request.referer == sign_in_url
+        super
+      else
+        url || request.referer || root_path
+      end
+    end
+  end
+
+   def after_sign_up_path_for(resource)
+    raise
+    url = stored_location_for(resource)
+    if url.include?("practices") && resource.has_practice
+      root_path
+    elsif url.include?("locums") && !resource.has_practice
+      root_path
+    else
+      sign_in_url = search_practices_path
+      if request.referer == sign_in_url
+        super
+      else
+        url || request.referer || root_path
+      end
+    end
   end
 
   def disable_footer
