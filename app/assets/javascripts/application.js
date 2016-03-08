@@ -10,4 +10,7 @@
 //= require gmaps/google
 //= require owl.carousel
 //= require moment_locale_config
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .

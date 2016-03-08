@@ -22,8 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :conversations, only: [:index, :show, :destroy]
-  resources :messages, only: [:new, :create]
+  resources :conversations, only: [:index]
 
   resource :calendar,     only: [:show]
 

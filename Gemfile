@@ -20,6 +20,9 @@ gem 'geocoder'
 gem 'owlcarousel-rails'
 gem 'activeadmin', github: 'activeadmin'
 
+# react
+gem 'js-routes'
+gem 'react-rails', '1.6.1'
 
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -36,6 +39,7 @@ gem 'underscore-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
   gem 'rails-assets-bootstrap-datepicker'
+  gem 'rails-assets-classnames'
 end
 
 group :development, :test do

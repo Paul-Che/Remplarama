@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :reviews_i_made, class_name: 'Review', foreign_key: :reviewer_id, dependent: :destroy
   has_many :slots, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_many :messages
   # has_many :messages, through: [:bookings, :slots], dependent: :restrict_with_exception
 
 
@@ -23,8 +24,30 @@ class User < ActiveRecord::Base
 
   #validates :numero_ursaff, format: { with: /\d{18}/, message: "Votre numéro URSSAF n'est pas le bon" }, on: :update
 
-  def mailboxer_email(object)
-    email
-  end
+  def conversations
+     Conversation.includes(:messages)
+                 .where("user1_id = :id OR user2_id = :id", id: id)
+                 .order("messages.created_at DESC")
+   end
+
+   def other_user(conversation)
+     conversation.users.include?(self) ? conversation.other_user(self) : nil
+   end
+
+   def unread_conversations
+     conversations.select { |c| c.unread_messages?(self) }
+   end
+
+   def unread_conversations_count
+     unread_conversations.count
+   end
+
+   def unread_conversations?
+     unread_conversations_count > 0
+   end
+
+   def one_avatar_url
+     avatar_url ? avatar_url : "http://placehold.it/64x64"
+   end
 
 end

@@ -13,7 +13,7 @@ User.destroy_all
 
 # Créations des users "Practice"
 
-User.create!(email: "chenon@gmail.com",
+angeline = User.create!(email: "chenon@gmail.com",
             password: "12345678",
             first_name: "Angéline",
             last_name: "Chenon",
@@ -31,7 +31,7 @@ User.create!(email: "chenon@gmail.com",
             convention: "1",
             house_visits: "above2",
             commission: 90)
-User.create!(email: "jeanne.darc@gmail.com",
+jeanne = User.create!(email: "jeanne.darc@gmail.com",
             password: "12345678",
             first_name: "Jeanne",
             last_name: "Dupont",
@@ -49,7 +49,7 @@ User.create!(email: "jeanne.darc@gmail.com",
             convention: "2",
             house_visits: "max2",
             commission: 80)
-User.create!(email: "martin.pecheur@gmail.com",
+martin = User.create!(email: "martin.pecheur@gmail.com",
             password: "12345678",
             first_name: "Martin",
             last_name: "Pêcheur",
@@ -67,7 +67,7 @@ User.create!(email: "martin.pecheur@gmail.com",
             convention: "3",
             house_visits: "above2",
             commission: 70)
-User.create!(email: "edouard.lesoin@gmail.com",
+edouard = User.create!(email: "edouard.lesoin@gmail.com",
             password: "12345678",
             first_name: "Edouard",
             last_name: "Le soin",
@@ -85,7 +85,7 @@ User.create!(email: "edouard.lesoin@gmail.com",
             convention: "1",
             house_visits: "none",
             commission: 60)
-User.create!(email: "jacques.wagon@gmail.com",
+jacques = User.create!(email: "jacques.wagon@gmail.com",
             password: "12345678",
             first_name: "Jacques",
             last_name: "Wagon",
@@ -107,7 +107,7 @@ User.create!(email: "jacques.wagon@gmail.com",
 
 # Créations des users "Remplaçant"
 
-User.create!(email: "antoine@gmail.com",
+antoine = User.create!(email: "antoine@gmail.com",
             password: "12345678",
             first_name: "Antoine",
             last_name: "Loron",
@@ -125,7 +125,7 @@ User.create!(email: "antoine@gmail.com",
             convention: nil,
             house_visits_tolerance: "above2",
             min_commission: 80)
-User.create!(email: "Didier.chenon@gmail.com",
+didier = User.create!(email: "Didier.chenon@gmail.com",
             password: "12345678",
             first_name: "Didier",
             last_name: "Chelon",
@@ -143,7 +143,7 @@ User.create!(email: "Didier.chenon@gmail.com",
             convention: nil,
             house_visits_tolerance: "none",
             min_commission: 70)
-User.create!(email: "jerome.burgaud@gmail.com",
+jerome = User.create!(email: "jerome.burgaud@gmail.com",
             password: "12345678",
             first_name: "Jerome",
             last_name: "Burgaud",
@@ -161,7 +161,7 @@ User.create!(email: "jerome.burgaud@gmail.com",
             convention: nil,
             house_visits_tolerance: "above2",
             min_commission: 90)
-User.create!(email: "pierre.martin@gmail.com",
+pierre = User.create!(email: "pierre.martin@gmail.com",
             password: "12345678",
             first_name: "Pierre",
             last_name: "Martin",
@@ -179,7 +179,7 @@ User.create!(email: "pierre.martin@gmail.com",
             convention: nil,
             house_visits_tolerance: "max2",
             min_commission: 80)
-User.create!(email: "ludovic.dupont@gmail.com",
+ludovic = User.create!(email: "ludovic.dupont@gmail.com",
             password: "12345678",
             first_name: "Ludovic",
             last_name: "Dupont",
@@ -219,8 +219,28 @@ User.where("first_name LIKE '%Jerome%'").first.bookings.create(start_date: ("Mon
 
 User.where("first_name LIKE '%Antoine%'").first.slots.destroy_all
 
+# Creation of conversation and messages for test :
 
 
+c1 = Conversation.create!(user1: ludovic, user2: angeline)
+c2 = Conversation.create!(user1: ludovic, user2: pierre)
+c3 = Conversation.create!(user1: ludovic, user2: martin)
+c4 = Conversation.create!(user1: angeline, user2: pierre)
+c5 = Conversation.create!(user1: angeline, user2: martin)
+c6 = Conversation.create!(user1: pierre, user2: martin)
+
+m1 = Message.create!(user: ludovic, conversation: c1, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
+m2 = Message.create!(user: ludovic, conversation: c2, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
+m3 = Message.create!(user: ludovic, conversation: c3, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
+m4 = Message.create!(user: angeline, conversation: c1, content: "Salut ludovic, malheureusement je ne suis pas là ce week-end... Une autre fois peut-être!")
+m5 = Message.create!(user: pierre, conversation: c2, content: "Hello ludovic, j'aimerais beaucoup te la prêter mais elle est en réparation...")
+m6 = Message.create!(user: martin, conversation: c3, content: "Oui pas de problème passe vendredi entre 19h et 21h!")
+m7 = Message.create!(user: angeline, conversation: c4, content: "Salut pierre")
+m8 = Message.create!(user: angeline, conversation: c5, content: "Salut martin")
+m9 = Message.create!(user: pierre, conversation: c6, content: "Hey!")
+m10 = Message.create!(user: pierre, conversation: c4, content: "Hello")
+m11 = Message.create!(user: martin, conversation: c5, content: "Quoi de neuf ?")
+m12 = Message.create!(user: martin, conversation: c6, content: "Tu fais quoi demain ?")
 
 
 
