@@ -24,7 +24,7 @@
               <div style = "margin-top: 20px;">
                   <%= f.input :first_name, placeholder: "#{@user.first_name}", label: "Prénom" %>
               </div>
-              <div style = "margin-top: 20px;">
+              <div style = "margin-top: 20px;" class="replacement-need">
                 <%= f.input :has_practice, collection: [['Je recherche un remplaçant', true], ['Je recherche un remplacement', false]], label: "Besoin" %>
               </div>
               <div style = "margin-top: 20px;">
@@ -58,7 +58,7 @@
                       <% end %>
                     </ul>
                   <h3>Activité & cabinet</h3>
-                  <ul>
+                     <ul>
                     <% if @user.has_practice %>
                       <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-user-md icon-profile"></i>
@@ -125,9 +125,17 @@
 <% content_for :after_js do %>
 
   <script>
+
   $(document).ready(function() {
-    $( "#accordion" ).accordion();
+    $("#accordion").accordion();
+
+    $( ".replacement-need" ).change(function() {
+      alert( "Ah oui oui Ah oui oui" );
+
+    });
+
   });
+
   </script>
 
 <% end %>
