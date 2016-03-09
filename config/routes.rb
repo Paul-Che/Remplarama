@@ -9,12 +9,12 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index] do
     resources :slots, only: [:create, :update, :destroy]
-    resources :bookings, only: [:new, :create, :update, :destroy]
+    resources :bookings, only: [:new, :create, :update]
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
     resources :messages, only: [:index]
   end
 
-  resources :bookings, only: [:new, :create, :update, :destroy] do
+  resources :bookings, only: [:destroy] do
     resources :messages, only: [:new, :create]
     member do
       patch 'confirm'

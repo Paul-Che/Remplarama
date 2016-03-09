@@ -30,15 +30,13 @@ class SlotsController < ApplicationController
 
   def destroy
     set_slot
-    authorize @slot
     @slot.destroy
-    redirect_to calendar_path
   end
 
   private
 
   def slots_params
-    params.permit(:start_date, :end_date, :status, :user_id,)
+    params.permit(:start_date, :end_date, :status, :user_id)
   end
 
   def set_slot
