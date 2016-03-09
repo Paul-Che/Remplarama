@@ -52,6 +52,7 @@
 .panel-body {
   position: relative;
   padding: 0px;
+  height: 60vh;
 }
 .panel-body > .flexbox-columns {
   width: 100%;
@@ -125,7 +126,7 @@
   }
 }
 .fixed-height {
-  height: 75vh;
+  height: 60vh;
   overflow-y: scroll;
 }
 .scroll {
@@ -191,6 +192,9 @@
       box-shadow: none;
     }
   }
+  .btn {
+    margin-right: 5px;
+  }
   .btn-send,
   .btn-stop {
     font-size: 13px;
@@ -221,8 +225,8 @@
   outline: none;
 }
 #wrapper {
-  min-height: 75vh;
-  height: 100%;
+  min-height: 48vh;
+  height: 80%;
   overflow-y: scroll;
   padding-bottom: 61px;
   &.focused {

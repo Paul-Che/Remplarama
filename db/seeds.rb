@@ -10,6 +10,8 @@ Booking.destroy_all
 Slot.destroy_all
 Review.destroy_all
 User.destroy_all
+Message.destroy_all
+Conversation.destroy_all
 
 # Créations des users "Practice"
 

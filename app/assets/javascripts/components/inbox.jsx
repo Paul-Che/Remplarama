@@ -17,7 +17,7 @@ var Inbox = React.createClass({
               <div className="panel-heading">
                 <h4>Inbox</h4>
               </div>
-              <div className="panel-body fixed-height">
+              <div className="panel-body">
                 <ConversationList
                   conversations={this.state.conversations}
                   onConversationSelection={this.handleConversationSelection}
@@ -26,12 +26,12 @@ var Inbox = React.createClass({
               </div>
             </div>
           </div>
-          <div className="col-sm-8" id="message-list">
+          <div className="col-sm-7" id="message-list">
             <div className="panel panel-default">
               <div className="panel-heading">
                 <h4>{this.state.firstName}</h4>
               </div>
-              <div className="panel-body fixed-height">
+              <div className="panel-body">
                 <div id="wrapper">
                   <MessageList
                     messages={this.state.messages}
