@@ -22,6 +22,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'mailboxer'
 gem 'bootstrap-will_paginate'
 gem 'will_paginate'
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 gem 'sass-rails'
 gem 'jquery-rails'

@@ -160,7 +160,7 @@
                       <% if user.avatar.nil? %>
                         <%= image_tag "placeholder_pic.png", class: "avatar-xxl" %>
                       <% else %>
-                        <%= cl_image_tag booking.user.avatar.path, width: 300, height: 300, crop: :fill, radius: :max %>
+                        <%= cl_image_tag booking.user.avatar.path, class: "avatar-xxl", crop: :fill, radius: :max %>
                       <% end %>
                     </div>
                     <div class="card-content-left">
