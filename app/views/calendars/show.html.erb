@@ -130,6 +130,9 @@
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
             <% current_user.bookings.order(created_at: :desc).each do |booking| %>
+            <% if booking.slot.nil?%>
+            <!-- <h5>un créneau pour lequel vous aviez fait une demande n'existe plus</h5> -->
+            <% else %>
               <div class="requests">
                 <div class="request-head">
                   <% if booking.slot.user.avatar.nil? %>
@@ -192,6 +195,7 @@
                   <% end %>
                 </div>
               </div>
+            <% end %>
             <% end %>
           <% end %>
       </div>
