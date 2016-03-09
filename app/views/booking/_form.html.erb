@@ -3,7 +3,7 @@
   <h4 class="modal-title" id="form-title">Informations complémentaires</h4>
 </div>
 <div class="modal-body">
-  <div class="text-center modal-subtitle">
+  <div class="modal-subtitle">
     <p>
     Avant de pouvoir
     <% if current_user.has_practice %>
@@ -21,10 +21,8 @@
       <%= f.input :speciality, required: true, placeholder: "Spécialité", collection: [['Médecine générale', 'medg'], ['Kinésithérapie', 'kine'], ['Autre spécialité', 'otherspe']], label: false, prompt: ["Spécialité", disabled: true] %>
       <%= f.input :numero_ordre, placeholder: "Numéro de l'Ordre", required: true, label: false %>
       <% if !current_user.has_practice %><%= f.input :numero_ursaff, required: true, placeholder: "Numéro URSSAF", label: false %><% end %>
-    </div>
-    <br>
     <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
+    </div>
   <% end %>
-  <br>
   <%= link_to "Editer mon profil complet", calendar_path(current_user) %>
 </div>
