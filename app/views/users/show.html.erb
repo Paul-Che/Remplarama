@@ -200,32 +200,17 @@
       </div>
     </div>
   </div>
+
   <!-- Modal -->
-  <div class="modal fade text-center" id="contacter">
-  <!-- Modal content with Sign up form -->
-    <div class="container">
-      <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
-        <div class="form-design background">
-          <div class="text-center" id="form_title">
-            <h2>Informations complémentaires</h2>
-            <p>Merci de renseigner les informations ci-dessous afin de pouvoir effectuer une demande de remplacement.</p>
-            </div>
-              <%= simple_form_for(current_user) do |f| %>
-                <%= f.error_notification %>
-                <div id="form-inputs">
-                  <%= f.input :address, required: true %>
-                  <%= f.input :speciality, required: true, collection: [['Médecine générale', 'medg'], ['Kinésithérapie', 'kine'], ['Autre spécialité', 'otherspe']] %>
-                  <%= f.input :numero_ordre, required: true %>
-                </div>
-                <div class="form-actions text-center">
-                  <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
-                </div>
-              <% end %>
-              <%= link_to "Finir de compléter son profil", calendar_path(current_user) %>
-          </div>
-        </div>
+  <div class="modal fade text-center" id="contacter" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <%= render 'booking/form' %>
+
       </div>
     </div>
   </div>
 
+  </div>
 </div>

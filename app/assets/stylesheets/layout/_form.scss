@@ -2,60 +2,60 @@
   margin-top: 50px;
   margin-bottom: 50px;
   padding: 10px 15px;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 13px;
   .checkbox label {
     padding: 10px 20px;
   }
-  // .password label {
-  //   padding-top: 25px;
-  //   font-size: 17px;
-  //   font-weight: lighter;
-  // }
-  // .password input {
-  //   background-color: transparent;
-  //   color: black;
-  //   border-bottom: 2px solid grey;
-  // }
-  // .email label {
-  //   padding-top: 25px;
-  //   font-size: 17px;
-  //   font-weight: lighter;
-  // }
-  // .email input {
-  //   background-color: transparent;
-  //   color: black;
-  //   border-bottom: 2px solid grey;
-  // }
-  // .first_name label {
-  //   padding-top: 25px;
-  //   font-size: 17px;
-  //   font-weight: lighter;
-  // }
-  // .first_name input {
-  //   background-color: transparent;
-  //   color: black;
-  //   border-bottom: 2px solid grey;
-  // }
   .help-block {
     font-size: 15px;
   }
+  a {
+    font-size: 13px;
+  }
+}
+.modal-subtitle {
+  text-align: left;
+}
+.modal-content {
+  a, p {
+    font-size: 13px;
+    color: #888;
+  }
 }
 .background {
-      background-color: rgb(250, 250, 250);
+  background-color: rgb(250, 250, 250);
 }
-#form_title h2 {
-  padding-bottom: 25px;
-  letter-spacing: 5px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: lighter;
-}
-#form_title p {
-  letter-spacing: 2px;
-  text-align: justify;
+#form_title h4 {
   padding-bottom: 10px;
-  font-size: 17px;
+  letter-spacing: 3px;
+  font-family: 'Raleway', sans-serif;
+}
+#form_title {
+  p {
+    text-align: justify;
+    padding-bottom: 10px;
+    font-size: 13px;
+  }
+}
+#form-inputs {
+  margin-bottom: 5px;
+  label {
+    font-size: 13px;
+  }
+  input {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 13px;
+  }
+  select {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 13px;
+    background-color: white;
+  }
 }
 #form-inputs {
   text-align: left;

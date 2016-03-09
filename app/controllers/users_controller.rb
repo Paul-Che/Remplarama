@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  skip_before_action :authenticate_user!, only: [:search_practices, :search_locums]
   after_action :verify_authorized, only: :update
   before_filter :disable_footer, only: [:search_practices, :search_locums, :show,]
 
@@ -53,7 +54,6 @@ class UsersController < ApplicationController
       marker.infowindow "<strong>Dr. #{user.first_name} #{user.last_name}</strong><br/>#{user.address}"
       marker.json({ :id => user.id })
     end
-    authorize @user
   end
 
   def search_locums
@@ -93,7 +93,6 @@ class UsersController < ApplicationController
       marker.infowindow "<strong>Dr. #{user.first_name} #{user.last_name}</strong><br/>#{user.address}"
       marker.json({ :id => user.id })
     end
-    authorize @user
   end
 
   def show
