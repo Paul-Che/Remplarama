@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # has_many :messages, through: [:bookings, :slots], dependent: :restrict_with_exception
 
 
-  validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
+  validates :speciality, inclusion: { in: [nil, 'Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
 
   validates :convention, inclusion: { in: [nil,'1', '2', '3']}, on: :update
   validates :house_visits, inclusion: { in: [nil,'none', 'max2', 'above2']}, on: :update
