@@ -26,6 +26,7 @@ $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', function() {
     initializeAutocomplete('user_input_autocomplete_address');
     initializeAutocomplete('user_input_autocomplete_address_navbar');
+    initializeAutocomplete('user_input_autocomplete_address_edit');
   });
 });
 
