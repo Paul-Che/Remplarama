@@ -10,4 +10,7 @@
 //= require gmaps/google
 //= require owl.carousel
 //= require moment_locale_config
+//= require jquery-fileupload/basic
+//= require cloudinary/jquery.cloudinary
+//= require attachinary
 //= require_tree .
