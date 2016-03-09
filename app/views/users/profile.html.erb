@@ -1,3 +1,4 @@
+<!-- Important : cette Route n'existe plus, le user est redirigé vers une user show à la place -->
 <% content_for :meta_title, "RemplaMatch - Mon profil - #{current_user.first_name} #{current_user.last_name}" %>
 
 <div class="myprofile-header">
@@ -50,13 +51,7 @@
       </div>
       <div class="col-sm-12 col-md-6">
         <div class="myprofile-card">
-          <h4>
-          <% if current_user.has_practice %>
-            Mon activité & mon cabinet
-          <% else %>
-            Mes filtres de recherche
-          <% end %>
-          </h4>
+          <h4>Mon activité & mon cabinet</h4>
           <hr>
           <ul class = "list-unstyled doc-user-profile">
             <% if current_user.has_practice %>
