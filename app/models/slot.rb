@@ -1,7 +1,7 @@
 class Slot < ActiveRecord::Base
   belongs_to :user
 
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
 
   validates :start_date, presence: true
   validates :end_date, presence: true

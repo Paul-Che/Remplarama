@@ -29,9 +29,9 @@
           <input type="text" class="search-input" placeholder="Lyon" name="location" id="user_input_autocomplete_address">
           <label for="formGroupInputSmall">en</label>
           <select class="search-input select-height" placeholder="Médecine générale" name="speciality">
-            <option value="Médecine générale">Médecine générale</option>
-            <option value="Kinésithérapie">Kinésithérapie</option>
-            <option value="Autre spécialité">Autre spécialité</option>
+            <option value="medg">Médecine générale</option>
+            <option value="kine">Kinésithérapie</option>
+            <option value="otherspe">Autre spécialité</option>
           </select>
           <input type="hidden" name="unrated" value="true">
           <button type="submit" class="btn btn-primary btn-search-home"><i class="fa fa-search"></i></button>
@@ -47,25 +47,25 @@
         <h3>Comment ça marche ?</h3>
         <br>
         <div class="col-xs-6 col-md-3">
-          <div class="card">
+          <div class="card round_icons">
             <%= image_tag "calendar2.svg", size: "100", class: "" %>
             <h5><strong>1.</strong> Déclarez vos disponibilités sur le calendrier intelligent</h5>
           </div>
         </div>
         <div class="col-xs-6 col-md-3">
-          <div class="card">
+          <div class="card round_icons">
             <%= image_tag "doctor2.svg", size: "100", class: "" %>
             <h5><strong>2.</strong> Choisissez le cabinet ou le remplaçant qui vous convient</h5>
           </div>
         </div>
         <div class="col-xs-6 col-md-3">
-          <div class="card">
+          <div class="card round_icons">
             <%= image_tag "switch2.svg", size: "100", class: "" %>
             <h5><strong>3.</strong> Échangez aisément depuis la plateforme</h5>
           </div>
         </div>
         <div class="col-xs-6 col-md-3">
-          <div class="card">
+          <div class="card round_icons">
             <%= image_tag "stethoscope2.svg", size: "100", class: "" %>
             <h5><strong>4.</strong> Donnez votre feedback à la fin de la prestation</h5>
           </div>
@@ -76,23 +76,23 @@
 </div>
 
 <div class="container">
-  <div class="row">
+  <div class="row medias">
     <div class="text-center">
       <h3>Ils parlent de nous :</h3>
       <br>
-      <div class="col-xs-6 col-sm-2 col-sm-offset-2">
+      <div class="col-xs-6 col-sm-2 col-sm-offset-2 ">
         <%= image_tag "le_wagon.png", class: "img-responsive"%>
       </div>
-      <div class="col-xs-6 col-sm-2">
+      <div class="col-xs-6 col-sm-2 ">
         <%= image_tag "jdn.png", class: "img-responsive" %>
       </div>
 <!--       <div class="col-xs-6 col-sm-2">
         <%= image_tag "paris-sud.png", class: "img-responsive"%>
       </div> -->
-      <div class="col-xs-6 col-sm-2">
+      <div class="col-xs-6 col-sm-2 ">
         <%= image_tag "lemonde.png", class: "img-responsive"%>
       </div>
-      <div class="col-xs-6 col-sm-2" style=" padding-left: 20px;">
+      <div class="col-xs-6 col-sm-2 " style=" padding-left: 20px;">
         <%= image_tag "le_quotidien.png", class: "img-responsive"%>
       </div>
     </div>
@@ -119,7 +119,7 @@
       </div>
       <div class="carousel-card text-center col-xs-12">
         <%= image_tag 'home_doc_1.jpg', class: "avatar-larger" %>
-        <h4>Dr Gibaud Laurent | Les Sables d'Olonnes</h4>
+        <h4>Dr Gibaud Laurent | Les Sables d'Olonne</h4>
         <div class="description text-justify">
           <p>"Auparavant, trouver un remplaçant de dernière minute était une mission quasi-impossible, mais ca, c'était avant."</p>
         </div>

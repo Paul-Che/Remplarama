@@ -1,11 +1,7 @@
 <% content_for :meta_title, "RemplaMatch - Mon calendrier - #{current_user.first_name} #{current_user.last_name}" %>
 
 <div id="title" class="text-center">
-  <% if current_user.has_practice? %>
-    <h3>Mon calendrier de recherches de remplaçants</h3>
-  <% else %>
-    <h3>Mon calendrier de recherches de remplacements</h3>
-  <%end%>
+  <h4>Sélectionnez vos périodes de recherche</h4>
 </div>
 
 <div class="container">
@@ -16,7 +12,7 @@
         <%= form_tag(user_slots_path(current_user), :method => :post ) do -%>
         <input id="startDate" name="start_date" type="hidden" value="" />
         <input id="endDate" name="end_date" type="hidden" value="" />
-        <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Ajouter la plage sélectionnée'/>
+        <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Valider cette plage'/>
         <% end %>
       </div>
     </div>
@@ -26,50 +22,44 @@
 
 <div class="demands">
   <div class="container">
-    <div class="row-fluid">
+    <div class="row-fluid border-between">
 
       <div class="availabilities text-center col-sm-12 col-md-4">
-        <% if current_user.has_practice? %>
-          <h4>Les dates où je recherche des remplaçants</h4>
-        <% else %>
-          <h4>Les dates où je recherche des remplacements</h4>
-        <% end %>
+        <h4>Mes périodes de recherche</h4>
         <% if current_user.slots.nil? %>
           <i class="fa fa-calendar-minus-o"></i>
-          <div class="empty_availabilities">Vous n'avez pas encore défini de plages de recherches <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
+          <div class="empty_availabilities">Vous n'avez pas encore défini de nouvelle plage de recherche <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
         <% else %>
-          <% current_user.slots.each do |slot| %>
-            <ul class="list-inline list-unstyled">
-              <li>Du <%= l(slot.start_date, format: "%e %B %Y") %> au <%= l(slot.end_date, format: "%e %B %Y") %></li>
-              <li><%= link_to "Supprimer", user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, data: { confirm: "Etes-vous sûr(e) ?" } %></li>
-              <hr>
-            </ul>
+          <% current_user.slots.order(created_at: :asc).each do |slot| %>
+            <% if slot.end_date > Date.today %>
+              <div class="myslots">
+                <p><strong><%= l(slot.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(slot.end_date, format: "%e %B %Y") %></strong></p>
+                <%= link_to user_slot_path(id: slot.id, user_id: current_user.id), method: :delete do %>
+                  <div class="delete-gray"><strong>X</strong></div>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>
 
       <div class="incoming_demands text-center col-sm-12 col-md-4">
-        <% if current_user.has_practice %>
-          <h4>Ils souhaitent vous remplacer :</h4>
-        <% else %>
-          <h4>Ils souhaitent que vous les remplaciez :</h4>
-        <% end %>
-        <!-- Je suis un cabinet ! -->
+        <h4>Mes demandes reçues</h4>
         <% if current_user.slots.first.nil? %>
           <h5> Vous n'avez pas encore reçu de demande <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</h5>
         <% else %>
-          <% current_user.slots.each do |slot| %>
-            <% slot.bookings.each do |booking| %>
+          <% current_user.slots.order(created_at: :desc).each do |slot| %>
+            <% slot.bookings.order(created_at: :asc).each do |booking| %>
             <div class="requests">
               <div class="request-head">
                 <% if booking.user.avatar.nil? %>
                   <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                 <% else %>
-                  <%= image_tag booking.user.avatar, class: "avatar-large " %>
+                  <%= cl_image_tag booking.user.avatar.path, width: 60, height: 60, crop: :fill, radius: :max %>
                 <% end %>
                 <div class="request-header-info">
                   <%= link_to user_path(booking.user) do %>
-                    <p class="request-dr-name">Dr <%= booking.user.first_name %> <%= booking.user.last_name %></p>
+                    <strong>Dr <%= booking.user.first_name %> <%= booking.user.last_name %></strong>
                   <% end %>
                   <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
                   <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
@@ -84,10 +74,10 @@
                 <% if booking.accepted.nil? %>
                   <%= simple_form_for(booking) do |f| %>
                     <%= f.input :accepted, as: :hidden, input_html: { value: 'true' } %>
-                    <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm', style: "width: 100%;" %>
+                    <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm', style: "width: 98%;" %>
                   <% end %><%= simple_form_for(booking) do |f| %>
                     <%= f.input :accepted, as: :hidden, input_html: { value: 'false' } %>
-                    <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm', style: "width: 100%;" %>
+                    <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm', style: "width: 98%;" %>
                   <% end %>
                 <% elsif booking.accepted == false %>
                   <strong>Remplacement refusé</strong>
@@ -95,7 +85,7 @@
                   <strong>Remplacement accepté</strong>
                 <% elsif booking.accepted && booking.end_date < Date.today && Review.where(booking_id: booking.id).size == 0 %>
                   <strong>Remplacement terminé</strong>
-                  <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">
+                  <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal" style="width: 98%; margin: 3px;">
                     Donnez votre avis
                   </button>
                   <!-- Modal -->
@@ -135,15 +125,11 @@
       </div>
 
       <div class = "outcoming_demands text-center col-sm-12 col-md-4">
-        <% if current_user.has_practice %>
-          <h4>Vous souhaitez qu'ils vous remplacent :</h4>
-        <% else %>
-          <h4>Vous souhaitez les remplacer :</h4>
-        <% end %>
+        <h4>Mes demandes envoyées</h4>
           <% if current_user.bookings.nil? %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
-            <% current_user.bookings.each do |booking| %>
+            <% current_user.bookings.order(created_at: :desc).each do |booking| %>
             <% if booking.slot.nil?%>
             <!-- <h5>un créneau pour lequel vous aviez fait une demande n'existe plus</h5> -->
             <% else %>
@@ -152,11 +138,11 @@
                   <% if booking.slot.user.avatar.nil? %>
                     <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                   <% else %>
-                    <%= image_tag booking.slot.user.avatar, class: "avatar-large " %>
+                    <%= cl_image_tag booking.user.avatar.path, width: 60, height: 60, crop: :fill, radius: :max %>
                   <% end %>
                   <div class="request-header-info">
                     <%= link_to user_path(booking.slot.user) do %>
-                      <p class="request-dr-name">Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></p>
+                      <strong>Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></strong>
                     <% end %>
                     <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
                     <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
@@ -169,7 +155,7 @@
                 <hr>
                 <div class="request-buttons">
                   <% if booking.accepted.nil? %>
-                    <em>Demande en attente</em>
+                    <em>Demande en attente - <%= link_to "Annuler", booking_path(booking), method: :delete, 'data-confirm' => "Êtes-vous certain de vouloir annuler votre demande ?" %></em>
                   <% elsif booking.accepted == false %>
                     <strong>Remplacement refusé</strong>
                   <% elsif booking.accepted && booking.end_date >= Date.today %>

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   include Pundit
 
@@ -13,10 +14,9 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:alert] = "Vous n'êtes pas autorisé(e) à effectuer cette action."
     redirect_to(root_path)
   end
-
 
   def devise_or_admin_controller?
     devise_controller? || params[:controller] =~ /admin\/.*/
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   # Mailboxer :
   rescue_from ActiveRecord::RecordNotFound do
-    flash[:warning] = 'Resource not found.'
+    flash[:warning] = 'Ressource non-trouvée.'
     redirect_back_or root_path
   end
   # Mailboxer :
@@ -40,4 +40,9 @@ class ApplicationController < ActionController::Base
     redirect_to request.referer || path
   end
 
+  protected
+
+   def configure_permitted_parameters
+     devise_parameter_sanitizer.for(:sign_up) << :first_name
+   end
 end

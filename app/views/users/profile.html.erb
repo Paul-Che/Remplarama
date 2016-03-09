@@ -1,3 +1,4 @@
+<!-- Important : cette Route n'existe plus, le user est redirigé vers une user show à la place -->
 <% content_for :meta_title, "RemplaMatch - Mon profil - #{current_user.first_name} #{current_user.last_name}" %>
 
 <div class="myprofile-header">
@@ -7,11 +8,14 @@
     <% else %>
       <%= image_tag current_user.avatar, class: "avatar-superextralarge " %>
     <% end %>
-    <h4><strong><%= "Dr. " if current_user.speciality != "Kinésithérapie" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
+    <h4><strong><%= "Dr. " if current_user.speciality != "kine" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
     <h5>
       <i class="fa fa-fw fa-search"></i>
       <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
     </h5>
+    <div class="text-center">
+      <%= link_to "Modifier mon profil", edit_user_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button " %>
+    </div>
   </div>
   <hr>
 </div>
@@ -24,7 +28,7 @@
           <h4>Mes informations clés</h4>
           <hr>
           <ul class="list-unstyled doc-user-profile">
-            <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><p><%= current_user.speciality %></p></li>
+            <li><i class="fa fa-fw fa-stethoscope icon-profile"></i><p><%= human_speciality(current_user.speciality) %></p></li>
             <li><i class="fa fa-fw fa-graduation-cap icon-profile"></i><p><%= current_user.education %></p></li>
             <li><i class="fa fa-fw fa-hashtag icon-profile"></i><p>Numéro de l'Ordre : <%= current_user.numero_ordre %></p></li>
             <% if !current_user.has_practice %>
@@ -47,13 +51,7 @@
       </div>
       <div class="col-sm-12 col-md-6">
         <div class="myprofile-card">
-          <h4>
-          <% if current_user.has_practice %>
-            Mon activité & mon cabinet
-          <% else %>
-            Mes filtres de recherche
-          <% end %>
-          </h4>
+          <h4>Mon activité & mon cabinet</h4>
           <hr>
           <ul class = "list-unstyled doc-user-profile">
             <% if current_user.has_practice %>
@@ -63,7 +61,7 @@
               <li><i class="fa fa-fw fa-home icon-profile"></i><p><%= human_housing(current_user.housing) %></p></li>
               <li>
                 <i class="fa fa-fw fa-money icon-profile"></i>
-                <p id="p-comm">Rétrocommission souhaitée :</p>
+                <p id="p-comm">Versement souhaitée :</p>
                 <div class="small-comm-tag"><%= current_user.commission %>%</div>
               </li>
             <% else %>
@@ -81,7 +79,7 @@
               </li>
               <li>
                 <i class="fa fa-fw fa-money icon-profile"></i>
-                <p id="p-comm">Rétrocommission minimale souhaitée :</p>
+                <p id="p-comm">Versement minimale souhaitée :</p>
                 <div class="small-comm-tag"><%= current_user.min_commission %>%</div>
               </li>
             <% end %>
@@ -157,16 +155,6 @@
         <% end %>
       </div>
     </div>
-  </div>
-
-
-
-
-
-
-
-  <div class="row">
-
   </div>
 
 </div>
