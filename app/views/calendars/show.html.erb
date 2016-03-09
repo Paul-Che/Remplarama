@@ -145,7 +145,7 @@
           <% else %>
             <% current_user.bookings.each do |booking| %>
             <% if booking.slot.nil?%>
-            <p>créneau n'existe plus</p>
+            <!-- <h5>un créneau pour lequel vous aviez fait une demande n'existe plus</h5> -->
             <% else %>
               <div class="requests">
                 <div class="request-head">
