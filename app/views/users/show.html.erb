@@ -10,7 +10,7 @@
       <% if @user.avatar.nil? %>
           <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
         <% else %>
-          <%= image_tag @user.avatar, class: "avatar-superextralarge " %>
+          <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
         <% end %>
       <h4><strong><%= "Dr. " if @user.speciality != "Kinésithérapie" %></strong><%= @user.first_name %> <%= @user.last_name %></h4>
       <h5>

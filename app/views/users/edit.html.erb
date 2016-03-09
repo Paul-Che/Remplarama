@@ -12,11 +12,11 @@
                 <% if @user.avatar.nil? %>
                   <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
                 <% else %>
-                  <%= image_tag @user.avatar, class: "avatar-superextralarge " %>
+                  <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
                 <% end %>
               </div>
               <div>
-                  <%= f.input :avatar, as: :file, :label => "Changez votre avatar" %>
+                  <%= f.input :avatar, as: :attachinary, :label => "Changez votre avatar" %>
               </div>
               <div style = "margin-top: 20px;">
                   <%= f.input :last_name, placeholder: "#{@user.last_name}", label: "Nom" %>

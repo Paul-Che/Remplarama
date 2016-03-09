@@ -133,7 +133,6 @@ class UsersController < ApplicationController
 
   def update
     if @user.update!(user_params)
-      @user.update!(user_params)
       authorize @user
       redirect_to :user
     else
