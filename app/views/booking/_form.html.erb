@@ -1,27 +1,30 @@
-<div class="container">
-  <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
-    <div class="form-design background">
-      <div class="text-center" id="form_title">
-        <h2>Information</h2>
-        <p>Ajouter des informations vous concernant pour permettre à votre interlocuteur de mieux vous connaître.</p>
-      </div>
-        <%= simple_form_for(@user) do |f| %>
-          <%= f.error_notification %>
-
-          <div class="form-inputs">
-            <%= f.input :address, required: true %>
-            <%= f.input :speciality, required: true %>
-            <%= f.input :numero_ordre, required: true %>
-            <%= f.input :numero_ursaff, required: true %>
-          </div>
-
-          <div class="form-actions text-center">
-            <%= f.button :submit, "Complete", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
-          </div>
-
-        <% end %>
-        <%= render "devise/shared/links" %>
-        <%= link_to "Finir de compléter son profil", user_path(@user) %>
-    </div>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="form-title">Informations complémentaires</h4>
+</div>
+<div class="modal-body">
+  <div class="text-center modal-subtitle">
+    <p>
+    Avant de pouvoir
+    <% if current_user.has_practice %>
+      solliciter ce remplaçant,
+    <% else %>
+      candidater pour un créneau,
+    <% end %>
+    nous vous prions de renseigner vos informations complémentaires.
+    </p>
   </div>
+  <%= simple_form_for(current_user) do |f| %>
+    <%= f.error_notification %>
+    <div id="form-inputs">
+      <%= f.input :address, required: true, placeholder: "Addresse", label: false %>
+      <%= f.input :speciality, required: true, placeholder: "Spécialité", collection: [['Médecine générale', 'medg'], ['Kinésithérapie', 'kine'], ['Autre spécialité', 'otherspe']], label: false, prompt: ["Spécialité", disabled: true] %>
+      <%= f.input :numero_ordre, placeholder: "Numéro de l'Ordre", required: true, label: false %>
+      <% if !current_user.has_practice %><%= f.input :numero_ursaff, required: true, placeholder: "Numéro URSSAF", label: false %><% end %>
+    </div>
+    <br>
+    <%= f.button :submit, "Valider", method: :patch, :class => 'btn btn-primary', style: "width: 100%;" %>
+  <% end %>
+  <br>
+  <%= link_to "Editer mon profil complet", calendar_path(current_user) %>
 </div>
