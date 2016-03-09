@@ -60,7 +60,7 @@
                 <% end %>
                 <div class="request-header-info">
                   <%= link_to user_path(booking.user) do %>
-                    <p class="request-dr-name">Dr <%= booking.user.first_name %> <%= booking.user.last_name %></p>
+                    <strong>Dr <%= booking.user.first_name %> <%= booking.user.last_name %></strong>
                   <% end %>
                   <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
                   <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
@@ -140,7 +140,7 @@
                   <% end %>
                   <div class="request-header-info">
                     <%= link_to user_path(booking.slot.user) do %>
-                      <p class="request-dr-name">Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></p>
+                      <strong>Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></strong>
                     <% end %>
                     <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
                     <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
@@ -153,7 +153,7 @@
                 <hr>
                 <div class="request-buttons">
                   <% if booking.accepted.nil? %>
-                    <em>Demande en attente</em>
+                    <em>Demande en attente - <%= link_to "Annuler", booking_path(booking), method: :delete %></em>
                   <% elsif booking.accepted == false %>
                     <strong>Remplacement refusé</strong>
                   <% elsif booking.accepted && booking.end_date >= Date.today %>
