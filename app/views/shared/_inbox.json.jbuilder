@@ -1,5 +1,6 @@
 json.selected_conversation_id selected_conversation.id
 json.first_name selected_conversation.other_user(current_user).first_name
+json.last_name selected_conversation.other_user(current_user).last_name
 
 json.conversations do
   json.array! conversations do |conversation|

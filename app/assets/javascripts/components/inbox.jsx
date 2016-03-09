@@ -3,6 +3,7 @@ var Inbox = React.createClass({
     return {
       selectedConversationId: this.props.selected_conversation_id,
       firstName: this.props.first_name,
+      lastName: this.props.last_name,
       conversations: this.props.conversations,
       messages: this.props.messages
     }
@@ -29,7 +30,7 @@ var Inbox = React.createClass({
           <div className="col-sm-7" id="message-list">
             <div className="panel panel-default">
               <div className="panel-heading">
-                <h4>{this.state.firstName}</h4>
+                <h4>Message du Dr. {this.state.firstName} {this.state.lastName}</h4>
               </div>
               <div className="panel-body">
                 <div id="wrapper">
@@ -59,6 +60,7 @@ var Inbox = React.createClass({
         that.setState({
           selectedConversationId: data.selected_conversation_id,
           firstName: data.first_name,
+          lastName: this.props.last_name,
           conversations: data.conversations,
           messages: data.messages
         })
@@ -76,6 +78,7 @@ var Inbox = React.createClass({
         that.setState({
           selectedConversationId: data.selected_conversation_id,
           firstName: data.first_name,
+          lastName: this.props.last_name,
           conversations: data.conversations,
           messages: data.messages
         })
