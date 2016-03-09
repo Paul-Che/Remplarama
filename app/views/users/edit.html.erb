@@ -12,20 +12,20 @@
                 <% if @user.avatar.nil? %>
                   <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
                 <% else %>
-                  <%= image_tag @user.avatar, class: "avatar-superextralarge " %>
+                  <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
                 <% end %>
               </div>
               <div>
-                  <%= f.input :avatar, as: :file, :label => "Changez votre avatar" %>
+                  <%= f.input :avatar, as: :attachinary, :label => "Changez votre avatar" %>
               </div>
               <div style = "margin-top: 20px;">
-                  <%= f.input :first_name, placeholder: "#{@user.first_name}", label: false %>
+                  <%= f.input :last_name, placeholder: "#{@user.last_name}", label: "Nom" %>
               </div>
               <div style = "margin-top: 20px;">
-                  <%= f.input :last_name, placeholder: "#{@user.last_name}", label: false %>
+                  <%= f.input :first_name, placeholder: "#{@user.first_name}", label: "Prénom" %>
               </div>
               <div style = "margin-top: 20px;">
-                <%= f.input :has_practice, collection: [['Je recherche un remplaçant', true], ['Je recherche un poste', false]], label: false %>
+                <%= f.input :has_practice, collection: [['Je recherche un remplaçant', true], ['Je recherche un remplacement', false]], label: "Besoin" %>
               </div>
               <div style = "margin-top: 20px;">
                   <%= f.input :address, placeholder: "#{@user.address}", label: "Localisation de votre cabinet" %>
@@ -38,71 +38,65 @@
                 <div id="accordion">
                   <h3>Informations clés</h3>
                     <ul>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-stethoscope icon-profile"></i>
-                        <%= f.input :speciality, placeholder: "#{@user.speciality }", label: "Spécialité" %>
+                        <%= f.input :speciality, placeholder: "#{@user.speciality}", collection: [['Médecine générale', 'medg'], ["Kinésithérapie", "kine"], ["Autre spécialité", "otherspe"]], label: "Spécialité" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-graduation-cap icon-profile"></i>
                         <%= f.input :education, placeholder: "#{@user.education }", label: "Education" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-hashtag icon-profile"></i>
                         <%= f.input :numero_ordre, placeholder: "#{@user.numero_ordre }", label: "Numéro d'Ordre" %>
                       </li>
                       <% if !@user.has_practice %>
-                        <li>
+                        <li style = "margin-top: 20px;">
                           <i class="fa fa-fw fa-file-text-o icon-profile"></i>
                           <%= f.input :numero_ursaff, placeholder: "#{@user.numero_ursaff }", label: "Numéro URSAFF" %>
                         </li>
                       <% end %>
                     </ul>
-                  <h3>
-                    <% if @user.has_practice %>
-                      Activité & cabinet
-                    <% else %>
-                      Filtres de recherche
-                    <% end %>
-                  </h3>
+                  <h3>Activité & cabinet</h3>
                   <ul>
                     <% if @user.has_practice %>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-user-md icon-profile"></i>
-                        <%= f.input :convention, placeholder: "#{@user.convention }", label: "Conventionnement secteur" %>
+                        <%= f.input :convention, placeholder: "#{@user.convention }", collection: [1, 2, 3], label: "Conventionnement secteur" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-suitcase icon-profile"></i>
-                        <%= f.input :house_visits, placeholder: "#{@user.house_visits}", collection: [['Aucune visite à domicile', 'none'], ["Jusqu'à 2 visites à domicile / jour en moyenne", "max2"], ["Plus de 2 visites à domicile / jour en moyenne", "above2"]], label: false %>
+                        <%= f.input :house_visits, placeholder: "#{@user.house_visits}", collection: [['Aucune visite à domicile', 'none'], ["Jusqu'à 2 visites à domicile / jour en moyenne", "max2"], ["Plus de 2 visites à domicile / jour en moyenne", "above2"]], label: "Visites à domicile" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-phone icon-profile"></i>
-                        <%= f.input :secretary, placeholder: "#{@user.secretary}", collection: [['Secrétariat disponible', true], ["Pas de secrétariat", false]], label: false %>
+                        <%= f.input :secretary, placeholder: "#{@user.secretary}", collection: [['Secrétariat disponible', true], ["Pas de secrétariat", false]], label: "Secrétariat" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-home icon-profile"></i>
-                        <%= f.input :housing, placeholder: "#{@user.housing}", collection: [['Hébergement possible', true], ["Pas d'hébergement possible", false]], label: false %>
+                        <%= f.input :housing, placeholder: "#{@user.housing}", collection: [['Hébergement possible', true], ["Pas d'hébergement possible", false]], label: "Hébergement" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-money icon-profile"></i>
                         <%= f.input :commission, placeholder: "#{@user.commission }", label: "Versement souhaitée (%)" %>
                       </li>
                     <% else %>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-suitcase icon-profile"></i>
-                        <%= f.input :house_visits_tolerance, placeholder: "#{@user.house_visits_tolerance}", collection: [['Aucune visite à domicile acceptée', 'none'], ["Maximum 2 visites à domicile / jour acceptées", "max2"], ["Visites à domicile acceptées", "above2"]], label: false %>
+                        <%= f.input :house_visits_tolerance, placeholder: "#{@user.house_visits_tolerance}", collection: [['Aucune visite à domicile acceptée', 'none'], ["Maximum 2 visites à domicile / jour acceptées", "max2"], ["Visites à domicile acceptées", "above2"]], label: "Visites à domicile" %>
                       </li>
 
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-phone icon-profile"></i>
-                        <%= f.input :nosecretary_tolerance, placeholder: "#{@user.nosecretary_tolerance}", collection: [['Absence de secrétariat acceptée', true], ["Secrétariat requis", false]], label: false %>
+                        <%= f.input :nosecretary_tolerance, placeholder: "#{@user.nosecretary_tolerance}", collection: [['Absence de secrétariat acceptée', true], ["Secrétariat requis", false]], label: "Secrétariat" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-home icon-profile"></i>
-                        <%= f.input :nohousing_tolerance, placeholder: "#{@user.nohousing_tolerance}", collection: [['Hébergement non-nécessaire', true], ["Hébergement nécessaire", false]], label: false %>
+                        <%= f.input :nohousing_tolerance, placeholder: "#{@user.nohousing_tolerance}", collection: [['Hébergement non-nécessaire', true], ["Hébergement nécessaire", false]], label: "Hébergement" %>
                       </li>
-                      <li>
+                      <li style = "margin-top: 20px;">
                         <i class="fa fa-fw fa-money icon-profile"></i>
-                        <%= f.input :commission, placeholder: "#{@user.min_commission }", label: "Versement minimal souhaité (%)" %>
+                        <%= f.input :min_commission, placeholder: "#{@user.min_commission }", label: "Versement minimal souhaité (%)" %>
                       </li>
                     <% end %>
                   </ul>

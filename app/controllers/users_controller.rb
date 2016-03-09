@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:search_practices, :search_locums]
   after_action :verify_authorized, only: :update
-  before_filter :disable_footer, only: [:search_practices, :search_locums, :show,]
+  before_filter :disable_footer, only: [:search_practices, :search_locums, :show]
 
   def search_practices
     @user = current_user
@@ -131,9 +131,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(user_params)
-    authorize @user
-    redirect_to :user
+    if @user.update!(user_params)
+      authorize @user
+      redirect_to :user
+    else
+      redirect_to :back
+    end
   end
 
   private
@@ -222,7 +225,8 @@ class UsersController < ApplicationController
     # Never trust user data!
     params.require(:user).permit(:first_name, :last_name, :has_practice, :email, :password,
       :password_confirmation, :address, :speciality, :numero_ordre, :numero_ursaff, :avatar,
-       :presentation, :education, :publications)
+       :presentation, :education, :publications, :convention, :house_visits, :secretary,
+       :housing, :commission, :house_visits_tolerance, :nosecretary_tolerance, :nohousing_tolerance, :min_commission)
   end
 
 end
