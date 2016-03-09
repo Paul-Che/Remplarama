@@ -6,11 +6,11 @@ var ConversationListItem = React.createClass({
       "selected": this.props.conversation.id == this.props.selectedConversationId
     })
     var iClasses = classNames({
-      "fa": this.props.is_last_message_writer_current_user,
-      "fa-reply": this.props.is_last_message_writer_current_user && !this.props.last_message_read_at,
-      "fa-check": this.props.is_last_message_writer_current_user && this.props.last_message_read_at,
-      "small-badge": !this.props.is_last_message_writer_current_user,
-      "small-badge-off": !this.props.is_last_message_writer_current_user && this.props.last_message_read_at
+      "fa": this.props.conversation.is_last_message_writer_current_user,
+      "fa-reply": this.props.conversation.is_last_message_writer_current_user && !this.props.conversation.last_message_read_at,
+      "fa-check": this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at,
+      "small-badge": !this.props.conversation.is_last_message_writer_current_user,
+      "small-badge-off": !this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at
     })
     return(
       <div className={divClasses} onClick={this.handleClick}>
