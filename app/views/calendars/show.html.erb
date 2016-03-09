@@ -52,11 +52,10 @@
             <% slot.bookings.order(created_at: :asc).each do |booking| %>
             <div class="requests">
               <div class="request-head">
-                <% raise %>
                 <% if booking.user.avatar.nil? %>
                   <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                 <% else %>
-                  <%= cl_image_tag booking.user.avatar.path, width: 100, height: 100, crop: :fill, radius: :max %>
+                  <%= cl_image_tag booking.user.avatar.path, width: 60, height: 60, crop: :fill, radius: :max %>
                 <% end %>
                 <div class="request-header-info">
                   <%= link_to user_path(booking.user) do %>
@@ -136,7 +135,7 @@
                   <% if booking.slot.user.avatar.nil? %>
                     <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                   <% else %>
-                    <%= cl_image_tag booking.user.avatar.path, width: 100, height: 100, crop: :fill, radius: :max %>
+                    <%= cl_image_tag booking.user.avatar.path, width: 60, height: 60, crop: :fill, radius: :max %>
                   <% end %>
                   <div class="request-header-info">
                     <%= link_to user_path(booking.slot.user) do %>
@@ -153,7 +152,7 @@
                 <hr>
                 <div class="request-buttons">
                   <% if booking.accepted.nil? %>
-                    <em>Demande en attente - <%= link_to "Annuler", booking_path(booking), method: :delete %></em>
+                    <em>Demande en attente - <%= link_to "Annuler", booking_path(booking), method: :delete, 'data-confirm' => "Êtes-vous certain de vouloir annuler votre demande ?" %></em>
                   <% elsif booking.accepted == false %>
                     <strong>Remplacement refusé</strong>
                   <% elsif booking.accepted && booking.end_date >= Date.today %>
