@@ -10,8 +10,7 @@ Booking.destroy_all
 Slot.destroy_all
 Review.destroy_all
 User.destroy_all
-Message.destroy_all
-Conversation.destroy_all
+
 
 # Créations des users "Practice"
 
@@ -224,25 +223,25 @@ User.where("first_name LIKE '%Antoine%'").first.slots.destroy_all
 # Creation of conversation and messages for test :
 
 
-c1 = Conversation.create!(user1: ludovic, user2: angeline)
-c2 = Conversation.create!(user1: ludovic, user2: pierre)
-c3 = Conversation.create!(user1: ludovic, user2: martin)
-c4 = Conversation.create!(user1: angeline, user2: pierre)
-c5 = Conversation.create!(user1: angeline, user2: martin)
-c6 = Conversation.create!(user1: pierre, user2: martin)
+# c1 = Conversation.create!(user1: ludovic, user2: angeline)
+# c2 = Conversation.create!(user1: ludovic, user2: pierre)
+# c3 = Conversation.create!(user1: ludovic, user2: martin)
+# c4 = Conversation.create!(user1: angeline, user2: pierre)
+# c5 = Conversation.create!(user1: angeline, user2: martin)
+# c6 = Conversation.create!(user1: pierre, user2: martin)
 
-m1 = Message.create!(user: ludovic, conversation: c1, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
-m2 = Message.create!(user: ludovic, conversation: c2, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
-m3 = Message.create!(user: ludovic, conversation: c3, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
-m4 = Message.create!(user: angeline, conversation: c1, content: "Salut ludovic, malheureusement je ne suis pas là ce week-end... Une autre fois peut-être!")
-m5 = Message.create!(user: pierre, conversation: c2, content: "Hello ludovic, j'aimerais beaucoup te la prêter mais elle est en réparation...")
-m6 = Message.create!(user: martin, conversation: c3, content: "Oui pas de problème passe vendredi entre 19h et 21h!")
-m7 = Message.create!(user: angeline, conversation: c4, content: "Salut pierre")
-m8 = Message.create!(user: angeline, conversation: c5, content: "Salut martin")
-m9 = Message.create!(user: pierre, conversation: c6, content: "Hey!")
-m10 = Message.create!(user: pierre, conversation: c4, content: "Hello")
-m11 = Message.create!(user: martin, conversation: c5, content: "Quoi de neuf ?")
-m12 = Message.create!(user: martin, conversation: c6, content: "Tu fais quoi demain ?")
+# m1 = Message.create!(user: ludovic, conversation: c1, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
+# m2 = Message.create!(user: ludovic, conversation: c2, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
+# m3 = Message.create!(user: ludovic, conversation: c3, content: "Salut, j'ai besoin d'une perceuse ce week-end, la tienne est-elle dispo ?")
+# m4 = Message.create!(user: angeline, conversation: c1, content: "Salut ludovic, malheureusement je ne suis pas là ce week-end... Une autre fois peut-être!")
+# m5 = Message.create!(user: pierre, conversation: c2, content: "Hello ludovic, j'aimerais beaucoup te la prêter mais elle est en réparation...")
+# m6 = Message.create!(user: martin, conversation: c3, content: "Oui pas de problème passe vendredi entre 19h et 21h!")
+# m7 = Message.create!(user: angeline, conversation: c4, content: "Salut pierre")
+# m8 = Message.create!(user: angeline, conversation: c5, content: "Salut martin")
+# m9 = Message.create!(user: pierre, conversation: c6, content: "Hey!")
+# m10 = Message.create!(user: pierre, conversation: c4, content: "Hello")
+# m11 = Message.create!(user: martin, conversation: c5, content: "Quoi de neuf ?")
+# m12 = Message.create!(user: martin, conversation: c6, content: "Tu fais quoi demain ?")
 
 
 
