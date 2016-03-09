@@ -78,7 +78,7 @@
             <% if current_user.avatar.nil? %>
               <%= image_tag 'placeholder_pic.png', class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
             <% else %>
-              <%= cl_image_tag @user.avatar.path, width: 30, height: 30, crop: :fill, :class => "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+              <%= cl_image_tag current_user.avatar.path, width: 30, height: 30, crop: :fill, :class => "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
             <% end %>
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
