@@ -32,7 +32,7 @@ class BookingsController < ApplicationController
     set_booking
     authorize @booking
     @booking.destroy
-    redirect_to calendar_path, notice: 'Vous avez bien annulé votre demande.'
+    redirect_to calendar_path
   end
 
   private

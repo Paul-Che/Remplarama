@@ -32,7 +32,7 @@ class SlotsController < ApplicationController
     set_slot
     authorize @slot
     @slot.destroy
-    redirect_to calendar_path, notice: 'Le créneau a bien été détruit.'
+    redirect_to calendar_path
   end
 
   private
