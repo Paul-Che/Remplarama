@@ -8,6 +8,7 @@ var ConversationList = React.createClass({
                     conversation={conversation}
                     key={index}
                     onConversationSelection={that.props.onConversationSelection}
+                    selectedConversationId={that.props.selectedConversationId}
                     // TODO props
                   />
         })}
