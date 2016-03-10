@@ -62,7 +62,8 @@
               </div>
               <hr>
               <div class="request-contact">
-                <%= link_to "Contacter", user_path(booking.user) %>
+                <%= link_to "Contacter", new_messages_path(booking.user) %>
+                <%# raise %>
               </div>
               <hr>
               <div class="request-buttons">
