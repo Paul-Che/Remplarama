@@ -38,8 +38,6 @@
         </div>
       </div>
 
-
-
       <div class="incoming_demands text-center col-sm-12 col-md-4">
         <h4>Mes demandes reçues</h4>
         <% if current_user.slots.first.nil? %>
@@ -123,7 +121,7 @@
 
       <div class = "outcoming_demands text-center col-sm-12 col-md-4">
         <h4>Mes demandes envoyées</h4>
-          <% if current_user.bookings.nil? %>
+          <% if current_user.bookings.nil? || current_user.bookings.each { |booking| booking.slot.nil? } %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
             <% current_user.bookings.order(created_at: :desc).each do |booking| %>
@@ -135,22 +133,26 @@
                   <div class="delete-gray"><strong>X</strong></div>
                 <% end %>
                 <div class="request-head">
-                  <% if booking.slot.user.avatar.nil? %>
+                  <% if booking.slot.blank? || booking.slot.user.avatar.nil? %>
                     <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                   <% else %>
                     <%= cl_image_tag booking.slot.user.avatar.path, width: 60, height: 60, crop: :fill, radius: :max %>
                   <% end %>
                   <div class="request-header-info">
+                  <% if !booking.slot.blank? %>
                     <%= link_to user_path(booking.slot.user) do %>
                       <strong>Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></strong>
                     <% end %>
                     <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
                     <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
+                  <% end %>
                   </div>
                 </div>
                 <hr>
                 <div class="request-contact">
-                  <%= link_to "Contacter", user_path(booking.slot.user) %>
+                  <% if !booking.slot.blank? %>
+                    <%= link_to "Contacter", user_path(booking.slot.user) %>
+                  <% end %>
                 </div>
                 <hr>
                 <div class="request-buttons">
