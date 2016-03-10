@@ -49,19 +49,13 @@
       <%= link_to conversations_path, class: "navbar-wagon-item navbar-wagon-link" do %>
         <div class="badge-container">
           <i class="fa fa-envelope-o"></i>
-          <%# if current_user.bikes.first.nil? %>
+          <% if !@unread_messages.nil? %>
             <div class="badge badge-grey">0</div>
-          <%# else %>
-            <%# if current_user.bikes.first.bookings.where(status: "pending").count == 0 %>
-<!--               <div class="badge badge-grey">
-                <%#= current_user.bikes.first.bookings.where(status: "pending").count %>
-              </div>
-            <%# else %>
-              <div class="badge badge-orange">
-                <%#= current_user.bikes.first.bookings.where(status: "pending").count %>
-              </div> -->
-            <%# end %>
-          <%# end %>
+          <% else %>
+            <div class="badge badge-orange">
+              <%= current_user.unread_conversations_count %>
+            </div>
+          <% end %>
         </div>
       <% end %>
 
