@@ -38,6 +38,8 @@
         </div>
       </div>
 
+
+
       <div class="incoming_demands text-center col-sm-12 col-md-4">
         <h4>Mes demandes reçues</h4>
         <% if current_user.slots.first.nil? %>
@@ -69,10 +71,10 @@
                 <% if booking.accepted.nil? %>
                   <%= simple_form_for(booking) do |f| %>
                     <%= f.input :accepted, as: :hidden, input_html: { value: 'true' } %>
-                    <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm', style: "width: 98%;" %>
+                    <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm', style: "width: 98%;", title: "Confirmer le remplacement", data: {confirm: 'Êtes-vous certain de vouloir accepter cette demande ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } %>
                   <% end %><%= simple_form_for(booking) do |f| %>
                     <%= f.input :accepted, as: :hidden, input_html: { value: 'false' } %>
-                    <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm', style: "width: 98%;" %>
+                    <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm', style: "width: 98%;", title: "Confirmer le refus du remplacement", data: {confirm: 'Êtes-vous certain de vouloir refuser cette demande ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" }%>
                   <% end %>
                 <% elsif booking.accepted == false %>
                   <strong>Remplacement refusé</strong>
