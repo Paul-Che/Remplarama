@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # get 'profile', to: 'users#profile'
 
   resources :users, except: [:index] do
-    resources :slots, only: [:create, :update, :destroy]
+    resources :slots, only: [:create, :destroy]
     resources :bookings, only: [:new, :create, :update]
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
     resources :messages, only: [:index]
