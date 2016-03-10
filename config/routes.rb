@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:index]
   end
 
+  resources :slots, only: [:show]
   resources :bookings, only: [:destroy] do
     resources :messages, only: [:new, :create]
     member do
