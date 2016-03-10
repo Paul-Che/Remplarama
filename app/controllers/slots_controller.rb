@@ -25,6 +25,10 @@ class SlotsController < ApplicationController
     authorize @slot
   end
 
+  def show
+    @slot = Slot.find(params[:id])
+  end
+
   def destroy
     set_slot
     @slot.destroy

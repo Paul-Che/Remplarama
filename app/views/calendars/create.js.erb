@@ -2,7 +2,7 @@
 // Here you will write *javascript* that would be executed by the browser
 <% if @slot.errors.any? %>
   // Render new review form with errors
-  $('#new_slot').html("<%= j render 'reviews/form', restaurant: @restaurant, review: @review %>");
+  $('#new_slot').html("<%= j render 'slots/form', user: @user, slot: @slot %>");
 <% else %>
   // Create a paragraph for the new review. But hide it.
   var new_slot = $("<%= j render 'slots/show', slots: @slots %>").hide();
