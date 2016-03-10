@@ -4,7 +4,7 @@
   <% end -%>
   <br>
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to "Inscription", new_registration_path(resource_name), :class => 'btn btn-success', style: "width: 100%;" %><br />
+    <%= link_to "Inscription", new_registration_path(resource_name), :class => 'btn btn-success', style: "width: 100%; font-size: 16px;" %><br />
   <% end -%>
   <br>
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>

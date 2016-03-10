@@ -4,41 +4,40 @@ class SlotsController < ApplicationController
   skip_after_action :authenticate_user!, only: :destroy
 
   def create
-
     @slot = Slot.new(slots_params)
     @start_date = string_to_date(params[:start_date])
     @end_date = string_to_date(params[:end_date])
-
     @slot.status = "pending"
     if @start_date.nil? || @end_date.nil?
       render :back
     end
-
-    @slot.save
-
-    redirect_to calendar_path
-    # flash[:notice] = "Vos dates sont ajoutées à votre calendrier"
+    if @slot.save
+      respond_to do |format|
+        format.html { redirect_to calendar_path }
+        format.js  # <-- will render `app/views/slots/create.js.erb`
+      end
+    else
+      respond_to do |format|
+        format.html { render 'calendars/show' }
+        format.js  # <-- idem
+      end
+    end
     authorize @slot
   end
 
-
-  def update
-    # @slots = Slot.find(params[:id)
-    # @slots.update(slots_params)
-    # @slots.save
+  def show
+    @slot = Slot.find(params[:id])
   end
 
   def destroy
     set_slot
     @slot.destroy
-
-    redirect_to :back, notice: 'Le créneau a bien été détruit.'
   end
 
   private
 
   def slots_params
-    params.permit(:start_date, :end_date, :status, :user_id,)
+    params.permit(:start_date, :end_date, :status, :user_id)
   end
 
   def set_slot

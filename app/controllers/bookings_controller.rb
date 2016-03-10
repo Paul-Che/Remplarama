@@ -22,14 +22,14 @@ class BookingsController < ApplicationController
 
   def update
     set_booking
-    authorize @booking
     @booking.update(booking_params)
     @booking.slot.update(status: "confirmed")
     redirect_to calendar_path
   end
 
   def destroy
-    authorize @booking
+    set_booking
+    @booking.destroy
   end
 
   private
@@ -47,6 +47,7 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+    authorize @booking
   end
 
   def booking_params

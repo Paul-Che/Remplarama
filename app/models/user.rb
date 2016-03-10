@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
   # has_many :messages, through: [:bookings, :slots], dependent: :restrict_with_exception
 
 
-  validates :speciality, inclusion: { in: ['Médecine générale', 'Kinésithérapie', 'Autre spécialité'] }, on: :update
+  validates :speciality, inclusion: { in: [nil, "", 'medg', 'kine', 'otherspe'] }, on: :update
 
-  validates :convention, inclusion: { in: [nil,'1', '2', '3']}, on: :update
-  validates :house_visits, inclusion: { in: [nil,'none', 'max2', 'above2']}, on: :update
-  validates :house_visits_tolerance, inclusion: { in: [nil,'none', 'max2', 'above2']}, on: :update
+  validates :convention, inclusion: { in: [nil,"",'1', '2', '3']}, on: :update
+  validates :house_visits, inclusion: { in: [nil,"",'none', 'max2', 'above2']}, on: :update
+  validates :house_visits_tolerance, inclusion: { in: [nil,"",'none', 'max2', 'above2']}, on: :update
 
   #validates :numero_ursaff, format: { with: /\d{18}/, message: "Votre numéro URSSAF n'est pas le bon" }, on: :update
 
@@ -49,5 +49,7 @@ class User < ActiveRecord::Base
    def one_avatar_url
      avatar ? avatar : "http://placehold.it/64x64"
    end
+
+  has_attachment :avatar
 
 end

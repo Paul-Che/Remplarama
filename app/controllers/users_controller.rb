@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  skip_before_action :authenticate_user!, only: [:search_practices, :search_locums]
   after_action :verify_authorized, only: :update
-  before_filter :disable_footer, only: [:search_practices, :search_locums, :show,]
+  before_filter :disable_footer, only: [:search_practices, :search_locums, :show]
 
   def search_practices
     @user = current_user
-    @speciality = params[:speciality] || ['Médecine générale', 'Kinésithérapie', 'Autre spécialité']
+    @speciality = params[:speciality] || ['medg', 'kine', 'otherspe']
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @has_practice = true
@@ -53,12 +54,11 @@ class UsersController < ApplicationController
       marker.infowindow "<strong>Dr. #{user.first_name} #{user.last_name}</strong><br/>#{user.address}"
       marker.json({ :id => user.id })
     end
-    authorize @user
   end
 
   def search_locums
     @user = current_user
-    @speciality = params[:speciality] || ['Médecine générale', 'Kinésithérapie', 'Autre spécialité']
+    @speciality = params[:speciality] || ['medg', 'kine', 'otherspe']
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @has_practice = false
@@ -93,12 +93,9 @@ class UsersController < ApplicationController
       marker.infowindow "<strong>Dr. #{user.first_name} #{user.last_name}</strong><br/>#{user.address}"
       marker.json({ :id => user.id })
     end
-    authorize @user
   end
 
   def show
-    set_user
-
     @markers = Gmaps4rails.build_markers(@user) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
@@ -131,14 +128,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-    set_user
   end
 
   def update
-    set_user
-    @user.update(user_params)
-    authorize @user
-    redirect_to :back
+    if @user.update!(user_params)
+      authorize @user
+      redirect_to :user
+    else
+      redirect_to :back
+    end
   end
 
   private
@@ -227,7 +225,8 @@ class UsersController < ApplicationController
     # Never trust user data!
     params.require(:user).permit(:first_name, :last_name, :has_practice, :email, :password,
       :password_confirmation, :address, :speciality, :numero_ordre, :numero_ursaff, :avatar,
-       :presentation, :education, :publications)
+       :presentation, :education, :publications, :convention, :house_visits, :secretary,
+       :housing, :commission, :house_visits_tolerance, :nosecretary_tolerance, :nohousing_tolerance, :min_commission)
   end
 
 end

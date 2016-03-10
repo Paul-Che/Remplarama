@@ -13,4 +13,8 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require jquery-fileupload/basic
+//= require cloudinary/jquery.cloudinary
+//= require attachinary
+//= require data-confirm-modal
 //= require_tree .

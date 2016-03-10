@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
-
   def devise_or_admin_controller?
     devise_controller? || params[:controller] =~ /admin\/.*/
   end

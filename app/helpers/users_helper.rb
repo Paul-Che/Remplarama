@@ -1,5 +1,15 @@
 module UsersHelper
 
+  def human_speciality(string)
+    if string == "medg"
+      "Médecine générale"
+    elsif string == "kine"
+      "Kinésithérapie"
+    else
+      "Autre spécialité"
+    end
+  end
+
   def human_house_visits(string)
     if string == "none"
       "Aucune visite à domicile"
@@ -63,5 +73,4 @@ module UsersHelper
       raw("<em>Hébergement : non-renseigné</em>")
     end
   end
-
 end
