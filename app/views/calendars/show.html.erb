@@ -29,7 +29,10 @@
         <div id="slots">
           <% if current_user.slots.nil? %>
             <i class="fa fa-calendar-minus-o"></i>
-            <div class="empty_availabilities">Vous n'avez pas encore défini de nouvelle plage de recherche <br> Veuillez remplir votre calendrier ci-dessus et valider vos plages</div>
+            <div class="empty_availabilities">
+              <h6>Vous n'avez pas encore défini de nouvelle plage de recherche.</h6>
+              <h6>Veuillez remplir votre calendrier ci-dessus et valider vos plages.</h6>
+            </div>
           <% else %>
             <% current_user.slots.order(created_at: :asc).each do |slot| %>
               <%= render 'slots/show', slot: slot %>
@@ -41,7 +44,9 @@
       <div class="incoming_demands text-center col-sm-12 col-md-4">
         <h4>Mes demandes reçues</h4>
         <% if current_user.slots.first.nil? %>
-          <h5> Vous n'avez pas encore reçu de demande <br> Commencez par remplir votre calendrier ci-dessus et valider vos plages</h5>
+          <h6> Vous n'avez pas encore reçu de demande.</h6>
+          <br>
+          <h6>Commencez par remplir votre calendrier ci-dessus et validez vos plages.</h6>
         <% else %>
           <% current_user.slots.order(created_at: :desc).each do |slot| %>
             <% slot.bookings.order(created_at: :asc).each do |booking| %>
@@ -121,8 +126,8 @@
 
       <div class = "outcoming_demands text-center col-sm-12 col-md-4">
         <h4>Mes demandes envoyées</h4>
-          <% if current_user.bookings.nil? || current_user.bookings.each { |booking| booking.slot.nil? } %>
-            <p> Vous n'avez pas encore fait de demande !</p>
+          <% if current_user.bookings.nil? %> <%# || current_user.bookings.each { |booking| booking.slot.nil? } %>
+            <h6>Vous n'avez pas encore fait de demande.</h6>
           <% else %>
             <% current_user.bookings.order(created_at: :desc).each do |booking| %>
             <% if booking.slot.nil?%>
