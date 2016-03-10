@@ -14,9 +14,7 @@ class SlotsController < ApplicationController
       render :back
     end
 
-    @slot.save
-
-    redirect_to calendar_path
+    slot_save
     # flash[:notice] = "Vos dates sont ajoutées à votre calendrier"
     authorize @slot
   end
@@ -50,5 +48,20 @@ class SlotsController < ApplicationController
     Time.parse(string).to_date
   rescue ArgumentError, TypeError
     # we return nil
+  end
+
+
+  def check_overlap
+    check = @slot.user.slots.map {|slot| (slot.start_date > @end_date) || (slot.end_date < @start_date) }
+    check.include? false
+  end
+
+  def slot_save
+    if check_overlap
+      redirect_to calendar_path, alert: 'Deux plages ne peuvent pas se chevaucher'
+    else
+      @slot.save
+      redirect_to calendar_path
+    end
   end
 end
