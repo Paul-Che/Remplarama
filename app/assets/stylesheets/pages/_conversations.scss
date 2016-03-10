@@ -1,0 +1,235 @@
+.conversation-link {
+  width: 100%;
+  max-height: 75px;
+  padding: 5px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  overflow: hidden;
+  .conversation-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 1 auto;
+  }
+  .conversation-preview {
+    ul.list-inline.conversation-header {
+      margin-left: 0;
+      li {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    i.fa {
+      font-size: 12px;
+      color: rgb(240, 240, 240);
+    }
+    margin-left: 10px;
+    overflow: hidden;
+    .message-preview {
+      font-size: 13px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(251, 251, 251);
+  }
+}
+.selected,
+.selected:hover {
+  background-color: #3A5795;
+  color: white;
+  h6,
+  .date {
+    color: white;
+  }
+}
+.unread-messages {
+  background-color: rgb(251, 251, 251);
+}
+.panel-body {
+  position: relative;
+  padding: 0px;
+  height: 60vh;
+}
+.panel-body > .flexbox-columns {
+  width: 100%;
+}
+.panel-heading h4 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+.scroll {
+  overflow: scroll;
+}
+.flexbox-columns-start {
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  .flex-item {
+    flex: 1 1 auto;
+  }
+  .flex-item-grow {
+    flex: 1 0 auto;
+  }
+  .flex-item-shrink {
+    flex: 0 1 auto;
+    min-height: 61px;
+  }
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+.flexbox-columns-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+  .flex-item {
+    flex: 0 0 auto;
+  }
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+.flexbox-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  .flex-item {
+    flex: 1 0;
+  }
+}
+.flexbox-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  .flex-item {
+    flex: 0 1;
+    margin: 5px 0 0 10px;
+  }
+}
+.end-of-messages {
+  text-align: center;
+  color: #d9d9d9;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  width: 100%;
+  p {
+    margin-top: 10px;
+    font-size: 13px;
+  }
+}
+.fixed-height {
+  height: 60vh;
+  overflow-y: scroll;
+}
+.scroll {
+}
+#conversation-list {
+  @media(min-width: 768px) {
+    padding-right: 0 !important;
+  }
+}
+#message-list {
+  @media(min-width: 768px) {
+    padding-left: 0 !important;
+    .panel {
+      border-left-width: 0 !important;
+    }
+  }
+}
+.message-container {
+  width: 100%;
+  padding: 5px 10px;
+  .message-content {
+    margin-left: 10px;
+    h6 {
+      margin-top: 0;
+      margin-bottom: 7px;
+    }
+    p {
+      font-size: 13px;
+    }
+  }
+  .message-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 1 auto;
+  }
+}
+.messages {
+  width: 100%
+}
+.message-input {
+  background-color: white;
+  width: 100%;
+  padding: 10px 15px;
+  box-shadow: 0 -1px 5px 0 rgba(0,0,0,0.07),0 -1px 0 0 rgba(0,0,0,0.03);
+  position: absolute;
+  bottom: 0;
+  textarea {
+    width: 100%;
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+    border-radius: 3px;
+    resize: none;
+    padding: 10px;
+    height: 44px;
+    &:focus {
+      outline: none;
+    }
+    &.focused {
+      height: 98px;
+      border-color: #5898f1;
+      box-shadow: none;
+    }
+  }
+  .btn {
+    margin-right: 5px;
+  }
+  .btn-send,
+  .btn-stop {
+    font-size: 13px;
+    border-radius: 1px;
+    color: white;
+  }
+  .btn-send {
+    background-color: #3A5795;
+    &:hover {
+      background-color: #1B316C;
+    }
+  }
+  .btn-stop {
+    background: rgba(0,0,0,0.12);
+    color: rgba(0,0,0,0.35) !important;
+    &:hover {
+      background: rgba(0,0,0,0.15);
+      color: rgba(0,0,0,0.40) !important;
+    }
+
+  }
+}
+.date {
+  font-size: 13px;
+  color: #bdc1c9;
+}
+.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
+  outline: none;
+}
+#wrapper {
+  min-height: 48vh;
+  height: 80%;
+  overflow-y: scroll;
+  padding-bottom: 61px;
+  &.focused {
+    padding-bottom: 159px;
+  }
+}

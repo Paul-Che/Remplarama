@@ -19,9 +19,15 @@ gem 'gmaps4rails'
 gem 'geocoder'
 gem 'owlcarousel-rails'
 gem 'activeadmin', github: 'activeadmin'
-gem 'mailboxer'
+
+# react
+gem 'js-routes'
+gem 'react-rails', '1.6.1'
+
+# les deux qui suivent je crois que ca allait avec Mailboxer, si c'est pas les votres je supprime
 gem 'bootstrap-will_paginate'
 gem 'will_paginate'
+
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 gem 'sass-rails'
@@ -39,6 +45,7 @@ gem 'underscore-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
   gem 'rails-assets-bootstrap-datepicker'
+  gem 'rails-assets-classnames'
 end
 
 group :development, :test do

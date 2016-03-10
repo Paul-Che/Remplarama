@@ -11,20 +11,20 @@ Rails.application.routes.draw do
     resources :slots, only: [:create, :destroy]
     resources :bookings, only: [:new, :create]
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
-    resources :messages, only: [:index]
   end
 
   resources :slots, only: [:show]
+
   resources :bookings, only: [:destroy, :update] do
-    resources :messages, only: [:new, :create]
     member do
       patch 'confirm'
       patch 'reject'
     end
   end
 
-  resources :conversations, only: [:index, :show, :destroy]
-  resources :messages, only: [:new, :create]
+  resources :conversations, only: :index do
+    resources :messages, only: :create
+  end
 
   resource :calendar,     only: [:show]
 
