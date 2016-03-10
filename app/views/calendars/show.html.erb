@@ -50,8 +50,6 @@
         <% end %>
       </div>
 
-
-
       <div class="incoming_demands text-center col-sm-12 col-md-4">
         <% if current_user.has_practice %>
           <h4>Ils souhaitent vous remplacer :</h4>
@@ -67,11 +65,10 @@
             <% slot.bookings.order(created_at: :asc).each do |booking| %>
             <div class="requests">
               <div class="request-head">
-                <% raise %>
                 <% if booking.user.avatar.nil? %>
                   <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                 <% else %>
-                  <%= cl_image_tag booking.user.avatar.path, width: 100, height: 100, crop: :fill, radius: :max %>
+                  <%= cl_image_tag booking.user.avatar.path, width: 60, height: 60, crop: :fill, radius: :max %>
                 <% end %>
                 <div class="request-header-info">
                   <%= link_to user_path(booking.user) do %>
@@ -146,28 +143,32 @@
         <% else %>
           <h4>Vous souhaitez les remplacer :</h4>
         <% end %>
-          <% if current_user.bookings.nil? %>
+          <% if current_user.bookings.nil? || current_user.bookings.each { |booking| booking.slot.nil? } %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
             <% current_user.bookings.order(created_at: :desc).each do |booking| %>
               <div class="requests">
                 <div class="request-head">
-                  <% if booking.slot.user.avatar.nil? %>
+                  <% if booking.slot.blank? || booking.slot.user.avatar.nil? %>
                     <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
                   <% else %>
-                    <%= cl_image_tag booking.user.avatar.path, width: 100, height: 100, crop: :fill, radius: :max %>
+                    <%= cl_image_tag booking.slot.user.avatar.path, width: 60, height: 60, crop: :fill, radius: :max %>
                   <% end %>
                   <div class="request-header-info">
+                  <% if !booking.slot.blank? %>
                     <%= link_to user_path(booking.slot.user) do %>
                       <p class="request-dr-name">Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></p>
                     <% end %>
                     <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
                     <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
+                  <% end %>
                   </div>
                 </div>
                 <hr>
                 <div class="request-contact">
-                  <%= link_to "Contacter", user_path(booking.slot.user) %>
+                  <% if !booking.slot.blank? %>
+                    <%= link_to "Contacter", user_path(booking.slot.user) %>
+                  <% end %>
                 </div>
                 <hr>
                 <div class="request-buttons">
