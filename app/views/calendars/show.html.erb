@@ -9,10 +9,10 @@
     <div class="col-xs-12">
       <div id="demo"></div>
       <div class="call-to-action text-center">
-        <%= form_tag(user_slots_path(current_user), :method => :post ) do -%>
-        <input id="startDate" name="start_date" type="hidden" value="" />
-        <input id="endDate" name="end_date" type="hidden" value="" />
-        <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Valider cette plage'/>
+        <%= form_tag(user_slots_path(current_user), :method => :post, remote: true ) do -%>
+          <input id="startDate" name="start_date" type="hidden" value="" />
+          <input id="endDate" name="end_date" type="hidden" value="" />
+          <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Valider cette plage'/>
         <% end %>
       </div>
     </div>
@@ -32,9 +32,9 @@
         <% else %>
           <% current_user.slots.order(created_at: :asc).each do |slot| %>
             <% if slot.end_date > Date.today %>
-              <div class="myslots">
+              <div class="myslots" id="slot-<%= slot.id %>">
                 <p><strong><%= l(slot.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(slot.end_date, format: "%e %B %Y") %></strong></p>
-                <%= link_to user_slot_path(id: slot.id, user_id: current_user.id), method: :delete, title: "Confirmer la suppression", data: {confirm: 'Êtes-vous certain de vouloir supprimer ce créneau ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } do %>
+                <%= link_to user_slot_path(id: slot.id, user_id: current_user.id), remote: true, method: :delete, title: "Confirmer la suppression", data: {confirm: 'Êtes-vous certain de vouloir supprimer ce créneau ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } do %>
                   <div class="delete-gray"><strong>X</strong></div>
                 <% end %>
               </div>
@@ -133,7 +133,7 @@
             <% if booking.slot.nil?%>
             <!-- <h5>un créneau pour lequel vous aviez fait une demande n'existe plus</h5> -->
             <% else %>
-              <div class="requests">
+              <div class="requests" id="booking-<%= booking.id %>">
                 <div class="request-head">
                   <% if booking.slot.user.avatar.nil? %>
                     <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
@@ -155,7 +155,7 @@
                 <hr>
                 <div class="request-buttons">
                   <% if booking.accepted.nil? %>
-                    <em>Demande en attente - <%= link_to "Annuler", booking_path(booking), method: :delete, title: "Confirmer la suppression", data: {confirm: 'Êtes-vous certain de vouloir supprimer cette demande ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } %></em>
+                    <em>Demande en attente - <%= link_to "Annuler", booking_path(booking), method: :delete, remote: true, title: "Confirmer la suppression", data: {confirm: 'Êtes-vous certain de vouloir supprimer cette demande ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } %></em>
                   <% elsif booking.accepted == false %>
                     <strong>Remplacement refusé</strong>
                   <% elsif booking.accepted && booking.end_date >= Date.today %>
