@@ -11,17 +11,7 @@ class SlotsController < ApplicationController
     if @start_date.nil? || @end_date.nil?
       render :back
     end
-    if slot_save
-      respond_to do |format|
-        format.html { redirect_to calendar_path }
-        format.js  # <-- will render `app/views/slots/create.js.erb`
-      end
-    else
-      respond_to do |format|
-        format.html { render 'calendars/show' }
-        format.js
-      end
-    end
+    slot_save
     authorize @slot
   end
 
@@ -60,8 +50,13 @@ class SlotsController < ApplicationController
   def slot_save
     if check_overlap
       redirect_to calendar_path, alert: 'Deux plages ne peuvent pas se chevaucher'
+      #not working
     else
       @slot.save
+      respond_to do |format|
+        format.html { redirect_to calendar_path }
+        format.js  # <-- will render `app/views/slots/create.js.erb`
+      end
     end
   end
 end
