@@ -1,0 +1,60 @@
+<% content_for :meta_title, "RemplaMatch - #{current_user.first_name} #{current_user.last_name}, vérifiez votre identité" %>
+
+<div class="wrapper relative">
+
+  <div class="container">
+    <div class="row myprofile-header">
+      <div class="col-xs-3">
+        <div class="avatar-header text-center">
+          <% if current_user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+            <% else %>
+              <%= cl_image_tag current_user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
+            <% end %>
+          <h4><strong><%= "Dr. " if current_user.speciality != "kine" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
+          <h5>
+            <i class="fa fa-fw fa-search"></i>
+            <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
+          </h5>
+          <% if current_user == current_user %>
+            <div class="text-center">
+            <%= link_to "Retour au profil", user_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" %>
+          </div>
+        <% end %>
+        </div>
+        <hr>
+      </div>
+      <div class="col-xs-7">
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        Qu'est-ce que la vérification de mon identité ?
+
+        La vérification est très simple :
+        - Vous nous transmettez une copie de pièce d'identité valide
+        - Vous renseignez votre numéro RPPS
+        - Vous certifiez sur l'honneur la véracité de ces informations
+
+        Et nous nous occupons de tout en moins de 24h.
+
+        Pourquoi vérifier mon identité ?
+
+        La vérification d'identité est une mesure de précaution afin de s'assurer que les utilisateur de RemplaMatch sont exclusivement des professionnels de santé. Un certain nombre d'informations n'est disponible qu'une fois votre identité validée. L'accès au nombre de recommandations reçues en particulier - remplaçants ou professionnels installés - nécessite d'avoir une identité validée, et une spécialité identite à celle des profils consultés.
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -139,6 +139,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def verify
+
+  end
+
   private
 
   def extract_percent_values(string, default)

@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :has_practice, presence: true
+  validates :has_practice, inclusion: { in: [true, false] }
   validates :speciality, inclusion: { in: [nil, "", 'medg', 'kine', 'otherspe'] }, on: :update
 
   validates :convention, inclusion: { in: [nil,"",'1', '2', '3']}, on: :update
