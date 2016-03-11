@@ -11,7 +11,7 @@ class SlotsController < ApplicationController
     if @start_date.nil? || @end_date.nil?
       render :back
     end
-    if @slot.save
+    if slot_save
       respond_to do |format|
         format.html { redirect_to calendar_path }
         format.js  # <-- will render `app/views/slots/create.js.erb`
@@ -19,7 +19,7 @@ class SlotsController < ApplicationController
     else
       respond_to do |format|
         format.html { render 'calendars/show' }
-        format.js  # <-- idem
+        format.js
       end
     end
     authorize @slot
@@ -49,5 +49,19 @@ class SlotsController < ApplicationController
     Time.parse(string).to_date
   rescue ArgumentError, TypeError
     # we return nil
+  end
+
+
+  def check_overlap
+    check = @slot.user.slots.map {|slot| (slot.start_date > @end_date) || (slot.end_date < @start_date) }
+    check.include? false
+  end
+
+  def slot_save
+    if check_overlap
+      redirect_to calendar_path, alert: 'Deux plages ne peuvent pas se chevaucher'
+    else
+      @slot.save
+    end
   end
 end

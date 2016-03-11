@@ -121,7 +121,7 @@
 
       <div class = "outcoming_demands text-center col-sm-12 col-md-4">
         <h4>Mes demandes envoyées</h4>
-          <% if current_user.bookings.nil? || current_user.bookings.each { |booking| booking.slot.nil? } %>
+          <% if current_user.bookings.nil? %>
             <p> Vous n'avez pas encore fait de demande !</p>
           <% else %>
             <% current_user.bookings.order(created_at: :desc).each do |booking| %>
