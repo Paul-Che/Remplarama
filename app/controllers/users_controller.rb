@@ -173,7 +173,10 @@ class UsersController < ApplicationController
     users = []
     prefiltered_users.each do |user|
       user.slots.each do |slot|
-        if slot.start_date <= Date.parse(@start_date) && slot.end_date >= Date.parse(@end_date)
+        if (slot.start_date <= Date.parse(@start_date) && slot.end_date >= Date.parse(@end_date)) ||
+           (slot.start_date >= Date.parse(@start_date) && slot.end_date <= Date.parse(@end_date)) ||
+           (slot.end_date >= Date.parse(@start_date) && slot.end_date <= Date.parse(@end_date)) ||
+           (slot.start_date >= Date.parse(@start_date) && slot.end_date >= Date.parse(@end_date))
           users << user if !users.include?(user)
         end
       end
