@@ -62,8 +62,12 @@
               </div>
               <hr>
               <div class="request-contact">
-                <%= link_to "Contacter", new_messages_path(booking.user) %>
+                <% if booking.user.conversations.nil? %>
+                  <%= link_to "Contacter", new_messages_path(booking.user) %>
+                <% else %>
+                  <%= link_to "Contacter", conversations_path(booking.user) %>
                 <%# raise %>
+                <% end %>
               </div>
               <hr>
               <div class="request-buttons">
