@@ -3,24 +3,24 @@
   $.attachinary =
     index: 0
     config:
-      disableWith: 'Uploading...'
+      disableWith: 'Chargement...'
       indicateProgress: true
-      invalidFormatMessage: 'Invalid file format'
+      invalidFormatMessage: 'Format de fichier invalide'
       template: """
-        <ul>
-          <% for(var i=0; i<files.length; i++){ %>
-            <li>
-              <% if(files[i].resource_type == "raw") { %>
-                <div class="raw-file"></div>
-              <% } else { %>
-                <img
-                  src="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 75, "height": 75 }) %>"
-                  alt="" width="75" height="75" />
-              <% } %>
-              <a href="#" data-remove="<%= files[i].public_id %>">Test</a>
-            </li>
-          <% } %>
-        </ul>
+        <% for(var i=0; i<files.length; i++){ %>
+            <% if(files[i].resource_type == "raw") { %>
+            <div class="badge-container">
+              <div class="raw-file"></div>
+            </div>
+            <% } else { %>
+            <div class="badge-container">
+              <img
+                src="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 75, "height": 75 }) %>"
+                alt="" width="75" height="75" />
+              <a href="#" data-remove="<%= files[i].public_id %>" class="delete-picture">X</a>
+              </div>
+            <% } %>
+        <% } %>
       """
       render: (files) ->
         $.attachinary.Templating.template(@template, files: files)
