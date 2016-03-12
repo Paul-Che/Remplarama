@@ -12,11 +12,46 @@
   text-align: left;
   padding-top: 10px;
   padding-bottom: 10px;
-    h5 {
+  h5 {
     color: $blue;
   }
-  input {
+  #user_numero_ordre {
     height: 40px;
     width: 250px;
   }
 }
+.attachinary_container {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  li {
+    display: inline;
+  }
+}
+// .attachinary-input {
+//   font-size: 13px;
+//   width: 160px;
+//   color: #fff;
+//   background-color: #00AFC3;
+//   border-color: #0098aa;
+//   display: inline-block;
+//   margin-bottom: 0;
+//   font-weight: normal;
+//   text-align: center;
+//   vertical-align: middle;
+//   -ms-touch-action: manipulation;
+//   touch-action: manipulation;
+//   cursor: pointer;
+//   background-image: none;
+//   border: 1px solid transparent;
+//   white-space: nowrap;
+//   padding: 6px 12px;
+//   font-size: 16px;
+//   line-height: 1.4;
+//   border-radius: 2px;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   user-select: none;
+// }
