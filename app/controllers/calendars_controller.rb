@@ -1,5 +1,4 @@
 class CalendarsController < ApplicationController
-  before_filter :disable_footer, only: [:show,]
 
   def show
     @user = current_user

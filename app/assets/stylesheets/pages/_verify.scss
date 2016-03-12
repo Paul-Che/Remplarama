@@ -1,0 +1,22 @@
+.explanations {
+  padding: 10px;
+  text-align: left;
+    p, li {
+      font-size: 13px;
+    }
+    h5 {
+    color: $blue;
+  }
+}
+.verify-field {
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+    h5 {
+    color: $blue;
+  }
+  input {
+    height: 40px;
+    width: 250px;
+  }
+}
