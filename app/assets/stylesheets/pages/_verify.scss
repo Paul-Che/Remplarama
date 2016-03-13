@@ -10,13 +10,83 @@
 }
 .verify-field {
   text-align: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-    h5 {
-    color: $blue;
+  padding: 10px;
+  margin: 10px;
+  .search-input {
+    line-height: 0px;
   }
-  input {
-    height: 40px;
-    width: 250px;
+  .form-control {
+    width: 98.5%;
   }
+  h5 {
+    color: #888;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .form-input {
+    display: flex;
+    align-items: center;
+  }
+}
+.attachinary_container {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+  li {
+    margin: 15px;
+    display: inline;
+  }
+  a {
+    font-size: 12px;
+  }
+  a:hover {
+    color: black;
+  }
+}
+.badge-container-picture {
+  position: relative;
+  font-size: 25px;
+  line-height: 30px;
+}
+.delete-picture {
+  position: absolute;
+  top: -24px;
+  right: -7px;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  text-align: center;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background-color: $gray-medium;
+  a {
+    font-weight: bold;
+    color: white;
+  }
+}
+
+#user_card_id::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.btn-add-file {
+  flex: 0 0 25%;
+  margin-left: 5px;
+  width: 75px;
+  height: 22px;
+}
+.btn-add-file::before {
+  content: 'Ajouter';
+}
+.btn-validate-upload {
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 98.5%;
 }
