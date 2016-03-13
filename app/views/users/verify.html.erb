@@ -26,22 +26,29 @@
         </div>
         <div class="col-xs-12 col-sm-8">
 
-              <div class="form-design background verify-field">
-                <%= simple_form_for(current_user) do |f| %>
-                  <%= f.error_notification %>
-                  <div class="form-inputs">
-                    <%= f.input :numero_ordre, label: false, placeholder: "Numéro RPPS", input_html:  { class: "search-input" } %>
-                    <%= f.input :numero_ursaff, label: false, placeholder: "Numéro URSSAF", input_html:  { class: "search-input" } %>
-                    <hr>
-                    <h5>Uploadez la photo de votre pièce d'identité (2 fichiers, recto-verso s'il s'agit d'une carte d'identité) :</h5>
+          <div class="form-design background verify-field">
+            <% if current_user.validated == "yes" %>
+              <h5 class="text-center">Votre identité a été validée - Vous avez désormais accès à l'ensemble des fonctionnalités de RemplaMatch !</h5>
+            <% elsif current_user.validated == "pending" %>
+              <h5 class="text-center">La validation de votre profil est cours - Le délai maximal est de 24h</h5>
+            <% else %>
+              <%= simple_form_for(current_user) do |f| %>
+                <%= f.error_notification %>
+                <div class="form-inputs">
+                  <%= f.input :numero_ordre, required: true, label: false, placeholder: "Numéro RPPS", input_html:  { class: "search-input" } %>
+                  <hr>
+                    <h5>Uploadez la photo de votre <strong>pièce d'identité</strong> (2 fichiers, recto-verso s'il s'agit d'une carte d'identité) :</h5>
+                  <div class="flex-upload">
                     <%= f.attachinary_file_field :card_id, as: :attachinary, cloudinary: { folder: "#{current_user.id}_#{current_user.first_name}_#{current_user.last_name}"} %>
                   </div>
-                  <br>
-                  <div class="form-actions text-center">
-                    <%= f.button :submit, "Envoyer", :class => 'btn btn-primary btn-search-home user-edit-button btn-validate-upload', style: "width: 100%; margin-bottom: 10px;" %>
-                  </div>
-                <% end %>
-              </div>
+                </div>
+                <%= f.input :validated, as: :hidden, input_html: {value: "pending"} %>
+                <div class="form-actions text-center">
+                  <%= f.button :submit, "Envoyer", method: :patch, :class => 'btn btn-primary btn-search-home user-edit-button btn-validate-upload' %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
 
         </div>
       </div>

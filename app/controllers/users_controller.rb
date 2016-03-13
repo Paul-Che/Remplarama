@@ -233,7 +233,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :has_practice, :email, :password,
       :password_confirmation, :address, :speciality, :numero_ordre, :numero_ursaff, :avatar,
        :presentation, :education, :publications, :convention, :house_visits, :secretary,
-       :housing, :commission, :house_visits_tolerance, :nosecretary_tolerance, :nohousing_tolerance, :min_commission)
+       :housing, :commission, :house_visits_tolerance, :nosecretary_tolerance, :nohousing_tolerance, :min_commission, :validated)
   end
 
 end
