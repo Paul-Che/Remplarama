@@ -14,10 +14,15 @@ class BookingsController < ApplicationController
     @slot_id = params[:slot_id].to_i
 
     # Permet de marquer les slots correspondants aux booking avec l'id booking en question :
-    @booking.save
+    if booking_exists
+      redirect_to :back, alert: "Vous avez déjà effectué cette demande"
+    else
+      @booking.save
+      redirect_to calendar_path(current_user)
+    end
+
     authorize @booking
 
-    redirect_to calendar_path(current_user)
   end
 
   def update
@@ -70,6 +75,11 @@ class BookingsController < ApplicationController
     else
       string
     end
+  end
+
+  def booking_exists
+    check_bookings = @booking.user.bookings.map {|booking| (@booking.slot.user == booking.slot.user) && (@booking.start_date == booking.start_date) && (@booking.end_date == booking.end_date)}
+    check_bookings.include? true
   end
 
 end

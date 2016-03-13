@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:search_practices, :search_locums]
   after_action :verify_authorized, only: :update
-  before_filter :disable_footer, only: [:search_practices, :search_locums, :show]
+  before_filter :disable_footer, only: [:search_practices, :search_locums]
 
   def search_practices
     @user = current_user
@@ -139,6 +139,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def verify
+
+  end
+
   private
 
   def extract_percent_values(string, default)
@@ -173,7 +177,10 @@ class UsersController < ApplicationController
     users = []
     prefiltered_users.each do |user|
       user.slots.each do |slot|
-        if slot.start_date <= Date.parse(@start_date) && slot.end_date >= Date.parse(@end_date)
+        if (slot.start_date <= Date.parse(@start_date) && slot.end_date >= Date.parse(@end_date)) ||
+           (slot.start_date >= Date.parse(@start_date) && slot.end_date <= Date.parse(@end_date)) ||
+           (slot.end_date >= Date.parse(@start_date) && slot.end_date <= Date.parse(@end_date)) ||
+           (slot.start_date >= Date.parse(@start_date) && slot.end_date >= Date.parse(@end_date))
           users << user if !users.include?(user)
         end
       end
