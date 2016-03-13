@@ -46,18 +46,22 @@
     <% if user_signed_in? %>
 
       <!-- Notification -->
-      <%= link_to conversations_path, class: "navbar-wagon-item navbar-wagon-link" do %>
-        <div class="badge-container">
-          <i class="fa fa-envelope-o"></i>
-          <% if !@unread_messages.nil? %>
-            <div class="badge badge-grey">0</div>
-          <% else %>
-            <div class="badge badge-orange">
-              <%= current_user.unread_conversations_count %>
-            </div>
-          <% end %>
-        </div>
+      <% if current_user.conversations.first.nil? %>
+        <%# flash[:notice] = "Vous n'avez pas encore de conversation en cours, contacter un médecin par l'intermédiaire de sa page de profil afin de lancer une conversation." %>
+      <% else %>
+        <%= link_to conversations_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+          <div class="badge-container">
+            <i class="fa fa-envelope-o"></i>
+            <% if !@unread_messages.nil? %>
+              <div class="badge badge-grey">0</div>
+            <% else %>
+              <div class="badge badge-orange">
+                <%= current_user.unread_conversations_count %>
+              </div>
+            <% end %>
+          </div>
       <% end %>
+    <% end %>
 
         <div class="navbar-name hidden-xs">
           <%= link_to user_path(current_user) do %>

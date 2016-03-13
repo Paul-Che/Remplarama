@@ -62,11 +62,10 @@
               </div>
               <hr>
               <div class="request-contact">
-                <% if booking.user.conversations.nil? %>
+                <% if booking.user.conversations.first.nil? %>
                   <%= link_to "Contacter", new_messages_path(booking.user) %>
                 <% else %>
                   <%= link_to "Contacter", conversations_path(booking.user) %>
-                <%# raise %>
                 <% end %>
               </div>
               <hr>
@@ -153,7 +152,14 @@
                 </div>
                 <hr>
                 <div class="request-contact">
-                  <%= link_to "Contacter", user_path(booking.slot.user) %>
+                  <%#= link_to "Contacter", user_path(booking.slot.user) %>
+                  <%# if booking.user.conversations.first.nil? %>
+                  <% booking.user.conversations.each do |conversation| %>
+                    <%if conversation.user2_id == booking.slot.user.id %>
+                      <%= link_to "Contacter", conversations_path(booking.user) %>
+                    <% end %>
+                    <%= link_to "Contacter", new_messages_path(booking.user) %>
+                  <% end %>
                 </div>
                 <hr>
                 <div class="request-buttons">
