@@ -1,30 +1,31 @@
 (($) ->
 
   $.attachinary =
-    index: 0
-    config:
-      disableWith: 'Chargement...'
-      indicateProgress: true
-      invalidFormatMessage: 'Format de fichier invalide'
-      template: """
-        <% for(var i=0; i<files.length; i++){ %>
-            <% if(files[i].resource_type == "raw") { %>
-            <div class="badge-container">
-              <div class="raw-file"></div>
-            </div>
-            <% } else { %>
-            <div class="badge-container">
-              <img
-                src="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 75, "height": 75 }) %>"
-                alt="" width="75" height="75" />
-              <a href="#" data-remove="<%= files[i].public_id %>" class="delete-picture">X</a>
-              </div>
-            <% } %>
-        <% } %>
-      """
-      render: (files) ->
-        $.attachinary.Templating.template(@template, files: files)
+      index: 0
+      config:
+        disableWith: 'Chargement...'
+        indicateProgress: true
+        invalidFormatMessage: 'Format de fichier invalide'
+        template: """
+          <ul>
+            <% for(var i=0; i<files.length; i++){ %>
+              <li class="badge-container">
 
+                  <% if(files[i].resource_type == "raw") { %>
+                    <div class="raw-file"></div>
+                  <% } else { %>
+                    <img
+                      src="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 75, "height": 75 }) %>"
+                      alt="" width="75" height="75" />
+                  <% } %>
+                  <a href="#" data-remove="<%= files[i].public_id %>" class="delete-picture"><i class="fa fa-times"></i></a>
+
+              </li>
+            <% } %>
+          </ul>
+        """
+        render: (files) ->
+          $.attachinary.Templating.template(@template, files: files)
 
   $.fn.attachinary = (options) ->
     settings = $.extend {}, $.attachinary.config, options
