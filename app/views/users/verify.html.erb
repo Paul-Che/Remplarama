@@ -1,0 +1,62 @@
+<% content_for :meta_title, "RemplaMatch - #{current_user.first_name} #{current_user.last_name}, vérifiez votre identité" %>
+
+<div class="wrapper relative">
+
+  <div class="myprofile-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <div class="avatar-header text-center">
+            <% if current_user.avatar.nil? %>
+                <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+              <% else %>
+                <%= cl_image_tag current_user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
+              <% end %>
+            <h4><strong><%= "Dr. " if current_user.speciality != "kine" %></strong><%= current_user.first_name %> <%= current_user.last_name %></h4>
+            <h5>
+              <i class="fa fa-fw fa-search"></i>
+              <%= current_user.has_practice ? raw("A la recherche de <strong>remplaçants</strong>") : raw("A la recherche de <strong>remplacements</strong>") %>
+            </h5>
+            <% if current_user == current_user %>
+              <div class="text-center">
+              <%= link_to "Retour au profil", user_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" %>
+            </div>
+          <% end %>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 verify-field">
+          <h5>Uploadez la photo de votre pièce d'identité (2 fichiers, recto-verso s'il s'agit d'une carte d'identité</h5>
+          <%= simple_form_for(current_user) do |f| %>
+            <%= f.input :numero_ordre, label: false, placeholder: "Numéro RPPS", input_html:  { class: "search-input" } %>
+            <%= f.attachinary_file_field :card_id, as: :attachinary, cloudinary: { folder: "#{current_user.id}_#{current_user.first_name}_#{current_user.last_name}"} %>
+            <%= f.button :submit, "Envoyer", :class => "btn btn-primary btn-search-home user-edit-button" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container myprofile-container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <div class="explanations">
+          <br>
+          <h5>Qu'est-ce que la vérification de mon identité ?</h5>
+          <p>La vérification est très simple :</p>
+          <ul>
+            <li>Vous nous transmettez une copie de pièce d'identité valide</li>
+            <li>Vous renseignez votre numéro RPPS</li>
+            <li>Vous certifiez sur l'honneur la véracité de ces informations</li>
+          </ul>
+          <p>Et nous nous occupons de tout en moins de 24h.</p>
+          <hr>
+          <h5>Pourquoi vérifier mon identité ?</h5>
+          <p>La vérification d'identité est une mesure de précaution afin de s'assurer que les utilisateur de RemplaMatch sont exclusivement des professionnels de santé.</p>
+          <p>Un certain nombre d'informations n'est disponible qu'une fois votre identité validée.</p>
+          <p>L'accès au nombre de recommandations reçues en particulier - remplaçants ou professionnels installés - nécessite d'avoir une identité validée, et une spécialité identite à celle des profils consultés.</p>
+        </div>
+      </div>
+     </div>
+  </div>
+
+</div>

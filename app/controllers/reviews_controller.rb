@@ -16,7 +16,6 @@ class ReviewsController < ApplicationController
 
     authorize @review
     @review.save
-    flash[:notice] = "Votre avis a bien été enregistré"
 
     redirect_to calendar_path(current_user)
   end
