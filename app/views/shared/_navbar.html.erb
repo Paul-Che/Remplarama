@@ -58,9 +58,12 @@
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
 
-      <!-- Notification -->
+      <!-- Messages -->
       <% if current_user.conversations.first.nil? %>
-        <%# flash[:notice] = "Vous n'avez pas encore de conversation en cours, contacter un médecin par l'intermédiaire de sa page de profil afin de lancer une conversation." %>
+        <div class="badge-container" style="margin-right: 15px;">
+          <i class="fa fa-envelope-o"></i>
+            <div class="badge badge-grey">0</div>
+        </div>
       <% else %>
         <%= link_to conversations_path, class: "navbar-wagon-item navbar-wagon-link" do %>
           <div class="badge-container">
@@ -73,8 +76,9 @@
               </div>
             <% end %>
           </div>
+        <% end %>
       <% end %>
-    <% end %>
+      <!-- Fin de Messages -->
 
         <div class="navbar-name hidden-xs">
           <%= link_to user_path(current_user) do %>
