@@ -27,7 +27,13 @@ Rails.application.routes.draw do
     resources :messages, only: :create
   end
 
-  resource :calendar,     only: [:show]
+  resource :messages, only: [:new, :creat_new] do
+    collection do
+      post 'create_new'
+    end
+  end
+
+  resource :calendar, only: :show
 
   # resources :slot_ranges, only: [:destroy] A detruire
 
