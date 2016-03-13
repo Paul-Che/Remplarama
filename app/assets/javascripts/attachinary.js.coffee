@@ -18,8 +18,7 @@
                       src="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 75, "height": 75 }) %>"
                       alt="" width="75" height="75" />
                   <% } %>
-                  <a href="#" data-remove="<%= files[i].public_id %>" class="delete-picture"><i class="fa fa-times"></i></a>
-
+                  <a href="#" data-remove="<%= files[i].public_id %>" class="delete-picture">x</a>
               </li>
             <% } %>
           </ul>

@@ -13,7 +13,7 @@
   padding: 10px;
   margin: 10px;
   .search-input {
-    line-height: 0px;
+    line-height: initial;
   }
   .form-control {
     width: 98.5%;
@@ -34,7 +34,7 @@
     list-style-type: none;
     padding-left: 0;
     margin-top: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
   }
   li {
     margin: 15px;
@@ -44,7 +44,7 @@
     font-size: 12px;
   }
   a:hover {
-    color: black;
+    color: white;
   }
 }
 .badge-container-picture {
@@ -57,6 +57,7 @@
   top: -24px;
   right: -7px;
   font-size: 12px;
+  font-weight: bold;
   color: white;
   display: flex;
   align-items: center;
@@ -78,9 +79,11 @@
 }
 .btn-add-file {
   flex: 0 0 25%;
-  margin-left: 5px;
+  margin-left: 0px;
   width: 75px;
   height: 22px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 .btn-add-file::before {
   content: 'Ajouter';
@@ -88,5 +91,18 @@
 .btn-validate-upload {
   margin-left: 5px;
   margin-right: 5px;
+  margin-bottom: 10px;
   width: 98.5%;
+}
+.flex-upload {
+  display: flex;
+  align-items: center;
+  h5 {
+    flex: 0 0 80%;
+    margin-right: 15px;
+  }
+  input {
+    flex: 0 0 auto;
+    margin-left: 5px;
+  }
 }
