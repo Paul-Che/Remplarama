@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def search_practices
     @user = current_user
-    @speciality = params[:speciality] || ['medg', 'kine', 'otherspe']
+    @speciality = params[:speciality] || [nil, 'medg', 'kine', 'otherspe']
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @has_practice = true
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
   def search_locums
     @user = current_user
-    @speciality = params[:speciality] || ['medg', 'kine', 'otherspe']
+    @speciality = params[:speciality] || [nil, 'medg', 'kine', 'otherspe']
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @has_practice = false
@@ -221,6 +221,7 @@ class UsersController < ApplicationController
                        nosecretary_tolerance: to_b(nosecretary_tolerance),
                        house_visits_tolerance: house_visits_tolerance,
                        min_commission: min_commission..max_commission)
+
     results = users.select do |user|
       if user.reviews_i_received.size > 0
         (user.reviews_i_received.average(:rating) <= max_rating && user.reviews_i_received.average(:rating) >= min_rating)
