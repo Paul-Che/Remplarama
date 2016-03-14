@@ -18,10 +18,17 @@
 .left-editing {
   border: 1px solid #E6E6E6;
   border-radius: 6px;
-  padding: 5px;
+  padding: 5px 10px 20px 10px;
+  input[type="file"] {
+    opacity: 0;
+  }
 }
 #user_avatar::-webkit-file-upload-button {
   visibility: hidden;
+}
+#edit-avatar:hover {
+  opacity: 0.5;
+  content: "Changer la photo";
 }
 .flex-fields {
   display: flex;
@@ -33,10 +40,6 @@
   .flex-input {
     flex: 0 0 93%;
   }
-}
-
-.btn-add-file-edit::before {
-  content: "Changer";
 }
 .btn-add-file-edit {
   flex: 0 0 25%;
@@ -56,4 +59,12 @@
 }
 .edit_user_background {
   background-color: #F9F9FA;
+}
+
+// Hover on avatar to change it
+
+.imgWrap {
+  p {
+    font-size: 13px;
+  }
 }

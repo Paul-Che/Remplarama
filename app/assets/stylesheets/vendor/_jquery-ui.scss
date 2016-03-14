@@ -221,6 +221,7 @@ input.ui-button::-moz-focus-inner,
 button.ui-button::-moz-focus-inner {
   border: 0;
   padding: 0;
+  outline: 0;
 }
 .ui-datepicker {
   width: 17em;
@@ -480,6 +481,7 @@ button.ui-button::-moz-focus-inner {
 .ui-menu .ui-state-focus,
 .ui-menu .ui-state-active {
   margin: -1px;
+  outline: none;
 }
 
 /* icon support */
@@ -666,7 +668,9 @@ button.ui-button::-moz-focus-inner {
 .ui-slider .ui-slider-handle:focus {
   outline: 0;
 }
-
+.ui-state-focus:focus {
+  outline: 0;
+}
 
 .ui-slider .ui-slider-range {
   position: absolute;

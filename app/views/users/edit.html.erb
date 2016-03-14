@@ -6,15 +6,18 @@
       <% f.error_notification %>
       <!-- left-edition : picture, firstname, lastname, A la recherche de -->
         <div class="container">
-          <div class="row">
+          <div class="roxw">
             <div class="col-xs-12 col-sm-4">
               <div class="left-editing">
                 <div class="avatar-header text-center">
-                  <% if @user.avatar.nil? %>
-                    <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
-                  <% else %>
-                    <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
-                  <% end %>
+                  <div class="imgWrap">
+                    <% if @user.avatar.nil? %>
+                      <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge", id: "edit-avatar" %>
+                    <% else %>
+                      <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge", id: "edit-avatar" %>
+                    <% end %>
+                    <p class="imgDescription"></p>
+                  </div>
                 </div>
                 <div>
                     <%= f.attachinary_file_field :avatar, as: :attachinary, cloudinary: { folder: "#{current_user.id}_#{current_user.first_name}_#{current_user.last_name}"} %>
@@ -115,7 +118,7 @@
             </div>
           <div class="row">
             <div class="col-xs-12 col-sm-offset-4 col-sm-4">
-              <%= f.button :submit,"Terminé", :class => "btn btn-primary btn-search-home user-edit-button",  :style => "margin: 50px" %>
+              <%= f.button :submit,"Valider les changements", :class => "btn btn-primary btn-search-home user-edit-button",  :style => "margin: 20px; width: 250px;" %>
             </div>
           </div>
         </div>
