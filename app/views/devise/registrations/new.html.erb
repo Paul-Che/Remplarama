@@ -9,7 +9,8 @@
           <div class="form-inputs">
             <%= f.input :first_name, required: true %>
             <%= f.input :last_name, required: true %>
-            <%= f.input :has_practice, collection: [['un remplaçant', true], ['un remplacement', false]] %>
+            <%= f.input :has_practice, collection: [['des remplaçants', true], ['des remplacements', false]] %>
+            <%= f.input :speciality, collection: [['Médecine générale', 'medg'], ["Kinésithérapie", "kine"], ["Autre spécialité", "otherspe"]], required: true %>
             <%= f.input :email, required: true, autofocus: true %>
             <%= f.input :password, required: true, hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length) %>
             <%= f.input :password_confirmation, required: true %>

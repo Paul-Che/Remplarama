@@ -22,4 +22,4 @@ fr:
   simple_form:
     labels:
       user:
-        has_practice: "Je recherche un :"
+        has_practice: "Je recherche :"
