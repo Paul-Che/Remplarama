@@ -20,7 +20,13 @@
       <% if current_user == @user %>
         <div class="text-center">
         <%= link_to "Modifier mon profil", edit_user_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" %>
-        <%= link_to "Vérifier mon identité", verify_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" %>
+        <% if @user.validated != "yes" %>
+          <%= link_to "Vérifier mon identité", verify_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" %>
+        <% else %>
+          <div class="identity-checked text-center">
+            <h6><i class="fa fa-check-circle"></i> Identité vérifiée</h6>
+          </div>
+        <% end %>
       </div>
     <% end %>
     </div>
