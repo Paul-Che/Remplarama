@@ -34,13 +34,13 @@
               <div class="col-xs-12">
                 <div class="option-flex filter-row">
                   <div class="label-option">
-                    <label for="min_commission">Reversement au remplaçant</label>
+                    <label for="commission">Reversement au remplaçant</label>
                   </div>
                   <div class="slider-values">
-                    <input type="text" name="min_commission" class="text-center slider-values-text" id="min_commission" readonly>
+                    <input type="text" name="commission" class="text-center slider-values-text" id="commission" readonly>
                   </div>
                   <div class="slider-bar">
-                    <div id="slider-single" data-value="<%= @min_commission %>"></div>
+                    <div id="slider-range" data-value1="<%= @min_commission %>" data-value2="<%= @max_commission %>"></div>
                   </div>
                 </div>
               </div>
