@@ -23,8 +23,8 @@ var CreateMessage = React.createClass({
           onClick={this.handleClick}
           onKeyUp={this.handleKeyUp}></textarea>
         <div className="actions flexbox">
-          <button className={btnClasses + "btn-stop"} onClick={this.handleCancel}>Cancel</button>
-          <button className={btnClasses + "btn-send"} onClick={this.createMessage}>Send</button>
+          <button className={btnClasses + " btn-primary"} onClick={this.handleCancel}>Annuler</button>
+          <button className={btnClasses + " btn-danger"} onClick={this.createMessage}>Envoyer</button>
         </div>
       </div>
     )
@@ -52,5 +52,10 @@ var CreateMessage = React.createClass({
 
   createMessage: function() {
     this.props.onMessageCreation(this.props.selectedConversationId, this.refs.textarea.value)
+    this.setState({
+      focused: false
+    })
+    this.refs.textarea.value = ''
+    this.refs.textarea.blur()
   }
 })
