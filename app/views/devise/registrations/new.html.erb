@@ -13,6 +13,7 @@
             <%= f.input :email, required: true, autofocus: true %>
             <%= f.input :password, required: true, hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length) %>
             <%= f.input :password_confirmation, required: true %>
+            <%= f.input :min_commission, as: :hidden, input_html: {value: 0} %>
           </div>
           <br>
           <div class="form-actions text-center">

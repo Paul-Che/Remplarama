@@ -62,7 +62,10 @@ class UsersController < ApplicationController
     @start_date = params[:start_date]
     @end_date = params[:end_date]
     @has_practice = false
-    @min_commission = extract_percent_value(params[:min_commission], 75)
+
+    @commission = params[:commission] || "0 - 100%"
+    @min_commission = @commission.scan(/\d+ /).join.gsub(" ","").to_i
+    @max_commission = @commission.scan(/\d+%/).join.gsub("%","").to_i
 
     @rating = params[:rating] || "0 - 5"
     @min_rating = @rating.first.to_i || 0
@@ -81,8 +84,8 @@ class UsersController < ApplicationController
       located_users = User.near(@location, 15)
     end
 
-    prefiltered_users = search_locum_by_filters(located_users, @speciality, @has_practice,
-      @min_commission, @min_rating, @max_rating, @unrated, @nohousing_tolerance, @nosecretary_tolerance, @house_visits_tolerance)
+    prefiltered_users = search_locum_by_filters(located_users, @speciality, @has_practice, @min_commission,
+      @max_commission, @min_rating, @max_rating, @unrated, @nohousing_tolerance, @nosecretary_tolerance, @house_visits_tolerance)
 
     @users = search_by_date(prefiltered_users)
 
@@ -133,7 +136,7 @@ class UsersController < ApplicationController
   def update
     if @user.update!(user_params)
       authorize @user
-      redirect_to :user
+      redirect_to :back
     else
       redirect_to :back
     end
@@ -206,8 +209,8 @@ class UsersController < ApplicationController
     return results
   end
 
-  def search_locum_by_filters(located_users, speciality, has_practice, min_commission, min_rating, max_rating, unrated, nohousing_tolerance, nosecretary_tolerance, house_visits_tolerance)
-    house_visits_tolerance = [nil, 'none', 'max2', 'above2'] if house_visits_tolerance == "all" || house_visits_tolerance.nil?
+  def search_locum_by_filters(located_users, speciality, has_practice, min_commission, max_commission, min_rating, max_rating, unrated, nohousing_tolerance, nosecretary_tolerance, house_visits_tolerance)
+    house_visits_tolerance = [nil, "", 'none', 'max2', 'above2'] if house_visits_tolerance == "all" || house_visits_tolerance.nil?
     nosecretary_tolerance = [nil, true, false] if nosecretary_tolerance == "all" || nosecretary_tolerance.nil?
     nohousing_tolerance = [nil, true, false] if nohousing_tolerance == "all" || nohousing_tolerance.nil?
 
@@ -215,8 +218,8 @@ class UsersController < ApplicationController
                        has_practice: has_practice,
                        nohousing_tolerance: to_b(nohousing_tolerance),
                        nosecretary_tolerance: to_b(nosecretary_tolerance),
-                       house_visits_tolerance: house_visits_tolerance).where("min_commission <= ?", min_commission + 5)
-
+                       house_visits_tolerance: house_visits_tolerance,
+                       min_commission: min_commission..max_commission)
     results = users.select do |user|
       if user.reviews_i_received.size > 0
         (user.reviews_i_received.average(:rating) <= max_rating && user.reviews_i_received.average(:rating) >= min_rating)
