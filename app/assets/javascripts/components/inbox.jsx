@@ -16,7 +16,7 @@ var Inbox = React.createClass({
           <div className="col-sm-4" id="conversation-list">
             <div className="panel panel-default">
               <div className="panel-heading">
-                <h4>Inbox</h4>
+                <h4>Boîte de réception</h4>
               </div>
               <div className="panel-body">
                 <ConversationList
@@ -30,7 +30,7 @@ var Inbox = React.createClass({
           <div className="col-sm-7" id="message-list">
             <div className="panel panel-default">
               <div className="panel-heading">
-                <h4>Message du Dr. {this.state.firstName} {this.state.lastName}</h4>
+                <h4>Messages du Dr. {this.state.firstName} {this.state.lastName}</h4>
               </div>
               <div className="panel-body">
                 <div id="wrapper">

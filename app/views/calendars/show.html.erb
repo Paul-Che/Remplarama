@@ -159,13 +159,10 @@
                 </div>
                 <hr>
                 <div class="request-contact">
-                  <%#= link_to "Contacter", user_path(booking.slot.user) %>
-                  <%# if booking.user.conversations.first.nil? %>
-                  <% booking.user.conversations.each do |conversation| %>
-                    <%if conversation.user2_id == booking.slot.user.id %>
-                      <%= link_to "Contacter", conversations_path(booking.user) %>
-                    <% end %>
-                    <%= link_to "Contacter", new_messages_path(booking.user) %>
+                  <% if booking.slot.user.conversations.where(user2_id: current_user.id).first.nil? %>
+                    <%= link_to "Contacter", new_messages_path(booking.slot.user) %>
+                  <% else %>
+                    <%= link_to "Contacter", conversations_path(booking.slot.user) %>
                   <% end %>
                 </div>
                 <hr>

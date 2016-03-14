@@ -68,10 +68,10 @@
         <%= link_to conversations_path, class: "navbar-wagon-item navbar-wagon-link" do %>
           <div class="badge-container">
             <i class="fa fa-envelope-o"></i>
-            <% if !@unread_messages.nil? %>
+            <% if !@unread_messages.nil? || current_user.unread_conversations_count == 0 %>
               <div class="badge badge-grey">0</div>
             <% else %>
-              <div class="badge badge-orange">
+              <div class="badge badge-blue">
                 <%= current_user.unread_conversations_count %>
               </div>
             <% end %>
