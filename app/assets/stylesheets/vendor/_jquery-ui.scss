@@ -90,16 +90,16 @@
   display: block;
   cursor: pointer;
   position: relative;
-  margin: 2px 0 0 0;
+  margin: 0 0 0 0;
   padding: .5em .5em .5em .7em;
   min-height: 0; /* support: IE7 */
   font-size: 100%;
 }
 .ui-accordion .ui-accordion-icons {
-  padding-left: 2.2em;
+  padding-left: 1.2em;
 }
 .ui-accordion .ui-accordion-icons .ui-accordion-icons {
-  padding-left: 2.2em;
+  padding-left: 1.2em;
 }
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon {
   position: absolute;
@@ -108,7 +108,7 @@
   margin-top: -8px;
 }
 .ui-accordion .ui-accordion-content {
-  padding: 1em 2.2em;
+  padding: 1em 1.2em;
   border-top: 0;
   overflow: auto;
 }
@@ -221,6 +221,7 @@ input.ui-button::-moz-focus-inner,
 button.ui-button::-moz-focus-inner {
   border: 0;
   padding: 0;
+  outline: 0;
 }
 .ui-datepicker {
   width: 17em;
@@ -480,6 +481,7 @@ button.ui-button::-moz-focus-inner {
 .ui-menu .ui-state-focus,
 .ui-menu .ui-state-active {
   margin: -1px;
+  outline: none;
 }
 
 /* icon support */
@@ -666,7 +668,9 @@ button.ui-button::-moz-focus-inner {
 .ui-slider .ui-slider-handle:focus {
   outline: 0;
 }
-
+.ui-state-focus:focus {
+  outline: 0;
+}
 
 .ui-slider .ui-slider-range {
   position: absolute;
@@ -845,8 +849,8 @@ body .ui-tooltip {
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-  font-family: Verdana,Arial,sans-serif;
-  font-size: 1em;
+  font-family: Open Sans;
+  font-size: 13px;
 }
 .ui-widget-content {
   border: 1px solid #E6E6E6;
@@ -909,7 +913,7 @@ body .ui-tooltip {
   border: 1px solid #aaaaaa;
   background: $blue 50% 50% repeat-x;
   font-weight: normal;
-  color: #212121;
+  color: white;
 }
 .ui-state-active a,
 .ui-state-active a:link,
