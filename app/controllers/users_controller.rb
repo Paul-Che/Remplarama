@@ -194,11 +194,12 @@ class UsersController < ApplicationController
   def search_practice_by_filters(located_users, speciality, has_practice, min_commission, max_commission, min_rating, max_rating, unrated, convention, housing, secretary, house_visits)
     users = located_users.where(speciality: speciality,
                        has_practice: has_practice,
-                       commission: min_commission..max_commission,
-                       convention: convention,
-                       housing: housing,
-                       secretary: secretary,
-                       house_visits: house_visits)
+                       commission: [min_commission..max_commission, nil, ""],
+                       convention: [convention, nil, ""],
+                       housing: [housing, nil],
+                       secretary: [secretary, nil],
+                       house_visits: [house_visits, nil, ""])
+
     results = users.select do |user|
       if user.reviews_i_received.size > 0
         (user.reviews_i_received.average(:rating) <= max_rating && user.reviews_i_received.average(:rating) >= min_rating)
