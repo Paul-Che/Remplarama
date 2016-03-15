@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313182546) do
+ActiveRecord::Schema.define(version: 20160315104049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,18 +103,18 @@ ActiveRecord::Schema.define(version: 20160313182546) do
   add_index "slots", ["user_id"], name: "index_slots_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                  default: "",       null: false
+    t.string   "encrypted_password",     default: "",       null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,        null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "has_practice"
@@ -128,16 +128,16 @@ ActiveRecord::Schema.define(version: 20160313182546) do
     t.text     "publications"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "admin",                  default: false, null: false
+    t.boolean  "admin",                  default: false,    null: false
     t.string   "convention"
     t.boolean  "housing"
     t.boolean  "secretary"
     t.string   "house_visits"
     t.integer  "commission"
-    t.string   "house_visits_tolerance"
-    t.boolean  "nosecretary_tolerance"
-    t.boolean  "nohousing_tolerance"
-    t.integer  "min_commission"
+    t.string   "house_visits_tolerance", default: "above2"
+    t.boolean  "nosecretary_tolerance",  default: true
+    t.boolean  "nohousing_tolerance",    default: true
+    t.integer  "min_commission",         default: 0
     t.string   "card_id"
     t.string   "validated"
   end

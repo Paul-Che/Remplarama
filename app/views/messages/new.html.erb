@@ -9,7 +9,7 @@
           :method => 'post' do |f| %>
             <div class="form-inputs">
               <%#= f.input :email, default: @user.email %>
-              <%= f.input :content, placeholder: "Ecrivez lui un message", label: false, :input_html => {:minlength => 10 , maxlength: 300} %>
+              <%= f.input :content, placeholder: "Votre message", label: false, :input_html => {:minlength => 10} %>
             </div>
             <br>
             <div class="form-actions text-center">

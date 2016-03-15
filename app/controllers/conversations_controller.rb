@@ -20,3 +20,4 @@ class ConversationsController < ApplicationController
   end
 
 end
+
