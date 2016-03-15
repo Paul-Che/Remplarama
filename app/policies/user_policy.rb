@@ -6,15 +6,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def search_practices?
-    true
+    true unless @user.has_practice
   end
 
   def search_locums?
-    true
+    true unless !@user.has_practice
   end
 
   def show?
-    true
+    @record.has_practice == !@user.has_practice || @user.admin? || @user == @record
   end
 
   def update?
