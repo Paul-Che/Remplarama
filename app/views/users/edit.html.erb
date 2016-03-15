@@ -6,7 +6,7 @@
       <% f.error_notification %>
       <!-- left-edition : picture, firstname, lastname, A la recherche de -->
         <div class="container">
-          <div class="roxw">
+          <div class="row">
             <div class="col-xs-12 col-sm-4">
               <div class="left-editing">
                 <div class="avatar-header text-center">
@@ -16,109 +16,126 @@
                     <% else %>
                       <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge", id: "edit-avatar" %>
                     <% end %>
-                    <p class="imgDescription"></p>
+                    <div id="avatar-edit-filter" class="imgDescription-hidden"><i class="fa fa-pencil">  Changer</i></div>
                   </div>
                 </div>
                 <div>
                     <%= f.attachinary_file_field :avatar, as: :attachinary, cloudinary: { folder: "#{current_user.id}_#{current_user.first_name}_#{current_user.last_name}"} %>
                 </div>
                 <div>
-                    <%= f.input :last_name, placeholder: "#{@user.last_name}", label: false, class: "form-inline" %>
+                    <%= f.input :last_name, placeholder: (@user.last_name || "Nom"), label: false, class: "form-inline" %>
                 </div>
                 <div>
                     <%= f.input :first_name, placeholder: "#{@user.first_name}", label: false %>
                 </div>
                 <div class="replacement-need">
-                  <%= f.input :has_practice, collection: [['Je recherche un remplaçant', true], ['Je recherche un remplacement', false]], label: false %>
+                  <%= f.input :has_practice, collection: [['Je recherche des remplaçants', true], ['Je recherche des remplacements', false]], label: false, include_blank: false %>
                 </div>
                 <div>
-                    <%= f.input :address, placeholder: "#{@user.address}", label: false %>
+                    <%= f.input :address, placeholder: (@user.address.nil? || @user.address == "") ? "Addresse" : @user.address, label: false %>
                 </div>
               </div>
             </div>
               <!-- right-edition -->
-              <div class="col-xs-12 col-sm-8">
-                <div class="right-editing">
-                  <div id="accordion">
-                    <h3>Informations clés</h3>
-                      <ul>
-                        <div class="flex-fields">
-                          <div class="flex-icons"><i class="fa fa-fw fa-stethoscope icon-profile"></i></div>
-                          <div class="flex-input"><%= f.input :speciality, label: false, placeholder: "#{@user.speciality}", collection: [['Médecine générale', 'medg'], ["Kinésithérapie", "kine"], ["Autre spécialité", "otherspe"]], style: "width: 100%;" %></div>
-                        </div>
-                        <div class="flex-fields">
-                          <div class="flex-icons"><i class="fa fa-fw fa-graduation-cap icon-profile"></i></div>
-                          <div class="flex-input"><%= f.input :education, placeholder: "#{@user.education }", label: false %></div>
-                        </div>
-                        <div class="flex-fields">
-                          <div class="flex-icons"><i class="fa fa-fw fa-hashtag icon-profile"></i></div>
-                          <div class="flex-input"><%= f.input :numero_ordre, placeholder: "#{@user.numero_ordre }", label: false %></div>
-                        </div>
-                        <% if !@user.has_practice %>
-                          <div class="flex-fields">
-                            <div class="flex-icons"><i class="fa fa-fw fa-file-text-o icon-profile"></i></div>
-                            <div class="flex-input"><%= f.input :numero_ursaff, placeholder: "#{@user.numero_ursaff }", label: false %></div>
-                          </div>
-                        <% end %>
-                      </ul>
-                    <h3>Activité & cabinet</h3>
-                       <ul>
-                       <!-- User has practice -->
-                        <li>
-                          <i class="fa fa-fw fa-user-md icon-profile"></i>
-                          <%= f.input :convention, placeholder: "#{@user.convention }", collection: [1, 2, 3], label: "Conventionnement secteur" %>
-                        </li>
-                        <li>
-                          <i class="fa fa-fw fa-suitcase icon-profile"></i>
-                          <%= f.input :house_visits, placeholder: "#{@user.house_visits}", collection: [['Aucune visite à domicile', 'none'], ["Jusqu'à 2 visites à domicile / jour en moyenne", "max2"], ["Plus de 2 visites à domicile / jour en moyenne", "above2"]], label: "Visites à domicile" %>
-                        </li>
-                        <li>
-                          <i class="fa fa-fw fa-phone icon-profile"></i>
-                          <%= f.input :secretary, placeholder: "#{@user.secretary}", collection: [['Secrétariat disponible', true], ["Pas de secrétariat", false]], label: "Secrétariat" %>
-                        </li>
-                        <li>
-                          <i class="fa fa-fw fa-home icon-profile"></i>
-                          <%= f.input :housing, placeholder: "#{@user.housing}", collection: [['Hébergement possible', true], ["Pas d'hébergement possible", false]], label: "Hébergement" %>
-                        </li>
-                        <li>
-                          <i class="fa fa-fw fa-money icon-profile"></i>
-                          <%= f.input :commission, placeholder: "#{@user.commission }", label: "Versement souhaitée (%)" %>
-                        </li>
-                        <!-- User doesn't have practice -->
-                        <li>
-                          <i class="fa fa-fw fa-suitcase icon-profile"></i>
-                          <%= f.input :house_visits_tolerance, placeholder: "#{@user.house_visits_tolerance}", collection: [['Aucune visite à domicile acceptée', 'none'], ["Maximum 2 visites à domicile / jour acceptées", "max2"], ["Visites à domicile acceptées", "above2"]], label: "Visites à domicile" %>
-                        </li>
+            <div class="col-xs-12 col-sm-8">
+              <div class="right-editing">
+                <div id="accordion">
+                  <h3>Informations clés</h3>
+                    <ul>
+                      <div class="flex-fields">
+                        <div class="flex-icons"><i class="fa fa-fw fa-stethoscope icon-profile"></i></div>
+                        <div class="flex-label">Spécialité</div>
+                        <div class="flex-input"><%= f.input :speciality, label: false, placeholder: @user.speciality, collection: [['Médecine générale', 'medg'], ["Kinésithérapie", "kine"], ["Autre spécialité", "otherspe"]], style: "width: 100%;" %></div>
+                      </div>
+                      <div class="flex-fields">
+                        <div class="flex-icons"><i class="fa fa-fw fa-graduation-cap icon-profile"></i></div>
+                        <div class="flex-label">Education</div>
+                        <div class="flex-input"><%= f.input :education, placeholder: @user.education || "Education", label: false %></div>
+                      </div>
+                      <div class="flex-fields">
+                        <div class="flex-icons"><i class="fa fa-fw fa-hashtag icon-profile"></i></div>
+                        <div class="flex-label">Numéro RPPS</div>
+                        <div class="flex-input"><%= f.input :numero_ordre, placeholder: @user.numero_ordre || "Numero RPPS", label: false %></div>
+                      </div>
+                      <div class="flex-fields edit-urssaf">
+                        <div class="flex-icons"><i class="fa fa-fw fa-file-text-o icon-profile"></i></div>
+                        <div class="flex-label">Numéro URSSAF</div>
+                        <div class="flex-input"><%= f.input :numero_ursaff, placeholder: @user.numero_ursaff || "Numero URSSAF", label: false %></div>
+                      </div>
+                    </ul>
+                  <h3>Activité & cabinet</h3>
+                    <ul>
+                      <!-- User has practice -->
 
-                        <li>
-                          <i class="fa fa-fw fa-phone icon-profile"></i>
-                          <%= f.input :nosecretary_tolerance, placeholder: "#{@user.nosecretary_tolerance}", collection: [['Absence de secrétariat acceptée', true], ["Secrétariat requis", false]], label: "Secrétariat" %>
-                        </li>
-                        <li>
-                          <i class="fa fa-fw fa-home icon-profile"></i>
-                          <%= f.input :nohousing_tolerance, placeholder: "#{@user.nohousing_tolerance}", collection: [['Hébergement non-nécessaire', true], ["Hébergement nécessaire", false]], label: "Hébergement" %>
-                        </li>
-                        <li>
-                          <i class="fa fa-fw fa-money icon-profile"></i>
-                          <%= f.input :min_commission, placeholder: "#{@user.min_commission }", label: "Versement minimal souhaité (%)" %>
-                        </li>
-                      </ul>
-                    <h3>Présentation</h3>
-                      <ul>
-                        <li>
-                          <%= f.input :presentation, placeholder: "#{@user.presentation}", label: "Rédigez votre présentation et obtenez jusqu'à 80% de résultats en plus" %>
-                        </li>
-                        <li>
-                          <%= f.input :publications, placeholder: "#{@user.publications}", label: "Renseignez vos publications" %>
-                        </li>
-                      </ul>
-                  </div>
+                      <div class="has_practice">
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-user-md icon-profile"></i></div>
+                          <div class="flex-label">Conventionnement</div>
+                          <div class="flex-input"><%= f.input :convention, label: false, placeholder: @user.convention, collection: [["Conventionné secteur 1", 1], ["Conventionné secteur 2", 2], ["Non-conventionné", 3]] %></div>
+                        </div>
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-suitcase icon-profile"></i></div>
+                          <div class="flex-label">Visites à domicile</div>
+                          <div class="flex-input"><%= f.input :house_visits, label: false, placeholder: @user.house_visits, collection: [['Aucune visite à domicile', 'none'], ["Jusqu'à 2 visites à domicile / jour en moyenne", "max2"], ["Plus de 2 visites à domicile / jour en moyenne", "above2"]] %></div>
+                        </div>
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-phone icon-profile"></i></div>
+                          <div class="flex-label">Secrétariat</div>
+                          <div class="flex-input"><%= f.input :secretary, label: false, placeholder: @user.secretary, collection: [['Secrétariat disponible', true], ["Pas de secrétariat", false]] %></div>
+                        </div>
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-home icon-profile"></i></div>
+                          <div class="flex-label">Hébergement</div>
+                          <div class="flex-input"><%= f.input :housing, label: false, placeholder: @user.housing, collection: [['Hébergement possible', true], ["Pas d'hébergement possible", false]] %></div>
+                        </div>
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-money icon-profile"></i></div>
+                          <div class="flex-label">Reversement</div>
+                          <div class="flex-input"><%= f.input :commission, label: false, placeholder: @user.commission, collection: [["0% reversés", 0], ["5% reversés", 5], ["10% reversés", 10], ["15% reversés", 15], ["20% reversés", 20], ["25% reversés", 25], ["30% reversés", 30], ["35% reversés", 35], ["40% reversés", 40], ["45% reversés", 45], ["50% reversés", 50], ["55% reversés", 55], ["60% reversés", 60], ["65% reversés", 65], ["70% reversés", 70], ["75% reversés", 75], ["80% reversés", 80], ["85% reversés", 85], ["90% reversés", 90], ["95% reversés", 95], ["100% reversés", 100]] %></div>
+                        </div>
+                      </div>
+
+                    <!-- User doesn't have practice -->
+                      <div class="has_no_practice">
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-suitcase icon-profile"></i></div>
+                          <div class="flex-label">Visites à domicile</div>
+                          <div class="flex-input"><%= f.input :house_visits_tolerance, label: false, placeholder: @user.house_visits_tolerance, collection: [['Aucune visite à domicile acceptée', 'none'], ["Maximum 2 visites à domicile / jour acceptées", "max2"], ["Visites à domicile acceptées", "above2"]] %></div>
+                        </div>
+
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-phone icon-profile"></i></div>
+                          <div class="flex-label">Secrétariat</div>
+                          <div class="flex-input"><%= f.input :nosecretary_tolerance, label: false, placeholder: @user.nosecretary_tolerance, collection: [['Absence de secrétariat acceptée', true], ["Secrétariat requis", false]] %></div>
+                        </div>
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-home icon-profile"></i></div>
+                          <div class="flex-label">Hébergement</div>
+                          <div class="flex-input"><%= f.input :nohousing_tolerance, label: false, placeholder: @user.nohousing_tolerance, collection: [['Hébergement non-nécessaire', true], ["Hébergement nécessaire", false]] %></div>
+                        </div>
+                        <div class="flex-fields">
+                          <div class="flex-icons"><i class="fa fa-fw fa-money icon-profile"></i></div>
+                          <div class="flex-label">Commission minimale souhaitée</div>
+                          <div class="flex-input"><%= f.input :min_commission, label: false, placeholder: @user.min_commission, collection: [["0% minimum", 0], ["5% minimum", 5], ["10% minimum", 10], ["15% minimum", 15], ["20% minimum", 20], ["25% minimum", 25], ["30% minimum", 30], ["35% minimum", 35], ["40% minimum", 40], ["45% minimum", 45], ["50% minimum", 50], ["55% minimum", 55], ["60% minimum", 60], ["65% minimum", 65], ["70% minimum", 70], ["75% minimum", 75], ["80% minimum", 80], ["85% minimum", 85], ["90% minimum", 90], ["95% minimum", 95], ["100% minimum", 100]] %></div>
+                        </div>
+                      </div>
+
+                    </ul>
+                  <h3>Présentation</h3>
+                    <ul>
+                      <div class="flex-fields">
+                        <div class="flex-full-length"><%= f.input :presentation, placeholder: @user.presentation, label: "Rédigez votre présentation et obtenez jusqu'à 80% de résultats en plus" %></div>
+                      </div>
+                      <div class="flex-fields">
+                        <div class="flex-full-length"><%= f.input :publications, placeholder: @user.publications, label: "Renseignez vos publications" %></div>
+                      </div>
+                    </ul>
                 </div>
               </div>
-            </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-offset-4 col-sm-4">
-              <%= f.button :submit,"Valider les changements", :class => "btn btn-primary btn-search-home user-edit-button",  :style => "margin: 20px; width: 250px;" %>
+              <div class="text-right">
+                <%= f.button :submit,"Sauvegarder", :class => "btn btn-primary",  :style => "margin: 20px 0px 20px 5px; width: 150px; font-size: 13px;" %>
+                <%= link_to "Annuler", edit_user_path(current_user), :class => "btn btn-danger",  :style => "margin: 20px 0px 20px 5px; width: 100px; font-size: 13px;" %>
+              </div>
             </div>
           </div>
         </div>
