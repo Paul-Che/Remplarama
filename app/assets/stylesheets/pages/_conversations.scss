@@ -190,8 +190,6 @@
 .message-input {
   background-color: white;
   width: 100%;
-  padding: 10px 15px;
-  // box-shadow: 0 -1px 5px 0 rgba(0,0,0,0.07),0 -1px 0 0 rgba(0,0,0,0.03);
   position: absolute;
   bottom: 0;
   textarea {
@@ -216,25 +214,6 @@
     margin-right: 5px;
     font-size: 13px;
   }
-  // .btn-send,
-  // .btn-stop {
-  //   border-radius: 1px;
-  //   color: white;
-  // }
-  // .btn-send {
-  //   background-color: $blue;
-  //   &:hover {
-  //     background-color: #1B316C;
-  //   }
-  // }
-  // .btn-stop {
-  //   background: rgba(0,0,0,0.12);
-  //   color: rgba(0,0,0,0.35) !important;
-  //   &:hover {
-  //     background: rgba(0,0,0,0.15);
-  //     color: rgba(0,0,0,0.40) !important;
-  //   }
-  // }
 }
 .date {
   font-size: 13px;
