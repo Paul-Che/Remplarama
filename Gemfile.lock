@@ -25,7 +25,7 @@ GIT
       railties (>= 3.0)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.5.1)
