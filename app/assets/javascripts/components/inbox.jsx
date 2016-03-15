@@ -11,9 +11,9 @@ var Inbox = React.createClass({
 
   render: function() {
     return (
-      <div className="container">
+      <div className="container" id="react-inbox">
         <div className="row">
-          <div className="col-sm-4" id="conversation-list">
+          <div className="col-sm-5" id="conversation-list">
             <div className="panel panel-default">
               <div className="panel-heading">
                 <h4>Boîte de réception</h4>
@@ -30,7 +30,7 @@ var Inbox = React.createClass({
           <div className="col-sm-7" id="message-list">
             <div className="panel panel-default">
               <div className="panel-heading">
-                <h4>Messages du Dr. {this.state.firstName} {this.state.lastName}</h4>
+                <h4>{this.state.firstName} {this.state.lastName}</h4>
               </div>
               <div className="panel-body">
                 <div id="wrapper">
@@ -60,7 +60,7 @@ var Inbox = React.createClass({
         that.setState({
           selectedConversationId: data.selected_conversation_id,
           firstName: data.first_name,
-          lastName: data .last_name,
+          lastName: data.last_name,
           conversations: data.conversations,
           messages: data.messages
         })
