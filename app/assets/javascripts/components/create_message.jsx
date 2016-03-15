@@ -23,8 +23,8 @@ var CreateMessage = React.createClass({
           onClick={this.handleClick}
           onKeyUp={this.handleKeyUp}></textarea>
         <div className="actions flexbox">
-          <button className={btnClasses + " btn-primary"} onClick={this.handleCancel}>Annuler</button>
-          <button className={btnClasses + " btn-danger"} onClick={this.createMessage}>Envoyer</button>
+          <button className={btnClasses + " btn-primary"} onClick={this.createMessage}>Envoyer</button>
+          <button className={btnClasses + " btn-danger"} onClick={this.handleCancel}>Annuler</button>
         </div>
       </div>
     )
