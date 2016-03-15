@@ -1,9 +1,12 @@
 .left-editing, .right-editing {
+  background-color: #F9F9FA;
   select, input, textarea {
     font-size: 13px;
     font-family: Open Sans;
     margin-top: 5px;
     margin-bottom: 5px;
+    border-radius: 3px;
+    background-color: white;
   }
   textarea {
     min-height: 100px;
@@ -34,11 +37,28 @@
   display: flex;
   align-items: center;
   .flex-icons {
-    flex: 0 0 7%;
+    flex: 0 0 3%;
+    color: $blue;
+  }
+  .flex-label {
+    flex: 0 0 20%;
+    font-family: Raleway;
+    font-size: 13px;
+    margin-left: 5px;
+    margin-right: 5px;
     color: $blue;
   }
   .flex-input {
-    flex: 0 0 93%;
+    flex: 0 0 77%;
+  }
+  .flex-full-length {
+    flex: 0 0 100%;
+  }
+  label {
+    font-size: 13px;
+    color: $blue;
+    font-family: Raleway;
+    font-weight: normal;
   }
 }
 .btn-add-file-edit {
@@ -58,13 +78,52 @@
   list-style : none;
 }
 .edit_user_background {
-  background-color: #F9F9FA;
+  background-color: white;
 }
 
 // Hover on avatar to change it
 
 .imgWrap {
-  p {
-    font-size: 13px;
+  position: relative;
+  margin: auto;
+  width: 100px;
+  .imgDescription-hidden {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    margin-bottom: 0;
+    border-radius: 50%;
+  }
+  .imgDescription-show {
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    font-size: 11px;
+    margin-bottom: 0;
+    border-radius: 50%;
+  }
+  .fa {
+    position: absolute;
+    top: 45px;
+    left: 19px;
   }
 }
+
+// Toggle right panel to be filled, based on dropdown selection for has_practice
+
+
+
+
+
+
+
+
+
