@@ -60,7 +60,7 @@ var Inbox = React.createClass({
         that.setState({
           selectedConversationId: data.selected_conversation_id,
           firstName: data.first_name,
-          lastName: this.props.last_name,
+          lastName: data .last_name,
           conversations: data.conversations,
           messages: data.messages
         })
@@ -78,7 +78,7 @@ var Inbox = React.createClass({
         that.setState({
           selectedConversationId: data.selected_conversation_id,
           firstName: data.first_name,
-          lastName: this.props.last_name,
+          lastName: data.last_name,
           conversations: data.conversations,
           messages: data.messages
         })

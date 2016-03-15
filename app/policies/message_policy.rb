@@ -17,3 +17,4 @@ class MessagePolicy < ApplicationPolicy
     record.user == user || user.admin?
   end
 end
+

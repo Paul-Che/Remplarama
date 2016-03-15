@@ -27,3 +27,4 @@ class Conversation < ActiveRecord::Base
     messages.order(created_at: :asc).last
   end
 end
+
