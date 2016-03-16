@@ -17,11 +17,13 @@ Rails.application.routes.draw do
   resources :slots, only: [:show]
 
   resources :bookings, only: [:show, :destroy, :update] do
+    resources :contracts, only: [:new, :create, :show]
     member do
       patch 'confirm'
       patch 'reject'
     end
   end
+
 
   resources :conversations, only: :index do
     resources :messages, only: :create
