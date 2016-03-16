@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :slots, only: [:show]
 
-  resources :bookings, only: [:destroy, :update] do
+  resources :bookings, only: [:show, :destroy, :update] do
     member do
       patch 'confirm'
       patch 'reject'

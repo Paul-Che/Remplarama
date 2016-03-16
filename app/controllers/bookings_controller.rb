@@ -1,9 +1,21 @@
 class BookingsController < ApplicationController
   # skip_after_action :verify_policy_scoped, only: :index
+  respond_to :html, :js, :pdf
 
   def new
     @booking = Booking.new
     @user = User.find(params[:user_id])
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "test_wicked_pdf"
+      end
+    end
+    authorize @booking
   end
 
   def create

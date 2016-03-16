@@ -39,6 +39,8 @@
             <% end %>
           <% end %>
         </div>
+        <br>
+        <%= link_to "Télécharger un modèle de contrat", booking_path(Booking.last, format: :pdf), target: "_blank" %>
       </div>
 
       <div class="incoming_demands text-center col-sm-12 col-md-4">
