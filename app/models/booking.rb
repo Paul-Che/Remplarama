@@ -4,7 +4,7 @@ class Booking < ActiveRecord::Base
   # Associations
   belongs_to :user
   belongs_to :slot
-  has_one :contract
+  has_one :contract, dependent: :destroy
 
   # Validations
   validates :start_date, presence: true
