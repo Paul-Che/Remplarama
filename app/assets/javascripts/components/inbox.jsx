@@ -33,7 +33,7 @@ var Inbox = React.createClass({
                 <h4>{this.state.firstName} {this.state.lastName}</h4>
               </div>
               <div className="panel-body">
-                <div id="wrapper">
+                <div id="wrapper-conversations">
                   <MessageList
                     messages={this.state.messages}
                   />
