@@ -1,161 +1,49 @@
 <div class="nav-side-menu">
-    <div class="brand">
-      <div class="mobile-menu">
-        <i class="fa fa-bars toggle-btn flex-item" data-toggle="collapse" data-target="#menu-content"></i>
-        <span class="flex-item" data-toggle="collapse" data-target="#menu-content"> Menu</span>
-      </div>
+  <div class="brand">
+    <div class="mobile-menu">
+      <i class="fa fa-bars toggle-btn flex-item" data-toggle="collapse" data-target="#menu-content"></i>
+      <span class="flex-item" data-toggle="collapse" data-target="#menu-content"> Menu</span>
     </div>
+  </div>
 
+  <div class="menu-list">
 
-        <div class="menu-list">
+    <ul id="menu-content" class="menu-content collapse out">
 
-            <ul id="menu-content" class="menu-content collapse out">
-
-                <li  data-toggle="collapse" data-target="#on-going-bookings" class="collapsed active">
-                  <a href="#"><i class="fa fa-refresh fa-lg"></i> Remplacements en cours <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="on-going-bookings">
-                    <li class="active"><a href="#">A valider</a></li>
-                    <li><a href="#">A clôturer</a></li>
-                </ul>
-
-
-                <li data-toggle="collapse" data-target="#on-going-requests" class="collapsed">
-                  <a href="#"><i class="fa fa-reply fa-lg"></i> Demandes en cours <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="on-going-requests">
-                  <li><a href="#">Envoyées</a></li>
-                  <li><a href="#">Reçues</a></li>
-                </ul>
-
-
-                <li data-toggle="collapse" data-target="#history" class="collapsed">
-                  <a href="#"><i class="fa fa-clock-o fa-lg"></i> Historique <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="history">
-                  <li><a href="#">Remplacements terminés</a></li>
-                  <li><a href="#">Demandes refusées</a></li>
-                </ul>
-
-                <li data-toggle="collapse" data-target="#financials" class="collapsed">
-                  <a href="#"><i class="fa fa-bar-chart fa-lg"></i> Ma gestion <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="financials">
-                  <li><a href="#">Mes revenus de remplacement</a></li>
-                  <li><a href="#">Mes autres revenus</a></li>
-                  <li><a href="#">Mes dépenses professionnelles</a></li>
-                  <li><a href="#">Ma déclaration URSSAF</a></li>
-                </ul>
-
-            </ul>
-     </div>
-</div>
-
-
-
-
-
-<!-- <div id="wrapper" class="toggled">
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li>
-        <ol class="breadcrumb"><li> </li></ol>
-      </li>
-      <li class="other" id="sidebar-label-1">
-        <a href="#">
-          Remplacements en cours
-          <span class="label label-info pull-right">1</span>
-        </a>
-      </li>
-      <div id="sidebar-sublabel-1">
-        <li class="other">
-          <a href="#">
-            <i class="fa fa-arrow-circle-o-right"></i> A valider
-          <span class="label label-info pull-right">3</span>
-          </a>
+        <li  data-toggle="collapse" data-target="#on-going-bookings" class="collapsed active">
+          <a href="#"><i class="fa fa-refresh fa-lg"></i> Remplacements en cours <span class="arrow"></span></a>
         </li>
-        <li class="current">
-          <a href="#">
-            <i class="fa fa-arrow-circle-o-right"></i> A clôturer
-          <span class="label label-info pull-right">3</span>
-          </a>
+        <ul class="sub-menu collapse" id="on-going-bookings">
+            <li class="active"><a href="#">A valider</a></li>
+            <li><a href="#">A clôturer</a></li>
+        </ul>
+
+        <li data-toggle="collapse" data-target="#on-going-requests" class="collapsed">
+          <a href="#"><i class="fa fa-reply fa-lg"></i> Demandes en cours <span class="arrow"></span></a>
         </li>
-        <li class="other" id="sidebar-label-2">
-          <a href="#">
-            Demandes en cours
-          <span class="label label-info pull-right">2</span>
-          </a>
+        <ul class="sub-menu collapse" id="on-going-requests">
+          <li><a href="#">Envoyées</a></li>
+          <li><a href="#">Reçues</a></li>
+        </ul>
+
+        <li data-toggle="collapse" data-target="#history" class="collapsed">
+          <a href="#"><i class="fa fa-clock-o fa-lg"></i> Historique <span class="arrow"></span></a>
         </li>
-      </div>
-      <div id="sidebar-sublabel-2">
-        <li class="other hidden">
-          <a href="#">
-            Envoyées
-            <span class="label label-info pull-right">99</span>
-          </a>
+        <ul class="sub-menu collapse" id="history">
+          <li><a href="#">Remplacements terminés</a></li>
+          <li><a href="#">Demandes refusées</a></li>
+        </ul>
+
+        <li data-toggle="collapse" data-target="#financials" class="collapsed">
+          <a href="#"><i class="fa fa-bar-chart fa-lg"></i> Ma gestion <span class="arrow"></span></a>
         </li>
-        <li class="other hidden">
-          <a href="#">
-            Reçues
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-      </div>
-      <li class="other" id="sidebar-label-3">
-        <a href="#">
-          Historique
-          <span class="label label-info pull-right">0</span>
-        </a>
-      </li>
-      <div id="sidebar-sublabel-3">
-        <li class="other hidden">
-          <a href="#">
-            Remplacements terminés
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-        <li class="other hidden">
-          <a href="#">
-            Demandes refusées
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-        <li class="other" id="sidebar-label-4">
-          <a href="#">
-            Ma gestion
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-      </div>
-      <div id="sidebar-sublabel-4">
-        <li class="other hidden">
-          <a href="#">
-            Mes revenus de remplacement
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-        <li class="other hidden">
-          <a href="#">
-            Mes autres revenus
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-        <li class="other hidden">
-          <a href="#">
-            Mes dépenses professionnelles
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-        <li class="other hidden">
-          <a href="#">
-            Ma déclaration URSSAF
-            <span class="label label-info pull-right">0</span>
-          </a>
-        </li>
-      </div>
+        <ul class="sub-menu collapse" id="financials">
+          <li><a href="#">Mes revenus de remplacement</a></li>
+          <li><a href="#">Mes autres revenus</a></li>
+          <li><a href="#">Mes dépenses professionnelles</a></li>
+          <li><a href="#">Ma déclaration URSSAF</a></li>
+        </ul>
+
     </ul>
   </div>
-</div> -->
-
-
-
+</div>
