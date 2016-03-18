@@ -29,6 +29,10 @@ class BookingPolicy < ApplicationPolicy
     user_is_owner_or_admin
   end
 
+  def index_accepted_bookings?
+    true
+  end
+
   private
 
   def user_is_owner_or_admin
