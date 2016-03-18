@@ -1,0 +1,281 @@
+.nav-side-menu {
+  overflow: auto;
+  font-family: Raleway;
+  font-size: 14px;
+  background-color: #F7F7F7;
+  position: fixed;
+  width: 275px;
+  height: 100%;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  .fa {
+    margin-right: 6px;
+  }
+}
+.nav-side-menu .brand {
+  background-color: #F7F7F7;
+  height: 30px;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+}
+.nav-side-menu .toggle-btn, .mobile-menu {
+  display: none;
+}
+.nav-side-menu ul,
+.nav-side-menu li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 50px;
+  cursor: pointer;
+  color: #888;
+  /*
+    .collapsed{
+       .arrow:before{
+                 font-family: FontAwesome;
+                 content: "\f053";
+                 display: inline-block;
+                 padding-left:10px;
+                 padding-right: 10px;
+                 vertical-align: middle;
+                 float:right;
+            }
+     }
+*/
+}
+.nav-side-menu ul :not(collapsed) .arrow:before,
+.nav-side-menu li :not(collapsed) .arrow:before {
+  font-family: FontAwesome;
+  content: "\f078";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  float: right;
+}
+.nav-side-menu ul .active,
+.nav-side-menu li .active {
+  border-left: 3px solid $yellow;
+  background-color: $blue;
+  border-bottom: 1px solid white;
+  color: white;
+  a {
+    color: white;
+  }
+}
+.nav-side-menu ul .sub-menu li.active,
+.nav-side-menu li .sub-menu li.active {
+  background-color: $blue;
+  color: white;
+}
+.nav-side-menu ul .sub-menu li.active a,
+.nav-side-menu li .sub-menu li.active a {
+  color: white;
+}
+.nav-side-menu ul .sub-menu li,
+.nav-side-menu li .sub-menu li {
+  background-color: #F7F7F7;
+  color: #888;
+  border: none;
+  line-height: 28px;
+  // border-bottom: 1px solid $blue;
+  margin-left: 0px;
+  padding-left: 29px;
+  a {
+    color: #888;
+  }
+}
+.nav-side-menu ul .sub-menu li:hover,
+.nav-side-menu li .sub-menu li:hover {
+  background-color: $blue;
+  color: white;
+  a {
+    color: white;
+  }
+}
+.nav-side-menu ul .sub-menu li:before,
+.nav-side-menu li .sub-menu li:before {
+  font-family: FontAwesome;
+  content: "\f105";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+.nav-side-menu li {
+  padding-left: 28px;
+  border-left: 3px solid #F7F7F7;
+  border-bottom: 1px solid $blue;
+}
+.nav-side-menu li a {
+  text-decoration: none;
+}
+.nav-side-menu li a i {
+  padding-left: 10px;
+  width: 20px;
+  padding-right: 20px;
+}
+.nav-side-menu li:hover {
+  border-left: 3px solid $yellow;
+  background-color: $blue;
+  color: white;
+  a {
+    color: white;
+  }
+  // -webkit-transition: all 1s ease;
+  // -moz-transition: all 1s ease;
+  // -o-transition: all 1s ease;
+  // -ms-transition: all 1s ease;
+  // transition: all 1s ease;
+}
+@media (max-width: 767px) {
+  .nav-side-menu {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .nav-side-menu .toggle-btn {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    left: 30px;
+    z-index: 10 !important;
+    padding: 3px;
+    color: $blue;
+    width: 40px;
+    text-align: center;
+  }
+  .nav-side-menu .mobile-menu {
+    padding-top: 10px;
+    font-size: 13px;
+    color: $blue;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    .flex-item {
+      flex: 0 0 50%;
+    }
+  }
+  .brand {
+    text-align: left !important;
+    font-size: 22px;
+    padding-left: 20px;
+  }
+}
+@media (min-width: 767px) {
+  .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
+}
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+
+// #wrapper.toggled #sidebar-wrapper {
+//   width: 250px;
+//   border-right: 1px solid #eee;
+// }
+// #sidebar-wrapper {
+//   z-index: 1035;
+//   position: fixed;
+//   left: 250px;
+//   width: 0;
+//   height: 100%;
+//   margin-left: -250px;
+//   background-color: #F7F7F7;
+//   overflow-y: auto;
+//   -webkit-transition: 0.3s, ease;
+//   transition: 0.3s, ease;
+// }
+// .sidebar-nav {
+//   position: absolute;
+//   top: 0;
+//   width: 250px;
+//   margin: 0;
+//   padding: 0;
+//   list-style: none;
+// }
+// .breadcrumb {
+//   background-color: transparent;
+//   font-size: 1.11111111em;
+//   margin-bottom: 0px !important;
+//   font-family: Raleway;
+//   list-style: none;
+//   padding: 0;
+//   padding-left: 0px;
+//   font-weight: bold;
+//   font-size: 17px;
+//   transition: 0.3s, ease;
+//   border-radius: 4px;
+// }
+// .sidebar-nav li {
+//   line-height: 1.38888889em;
+// }
+// .sidebar-nav li h4 {
+//   padding: 21px 10px;
+//   font-family: Raleway;
+//   background-color: #383838;
+//   margin: 0 auto;
+//   color: white;
+//   border-bottom: 2px solid #383838;
+// }
+// .sidebar-nav li > a {
+//   background-color: #F7F7F7;
+//   display: block;
+//   color: #ababab;
+//   font-family: Raleway;
+//   font-weight: normal;
+//   font-size: 15px;
+//   line-height: 21px;
+//   padding: 10px 10px 10px 32px;
+//   border-top: 1px solid transparent;
+//   border-bottom: 1px solid transparent;
+//   outline: none;
+// }
+// .sidebar-nav li > a:hover {
+//   text-decoration: none;
+//   color: white;
+//   background-color: $blue;
+//   border-bottom: 1px solid #007482;
+// }
+// .sidebar-nav li.current a {
+//   text-decoration: none;
+//   color: white;
+//   background-color: $blue;
+//   border-bottom: 1px solid #007482;
+//   border-left: 3px solid $yellow;
+// }
+// .sidebar-nav li>a span.label {
+//   margin-top: 3px;
+// }
+// .sidebar-nav .fa-arrow-circle-o-right {
+//   padding-right: 10px;
+// }
+// .pull-right {
+//   float: right;
+// }
+// .pull-right {
+//   float: right !important;
+// }
+// .label {
+//   padding: 3px;
+//   display: inline;
+//   font-weight: bold;
+//   line-height: 1;
+//   text-align: center;
+//   white-space: nowrap;
+//   vertical-align: baseline;
+//   font-size: 10px;
+//   height: 18px;
+//   width: 18px;
+//   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+//   border-radius: 50%;
+//   justify-content: center;
+// }
+
+

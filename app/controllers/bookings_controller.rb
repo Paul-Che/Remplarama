@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   # skip_after_action :verify_policy_scoped, only: :index
   respond_to :html, :js, :pdf
+  before_filter :show_sidebar, only: [:index_accepted_bookings]
 
   def new
     @booking = Booking.new
@@ -47,6 +48,15 @@ class BookingsController < ApplicationController
   def destroy
     set_booking
     @booking.destroy
+  end
+
+  def index_accepted_bookings
+    sent_accepted_bookings = Booking.where(accepted: true, user: current_user)
+    received_accepted_slots = Slot.where(status: "accepted", user: current_user)
+    received_accepted_bookings = []
+    received_accepted_bookings = received_accepted_slots.bookings.where(accepted: true) unless received_accepted_slots.size == 0
+    @accepted_bookings = sent_accepted_bookings.to_a + received_accepted_bookings.to_a
+    authorize @accepted_bookings
   end
 
   private

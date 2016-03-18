@@ -39,6 +39,7 @@
       <%= render 'shared/flashes' %>
     </div>
     <div class="main-content">
+      <%= render 'shared/sidebar' if @show_sidebar %>
       <%= yield %>
     </div>
       <%= render 'shared/footer' unless @disable_footer %>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'search_practices', to: 'users#search_practices'
   get 'search_locums', to: 'users#search_locums'
   get 'verify', to: 'users#verify'
-  # get 'profile', to: 'users#profile'
+  get 'accepted_bookings', to: 'bookings#index_accepted_bookings'
 
   resources :users, except: [:index] do
     resources :slots, only: [:create, :destroy]
