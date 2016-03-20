@@ -21,11 +21,17 @@
   .fa-times {
     color: $red;
   }
+  li {
+    text-indent: -1.55em;
+    .fa-file {
+      padding-left: 22px;
+      color: $blue;
+    }
+  }
 }
 .booking-card-header {
   background-color: $blue;
   color: white;
-  height: 30px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   display: flex;
@@ -33,6 +39,9 @@
   justify-content: space-between;
   padding-left: 15px;
   padding-right: 15px;
+  span {
+    padding: 0 10px;
+  }
   .flex-item span {
     flex: 0 1 80%;
   }
@@ -48,10 +57,11 @@
   flex: 0 1 45%;
 }
 .inner-card-header {
-  height: 100px;
+  min-height: 100px;
 }
 .inner-card-info {
-  height: 100px;
+  min-height: 100px;
+  padding-left: 15px;
 }
 .booking-card-pre-footer {
   display: flex;
@@ -66,7 +76,7 @@
 }
 .card-split {
   flex: 0 0 5%;
-  min-height: 235px;
+  min-height: 100px;
   max-width: 33px;
   img {
     margin-top: 100px;
@@ -77,9 +87,10 @@
   background-color: $green;
   color: white;
   align-items: center;
-  height: 30px;
+  min-height: 30px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  padding-left: 15px;
   .fa-lg {
     margin-right: 10px;
   }

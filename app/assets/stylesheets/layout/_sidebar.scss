@@ -2,17 +2,15 @@
   overflow: auto;
   font-family: Raleway;
   font-size: 14px;
-  background-color: #F7F7F7;
   position: fixed;
   width: 275px;
   height: 100%;
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.18),0 1px 0 0 rgba(0,0,0,0.10);
   .fa {
     margin-right: 6px;
   }
 }
 .nav-side-menu .brand {
-  background-color: #F7F7F7;
   height: 30px;
   display: block;
   text-align: center;
@@ -29,19 +27,17 @@
   line-height: 50px;
   cursor: pointer;
   color: #888;
-  /*
-    .collapsed{
-       .arrow:before{
-                 font-family: FontAwesome;
-                 content: "\f053";
-                 display: inline-block;
-                 padding-left:10px;
-                 padding-right: 10px;
-                 vertical-align: middle;
-                 float:right;
-            }
-     }
-*/
+  .collapsed{
+     .arrow:before{
+               font-family: FontAwesome;
+               content: "\f053";
+               display: inline-block;
+               padding-left:10px;
+               padding-right: 10px;
+               vertical-align: middle;
+               float:right;
+          }
+   }
 }
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {
@@ -74,7 +70,6 @@
 }
 .nav-side-menu ul .sub-menu li,
 .nav-side-menu li .sub-menu li {
-  background-color: #F7F7F7;
   color: #888;
   border: none;
   line-height: 28px;
@@ -146,29 +141,41 @@
     text-align: center;
   }
   .nav-side-menu .mobile-menu {
-    padding-top: 10px;
+    padding-top: 7px;
     font-size: 13px;
     color: $blue;
     display: flex;
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    width: 200px;
+    span {
+      font-family: Open Sans;
+    }
     .flex-item {
-      flex: 0 0 50%;
+      flex: 0 0 15%;
+    }
+    .arrow-x {
+    font-family: FontAwesome;
+    content: "\f078";
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+    float: right;
     }
   }
   .brand {
-    text-align: left !important;
     font-size: 22px;
     padding-left: 20px;
   }
 }
+
 @media (min-width: 767px) {
   .nav-side-menu .menu-list .menu-content {
     display: block;
   }
 }
+
 body {
   margin: 0px;
   padding: 0px;
