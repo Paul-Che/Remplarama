@@ -73,6 +73,13 @@
   div {
     flex: 0 0 10%;
   }
+  .btn-calendar {
+    margin: 0 auto;
+  }
+  .validation-p {
+    flex: 0 0 100%;
+    color: $green;
+  }
 }
 .card-split {
   flex: 0 0 5%;

@@ -4,7 +4,7 @@ class ContractsController < ApplicationController
     @contract = Contract.new(contract_params)
     @contract.save
     authorize @contract
-    redirect_to calendar_path
+    redirect_to accepted_bookings_path
   end
 
   def show

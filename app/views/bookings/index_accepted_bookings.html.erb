@@ -55,7 +55,23 @@
       <hr>
       <div class="booking-card-pre-footer light-padding">
         <!-- <p><i class="fa fa-check fa-fw"></i> Contrat signé</p> -->
-        <span><%= image_tag "contract_icon_green.png", style: "width: 30px; margin: 2px 10px;" %></span><span> Contrat de remplacement</span>
+
+        <% if Contract.where(booking: booking).size == 0 %>
+          <%= simple_form_for([booking, @contract]) do |f| %>
+            <%= f.input :contract_type, as: :hidden, input_html: { value: "licensed"} %>
+            <%= f.input :booking_id, as: :hidden, input_html: { value: booking.id} %>
+            <br>
+            <%= f.button :submit, "Générer un contrat", class: "btn btn-info btn-calendar", style: "width: 98%; margin: 3px;" do %>
+              <span><%= image_tag "contract_icon_green.png", style: "width: 30px; margin: 2px 10px;" %></span><span> Contrat de remplacement</span>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to booking_contract_path(booking, Contract.where(booking: booking).first, format: :pdf), target: "_blank" do %>
+            <span><%= image_tag "contract_icon_green.png", style: "width: 30px; margin: 2px 10px;" %></span><span> Contrat de remplacement</span>
+          <% end %>
+        <% end %>
+
+
         <!-- <p><i class="fa fa-times fa-fw"></i> Contrat en attente de signature</p> -->
       </div>
 
