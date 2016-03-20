@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'search_locums', to: 'users#search_locums'
   get 'verify', to: 'users#verify'
   get 'accepted_bookings', to: 'bookings#index_accepted_bookings'
+  get 'finished_bookings', to: 'bookings#index_finished_bookings'
 
   resources :users, except: [:index] do
     resources :slots, only: [:create, :destroy]

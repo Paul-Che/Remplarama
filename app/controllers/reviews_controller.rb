@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
     authorize @review
     @review.save
 
-    redirect_to calendar_path(current_user)
+    redirect_to finished_bookings_path(current_user)
   end
 
   def edit

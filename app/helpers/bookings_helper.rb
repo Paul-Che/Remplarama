@@ -16,5 +16,13 @@ module BookingsHelper
     end
   end
 
+  def find_other_user(booking)
+    if booking.user == current_user
+      booking.slot.user
+    else
+      booking.user
+    end
+  end
+
 end
 
