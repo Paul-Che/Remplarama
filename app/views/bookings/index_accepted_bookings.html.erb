@@ -1,0 +1,71 @@
+<% content_for :meta_title, "RemplaMatch - #{current_user.first_name} #{current_user.last_name}" %>
+
+<div class="wrapper-dashboard">
+  <% @accepted_bookings.each do |booking| %>
+
+    <% practice_user = find_practice_user(booking) %>
+    <% locum_user = find_locum_user(booking) %>
+
+    <div class="accepted-booking-card">
+
+      <div class="booking-card-header light-padding">
+        <i class="fa fa-user-md"></i><span class="flex-item"> Remplacement du <strong><%= l(booking.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(booking.end_date, format: "%e %B %Y") %></strong> - Reversement au remplaçant : <strong><%= booking.commission %>%</strong></span><i class="fa fa-envelope flex-item"></i>
+      </div>
+
+      <div class="accepted-booking-card-content">
+        <div class="inner-card">
+          <div class="inner-card-header text-center light-padding">
+            <%= image_tag (practice_user.avatar.nil? ? "placeholder_pic.png" : practice_user.avatar), class: "avatar-large" %>
+            <p><%= practice_user.first_name %> <strong><%= practice_user.last_name %></strong></p>
+            <p><em><%= practice_user.has_practice ? "Remplacé(e)" : "Remplaçant" %></em></p>
+          </div>
+          <div class="inner-card-info light-padding">
+
+            <p>
+              <% if practice_user.validated %>
+                <i class="fa fa-check fa-fw"></i> Identité vérifiée par RemplaMatch
+              <% else %>
+                <i class="fa fa-times fa-fw"></i> Identité non-vérifiée par RemplaMatch
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <div class="card-split" style="border-right: 1px solid #eee;"></div>
+        <div class="card-split">
+          <%= image_tag "replacement_icon_green.png", style: "width: 40px; position: relative; left: -20px; background-color: white;" %>
+        </div>
+        <div class="inner-card">
+          <div class="inner-card-header text-center light-padding">
+            <%= image_tag (locum_user.avatar.nil? ? "placeholder_pic.png" : locum_user.avatar), class: "avatar-large" %>
+            <p><%= locum_user.first_name %> <strong><%= locum_user.last_name %></strong></p>
+            <p><em><%= locum_user.has_practice ? "Remplacé(e)" : "Remplaçant" %></em></p>
+          </div>
+          <div class="inner-card-info light-padding">
+            <p>
+              <i class="fa fa-check fa-fw"></i> Attestation d'inscription à l'Ordre ou licence de remplacement
+            </p>
+            <p>
+              <i class="fa fa-times fa-fw"></i> Attestation d'assurance Responsabilité Civile Professionnelle
+            </p>
+            <p>
+              <% if practice_user.validated %>
+                <i class="fa fa-check fa-fw"></i> Identité vérifiée par RemplaMatch
+              <% else %>
+                <i class="fa fa-times fa-fw"></i> Identité non-vérifiée par RemplaMatch
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="booking-card-pre-footer light-padding">
+        <p><i class="fa fa-check fa-fw"></i> Contrat signé</p>
+        <div><%= image_tag "contract_icon_green.png", style: "width: 30px; position: relative; left: 17px;" %></div>
+        <p><i class="fa fa-times fa-fw"></i> Contrat en attente de signature</p>
+      </div>
+
+      <div class="booking-card-footer text-center light-padding"><i class="fa fa-share fa-lg"></i><p>Valider et envoyer les documents à l'Ordre</p></div>
+
+    </div>
+  <% end %>
+</div>
