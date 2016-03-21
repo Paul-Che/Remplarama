@@ -16,5 +16,6 @@
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
+//= require pusher
 //= require data-confirm-modal
 //= require_tree .

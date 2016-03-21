@@ -19,6 +19,7 @@ class BookingsController < ApplicationController
     else
       @booking.save
       redirect_to calendar_path(current_user)
+      # Pusher.trigger("new-booking-notification", "new_booking_event", {:start_date => @booking.start_date, :end_date => @booking.end_date})
     end
 
     authorize @booking
