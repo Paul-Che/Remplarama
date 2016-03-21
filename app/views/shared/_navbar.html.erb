@@ -30,7 +30,16 @@
         <%= link_to calendar_path, class: "navbar-wagon-item navbar-wagon-link" do %>
         <div class="badge-container">
           <i class="fa fa-calendar"></i>
-          </div>
+          <% if current_user %>
+              <div class="badge-notification">
+                <% if pending_requests_count > 0 %>
+                <div class="badge badge-blue">
+                  <%= pending_requests_count %>
+                </div>
+                <% end %>
+              </div>
+            <% end %>
+        </div>
         <% end %>
       </div>
 
@@ -38,15 +47,6 @@
         <%= link_to accepted_bookings_path, class: "navbar-wagon-item navbar-wagon-link" do %>
           <div class="badge-container">
             <i class="fa fa-users"></i>
-            <% if current_user %>
-          <div class="badge-notification">
-            <% if pending_requests_count > 0 %>
-            <div class="badge badge-blue">
-              <%= pending_requests_count %>
-            </div>
-            <% end %>
-          </div>
-          <% end %>
         </div>
         <% end %>
       </div>
