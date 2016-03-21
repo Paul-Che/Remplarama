@@ -10,19 +10,19 @@
     <ul id="menu-content" class="menu-content collapse out">
 
         <li data-toggle="collapse" data-target="#on-going-bookings" class="collapsed active" id="on-going-bookings-head">
-          <a href="#"><i class="fa fa-refresh fa-lg"></i> Remplacements en cours <span class="arrow"></span></a>
+          <a href="#"><i class="fa fa-refresh fa-lg"></i> Remplacements acceptés<span class="arrow"></span></a>
         </li>
         <ul class="sub-menu collapse" id="on-going-bookings">
             <%= link_to accepted_bookings_path do %><li id="accepted_bookings">A valider</li><% end %>
             <%= link_to finished_bookings_path do %><li id="finished_bookings">A clôturer</li><% end %>
         </ul>
 
-        <li data-toggle="collapse" data-target="#on-going-requests" class="collapsed">
-          <a href="#"><i class="fa fa-reply fa-lg"></i> Demandes en cours <span class="arrow"></span></a>
+        <li data-toggle="collapse" data-target="#on-going-requests" class="collapsed" id="on-going-requests-head">
+          <a href="#"><i class="fa fa-hourglass-half fa-lg"></i> Demandes en cours <span class="arrow"></span></a>
         </li>
         <ul class="sub-menu collapse" id="on-going-requests">
-          <li><a href="#">Envoyées</a></li>
-          <li><a href="#">Reçues</a></li>
+          <%= link_to sent_requests_path do %><li id="sent_requests">Envoyées</li><% end %>
+          <%= link_to received_requests_path do %><li id="received_requests">Reçues</li><% end %>
         </ul>
 
         <li data-toggle="collapse" data-target="#history" class="collapsed">

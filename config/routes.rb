@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'verify', to: 'users#verify'
   get 'accepted_bookings', to: 'bookings#index_accepted_bookings'
   get 'finished_bookings', to: 'bookings#index_finished_bookings'
+  get 'sent_requests', to: 'bookings#index_sent_requests'
+  get 'received_requests', to: 'bookings#index_received_requests'
 
   resources :users, except: [:index] do
     resources :slots, only: [:create, :destroy]

@@ -37,6 +37,14 @@ class BookingPolicy < ApplicationPolicy
     true
   end
 
+  def index_sent_requests?
+    true
+  end
+
+  def index_received_requests?
+    true
+  end
+
   private
 
   def user_is_owner_or_admin
