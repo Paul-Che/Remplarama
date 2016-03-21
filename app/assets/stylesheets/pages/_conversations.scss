@@ -1,3 +1,14 @@
+#react-inbox {
+  margin-top: 80px;
+}
+.panel-default {
+  border-color: white;
+  padding: 10px;
+}
+.panel-default > .panel-heading {
+  background-color: white;
+  border-color: $blue;
+}
 .conversation-link {
   width: 100%;
   max-height: 75px;
@@ -39,7 +50,7 @@
 }
 .selected,
 .selected:hover {
-  background-color: #3A5795;
+  background-color: $blue;
   color: white;
   h6,
   .date {
@@ -57,14 +68,18 @@
 .panel-body > .flexbox-columns {
   width: 100%;
 }
-.panel-heading h4 {
-  font-size: 18px;
-  margin: 5px 0;
+.panel-heading {
+  padding-left: 0;
+  h4 {
+    font-size: 18px;
+    margin: 5px 0;
+  }
 }
 .scroll {
   overflow: scroll;
 }
 .flexbox-columns-start {
+  border-right: 1px solid $blue;
   height: 100%;
   display: flex;
   align-items: flex-start;
@@ -132,6 +147,7 @@
 .scroll {
 }
 #conversation-list {
+  // margin-right: 3px;
   @media(min-width: 768px) {
     padding-right: 0 !important;
   }
@@ -146,7 +162,7 @@
 }
 .message-container {
   width: 100%;
-  padding: 5px 10px;
+  padding: 5px 0px;
   .message-content {
     margin-left: 10px;
     h6 {
@@ -164,7 +180,7 @@
     justify-content: space-between;
     flex: 1 1 auto;
     h6 {
-      color: $blue;
+      color: #888;
     }
   }
 }
@@ -174,8 +190,6 @@
 .message-input {
   background-color: white;
   width: 100%;
-  padding: 10px 15px;
-  box-shadow: 0 -1px 5px 0 rgba(0,0,0,0.07),0 -1px 0 0 rgba(0,0,0,0.03);
   position: absolute;
   bottom: 0;
   textarea {
@@ -200,25 +214,6 @@
     margin-right: 5px;
     font-size: 13px;
   }
-  // .btn-send,
-  // .btn-stop {
-  //   border-radius: 1px;
-  //   color: white;
-  // }
-  // .btn-send {
-  //   background-color: $blue;
-  //   &:hover {
-  //     background-color: #1B316C;
-  //   }
-  // }
-  // .btn-stop {
-  //   background: rgba(0,0,0,0.12);
-  //   color: rgba(0,0,0,0.35) !important;
-  //   &:hover {
-  //     background: rgba(0,0,0,0.15);
-  //     color: rgba(0,0,0,0.40) !important;
-  //   }
-  // }
 }
 .date {
   font-size: 13px;
@@ -227,7 +222,7 @@
 .btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
   outline: none;
 }
-#wrapper {
+#wrapper-conversations {
   min-height: 48vh;
   height: 80%;
   overflow-y: scroll;

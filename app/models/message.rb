@@ -15,3 +15,4 @@ class Message < ActiveRecord::Base
     conversation.users
   end
 end
+

@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'search_practices', to: 'users#search_practices'
   get 'search_locums', to: 'users#search_locums'
   get 'verify', to: 'users#verify'
-  # get 'profile', to: 'users#profile'
+  get 'accepted_bookings', to: 'bookings#index_accepted_bookings'
+  get 'finished_bookings', to: 'bookings#index_finished_bookings'
 
   resources :users, except: [:index] do
     resources :slots, only: [:create, :destroy]
@@ -16,12 +17,14 @@ Rails.application.routes.draw do
 
   resources :slots, only: [:show]
 
-  resources :bookings, only: [:destroy, :update] do
+  resources :bookings, only: [:show, :destroy, :update] do
+    resources :contracts, only: [:new, :create, :show]
     member do
       patch 'confirm'
       patch 'reject'
     end
   end
+
 
   resources :conversations, only: :index do
     resources :messages, only: :create
