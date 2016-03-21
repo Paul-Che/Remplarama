@@ -12,7 +12,7 @@
         <%= form_tag(user_slots_path(current_user), :method => :post, remote: true ) do -%>
           <input id="startDate" name="start_date" type="hidden" value="" />
           <input id="endDate" name="end_date" type="hidden" value="" />
-          <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Valider cette plage'/>
+          <input id="sendDates" name='commit' type='submit' class ="btn btn-primary" value='Valider cette plage'/>
         <% end %>
       </div>
     </div>

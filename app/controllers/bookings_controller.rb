@@ -42,7 +42,9 @@ class BookingsController < ApplicationController
   def update
     set_booking
     @booking.update(booking_params)
-    @booking.slot.update(status: "confirmed")
+    if booking_params["accepted"] == "true"
+      @booking.slot.update(status: "confirmed")
+    end
     redirect_to calendar_path
   end
 
