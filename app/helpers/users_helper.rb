@@ -1,5 +1,20 @@
 module UsersHelper
 
+  def is_profile_completed(user)
+    !user.address.nil? &&
+    user.address != "" &&
+    !user.numero_ordre.nil? &&
+    user.numero_ordre != "" &&
+    !user.speciality.nil? &&
+    user.speciality != "" &&
+    if !user.has_practice
+      !user.numero_ursaff.nil? &&
+      user.numero_ursaff != ""
+    else
+      true
+    end
+  end
+
   def human_speciality(string)
     if string == "medg"
       "Médecine générale"

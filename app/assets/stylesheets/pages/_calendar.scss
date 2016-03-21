@@ -1,5 +1,22 @@
 #title{
   padding-top: 20px;
+  h4 {
+  font-family: Open Sans;
+  font-weight: bold;
+  font-size: 16px;
+  color: #888;
+  }
+}
+.custom-ol {
+  font-size: 14px;
+  font-family: Raleway;
+  font-weight: bold;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: $blue;
+  color: white;
+  padding: 2.5px;
 }
 .call-to-action{
   padding-top: 20px;
@@ -149,7 +166,14 @@
     margin-bottom: -20px;
   }
 }
-
+.percentage {
+  position: relative;
+  right: 40px;
+  font-family: Raleway;
+  font-weight: lighter;
+  font-size: 14px;
+  color: #666666;
+}
 
 
 

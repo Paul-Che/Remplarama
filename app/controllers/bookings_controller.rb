@@ -29,8 +29,9 @@ class BookingsController < ApplicationController
     # Permet de marquer les slots correspondants aux booking avec l'id booking en question :
     if booking_exists
       redirect_to :back, alert: "Vous avez déjà effectué cette demande"
+    elsif @booking.save == false
+      redirect_to user_path(@user), alert: "Merci d'indiquer le reversement proposé au remplaçant"
     else
-      @booking.save
       redirect_to calendar_path(current_user)
       # Pusher.trigger("new-booking-notification", "new_booking_event", {:start_date => @booking.start_date, :end_date => @booking.end_date})
     end
@@ -86,7 +87,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :slot_id, :user_id, :accepted)
+    params.require(:booking).permit(:start_date, :end_date, :slot_id, :user_id, :accepted, :commission)
   end
 
   def string_to_date(string)
