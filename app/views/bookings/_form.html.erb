@@ -17,7 +17,7 @@
   <%= simple_form_for(current_user) do |f| %>
     <%= f.error_notification %>
     <div id="form-inputs">
-      <%= f.input :address, required: true, placeholder: "Addresse", label: false %>
+      <%= f.input :address, required: true, placeholder: "Addresse", label: false, input_html: { autocomplete: "on" } %>
       <%= f.input :speciality, required: true, placeholder: "Spécialité", collection: [['Médecine générale', 'medg'], ['Kinésithérapie', 'kine'], ['Autre spécialité', 'otherspe']], label: false, prompt: ["Spécialité", disabled: true] %>
       <%= f.input :numero_ordre, placeholder: "Numéro de l'Ordre", required: true, label: false %>
       <% if !current_user.has_practice %><%= f.input :numero_ursaff, required: true, placeholder: "Numéro URSSAF", label: false %><% end %>
