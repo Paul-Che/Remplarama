@@ -26,20 +26,18 @@
       </div>
 
       <%= link_to calendar_path, class: "navbar-wagon-item navbar-wagon-link" do %>
-        <div class="badge-container">
-          <i class="fa fa-calendar"></i>
+      <div class="badge-container">
+        <i class="fa fa-calendar"></i>
           <% if current_user %>
-            <% if pending_requests_count > 0 %>
-              <div class="badge badge-blue">
-                <%= pending_requests_count %>
-              </div>
-            <% else %>
-              <div class="badge badge-grey">
-                <%= pending_requests_count %>
-              </div>
-            <% end %>
+        <div class="badge-notification">
+          <% if pending_requests_count > 0 %>
+          <div class="badge badge-blue">
+            <%= pending_requests_count %>
+          </div>
           <% end %>
         </div>
+        <% end %>
+      </div>
       <% end %>
 
     <% end %>
@@ -59,25 +57,16 @@
     <% if user_signed_in? %>
 
       <!-- Messages -->
-      <% if current_user.conversations.first.nil? %>
-        <div class="badge-container" style="margin-right: 15px;">
-          <i class="fa fa-envelope-o"></i>
-            <div class="badge badge-grey">0</div>
-        </div>
-      <% else %>
         <%= link_to conversations_path, class: "navbar-wagon-item navbar-wagon-link" do %>
           <div class="badge-container">
             <i class="fa fa-envelope-o"></i>
-            <% if !@unread_messages.nil? || current_user.unread_conversations_count == 0 %>
-              <div class="badge badge-grey">0</div>
-            <% else %>
+            <% if !@unread_messages.nil? && current_user.unread_conversations_count > 0 %>
               <div class="badge badge-blue">
                 <%= current_user.unread_conversations_count %>
               </div>
             <% end %>
           </div>
         <% end %>
-      <% end %>
       <!-- Fin de Messages -->
 
         <div class="navbar-name hidden-xs">
@@ -170,3 +159,22 @@
   </div>
 </div>
 <div class="margin-navbar"></div>
+
+<% #content_for(:after_js) do %>
+   // <script>
+
+  // var pusher = new Pusher('a004fee566cb956d3ba9', {
+  //     cluster: 'eu',
+  //     encrypted: true
+  //   });
+
+  // var new_bookings_channel = pusher.subscribe("new-booking-notification");
+
+  // comments_channel.bind('new_booking_event', function(data) {
+  //   var new_notif_number = parseInt($("#badge-notifications").text() || "0") + 1;
+  //   $("#badge-notifications").text(new_notif_number);
+  // });
+
+  // </script>
+<%# end %>
+
