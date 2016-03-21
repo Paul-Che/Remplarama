@@ -6,7 +6,7 @@
     <% practice_user = find_practice_user(booking) %>
     <% locum_user = find_locum_user(booking) %>
 
-    <div class="accepted-booking-card">
+    <div class="booking-card">
 
       <div class="booking-card-header light-padding">
         <i class="fa fa-user-md"></i><span class="flex-item"> Remplacement du <strong><%= l(booking.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(booking.end_date, format: "%e %B %Y") %></strong> - Reversement au remplaçant : <strong><%= booking.commission %>%</strong></span><i class="fa fa-envelope flex-item"></i>

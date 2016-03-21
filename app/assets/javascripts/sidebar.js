@@ -8,5 +8,13 @@ $(document).ready(function () {
     $('#menu-content li').removeClass('active');
     $('#finished_bookings').addClass('active');
     $('#on-going-bookings-head').trigger("click");
+  } else if (pathname === "/sent_requests") {
+    $('#menu-content li').removeClass('active');
+    $('#sent_requests').addClass('active');
+    $('#on-going-requests-head').trigger("click");
+  } else if (pathname === "/received_requests") {
+    $('#menu-content li').removeClass('active');
+    $('#received_requests').addClass('active');
+    $('#on-going-requests-head').trigger("click");
   }
 });

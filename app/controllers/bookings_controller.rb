@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   #skip_after_action :verify_policy_scoped, only: :index_accepted_bookings
   respond_to :html, :js, :pdf
-  before_filter :show_sidebar, only: [:index_accepted_bookings, :index_finished_bookings]
+  before_filter :show_sidebar, only: [:index_accepted_bookings, :index_finished_bookings, :index_sent_requests, :index_received_requests]
 
   def new
     @booking = Booking.new
@@ -64,6 +64,16 @@ class BookingsController < ApplicationController
   def index_finished_bookings
     set_finished_bookings
     @review = Review.new
+    @booking = Booking.new
+    authorize @booking
+  end
+
+  def index_sent_requests
+    @booking = Booking.new
+    authorize @booking
+  end
+
+  def index_received_requests
     @booking = Booking.new
     authorize @booking
   end
