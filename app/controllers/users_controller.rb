@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:search_practices, :search_locums]
   after_action :verify_authorized, only: :update
   before_filter :disable_footer, only: [:search_practices, :search_locums]
+  before_filter :set_cache_buster, only: [:show]
 
   def search_practices
     @user = current_user
@@ -104,13 +105,11 @@ class UsersController < ApplicationController
       marker.lng user.longitude
    end
     p @markers
-
-
-    @start_date = params[:start_date]
-    @end_date = params[:end_date]
-    @bookings = current_user.bookings
-    @slots = current_user.slots
-
+    @booking = Booking.new
+    # @start_date = params[:start_date]
+    # @end_date = params[:end_date]
+    # @bookings = current_user.bookings
+    # @slots = current_user.slots
     authorize @user
   end
 

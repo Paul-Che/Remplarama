@@ -9,6 +9,7 @@ class Booking < ActiveRecord::Base
   # Validations
   validates :start_date, presence: true
   validates :end_date, presence: true
+  validates :commission, presence: true, inclusion: { in: 0..100 }
 
   # Callbacks
   # Class methods

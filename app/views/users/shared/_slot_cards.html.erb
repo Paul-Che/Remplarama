@@ -1,0 +1,53 @@
+<ul class="list-inline list-unstyled text-center">
+  <% if slot.status == "pending" && slot.end_date > Date.today %>
+    <% if is_profile_completed(current_user) %>
+      <li class="single_dispo">
+        <%= simple_form_for([user, booking]) do |f| %>
+          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.input :slot_id, as: :hidden, input_html: { value: slot.id } %>
+          <%= f.input :start_date, as: :hidden, input_html: { value: slot.start_date } %>
+          <%= f.input :end_date, as: :hidden, input_html: { value: slot.end_date } %>
+          <ul class="list-inline">
+            <li>
+              <i class="fa fa-fw fa-calendar-plus-o"></i>
+                <strong> <%= l(slot.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(slot.end_date, format: "%e %B %Y") %></strong>
+            </li>
+            <li class="form-inline">
+            <% if user.has_practice %>
+              Reversement : <strong><%= slot.commission %>%</strong>
+              <%= f.input :commission, as: :hidden, input_html: { value: slot.commission } %>
+            <% else %>
+              <%= f.input :commission, required: true, class: "form-inline", label: "<i class='fa fa-fw fa-money'></i> <strong>Reversement</strong> [%] :".html_safe, class: "search-input" %>
+            <% end %>
+            </li>
+              <%= f.button :submit, "Envoyer la demande", class: "btn btn-primary btn-slot-card", method: :post, title: "Confirmer la demande", data: {confirm: 'Êtes-vous certain de vouloir effectuer cette demande ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } %>
+          </ul>
+        <% end %>
+      </li>
+    <% else %>
+      <li class="single_dispo">
+        <%= simple_form_for([user, booking]) do |f| %>
+          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.input :slot_id, as: :hidden, input_html: { value: slot.id } %>
+          <%= f.input :start_date, as: :hidden, input_html: { value: slot.start_date } %>
+          <%= f.input :end_date, as: :hidden, input_html: { value: slot.end_date } %>
+          <ul class="list-inline">
+            <li>
+              <i class="fa fa-fw fa-calendar-plus-o"></i>
+                <strong> <%= l(slot.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(slot.end_date, format: "%e %B %Y") %></strong>
+            </li>
+            <li class="form-inline">
+            <% if user.has_practice %>
+              Reversement : <strong><%= slot.commission %>%</strong>
+              <%= f.input :commission, as: :hidden, input_html: { value: slot.commission } %>
+            <% else %>
+              <%= f.input :commission, required: true, class: "form-inline", label: "<i class='fa fa-fw fa-money'></i> <strong>Reversement</strong> [%] :".html_safe, class: "search-input" %>
+            <% end %>
+            </li>
+              <%= link_to "Envoyer la demande", user_bookings_path(@user, booking: { user_id: current_user.id,slot_id: slot.id, start_date: slot.start_date, end_date: slot.end_date }), class: "btn btn-primary btn-slot-card", data: {toggle: "modal", target: "#contacter"}%>
+          </ul>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

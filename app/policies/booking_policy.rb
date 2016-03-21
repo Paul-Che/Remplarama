@@ -1,7 +1,7 @@
 class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.all
     end
   end
 
@@ -30,6 +30,10 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def index_accepted_bookings?
+    true
+  end
+
+  def index_finished_bookings?
     true
   end
 

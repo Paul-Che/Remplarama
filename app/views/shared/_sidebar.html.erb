@@ -9,12 +9,12 @@
 
     <ul id="menu-content" class="menu-content collapse out">
 
-        <li  data-toggle="collapse" data-target="#on-going-bookings" class="collapsed active">
+        <li data-toggle="collapse" data-target="#on-going-bookings" class="collapsed active" id="on-going-bookings-head">
           <a href="#"><i class="fa fa-refresh fa-lg"></i> Remplacements en cours <span class="arrow"></span></a>
         </li>
         <ul class="sub-menu collapse" id="on-going-bookings">
-            <li class="active"><a href="#">A valider</a></li>
-            <li><a href="#">A clôturer</a></li>
+            <%= link_to accepted_bookings_path do %><li id="accepted_bookings">A valider</li><% end %>
+            <%= link_to finished_bookings_path do %><li id="finished_bookings">A clôturer</li><% end %>
         </ul>
 
         <li data-toggle="collapse" data-target="#on-going-requests" class="collapsed">

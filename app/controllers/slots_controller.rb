@@ -27,7 +27,7 @@ class SlotsController < ApplicationController
   private
 
   def slots_params
-    params.permit(:start_date, :end_date, :status, :user_id)
+    params.permit(:start_date, :end_date, :status, :user_id, :commission)
   end
 
   def set_slot

@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
-  # skip_after_action :verify_policy_scoped, only: :index
+  #skip_after_action :verify_policy_scoped, only: :index_accepted_bookings
   respond_to :html, :js, :pdf
-  before_filter :show_sidebar, only: [:index_accepted_bookings]
+  before_filter :show_sidebar, only: [:index_accepted_bookings, :index_finished_bookings]
 
   def new
     @booking = Booking.new
@@ -29,9 +29,11 @@ class BookingsController < ApplicationController
     # Permet de marquer les slots correspondants aux booking avec l'id booking en question :
     if booking_exists
       redirect_to :back, alert: "Vous avez déjà effectué cette demande"
+    elsif @booking.save == false
+      redirect_to user_path(@user), alert: "Merci d'indiquer le reversement proposé au remplaçant"
     else
-      @booking.save
       redirect_to calendar_path(current_user)
+      # Pusher.trigger("new-booking-notification", "new_booking_event", {:start_date => @booking.start_date, :end_date => @booking.end_date})
     end
 
     authorize @booking
@@ -41,7 +43,9 @@ class BookingsController < ApplicationController
   def update
     set_booking
     @booking.update(booking_params)
-    @booking.slot.update(status: "confirmed")
+    if booking_params["accepted"] == "true"
+      @booking.slot.update(status: "confirmed")
+    end
     redirect_to calendar_path
   end
 
@@ -51,12 +55,17 @@ class BookingsController < ApplicationController
   end
 
   def index_accepted_bookings
-    sent_accepted_bookings = Booking.where(accepted: true, user: current_user)
-    received_accepted_slots = Slot.where(status: "accepted", user: current_user)
-    received_accepted_bookings = []
-    received_accepted_bookings = received_accepted_slots.bookings.where(accepted: true) unless received_accepted_slots.size == 0
-    @accepted_bookings = sent_accepted_bookings.to_a + received_accepted_bookings.to_a
-    authorize @accepted_bookings
+    set_accepted_bookings
+    @contract = Contract.new
+    @booking = Booking.new
+    authorize @booking
+  end
+
+  def index_finished_bookings
+    set_finished_bookings
+    @review = Review.new
+    @booking = Booking.new
+    authorize @booking
   end
 
   private
@@ -78,7 +87,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :slot_id, :user_id, :accepted)
+    params.require(:booking).permit(:start_date, :end_date, :slot_id, :user_id, :accepted, :commission)
   end
 
   def string_to_date(string)
@@ -102,6 +111,22 @@ class BookingsController < ApplicationController
   def booking_exists
     check_bookings = @booking.user.bookings.map {|booking| (@booking.slot.user == booking.slot.user) && (@booking.start_date == booking.start_date) && (@booking.end_date == booking.end_date)}
     check_bookings.include? true
+  end
+
+  def set_accepted_bookings
+    sent_accepted_bookings = Booking.where(accepted: true, user: current_user).where('end_date >= ?', Date.today)
+    received_accepted_slots = Slot.where(status: "accepted", user: current_user).where('end_date >= ?', Date.today)
+    received_accepted_bookings = []
+    received_accepted_bookings = received_accepted_slots.bookings.where(accepted: true) unless received_accepted_slots.size == 0
+    @accepted_bookings = sent_accepted_bookings.to_a + received_accepted_bookings.to_a
+  end
+
+  def set_finished_bookings
+    sent_finished_bookings = Booking.where(accepted: true, user: current_user).where('end_date < ?', Date.today)
+    received_finished_slots = Slot.where(status: "accepted", user: current_user).where('end_date < ?', Date.today)
+    received_finished_bookings = []
+    received_finished_bookings = received_finished_slots.bookings.where(accepted: true) unless received_finished_slots.size == 0
+    @finished_bookings = sent_finished_bookings.to_a + received_finished_bookings.to_a
   end
 
 end

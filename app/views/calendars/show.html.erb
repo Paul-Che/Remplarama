@@ -1,7 +1,10 @@
 <% content_for :meta_title, "RemplaMatch - Mon calendrier - #{current_user.first_name} #{current_user.last_name}" %>
 
 <div id="title" class="text-center">
-  <h4>Sélectionnez vos périodes de recherche</h4>
+  <ul class="list-inline">
+    <li><div class="custom-ol">1</div></li>
+    <li><h4>Sélectionnez votre plage de recherche sur calendrier</h4></li>
+  </ul>
 </div>
 
 <div class="container">
@@ -12,7 +15,20 @@
         <%= form_tag(user_slots_path(current_user), :method => :post, remote: true ) do -%>
           <input id="startDate" name="start_date" type="hidden" value="" />
           <input id="endDate" name="end_date" type="hidden" value="" />
-          <input id ="sendDates"name='commit' type='submit' class ="btn btn-primary" value='Valider cette plage'/>
+          <% if current_user.has_practice %>
+            <ul class="list-inline">
+              <li><div class="custom-ol">2</div></li>
+              <li><div class="form-group">
+                <label for="setCommission">Définissez le reversement au remplaçant :</label>
+                <input type="number" class="search-input" id="setCommission" name="commission" value="<%= current_user.commission %>" style="width: 100px; line-height: 36px;" required><span class="percentage">%</span>
+              </div></li>
+            </ul>
+          <% end %>
+          <br>
+          <ul class="list-inline">
+            <li><div class="custom-ol"><%= current_user.has_practice ? "3" : "2" %></div></li>
+            <li><div><input id="sendDates" name='commit' type='submit' class ="btn btn-primary" value='Validez cette plage'/></div></li>
+          </ul>
         <% end %>
       </div>
     </div>

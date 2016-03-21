@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 ruby '2.3.0'
 
 gem 'rails', '4.2.5.1'
@@ -39,11 +39,13 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'underscore-rails'
+gem 'pusher'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
   gem 'rails-assets-bootstrap-datepicker'
   gem 'rails-assets-classnames'
+  gem 'rails-assets-pusher'
 end
 
 group :development, :test do

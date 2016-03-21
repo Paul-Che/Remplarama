@@ -23,3 +23,8 @@
 .main-content{
   min-height: 700px;
 }
+
+// Show Google autocomplete above BS modals
+.pac-container {
+  z-index: 1100;
+}

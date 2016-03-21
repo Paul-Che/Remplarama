@@ -25,7 +25,7 @@ GIT
       railties (>= 3.0)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.5.1)
@@ -134,6 +134,7 @@ GEM
       activesupport (>= 3.2, < 5)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httpclient (2.7.1)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -192,6 +193,11 @@ GEM
     puma (2.16.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
+    pusher (0.17.0)
+      httpclient (~> 2.7)
+      multi_json (~> 1.0)
+      pusher-signature (~> 0.1.8)
+    pusher-signature (0.1.8)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -212,6 +218,7 @@ GEM
       rails-assets-jquery (>= 1.7.1)
     rails-assets-classnames (2.2.3)
     rails-assets-jquery (2.2.0)
+    rails-assets-pusher (3.0.0)
     rails-assets-underscore (1.8.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -324,10 +331,12 @@ DEPENDENCIES
   pry-rails
   puma
   pundit
+  pusher
   quiet_assets
   rails (= 4.2.5.1)
   rails-assets-bootstrap-datepicker!
   rails-assets-classnames!
+  rails-assets-pusher!
   rails-assets-underscore!
   rails-i18n
   rails_12factor

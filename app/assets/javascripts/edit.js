@@ -37,7 +37,4 @@ $(document).ready(function() {
       $(".edit-urssaf").removeClass("hidden");
     };
   });
-
-
-
 });

@@ -1,6 +1,7 @@
 <% if slot.end_date > Date.today %>
   <div class="myslots" id="slot-<%= slot.id %>">
-    <p><strong><%= l(slot.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(slot.end_date, format: "%e %B %Y") %></strong></p>
+    <p>
+      <strong><%= l(slot.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(slot.end_date, format: "%e %B %Y") %></strong><% if current_user.has_practice %>  - Reversement : <strong><%= slot.commission %>%</strong><% end %></p>
     <%= link_to user_slot_path(id: slot.id, user_id: current_user.id), remote: true, method: :delete, title: "Confirmer la suppression", data: {confirm: 'Êtes-vous certain de vouloir supprimer ce créneau ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } do %>
       <div class="delete-gray"><strong>X</strong></div>
     <% end %>
