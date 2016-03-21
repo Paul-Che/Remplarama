@@ -39,6 +39,7 @@
             <% end %>
           <% end %>
         </div>
+        <br>
       </div>
 
       <div class="incoming_demands text-center col-sm-12 col-md-4">
@@ -67,10 +68,10 @@
               </div>
               <hr>
               <div class="request-contact">
-                <% if booking.user.conversations.first.nil? %>
-                  <%= link_to "Contacter", new_messages_path(booking.user) %>
-                <% else %>
+                <% if conversation_exists(booking.user, booking.slot.user) %>
                   <%= link_to "Contacter", conversations_path(booking.user) %>
+                <% else %>
+                  <%= link_to "Contacter", new_messages_path(booking.user) %>
                 <% end %>
               </div>
               <hr>
@@ -87,6 +88,16 @@
                   <strong>Remplacement refusé</strong>
                 <% elsif booking.accepted && booking.end_date >= Date.today %>
                   <strong>Remplacement accepté</strong>
+                  <% if Contract.where(booking: booking).size == 0 %>
+                    <%= simple_form_for([booking, @contract]) do |f| %>
+                      <%= f.input :contract_type, as: :hidden, input_html: { value: "licensed"} %>
+                      <%= f.input :booking_id, as: :hidden, input_html: { value: booking.id} %>
+                      <br>
+                      <%= f.button :submit, "Générer un contrat", class: "btn btn-info btn-calendar", style: "width: 98%; margin: 3px;" %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to " - Contrat", booking_contract_path(booking, Contract.where(booking: booking).first, format: :pdf), target: "_blank" %>
+                  <% end %>
                 <% elsif booking.accepted && booking.end_date < Date.today && Review.where(booking_id: booking.id).size == 0 %>
                   <strong>Remplacement terminé</strong>
                   <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal" style="width: 98%; margin: 3px;">
@@ -152,17 +163,17 @@
                     <%= link_to user_path(booking.slot.user) do %>
                       <strong>Dr <%= booking.slot.user.first_name %> <%= booking.slot.user.last_name %></strong>
                     <% end %>
-                    <p>Du <%= l(booking.start_date, format: "%e %B %Y")  %></p>
-                    <p>Au <%= l(booking.end_date, format: "%e %B %Y")  %></p>
+                    <p>Du <%= l(booking.start_date, format: "%e %B %Y") %></p>
+                    <p>Au <%= l(booking.end_date, format: "%e %B %Y") %></p>
                   <% end %>
                   </div>
                 </div>
                 <hr>
                 <div class="request-contact">
-                  <% if booking.slot.user.conversations.where(user2_id: current_user.id).first.nil? %>
-                    <%= link_to "Contacter", new_messages_path(booking.slot.user) %>
-                  <% else %>
+                  <% if conversation_exists(booking.user, booking.slot.user) %>
                     <%= link_to "Contacter", conversations_path(booking.slot.user) %>
+                  <% else %>
+                    <%= link_to "Contacter", new_messages_path(booking.slot.user) %>
                   <% end %>
                 </div>
                 <hr>
@@ -173,6 +184,16 @@
                     <strong>Remplacement refusé</strong>
                   <% elsif booking.accepted && booking.end_date >= Date.today %>
                     <strong>Remplacement accepté</strong>
+                    <% if Contract.where(booking: booking).size == 0 %>
+                      <%= simple_form_for([booking, @contract]) do |f| %>
+                        <%= f.input :contract_type, as: :hidden, input_html: { value: "licensed"} %>
+                        <%= f.input :booking_id, as: :hidden, input_html: { value: booking.id} %>
+                        <hr>
+                        <%= f.button :submit, "Générer un contrat", class: "btn btn-info btn-calendar", style: "width: 98%; margin: 3px;" %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to " - Contrat", booking_contract_path(booking, Contract.where(booking: booking).first, format: :pdf), target: "_blank" %>
+                    <% end %>
                   <% elsif booking.accepted && booking.end_date < Date.today && Review.where(booking_id: booking.id).size == 0 %>
                     <strong>Remplacement terminé</strong>
                     <button type="button" class="btn btn-info btn-calendar" data-toggle="modal" data-target="#myModal">

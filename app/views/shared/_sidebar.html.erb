@@ -1,0 +1,48 @@
+<div class="nav-side-menu">
+  <div class="brand">
+    <div class="mobile-menu">
+      <span class="flex-item" data-toggle="collapse" data-target="#menu-content"> Menu</span><i class="fa fa-lg fa-angle-down"></i>
+    </div>
+  </div>
+
+  <div class="menu-list">
+
+    <ul id="menu-content" class="menu-content collapse out">
+
+        <li data-toggle="collapse" data-target="#on-going-bookings" class="collapsed active" id="on-going-bookings-head">
+          <a href="#"><i class="fa fa-refresh fa-lg"></i> Remplacements en cours <span class="arrow"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="on-going-bookings">
+            <%= link_to accepted_bookings_path do %><li id="accepted_bookings">A valider</li><% end %>
+            <%= link_to finished_bookings_path do %><li id="finished_bookings">A clôturer</li><% end %>
+        </ul>
+
+        <li data-toggle="collapse" data-target="#on-going-requests" class="collapsed">
+          <a href="#"><i class="fa fa-reply fa-lg"></i> Demandes en cours <span class="arrow"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="on-going-requests">
+          <li><a href="#">Envoyées</a></li>
+          <li><a href="#">Reçues</a></li>
+        </ul>
+
+        <li data-toggle="collapse" data-target="#history" class="collapsed">
+          <a href="#"><i class="fa fa-clock-o fa-lg"></i> Historique <span class="arrow"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="history">
+          <li><a href="#">Remplacements terminés</a></li>
+          <li><a href="#">Demandes refusées</a></li>
+        </ul>
+
+        <li data-toggle="collapse" data-target="#financials" class="collapsed">
+          <a href="#"><i class="fa fa-bar-chart fa-lg"></i> Ma gestion <span class="arrow"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="financials">
+          <li><a href="#">Mes revenus de remplacement</a></li>
+          <li><a href="#">Mes autres revenus</a></li>
+          <li><a href="#">Mes dépenses professionnelles</a></li>
+          <li><a href="#">Ma déclaration URSSAF</a></li>
+        </ul>
+
+    </ul>
+  </div>
+</div>

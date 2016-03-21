@@ -4,6 +4,7 @@ class CalendarsController < ApplicationController
     @user = current_user
     @slot = Slot.new
     @review = Review.new
+    @contract = Contract.new
     authorize @user
     @slotted_bookings = Booking.joins(:slots).where(slots: { user_id: current_user.id } ).distinct
   end

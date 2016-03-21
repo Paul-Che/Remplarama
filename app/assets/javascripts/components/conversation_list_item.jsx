@@ -19,7 +19,7 @@ var ConversationListItem = React.createClass({
         </span>
         <div className="conversation-preview flexbox-columns flex-item">
           <ul className="conversation-header list-unstyled list-inline flex-item">
-            <li><h6><strong>{this.props.conversation.other_user_first_name}</strong></h6></li>
+            <li><h6><strong>{this.props.conversation.other_user_first_name.charAt(0)}. {this.props.conversation.other_user_last_name}</strong></h6></li>
             <li className="date">{this.props.conversation.last_message_created_at}</li>
           </ul>
           <div className="message-preview flex-item">

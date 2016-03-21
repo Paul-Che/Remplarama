@@ -7,3 +7,4 @@ module MessagesHelper
     s.html_safe
   end
 end
+

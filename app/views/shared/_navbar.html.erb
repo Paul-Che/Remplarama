@@ -2,7 +2,7 @@
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo-2.png" %>
-    <span id="logo-text">RemplaMatch</span>
+    <span class="hidden-xs" id="logo-text">RemplaMatch</span>
   <% end %>
 
   <!-- Right Navigation -->
@@ -28,6 +28,10 @@
       <%= link_to calendar_path, class: "navbar-wagon-item navbar-wagon-link" do %>
       <div class="badge-container">
         <i class="fa fa-calendar"></i>
+
+      <%= link_to accepted_bookings_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+        <div class="badge-container">
+          <i class="fa fa-users"></i>
           <% if current_user %>
         <div class="badge-notification">
           <% if pending_requests_count > 0 %>
@@ -38,6 +42,12 @@
         </div>
         <% end %>
       </div>
+      <% end %>
+
+      <%= link_to calendar_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+        <div class="badge-container">
+          <i class="fa fa-calendar"></i>
+        </div>
       <% end %>
 
     <% end %>

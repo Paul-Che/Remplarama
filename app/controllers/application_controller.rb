@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /admin\/.*/
   end
 
+  def show_sidebar
+    @show_sidebar = true
+  end
+
   def disable_footer
     @disable_footer = true
   end

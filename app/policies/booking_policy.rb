@@ -1,8 +1,12 @@
 class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.all
     end
+  end
+
+  def show?
+    true
   end
 
   def create?
@@ -23,6 +27,14 @@ class BookingPolicy < ApplicationPolicy
 
   def destroy?
     user_is_owner_or_admin
+  end
+
+  def index_accepted_bookings?
+    true
+  end
+
+  def index_finished_bookings?
+    true
   end
 
   private

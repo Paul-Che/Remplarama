@@ -29,6 +29,9 @@
 #user_avatar::-webkit-file-upload-button {
   visibility: hidden;
 }
+#avatar-edit-filter {
+  font-size: 12px;
+}
 #edit-avatar:hover {
   opacity: 0.5;
   content: "Changer la photo";
@@ -112,8 +115,13 @@
   }
   .fa {
     position: absolute;
-    top: 45px;
-    left: 19px;
+    top: 44px;
+    left: 73px;
+  }
+  span {
+    position: absolute;
+    top: 43px;
+    left: 33px;
   }
 }
 
