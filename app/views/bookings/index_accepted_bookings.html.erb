@@ -15,7 +15,11 @@
       <div class="accepted-booking-card-content">
         <div class="inner-card">
           <div class="inner-card-header text-center light-padding">
-            <%= image_tag (practice_user.avatar.nil? ? "placeholder_pic.png" : practice_user.avatar), class: "avatar-large" %>
+            <% if practice_user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+            <% else %>
+              <%= cl_image_tag practice_user.avatar.path, class: "avatar-large" %>
+            <% end %>
             <p><%= practice_user.first_name %> <strong><%= practice_user.last_name %></strong></p>
             <p><em><%= practice_user.has_practice ? "Remplacé(e)" : "Remplaçant" %></em></p>
           </div>
@@ -35,7 +39,11 @@
         </div>
         <div class="inner-card">
           <div class="inner-card-header text-center light-padding">
-            <%= image_tag (locum_user.avatar.nil? ? "placeholder_pic.png" : locum_user.avatar), class: "avatar-large" %>
+            <% if locum_user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+            <% else %>
+              <%= cl_image_tag locum_user.avatar.path, class: "avatar-large" %>
+            <% end %>
             <p><%= locum_user.first_name %> <strong><%= locum_user.last_name %></strong></p>
             <p><em><%= locum_user.has_practice ? "Remplacé(e)" : "Remplaçant" %></em></p>
           </div>
