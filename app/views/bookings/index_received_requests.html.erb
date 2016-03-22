@@ -1,0 +1,73 @@
+<% content_for :meta_title, "RemplaMatch - #{current_user.first_name} #{current_user.last_name}" %>
+
+<div class="wrapper-dashboard">
+
+  <% @received_booking_requests.each do |booking| %>
+
+    <% practice_user = find_practice_user(booking) %>
+    <% locum_user = find_locum_user(booking) %>
+    <% other_user = find_other_user(booking) %>
+
+    <div class="booking-card" id="booking-<%= booking.id %>">
+
+      <div class="booking-card-header light-padding">
+        <i class="fa fa-user-md"></i><span class="flex-item"> Remplacement du <strong><%= l(booking.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(booking.end_date, format: "%e %B %Y") %></strong> - Reversement au remplaçant : <strong><%= booking.commission %>%</strong></span><i class="fa fa-folder-o flex-item"></i>
+      </div>
+
+      <div class="accepted-booking-card-content">
+        <div class="inner-card-request">
+          <div class="inner-card-header text-center light-padding">
+            <% if practice_user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+            <% else %>
+              <%= cl_image_tag practice_user.avatar.path, class: "avatar-large" %>
+            <% end %>
+            <p><%= practice_user.first_name %> <strong><%= practice_user.last_name %></strong></p>
+            <p><em><%= practice_user.has_practice ? "Remplacé(e)" : "Remplaçant" %></em></p>
+          </div>
+        </div>
+        <div class="card-split-request" style="border-right: 1px solid #eee;"></div>
+        <div class="inner-card-request">
+          <div class="inner-card-header text-center light-padding">
+            <% if locum_user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+            <% else %>
+              <%= cl_image_tag locum_user.avatar.path, class: "avatar-large" %>
+            <% end %>
+            <p><%= locum_user.first_name %> <strong><%= locum_user.last_name %></strong></p>
+            <p><em><%= locum_user.has_practice ? "Remplacé(e)" : "Remplaçant" %></em></p>
+          </div>
+        </div>
+        <div class="card-split-request" style="border-right: 1px solid #eee;"></div>
+        <div class="inner-card-request light-padding text-center">
+          <% if booking.accepted.nil? %>
+            <%= simple_form_for(booking) do |f| %>
+              <%= f.input :accepted, as: :hidden, input_html: { value: 'true' } %>
+              <%= f.button :submit, "Accepter", method: :patch, :class => 'btn btn-primary btn-calendar btn-confirm', style: "width: 98%;", title: "Confirmer le remplacement", data: {confirm: 'Êtes-vous certain de vouloir accepter cette demande, et par conséquent refuser toute autre demande en cours sur la même période ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" } %>
+            <% end %><%= simple_form_for(booking) do |f| %>
+              <%= f.input :accepted, as: :hidden, input_html: { value: 'false' } %>
+              <%= f.button :submit, "Refuser", method: :patch, :class => 'btn btn-danger btn-calendar btn-confirm', style: "width: 98%;", title: "Confirmer le refus du remplacement", data: {confirm: 'Êtes-vous certain de vouloir refuser cette demande ?', commit: "Valider", 'commit-class': "btn-primary btn-modal", cancel: "Annuler", 'cancel-class': "btn-default btn-modal" }%>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="card-split-request" style="border-right: 1px solid #eee;"></div>
+        <div class="inner-card-request light-padding text-center">
+          <div class="request-contact">
+            <% if conversation_exists(booking.user, booking.slot.user) %>
+              <%= link_to conversations_path(booking.slot.user) do %>
+                <i class="fa fa-envelope"></i><span class="hidden-xs"> Contacter</span>
+              <% end %>
+            <% else %>
+              <%= link_to new_messages_path(booking.slot.user) do %>
+                <i class="fa fa-envelope"></i><span class="hidden-xs"> Contacter</span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+
+</div>
+

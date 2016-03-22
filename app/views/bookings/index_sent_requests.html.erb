@@ -1,7 +1,7 @@
 <% content_for :meta_title, "RemplaMatch - #{current_user.first_name} #{current_user.last_name}" %>
 
 <div class="wrapper-dashboard">
-  <% current_user.bookings.each do |booking| %>
+  <% @sent_booking_requests.each do |booking| %>
 
     <% practice_user = find_practice_user(booking) %>
     <% locum_user = find_locum_user(booking) %>
@@ -32,7 +32,11 @@
         <div class="card-split-request" style="border-right: 1px solid #eee;"></div>
         <div class="inner-card-request">
           <div class="inner-card-header text-center light-padding">
-            <%= cl_image_tag (locum_user.avatar.nil? ? "placeholder_pic.png" : locum_user.avatar.path), class: "avatar-large" %>
+            <% if locum_user.avatar.nil? %>
+              <%= image_tag "placeholder_pic.png", class: "avatar-large" %>
+            <% else %>
+              <%= cl_image_tag locum_user.avatar.path, class: "avatar-large" %>
+            <% end %>
             <p><%= locum_user.first_name %> <strong><%= locum_user.last_name %></strong></p>
             <p><em><%= locum_user.has_practice ? "Remplacé(e)" : "Remplaçant" %></em></p>
           </div>

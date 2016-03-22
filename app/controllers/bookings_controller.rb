@@ -32,7 +32,7 @@ class BookingsController < ApplicationController
     elsif @booking.save == false
       redirect_to user_path(@user), alert: "Merci d'indiquer le reversement proposé au remplaçant"
     else
-      redirect_to calendar_path(current_user)
+      redirect_to sent_requests_path
       # Pusher.trigger("new-booking-notification", "new_booking_event", {:start_date => @booking.start_date, :end_date => @booking.end_date})
     end
 
@@ -42,11 +42,12 @@ class BookingsController < ApplicationController
 
   def update
     set_booking
-    @booking.update(booking_params)
     if booking_params["accepted"] == "true"
       @booking.slot.update(status: "confirmed")
+      Booking.where(slot: @booking.slot).update_all(accepted: false)
+      @booking.update(booking_params)
     end
-    redirect_to calendar_path
+    redirect_to received_requests_path
   end
 
   def destroy
@@ -70,11 +71,18 @@ class BookingsController < ApplicationController
 
   def index_sent_requests
     @booking = Booking.new
+    @sent_booking_requests = current_user.bookings
     authorize @booking
   end
 
   def index_received_requests
     @booking = Booking.new
+    @received_booking_requests = []
+    current_user.slots.where('end_date > ?', Date.today).order(created_at: :desc).each do |slot|
+      slot.bookings.where(accepted: nil).order(created_at: :asc).each do |booking|
+        @received_booking_requests << booking
+      end
+    end
     authorize @booking
   end
 
