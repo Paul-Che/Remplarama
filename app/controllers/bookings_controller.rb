@@ -133,18 +133,22 @@ class BookingsController < ApplicationController
 
   def set_accepted_bookings
     sent_accepted_bookings = Booking.where(accepted: true, user: current_user).where('end_date >= ?', Date.today)
-    received_accepted_slots = Slot.where(status: "accepted", user: current_user).where('end_date >= ?', Date.today)
+    received_accepted_slots = Slot.where(status: "confirmed", user: current_user).where('end_date >= ?', Date.today)
     received_accepted_bookings = []
-    received_accepted_bookings = received_accepted_slots.bookings.where(accepted: true) unless received_accepted_slots.size == 0
-    @accepted_bookings = sent_accepted_bookings.to_a + received_accepted_bookings.to_a
+    received_accepted_slots.each do |slot|
+      received_accepted_bookings << slot.bookings.where(accepted: true)
+    end
+    @accepted_bookings = sent_accepted_bookings.to_a + received_accepted_bookings.flatten
   end
 
   def set_finished_bookings
     sent_finished_bookings = Booking.where(accepted: true, user: current_user).where('end_date < ?', Date.today)
-    received_finished_slots = Slot.where(status: "accepted", user: current_user).where('end_date < ?', Date.today)
+    received_finished_slots = Slot.where(status: "confirmed", user: current_user).where('end_date < ?', Date.today)
     received_finished_bookings = []
-    received_finished_bookings = received_finished_slots.bookings.where(accepted: true) unless received_finished_slots.size == 0
-    @finished_bookings = sent_finished_bookings.to_a + received_finished_bookings.to_a
+    received_finished_slots.each do |slot|
+      received_finished_bookings << slot.bookings.where(accepted: true)
+    end
+    @finished_bookings = sent_finished_bookings.to_a + received_finished_bookings.flatten
   end
 
 end

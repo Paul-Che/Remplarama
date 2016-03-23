@@ -9,10 +9,12 @@ class ContractsController < ApplicationController
 
   def show
     set_contract
+    @practice_user = find_practice_user(@contract)
+    @locum_user = find_locum_user(@contract)
     respond_to do |format|
-      #format.html
+      format.html
       format.pdf do
-        render pdf: "Contract_RemplaMatch_#{@contract.id}"
+        render pdf: "test" #"Contract_RemplaMatch_#{@contract.id}"
       end
     end
   end
@@ -26,6 +28,30 @@ class ContractsController < ApplicationController
 
   def contract_params
     params.require(:contract).permit(:id, :contract_type, :booking_id)
+  end
+
+  def find_practice_user(contract)
+    if contract.booking.user.has_practice
+      contract.booking.user
+    else
+      contract.booking.slot.user
+    end
+  end
+
+  def find_locum_user(contract)
+    if contract.booking.user.has_practice
+      contract.booking.slot.user
+    else
+      contract.booking.user
+    end
+  end
+
+  def find_other_user(contract)
+    if booking.user == current_user
+      booking.slot.user
+    else
+      booking.user
+    end
   end
 
 end
