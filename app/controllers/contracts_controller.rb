@@ -2,8 +2,6 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(contract_params)
-    @practice_user = find_practice_user(@contract)
-    @locum_user = find_locum_user(@contract)
     @contract.save
     authorize @contract
     redirect_to accepted_bookings_path
@@ -11,10 +9,12 @@ class ContractsController < ApplicationController
 
   def show
     set_contract
+    @practice_user = find_practice_user(@contract)
+    @locum_user = find_locum_user(@contract)
     respond_to do |format|
-      #format.html
+      format.html
       format.pdf do
-        render pdf: "Contract_RemplaMatch_#{@contract.id}"
+        render pdf: "test" #"Contract_RemplaMatch_#{@contract.id}"
       end
     end
   end
@@ -31,18 +31,18 @@ class ContractsController < ApplicationController
   end
 
   def find_practice_user(contract)
-    if contract.user1.has_practice
-      contract.user1
+    if contract.booking.user.has_practice
+      contract.booking.user
     else
-      contract.user2
+      contract.booking.slot.user
     end
   end
 
   def find_locum_user(contract)
-    if contract.user1.has_practice
-      contract.user2
+    if contract.booking.user.has_practice
+      contract.booking.slot.user
     else
-      contract.user1
+      contract.booking.user
     end
   end
 

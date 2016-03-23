@@ -1,269 +1,176 @@
 
 <!doctype html>
 <html>
+
   <head>
     <meta charset='utf-8' />
     <%= wicked_pdf_stylesheet_link_tag "pdf" %>
     <%= wicked_pdf_javascript_include_tag "number_pages" %>
   </head>
+
 <body>
 
-<%= wicked_pdf_image_tag 'large_logo_remplamatch.png', width: 200, height: 100, class: "text-center" %>
-<h3>Contrat entre le Dr. <%= @contract.booking.user.last_name %> et le Dr. <%= @contract.booking.slot.user.last_name %> pour un remplacement du <%= l(@contract.booking.start_date, format: "%e %B %Y") %> au <%= l(@contract.booking.end_date, format: "%e %B %Y") %></h3>
+  <div style="text-align: center;">
+    <%= wicked_pdf_image_tag 'logo_cnom.jpg', width: 177, height: 100 %>
+    <%= wicked_pdf_image_tag 'large_logo_remplamatch.png', width: 200, height: 100 %>
+  </div>
+  <br>
+  <h3 style="text-align: center;">Contrat entre le Dr. <%= @practice_user.first_name %> <%= @practice_user.last_name %> et le Dr. <%= @locum_user.first_name %> <%= @locum_user.last_name %></h3>
 
-<p><strong>Contrat de remplacement en exercice libéral</strong></p>
-<p>(Articles 65 et 91 du code de déontologie figurant dans le Code de la Santé publique sous les numéros R.4127-65 et R.4127-91)</p>
-<p><strong>Remplacement par un médecin inscrit au Tableau</strong></p>
-<p>Adopté le 9 février 1996</p>
-<p>MAJ oct.2008</p>
+  <p style="text-align: center;"><strong>Contrat de remplacement en exercice libéral</strong></p>
+  <p style="text-align: center;">(Articles 65 et 91 du code de déontologie figurant dans le Code de la Santé publique sous les numéros R.4127-65 et R.4127-91)</p>
+  <p style="text-align: center;"><strong>Remplacement par un médecin inscrit au Tableau</strong></p>
+  <p style="text-align: center;">adopté le 9 février 1996, MAJ oct.2008</p>
 
-<p>Entrele Docteur X... (indiquer les qualités et numéro d'inscription au Tableau) exerçant à ...</p>
-<p>
-    d'une part
-</p>
-<p>
-    <em>Et</em>
-</p>
-<p>
-    le Docteur Y... (indiquer les qualités, adresse et numéro d'inscription au Tableau de ...)
-</p>
-<p>
-    Immatriculé à l’URSSAF, sous le n°………
-</p>
-<p>
-    d'autre part
-</p>
-<p>
-    <strong>PREAMBULE</strong>
-</p>
-<p>
-    Face à l'obligation déontologique qui est la sienne d'assurer la permanence des soins et conformément aux dispositions de l'article R.4127-65 du code de la
-    santé publique (article 65 du code de déontologie médicale), le Dr X. a contacté le Dr Y. médecin remplaçant pour prendre en charge, lors de la cessation
-    temporaire de son activité professionnelle habituelle, les patients qui feraient appel à lui.
-</p>
-<p>
-    Pour permettre le bon déroulement de ce remplacement, le Dr X... met à la disposition du Dr Y. son cabinet de consultation, sis ... (adresse) et son
-    secrétariat.
-</p>
-<p>
-    Le Docteur Y. assume de ce fait toutes les obligations inscrites dans le code de déontologie. Il ne peut aliéner son indépendance professionnelle sous
-    quelque forme que ce soit.
-</p>
-<p>
-    <strong></strong>
-    <br/>
-</p>
-<p>
-    <strong></strong>
-    <br/>
-</p>
-<p>
-    <strong>Il a été convenu ce qui suit :</strong>
-</p>
-<p>
-    <strong>Article ler</strong>
-</p>
-<p>
-    Dans le souci de la permanence des soins, le Dr X. charge le Dr Y., qui accepte, de le remplacer temporairement auprès des patients qui feraient appel à
-    lui.
-</p>
-<p>
-    Les patients devront être avertis, dès que possible, de la présence d'un médecin remplaçant et notamment lors de toute demande de visite à domicile ou de
-    rendez-vous au cabinet médical.
-</p>
-<p>
-    Le Dr Y. devra consacrer à cette activité tout le temps nécessaire selon des modalités qu'il fixera librement (<strong>1</strong>). Il pourra, avec
-    l'accord préalable du Dr X., exercer une autre activité médicale, y compris dans les locaux du Dr X.(<strong>2</strong>) (<strong>3</strong>)
-</p>
-<p>
+  <br>
+  <br>
+
+  <p>Entre</p>
+  <p>le Docteur <%= @practice_user.first_name %> <%= @practice_user.last_name %>, praticien en <%= human_speciality(@practice_user.speciality) %>, inscrit au Tableau sous le numéro <%= @practice_user.numero_ordre %>, exerçant à <%= @practice_user.address %></p>
+  <p style="text-align: right;">d'une part,</p>
+  <p>et</p>
+  <p>le Docteur <%= @locum_user.first_name %> <%= @locum_user.last_name %>, praticien en <%= human_speciality(@locum_user.speciality) %>, inscrit au Tableau sous le numéro <%= @locum_user.numero_ordre %>, résidant à <%= @locum_user.address %>, immatriculé à l’URSSAF, sous le numéro <%= @locum_user.numero_ursaff %></p>
+  <p style="text-align: right;">d'autre part.</p>
+
+  <p style="text-align: center;"><strong>PREAMBULE</strong></p>
+
+  <p>
+    Face à l'obligation déontologique qui est la sienne d'assurer la permanence des soins et conformément aux dispositions de l'article R.4127-65 du code de la santé publique (article 65 du code de déontologie médicale), le Dr <%= @practice_user.last_name %> a sollicité le Dr <%= @locum_user.last_name %>, médecin remplaçant, pour prendre en charge, lors de la cessation temporaire de son activité professionnelle habituelle, les patients qui feraient appel à lui.
+  </p>
+  <p>
+    Pour permettre le bon déroulement de ce remplacement, le Dr <%= @practice_user.last_name %> met à la disposition du Dr <%= @locum_user.last_name %> son cabinet de consultation, sis <%= @practice_user.address %>.
+  </p>
+
+  <% if @practice_user.secretary %>
+    <p>
+      Le Dr <%= @practice_user.last_name %> met également à la disposition du Dr <%= @locum_user.last_name %> son secrétariat.
+    </p>
+  <% end %>
+
+  <p>
+    Le Docteur <%= @locum_user.last_name %> assume de ce fait toutes les obligations inscrites dans le code de déontologie. Il ne peut aliéner son indépendance professionnelle sous quelque forme que ce soit.
+  </p>
+
+  <br><br>
+
+  <p style="text-align: center;"><strong>Il a été convenu ce qui suit :</strong></p>
+
+  <p><strong>Article ler</strong></p>
+
+  <p>
+      Dans le souci de la permanence des soins, le Dr <%= @practice_user.last_name %> charge le Dr <%= @locum_user.last_name %>, qui accepte, de le remplacer temporairement auprès des patients qui feraient appel à
+      lui.
+  </p>
+  <p>
+      Les patients devront être avertis, dès que possible, de la présence d'un médecin remplaçant et notamment lors de toute demande de visite à domicile ou de rendez-vous au cabinet médical.
+  </p>
+  <p>
+    Le Dr <%= @locum_user.last_name %> devra consacrer à cette activité tout le temps nécessaire selon des modalités qu'il fixera librement, de préférence en accord avec les modalités habituelles de fonctionnement du cabinet, dans le souci de la permanence des soins.
+  </p>
+  <p>
+    Il pourra, avec l'accord préalable du Dr <%= @practice_user.last_name %>, exercer une autre activité médicale, y compris dans les locaux du Dr <%= @practice_user.last_name %>.
+  </p>
+  <p>
+    Cette activité personnelle ne devra en aucun cas être préjudiciable à la permanence des soins au sein du cabinet du médecin remplacé, activité justificative de l'établissement dudit contrat et ne pourra jamais être une activité de soins donnant lieu à délivrance de feuilles de maladie ; il ne peut s'agir que de médecine de prévention, d'examens pour des compagnies d'assurances, ou autre, qui entrent dans l'activité habituelle du médecin remplaçant.
+  </p>
+  <p>
     Il s'engage à donner, à tout malade faisant appel à lui, des soins consciencieux et attentifs dans le respect des dispositions du code de déontologie.
-</p>
-<p>
-    Hors le cas d'urgence, le médecin remplaçant pourra, dans les conditions de l'article R.4127-47 du code de la santé publique (article 47 du code de
-    déontologie médicale), refuser ses soins pour des raisons professionnelles ou personnelles.
-</p>
-<p>
-    <strong>Article 2</strong>
-</p>
-<p>
-    Le présent contrat de remplacement est prévu pour une période de ... mois (ou jours) s'étendant du ... au ... compris.
-</p>
-<p>
-    <strong>Article 3</strong>
-</p>
-<p>
-    Pendant la durée du présent contrat de remplacement et pour les besoins de son exécution, le Dr Y. aura l'usage des locaux professionnels, installations et
-    appareils que le Dr X. met à sa disposition. Il en fera usage en bon père de famille.
-</p>
-<p>
-    Compte tenu du caractère par nature provisoire de l'activité du remplaçant, celui-ci s'interdit toute modification des lieux ou de leur destination.
-</p>
-<p>
-    <strong>Article 4</strong>
-</p>
-<p>
-    Le Dr Y. exerçant son art en toute indépendance sera seul responsable vis-à-vis des patients et des tiers des conséquences de son exercice professionnel et
-    conservera seul la responsabilité de son activité professionnelle pour laquelle il s'assurera personnellement à ses frais à une compagnie notoirement
-    solvable. Il devra apporter la preuve de cette assurance avant le début de son activité. (<strong>4</strong>)
-</p>
-<p>
-    <strong>Article 5</strong>
-</p>
-<p>
-    Le Dr Y. utilisera conformément à la Convention nationale les ordonnances ainsi que les feuilles de soins et imprimés pré-identifiés au nom du Dr X. dans
-    son activité relative aux seuls patients du Dr X.
-</p>
-<p>
-    En outre, il devra faire mention de son identification personnelle sur les ordonnances, feuilles de soins et imprimés réglementaires qu'il sera amené à
-    remplir.
-</p>
-<p>
-    <strong></strong>
-    <br/>
-</p>
-<p>
-    <strong></strong>
-    <br/>
-</p>
-<p>
-    <strong>Article 6</strong>
-</p>
-<p>
-    Les deux co-contractants auront des déclarations fiscales et sociales indépendantes et supporteront personnellement, chacun en ce qui les concerne, la
-    totalité de leurs charges fiscales et sociales afférentes au dit remplacement.
-</p>
-<p>
-    <strong>Article 7</strong>
-</p>
-<p>
-    Le Dr Y. percevra l'ensemble des honoraires correspondant aux actes effectués sur les patients à qui il aura donné ses soins.
-</p>
-<p>
+  </p>
+  <p>
+    Hors le cas d'urgence, le médecin remplaçant pourra, dans les conditions de l'article R.4127-47 du code de la santé publique (article 47 du code de déontologie médicale), refuser ses soins pour des raisons professionnelles ou personnelles.
+  </p>
+
+  <p><strong>Article 2</strong></p>
+
+  <p>
+    Le présent contrat de remplacement est prévu pour la période s'étendant du <%= l(@contract.booking.start_date, format: "%e %B %Y") %> au <%= l(@contract.booking.end_date, format: "%e %B %Y") %> compris.
+  </p>
+
+  <p><strong>Article 3</strong></p>
+
+  <p>
+    Pendant la durée du présent contrat de remplacement et pour les besoins de son exécution, le Dr <%= @locum_user.last_name %> aura l'usage des locaux professionnels, installations et appareils que le Dr <%= @practice_user.last_name %> met à sa disposition. Il en fera usage en bon père de famille.
+  </p>
+  <p>
+      Compte tenu du caractère par nature provisoire de l'activité du remplaçant, celui-ci s'interdit toute modification des lieux ou de leur destination.
+  </p>
+
+  <p><strong>Article 4</strong></p>
+
+  <p>
+    Le Dr <%= @locum_user.last_name %> exerçant son art en toute indépendance sera seul responsable vis-à-vis des patients et des tiers des conséquences de son exercice professionnel et conservera seul la responsabilité de son activité professionnelle pour laquelle il s'assurera personnellement à ses frais à une compagnie notoirement solvable. Il devra apporter la preuve de cette assurance avant le début de son activité.
+  </p>
+
+  <p><strong>Article 5</strong></p>
+
+  <p>
+    Le Dr <%= @locum_user.last_name %> utilisera, conformément à la Convention nationale, les ordonnances ainsi que les feuilles de soins et imprimés pré-identifiés au nom du Dr <%= @practice_user.last_name %> dans son activité relative aux seuls patients du Dr <%= @practice_user.last_name %>.
+  </p>
+  <p>
+    En outre, il devra faire mention de son identification personnelle sur les ordonnances, feuilles de soins et imprimés réglementaires qu'il sera amené à remplir.
+  </p>
+
+  <p><strong>Article 6</strong></p>
+
+  <p>
+    Les deux co-contractants auront des déclarations fiscales et sociales indépendantes et supporteront personnellement, chacun en ce qui les concerne, la totalité de leurs charges fiscales et sociales afférentes au dit remplacement.
+  </p>
+
+  <p><strong>Article 7</strong></p>
+
+  <p>
+    Le Dr <%= @locum_user.last_name %> percevra l'ensemble des honoraires correspondant aux actes effectués sur les patients à qui il aura donné ses soins.
+  </p>
+  <p>
     Il devra remplir les obligations comptables normales et habituelles qui lui sont imposées réglementairement.
-</p>
-<p>
-    En fin de remplacement, le Dr X. reversera au Dr Y .... % du total des honoraires perçus et à percevoir correspondant au remplacement.
-</p>
-<p>
-    Conformément aux dispositions de l'article R.4127-66 du code de la santé publique (article 66 du code de déontologie médicale), le remplacement terminé, le
-    remplaçant cessera toute activité s'y rapportant et transmettra les informations nécessaires à la continuité des soins.
-</p>
-<p>
-    <strong>Article 8</strong>
-</p>
-<p>
-    Si au terme du remplacement prévu au présent contrat le Dr Y. a remplacé le Dr X. pendant une période de trois mois, consécutifs ou non, il ne pourra sauf
-    accord écrit du Dr X. (<strong>5</strong>) s'installer pendant une durée de deux ans dans un poste où il puisse entrer en concurrence directe avec le
-    médecin remplacé ou éventuellement ses associés (préciser ici commune, arrondissement, distance ... ). (<strong>6</strong>)
-</p>
-<p>
-    <strong>Article 9</strong>
-    <strong> : </strong>
-    Conciliation
-</p>
-<p>
-    Tous les litiges ou différends relatifs notamment à la validité, l’interprétation, l’exécution ou la résolution du présent contrat, seront soumis avant
-    tout recours à une conciliation confiée au Conseil départemental de l’Ordre des médecins, en application de l’article R.4127-56 du code de la santé
-    publique (article 56 du code de déontologie médicale).
-</p>
-<p>
-    <strong>Article 10</strong>
-    : Arbitrage (<strong>7</strong>)
-</p>
-<p>
-    En cas d’échec de la conciliation, les litiges ou différends relatifs à la validité, l’interprétation, l’exécution ou la résolution du présent contrat,
-    seront soumis à l’arbitrage conformément au règlement d’arbitrage de la Chambre nationale d’Arbitrage des médecins .
-</p>
-<p>
-    1<sup>ère</sup> option :
-</p>
-<p>
-    Dès à présent, les parties conviennent de soumettre leur litige à un arbitre unique.
-</p>
-<p>
-    Le tribunal arbitral statuera avec les pouvoirs d’amiable compositeur. (<strong>8</strong>)
-</p>
-<p>
-    Les parties peuvent faire appel de la sentence arbitrale.
-</p>
-<p>
-    2ème option :
-</p>
-<p>
-    Dès à présent, les parties conviennent de soumettre leur litige à trois arbitres désignés selon les modalités définies à l’article 4 du règlement
-    d’arbitrage de la Chambre nationale d’Arbitrage des médecins.
-</p>
-<p>
-    Le tribunal arbitral statuera avec les pouvoirs d’amiable compositeur. (<strong>8</strong>)
-</p>
-<p>
-    Les parties renoncent à la possibilité de faire appel.
-</p>
-<p>
-    Le siège de la Chambre nationale d’Arbitrage des médecins est fixé à PARIS 8<sup>ème</sup>, 180 Boulevard Haussmann.
-</p>
-<p>
-    <strong>Article 11</strong>
-</p>
-<p>
+  </p>
+  <p>
+    En fin de remplacement, le Dr <%= @practice_user.last_name %> reversera au Dr <%= @locum_user.last_name %> <%= @contract.booking.commission%>% du total des honoraires perçus et à percevoir correspondant au remplacement.
+  </p>
+  <p>
+    Conformément aux dispositions de l'article R.4127-66 du code de la santé publique (article 66 du code de déontologie médicale), le remplacement terminé, le remplaçant cessera toute activité s'y rapportant et transmettra les informations nécessaires à la continuité des soins.
+  </p>
+
+  <p><strong>Article 8</strong></p>
+
+  <p>
+    Si au terme du remplacement prévu au présent contrat le Dr <%= @locum_user.last_name %> a remplacé le Dr <%= @practice_user.last_name %> pendant une période de trois mois, consécutifs ou non, il ne pourra sauf accord écrit du Dr <%= @practice_user.last_name %> (1) s'installer pendant une durée de deux ans dans un poste où il puisse entrer en concurrence directe avec le médecin remplacé ou éventuellement ses associés.
+  </p>
+
+  <p><strong>Article 9</strong> : Conciliation</p>
+
+  <p>
+    Tous les litiges ou différends relatifs notamment à la validité, l’interprétation, l’exécution ou la résolution du présent contrat, seront soumis avant tout recours à une conciliation confiée au Conseil départemental de l’Ordre des médecins, en application de l’article R.4127-56 du code de la santé publique (article 56 du code de déontologie médicale).
+  </p>
+
+  <p><strong>Article 11</strong></p>
+
+  <p>
     Les parties affirment sur l'honneur n'avoir passé aucune contre-lettre ou avenant relatif au présent contrat qui ne soit soumis au Conseil départemental.
-</p>
-<p>
-    <strong>Article 12</strong>
-</p>
-<p>
-    Conformément aux dispositions des articles R.4127-65 et 91 du code de la santé publique (articles 65 et 91 du code de déontologie médicale), ce contrat
-    sera communiqué au Conseil départemental de l'Ordre avant le début du remplacement.
-</p>
-<p>
+  </p>
+
+  <p><strong>Article 12</strong></p>
+
+  <p>
+    Conformément aux dispositions des articles R.4127-65 et 91 du code de la santé publique (articles 65 et 91 du code de déontologie médicale), ce contrat sera communiqué au Conseil départemental de l'Ordre avant le début du remplacement.
+  </p>
+  <p>
     Son renouvellement sera soumis à ces mêmes dispositions.
-</p>
-<p>
-    Fait en trois exemplaires
-</p>
-<p>
-    (dont un pour le Conseil départemental)
-</p>
-<p>
-    le
-</p>
-<p>
-    Docteur X...... Docteur Y....
-</p>
-<p>
-    ____
-</p>
-<p>
-    (<strong>1</strong>) Il est recommandé que les modalités habituelles de fonctionnement du cabinet soient précisées au remplaçant, dans le souci de la
-    permanence des soins.
-</p>
-<p>
-    (<strong>2</strong>) Cette activité personnelle ne devra en aucun cas être préjudiciable à la permanence des soins au sein du cabinet du médecin remplacé,
-    activité justificative de l'établissement dudit contrat et ne pourra jamais être une activité de soins donnant lieu à délivrance de feuilles de maladie ;
-    il ne peut s'agir que de médecine de prévention, d'examens pour des compagnies d'assurances ... qui entrent dans l'activité habituelle du médecin
-    remplaçant.
-</p>
-<p>
-    (<strong>3</strong>) clause facultative, à débattre entre les signataires ; elle devra faire l'objet d'une annexe au présent contrat.
-</p>
-<p>
-    (<strong>4</strong>) il serait souhaitable que la copie de cette assurance soit jointe au présent contrat.
-</p>
-<p>
-    (<strong>5</strong>) L'accord peut consister en une renonciation totale ou limitée dans le temps à se prévaloir de l'interdiction d'installation édictée à
-    l'article R.4127-86 du code de la santé publique (article 86 du code de déontologie médicale) et rappelée par cette clause du contrat.
-</p>
-<p>
-    (<strong>6</strong>) Pour les remplacements inférieurs à trois mois, les parties au contrat gardent la faculté d'introduire une clause de
-    non-réinstallation si la durée de remplacement le justifie.
-</p>
-<p>
-    (<strong>7</strong>) la clause d’arbitrage (clause compromissoire) est facultative et les parties peuvent décider de ne pas y recourir ou encore y recourir
-    dans des conditions différentes de celles proposées ci-dessus.
-</p>
-<p>
-    <strong>(8) </strong>
-    les parties peuvent renoncer à cette modalité de l’arbitrage et, dans ce cas, il suffit de supprimer la mention de l’amiable composition.
-</p>
+  </p>
+  <p>
+    Fait en trois exemplaires (dont un pour le Conseil départemental de l'Ordre),
+    le <%= l(Date.today, format: "%e %B %Y") %>
+  </p>
+  <br><br>
+
+  <p style="text-align: center;">Docteur <%= @practice_user.first_name%> <%= @practice_user.last_name%><span style="margin-left: 80px; margin-right: 80px;"></span>Docteur <%= @locum_user.first_name%> <%= @locum_user.last_name%></p>
+  <br><br><br>
+  <p>
+      ____
+  </p>
+
+  <p>
+    (1) L'accord peut consister en une renonciation totale ou limitée dans le temps à se prévaloir de l'interdiction d'installation édictée à l'article R.4127-86 du code de la santé publique (article 86 du code de déontologie médicale) et rappelée par cette clause du contrat.
+  </p>
 
 </body>
