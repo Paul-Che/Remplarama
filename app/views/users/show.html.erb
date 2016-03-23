@@ -1,17 +1,14 @@
 <% content_for :meta_title, "RemplaMatch - Profil de #{@user.first_name} #{@user.last_name}" %>
 
-
-
-
 <div class="wrapper relative">
 
   <div class="myprofile-header">
     <div class="avatar-header text-center">
       <% if @user.avatar.nil? %>
-          <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
-        <% else %>
-          <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
-        <% end %>
+        <%= image_tag "placeholder_pic.png", class: "avatar-superextralarge" %>
+      <% else %>
+        <%= cl_image_tag @user.avatar.path, width: 100, height: 100, crop: :fill, :class => "avatar-superextralarge" %>
+      <% end %>
       <h4><strong><%= "Dr. " if @user.speciality != "kine" %></strong><%= @user.first_name %> <%= @user.last_name %></h4>
       <h5>
         <i class="fa fa-fw fa-search"></i>
@@ -19,16 +16,22 @@
       </h5>
       <% if current_user == @user %>
         <div class="text-center">
-        <%= link_to "Modifier mon profil", edit_user_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" %>
-        <% if @user.validated != "yes" %>
-          <%= link_to "Vérifier mon identité", verify_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" %>
-        <% else %>
-          <div class="identity-checked text-center">
-            <h6><i class="fa fa-check-circle"></i> Identité vérifiée</h6>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+          <%= link_to edit_user_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" do %>
+            <i class="fa fa-fw fa-pencil-square"></i> Modifier mon profil
+          <% end %>
+        </div>
+        <div class="text-center">
+          <% if @user.validated != "yes" %>
+            <%= link_to verify_path(current_user), :class => "btn btn-primary btn-search-home user-edit-button" do %>
+              <i class="fa fa-fw fa-check-square"></i> Valider mon identité
+            <% end %>
+          <% else %>
+            <div class="identity-checked text-center">
+              <h6><i class="fa fa-check-square"></i> Identité vérifiée</h6>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <hr>
   </div>
@@ -57,15 +60,29 @@
                   <p>Aucun avis reçu pour le moment</p>
                 <% end %>
               </li>
+              <% if current_user == @user %>
+                <% if !@user.has_practice %>
+                  <% if @user.student %>
+                    <li>
+                      <i class="fa fa-fw fa-file icon-profile"></i><p>Licence de remplacement</p>
+                    </li>
+                  <% else %>
+                    <li>
+                      <i class="fa fa-fw fa-file icon-profile"></i><p>Attestation d'inscription à l'Ordre</p>
+                    </li>
+                  <% end %>
+                  <li>
+                    <i class="fa fa-fw fa-file icon-profile"></i><p>Attestation d'assurance Responsabilité Civile Professionnelle</p>
+                  </li>
+                <% end %>
+              <% end %>
             </ul>
             <br><br>
           </div>
         </div>
         <div class="col-sm-12 col-md-6">
           <div class="myprofile-card">
-            <h4>
-              Activité & cabinet
-            </h4>
+            <h4>Activité & cabinet</h4>
             <hr>
             <ul class = "list-unstyled doc-user-profile">
               <% if @user.has_practice %>
