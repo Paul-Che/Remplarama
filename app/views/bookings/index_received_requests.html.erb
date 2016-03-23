@@ -11,7 +11,7 @@
     <div class="booking-card" id="booking-<%= booking.id %>">
 
       <div class="booking-card-header light-padding">
-        <i class="fa fa-user-md"></i><span class="flex-item"> Remplacement du <strong><%= l(booking.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(booking.end_date, format: "%e %B %Y") %></strong> - Reversement au remplaçant : <strong><%= booking.commission %>%</strong></span><i class="fa fa-folder-o flex-item"></i>
+        <i class="fa fa-user-md"></i><span class="flex-item"> Remplacement du <strong><%= l(booking.start_date, format: "%e %B %Y") %></strong> au <strong><%= l(booking.end_date, format: "%e %B %Y") %></strong> - Reversement au remplaçant : <strong><%= booking.commission %>%</strong></span>
       </div>
 
       <div class="accepted-booking-card-content">

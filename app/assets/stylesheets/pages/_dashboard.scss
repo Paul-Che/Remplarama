@@ -16,15 +16,17 @@
   margin: 0px 25px 10px 10px;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2), 0 1px 0 0 rgba(0,0,0,0.1);
   border-radius: 3px;
-  min-height: 130px;
-  .fa-check {
+  min-height: 50px;
+  .fa-check-square {
     color: $green;
+    margin-right: -8px;
   }
   .fa-times {
     color: $red;
+    margin-right: -8px;
   }
   li {
-    text-indent: -1.55em;
+    text-indent: -0.9em;
     .fa-file {
       padding-left: 22px;
       color: $blue;
@@ -36,30 +38,27 @@
   color: white;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding-left: 15px;
   padding-right: 15px;
-  span {
-    padding: 0 10px;
-  }
-  .flex-item span {
-    flex: 0 1 80%;
-  }
-  .flex-item i {
-    flex: 0 0 10%;
+  display: flex;
+  align-items: center;
+  i {
+    margin-right: 10px;
   }
 }
 .accepted-booking-card-content {
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
 // Bookings
 
 .inner-card {
-  flex: 0 1 45%;
+  flex: 0 1 25%;
+}
+.inner-card-picture {
+  flex: 0 0 auto;
 }
 .inner-card-header {
   min-height: 100px;
@@ -78,6 +77,10 @@
   div {
     flex: 0 0 10%;
   }
+  a {
+    margin: auto;
+    color: $green;
+  }
   .btn-calendar {
     margin: 0 auto;
   }
@@ -87,8 +90,8 @@
   }
 }
 .card-split {
-  flex: 0 0 5%;
-  min-height: 100px;
+  flex: 0 0 2%;
+  min-height: 80px;
   max-width: 33px;
   img {
     margin-top: 100px;
@@ -120,7 +123,7 @@
 }
 .card-split-request {
   flex: 0 0 1%;
-  min-height: 100px;
+  min-height: 80px;
 }
 .request-head {
   display: flex;
