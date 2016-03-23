@@ -62,6 +62,26 @@
                         <div class="flex-label">Numéro URSSAF</div>
                         <div class="flex-input"><%= f.input :numero_ursaff, placeholder: @user.numero_ursaff || "Numero URSSAF", label: false %></div>
                       </div>
+                      <div class="has_no_practice">
+                        <% if @user.student %>
+                          <div>
+                            <div class="flex-icons"><i class="fa fa-fw fa-file-text-o icon-profile"></i></div>
+                            <div class="flex-label">Licence de remplacement</div>
+                            <%= f.attachinary_file_field :licence, as: :attachinary, cloudinary: { folder: "#{current_user.id}_#{current_user.first_name}_#{current_user.last_name}", public_id: "Licence"} %>
+                          </div>
+                        <% else %>
+                          <div>
+                            <div class="flex-icons"><i class="fa fa-fw fa-file-text-o icon-profile"></i></div>
+                            <div class="flex-label">Attestation d'inscription à l'ordre</div>
+                            <%= f.attachinary_file_field :registration, as: :attachinary, cloudinary: { folder: "#{current_user.id}_#{current_user.first_name}_#{current_user.last_name}", public_id: "Attestation"} %>
+                          </div>
+                        <% end %>
+                        <div>
+                          <div class="flex-icons"><i class="fa fa-fw fa-file-text-o icon-profile"></i></div>
+                          <div class="flex-label">Attestation d'assurance Responsabilité Civile Professionnelle</div>
+                          <%= f.attachinary_file_field :insurance, as: :attachinary, cloudinary: { folder: "#{current_user.id}_#{current_user.first_name}_#{current_user.last_name}", public_id: "Assurance_RCP"} %>
+                        </div>
+                      </div>
                     </ul>
                   <h3>Activité & cabinet</h3>
                     <ul>

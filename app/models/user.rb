@@ -54,5 +54,8 @@ class User < ActiveRecord::Base
 
   has_attachment :avatar
   has_attachments :card_id, maximum: 2
+  has_attachment :licence
+  has_attachment :registration
+  has_attachment :insurance
 
 end
