@@ -8,16 +8,13 @@
   </head>
 <body>
 
-<%= wicked_pdf_image_tag 'large_logo_remplamatch.png', width: 200, height: 100, class: "text-center" %>
-<h3>Modèle de contrat entre le Dr. <%= Booking.last.user.last_name %> et le Dr. <%= Booking.last.slot.user.last_name %></h3>
+<div style="text-align: center;">
+  <%= wicked_pdf_image_tag 'large_logo_remplamatch.png', width: 200, height: 100, style: "flex: 0 0 25%;" %>
+  <h3 style="text-align: center;">Contrat entre le Dr. <%= @practice_user.first_name %> <%= @practice_user.last_name %> et le Dr. <%= @practice_user.first_name %> <%= @locum_user.last_name %></h3>
+</div>
 
-<p>
-    <strong>
-        Modèle de contrat de remplacement
-        <br/>
-        en exercice libéral
-    </strong>
-</p>
+<p><strong>Contrat de remplacement en exercice libéral</strong></p>
+
 <p>
     (Articles 65 et 91 du code de déontologie figurant dans le Code de la Santé publique
 </p>
